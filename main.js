@@ -233,35 +233,7 @@ function initSizeSelection() {
     });
 }
 
-// Add to Cart Animation (Mock)
-function initAddToCartAnim() {
-    const addBtn = document.getElementById('add-to-cart-btn');
-    if (!addBtn) return;
-
-    addBtn.addEventListener('click', () => {
-        // Shake animation
-        addBtn.classList.add('shake-anim');
-        setTimeout(() => addBtn.classList.remove('shake-anim'), 400);
-
-        // Update header cart count
-        const countSpan = document.getElementById('header-cart-count');
-        if (countSpan) {
-            let count = parseInt(countSpan.textContent);
-            countSpan.textContent = count + 1;
-        }
-
-        // Open cart
-        const slideCart = document.getElementById('slide-cart');
-        const overlay = document.getElementById('slide-cart-overlay');
-        if (slideCart && overlay) {
-            slideCart.style.right = '0';
-            overlay.style.display = 'block';
-        }
-    });
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     initImageZoom();
     initSizeSelection();
-    initAddToCartAnim();
 });
