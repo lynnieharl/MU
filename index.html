@@ -3,283 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manchester United Official Online Store</title>
-    <!-- FontAwesome -->
+    <title>Official Manchester United Online Store</title>
+    <!-- FontAwesome for exact icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- TOPBAR -->
-    <div class="topbar">
-        <div class="container">
-            <a href="#" class="topbar-link">Help</a>
-            <a href="#" class="topbar-link">Track Order</a>
-            <div class="currency-selector">
-                <i class="fa-solid fa-globe"></i> EN / $USD
+    <!-- ==========================================
+         BLOCK 1: TOP BAR & MAIN HEADER
+         ========================================== -->
+    
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-left">
+                <!-- Currency & Language -->
+                <button class="top-bar-btn"><i class="fa-solid fa-globe"></i> English - US$</button>
+            </div>
+            <div class="top-bar-right">
+                <a href="#" class="top-bar-link">Track Order</a>
+                <a href="#" class="top-bar-link">Help</a>
             </div>
         </div>
     </div>
 
-    <!-- MAIN HEADER -->
-    <header class="site-header">
-        <div class="container navbar">
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="header-container">
             
-            <!-- Mobile Toggle -->
-            <button class="mobile-menu-toggle">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-
-            <!-- Logo -->
-            <a href="index.html" class="nav-brand">
-                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd Logo">
-            </a>
-
-            <!-- Navigation & Mega Menu -->
-            <nav class="nav-menu">
-                <div class="nav-item">
-                    <a href="category.html" class="nav-link">Kits</a>
-                    <!-- Mega Menu Content -->
-                    <div class="mega-menu">
-                        <div class="container flex justify-between">
-                            <div class="mega-column">
-                                <h4 class="mega-title">Shop By Player</h4>
-                                <ul class="mega-list">
-                                    <li><a href="#">Bruno Fernandes</a></li>
-                                    <li><a href="#">Marcus Rashford</a></li>
-                                    <li><a href="#">Garnacho</a></li>
-                                    <li><a href="#">Mainoo</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-column">
-                                <h4 class="mega-title">Home Kit</h4>
-                                <ul class="mega-list">
-                                    <li><a href="#">Mens Home Kit</a></li>
-                                    <li><a href="#">Womens Home Kit</a></li>
-                                    <li><a href="#">Kids Home Kit</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-column">
-                                <h4 class="mega-title">Away Kit</h4>
-                                <ul class="mega-list">
-                                    <li><a href="#">Mens Away Kit</a></li>
-                                    <li><a href="#">Womens Away Kit</a></li>
-                                    <li><a href="#">Kids Away Kit</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-column">
-                                <img src="https://images.unsplash.com/photo-1518063319789-7217e6706b04?auto=format&fit=crop&w=300&q=80" alt="Kit Promo" style="width:100%; border-radius:8px;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="nav-item">
-                    <a href="category.html" class="nav-link">Training</a>
-                    <div class="mega-menu">
-                        <div class="container flex justify-between">
-                            <div class="mega-column">
-                                <h4 class="mega-title">Categories</h4>
-                                <ul class="mega-list">
-                                    <li><a href="#">T-Shirts</a></li>
-                                    <li><a href="#">Jackets</a></li>
-                                    <li><a href="#">Tracksuits</a></li>
-                                    <li><a href="#">Shorts & Pants</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-column">
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&q=80" alt="Training Promo" style="width:100%; border-radius:8px;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="nav-item">
-                    <a href="category.html" class="nav-link">Retro</a>
-                </div>
-                
-                <div class="nav-item">
-                    <a href="category.html" class="nav-link">Gifts & Accessories</a>
-                </div>
-            </nav>
-
-            <!-- Actions (Search, Account, Cart) -->
-            <div class="nav-actions">
-                <button class="action-btn" title="Search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-                <button class="action-btn" title="Account">
-                    <i class="fa-regular fa-user"></i>
-                </button>
-                <button class="action-btn" id="cart-toggle-btn" title="Cart">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="cart-count" id="header-cart-count">0</span>
-                </button>
+            <!-- Logo Left -->
+            <div class="header-logo">
+                <a href="index.html">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Manchester United Logo" class="logo-img">
+                </a>
             </div>
+
+            <!-- Search Middle -->
+            <div class="header-search">
+                <form action="search.html" method="GET" class="search-form">
+                    <input type="text" name="query" class="search-input" placeholder="Search for products, players, and more...">
+                    <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
+
+            <!-- Icons Right -->
+            <div class="header-icons">
+                <a href="login.html" class="header-icon-link">
+                    <i class="fa-regular fa-user"></i>
+                    <span class="icon-label">Account</span>
+                </a>
+                <a href="wishlist.html" class="header-icon-link">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="icon-label">Wishlist</span>
+                </a>
+                <a href="cart.html" class="header-icon-link cart-icon-wrapper">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-badge">0</span>
+                    <span class="icon-label">Cart</span>
+                </a>
+            </div>
+
         </div>
     </header>
 
-    <!-- MAIN CONTENT AREA -->
-    <main id="main-content">
-        <!-- Hero Banner Section -->
-        <section class="hero-section">
-            <div class="hero-slider" id="heroSlider">
-                <div class="hero-slide active">
-                    <img src="https://images.unsplash.com/photo-1551280857-2b9bbe52ccf5?auto=format&fit=crop&w=1600&q=80" alt="Hero 1">
-                    <div class="hero-content">
-                        <h2>NEW 24/25 HOME KIT</h2>
-                        <p>Worn by your heroes. Shop the new home kit today.</p>
-                        <a href="category.html" class="btn btn-primary">SHOP NOW</a>
-                    </div>
-                </div>
-                <div class="hero-slide">
-                    <img src="https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&w=1600&q=80" alt="Hero 2">
-                    <div class="hero-content">
-                        <h2>TRAINING RANGE</h2>
-                        <p>Train like the first team. Discover the new collection.</p>
-                        <a href="category.html" class="btn btn-primary">SHOP TRAINING</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Slider Controls -->
-            <button class="slider-control prev" onclick="moveHeroSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="slider-control next" onclick="moveHeroSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
-            <!-- Slider Dots -->
-            <div class="slider-dots" id="heroDots">
-                <span class="dot active" onclick="setHeroSlide(0)"></span>
-                <span class="dot" onclick="setHeroSlide(1)"></span>
-            </div>
-        </section>
-
-        <!-- Product Carousel Section -->
-        <section class="trending-section container">
-            <div class="section-header flex justify-between items-center">
-                <h3 class="section-title">Trending Now</h3>
-                <a href="category.html" class="view-all-link">View All <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-            
-            <div class="product-carousel-container">
-                <button class="carousel-control prev" onclick="scrollCarousel(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="product-carousel" id="trendingCarousel">
+    <!-- ==========================================
+         BLOCK 2: MEGA MENU NAVBAR
+         ========================================== -->
+    
+    <!-- Navigation Bar (Black) -->
+    <nav class="mega-navbar">
+        <div class="navbar-container">
+            <ul class="nav-list">
+                
+                <!-- Kits Dropdown -->
+                <li class="nav-item has-dropdown">
+                    <a href="category.html" class="nav-link">Kits</a>
                     
-                    <!-- Product 1 -->
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=400&q=80" alt="Home Shirt" class="product-img primary">
-                            <img src="https://images.unsplash.com/photo-1577223625856-758c127e1279?auto=format&fit=crop&w=400&q=80" alt="Home Shirt Hover" class="product-img hover-img">
-                            <button class="quick-add-btn">QUICK ADD</button>
-                        </div>
-                        <div class="product-info">
-                            <a href="product.html" class="product-title">Manchester United Home Shirt 24/25</a>
-                            <p class="product-price">$90.00</p>
-                        </div>
-                    </div>
+                    <!-- Mega Dropdown Box -->
+                    <div class="mega-dropdown">
+                        <div class="dropdown-container">
+                            
+                            <!-- Sub menu column 1 -->
+                            <div class="dropdown-column">
+                                <h3 class="dropdown-title">Shop By Category</h3>
+                                <ul class="dropdown-list">
+                                    <li><a href="#">Home Kits</a></li>
+                                    <li><a href="#">Away Kits</a></li>
+                                    <li><a href="#">Third Kits</a></li>
+                                    <li><a href="#">Goalkeeper Kits</a></li>
+                                    <li><a href="#">Training Kits</a></li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Sub menu column 2 -->
+                            <div class="dropdown-column">
+                                <h3 class="dropdown-title">Shop By Player</h3>
+                                <ul class="dropdown-list">
+                                    <li><a href="#">Bruno Fernandes</a></li>
+                                    <li><a href="#">Marcus Rashford</a></li>
+                                    <li><a href="#">Alejandro Garnacho</a></li>
+                                    <li><a href="#">Kobbie Mainoo</a></li>
+                                    <li><a href="#">Rasmus Højlund</a></li>
+                                </ul>
+                            </div>
 
-                    <!-- Product 2 -->
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="https://images.unsplash.com/photo-1520903928273-0f44b0a2fe08?auto=format&fit=crop&w=400&q=80" alt="Away Shirt" class="product-img primary">
-                            <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=400&q=80" alt="Away Shirt Hover" class="product-img hover-img">
-                            <button class="quick-add-btn">QUICK ADD</button>
-                        </div>
-                        <div class="product-info">
-                            <a href="product.html" class="product-title">Manchester United Away Shirt 24/25</a>
-                            <p class="product-price">$90.00</p>
-                        </div>
-                    </div>
+                            <!-- Banner Column 1 -->
+                            <div class="dropdown-column banner-col">
+                                <a href="#">
+                                    <img src="https://via.placeholder.com/250x300/DA291C/FFFFFF?text=New+Home+Kit" alt="Home Kit Banner" class="dropdown-banner">
+                                    <span class="banner-text">Shop 24/25 Home Kit</span>
+                                </a>
+                            </div>
 
-                    <!-- Product 3 -->
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="https://images.unsplash.com/photo-1616124619460-ff4ed8f4683c?auto=format&fit=crop&w=400&q=80" alt="Training Top" class="product-img primary">
-                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80" alt="Training Top Hover" class="product-img hover-img">
-                            <button class="quick-add-btn">QUICK ADD</button>
-                        </div>
-                        <div class="product-info">
-                            <a href="product.html" class="product-title">Manchester United Training Top 24/25</a>
-                            <p class="product-price">$65.00</p>
-                        </div>
-                    </div>
+                            <!-- Banner Column 2 -->
+                            <div class="dropdown-column banner-col">
+                                <a href="#">
+                                    <img src="https://via.placeholder.com/250x300/000000/FFFFFF?text=New+Away+Kit" alt="Away Kit Banner" class="dropdown-banner">
+                                    <span class="banner-text">Shop 24/25 Away Kit</span>
+                                </a>
+                            </div>
 
-                    <!-- Product 4 -->
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="https://images.unsplash.com/photo-1556822272-911e860959bb?auto=format&fit=crop&w=400&q=80" alt="Jacket" class="product-img primary">
-                            <img src="https://images.unsplash.com/photo-1509631179647-0c37cb87a5a5?auto=format&fit=crop&w=400&q=80" alt="Jacket Hover" class="product-img hover-img">
-                            <button class="quick-add-btn">QUICK ADD</button>
-                        </div>
-                        <div class="product-info">
-                            <a href="product.html" class="product-title">Manchester United Anthem Jacket</a>
-                            <p class="product-price">$110.00</p>
                         </div>
                     </div>
-                    
-                </div>
-                <button class="carousel-control next" onclick="scrollCarousel(1)"><i class="fa-solid fa-chevron-right"></i></button>
+                </li>
+
+                <!-- Other Nav Items -->
+                <li class="nav-item"><a href="category.html" class="nav-link">Training</a></li>
+                <li class="nav-item"><a href="category.html" class="nav-link">Mens</a></li>
+                <li class="nav-item"><a href="category.html" class="nav-link">Womens</a></li>
+                <li class="nav-item"><a href="category.html" class="nav-link">Kids</a></li>
+                <li class="nav-item"><a href="category.html" class="nav-link">Homeware</a></li>
+                <li class="nav-item"><a href="category.html" class="nav-link">Souvenirs</a></li>
+                <li class="nav-item sale-item"><a href="category.html" class="nav-link" style="color: #DA291C;">Sale</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+         BLOCK 3: PROMO BAR & HERO BANNER
+         ========================================== -->
+
+    <!-- Promo Bar -->
+    <div class="promo-bar">
+        <div class="promo-text">
+            <span>FREE SHIPPING ON ALL ORDERS OVER $100</span>
+            <a href="#" class="promo-link">DETAILS</a>
+        </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="hero-image-wrapper">
+            <!-- Using a large placeholder image to simulate the hero graphic -->
+            <img src="https://via.placeholder.com/1440x600/1A1A1A/FFFFFF?text=NEW+SEASON.+NEW+GEAR." alt="Hero Banner" class="hero-img">
+        </div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">READY FOR THE NEW SEASON</h1>
+            <p class="hero-subtitle">Discover the latest training wear and exclusive merchandise.</p>
+            <div class="hero-actions">
+                <a href="category.html" class="btn-primary">Shop Now</a>
+                <a href="category.html" class="btn-secondary">Shop Training</a>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <!-- FOOTER -->
+    <!-- ==========================================
+         BLOCK 4: PRODUCT CAROUSEL (TRENDING NOW)
+         ========================================== -->
+    <section class="carousel-section">
+        <div class="carousel-header">
+            <h2 class="section-title">Trending Now</h2>
+            <div class="carousel-controls">
+                <button class="carousel-btn prev-btn" id="trending-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="carousel-btn next-btn" id="trending-next"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+        
+        <div class="carousel-container" id="trending-carousel">
+            <div class="carousel-track">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://via.placeholder.com/300x400/F5F5F5/333333?text=Home+Shirt" class="product-img" alt="Home Shirt">
+                    </div>
+                    <div class="product-info">
+                        <a href="#" class="product-title">Mens Manchester United Home Shirt 24/25</a>
+                        <p class="product-price">$90.00</p>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://via.placeholder.com/300x400/F5F5F5/333333?text=Away+Shirt" class="product-img" alt="Away Shirt">
+                    </div>
+                    <div class="product-info">
+                        <a href="#" class="product-title">Womens Manchester United Away Shirt 24/25</a>
+                        <p class="product-price">$90.00</p>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://via.placeholder.com/300x400/F5F5F5/333333?text=Training+Top" class="product-img" alt="Training Top">
+                    </div>
+                    <div class="product-info">
+                        <a href="#" class="product-title">Manchester United Training Top 24/25</a>
+                        <p class="product-price">$65.00</p>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://via.placeholder.com/300x400/F5F5F5/333333?text=Anthem+Jacket" class="product-img" alt="Anthem Jacket">
+                    </div>
+                    <div class="product-info">
+                        <a href="#" class="product-title">Manchester United Anthem Jacket</a>
+                        <p class="product-price">$110.00</p>
+                    </div>
+                </div>
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://via.placeholder.com/300x400/F5F5F5/333333?text=Third+Shirt" class="product-img" alt="Third Shirt">
+                    </div>
+                    <div class="product-info">
+                        <a href="#" class="product-title">Kids Manchester United Third Shirt 24/25</a>
+                        <p class="product-price">$70.00</p>
+                    </div>
+                </div>
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://via.placeholder.com/300x400/F5F5F5/333333?text=Retro+Shirt" class="product-img" alt="Retro Shirt">
+                    </div>
+                    <div class="product-info">
+                        <a href="#" class="product-title">Manchester United 1999 Retro Shirt</a>
+                        <p class="product-price">$85.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+    <!-- ==========================================
+         BLOCK 5: FOOTER
+         ========================================== -->
     <footer class="site-footer">
-        <div class="container">
-            <div class="footer-top">
+        <!-- Newsletter Section -->
+        <div class="newsletter-section">
+            <div class="newsletter-container">
+                <div class="newsletter-text">
+                    <h3>SIGN UP TO OUR NEWSLETTER</h3>
+                    <p>Be the first to hear about new product drops, sales, and exclusive offers.</p>
+                </div>
+                <div class="newsletter-form-container">
+                    <form action="#" class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" required class="newsletter-input">
+                        <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Links -->
+        <div class="footer-main">
+            <div class="footer-container">
                 <div class="footer-column">
-                    <h4 class="footer-title">Customer Service</h4>
-                    <ul class="footer-list footer-links">
+                    <h4>Customer Service</h4>
+                    <ul>
                         <li><a href="#">Help & FAQs</a></li>
                         <li><a href="#">Track Order</a></li>
                         <li><a href="#">Delivery & Shipping</a></li>
                         <li><a href="#">Returns</a></li>
+                        <li><a href="#">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h4 class="footer-title">Information</h4>
-                    <ul class="footer-list footer-links">
+                    <h4>Shopping With Us</h4>
+                    <ul>
                         <li><a href="#">Safe Shopping</a></li>
                         <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Accessibility</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h4 class="footer-title">Stay Updated</h4>
-                    <p style="font-size: 0.9rem; margin-bottom: 15px; color: var(--color-gray-dark);">Sign up to receive the latest news, updates and offers.</p>
-                    <form class="newsletter-form" onsubmit="event.preventDefault();">
-                        <input type="email" placeholder="Email Address" class="newsletter-input" required>
-                        <button type="submit" class="newsletter-btn">Sign Up</button>
-                    </form>
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="#">Club History</a></li>
+                        <li><a href="#">Old Trafford Stadium</a></li>
+                        <li><a href="#">MU Foundation</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Follow Us</h4>
+                    <ul class="social-links">
+                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fa-brands fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                &copy; 2026 Manchester United FC Ltd. All rights reserved. 
+        </div>
+
+        <!-- Footer Bottom: Payment & Sponsors -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <div class="payment-methods">
+                    <img src="https://via.placeholder.com/50x30/FFFFFF/000000?text=Visa" alt="Visa" class="footer-logo">
+                    <img src="https://via.placeholder.com/50x30/FFFFFF/000000?text=MC" alt="Mastercard" class="footer-logo">
+                    <img src="https://via.placeholder.com/50x30/FFFFFF/000000?text=Amex" alt="Amex" class="footer-logo">
+                    <img src="https://via.placeholder.com/50x30/FFFFFF/000000?text=PayPal" alt="PayPal" class="footer-logo">
+                    <img src="https://via.placeholder.com/50x30/FFFFFF/000000?text=Apple" alt="Apple Pay" class="footer-logo">
+                </div>
+                <div class="sponsors">
+                    <span class="sponsor-label">Principal Partners:</span>
+                    <img src="https://via.placeholder.com/80x40/FFFFFF/000000?text=Snapdragon" alt="Snapdragon" class="footer-logo">
+                    <img src="https://via.placeholder.com/80x40/FFFFFF/000000?text=Tezos" alt="Tezos" class="footer-logo">
+                    <img src="https://via.placeholder.com/80x40/FFFFFF/000000?text=Adidas" alt="Adidas" class="footer-logo">
+                </div>
+            </div>
+            <div class="copyright-text">
+                <p>&copy; 2026 Manchester United FC Ltd. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Slide-out Cart Container (Hidden by default) -->
-    <div id="slide-cart-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1001;"></div>
-    <div id="slide-cart" style="position:fixed; top:0; right:-400px; width:400px; max-width:100%; height:100vh; background:#fff; z-index:1002; transition:right 0.3s ease; box-shadow:-5px 0 15px rgba(0,0,0,0.1); padding:20px; display:flex; flex-direction:column;">
-        <div class="flex justify-between items-center" style="border-bottom:1px solid #ccc; padding-bottom:15px; margin-bottom:15px;">
-            <h2 style="font-size:1.5rem;">Your Cart</h2>
-            <button id="close-cart-btn" style="font-size:1.5rem;"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div id="cart-items" style="flex:1; overflow-y:auto;">
-            <!-- Cart items will be rendered here by JS -->
-            <p style="text-align:center; color:#666; margin-top:50px;">Your cart is empty.</p>
-        </div>
-        <div id="cart-footer" style="border-top:1px solid #ccc; padding-top:15px; margin-top:15px;">
-            <div class="flex justify-between" style="font-size:1.2rem; font-weight:bold; margin-bottom:15px;">
-                <span>Total:</span>
-                <span id="cart-total-price">$0.00</span>
-            </div>
-            <button class="btn btn-primary" style="width:100%; padding:15px;">Checkout</button>
-        </div>
-    </div>
-
-    <!-- Core Scripts -->
-    <script src="main.js"></script>
-    <script src="cart.js"></script>
 </body>
 </html>
