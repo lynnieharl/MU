@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manchester United Official Online Store</title>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="container">
+            <a href="#" class="topbar-link">Help</a>
+            <a href="#" class="topbar-link">Track Order</a>
+            <div class="currency-selector">
+                <i class="fa-solid fa-globe"></i> EN / $USD
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="site-header">
+        <div class="container navbar">
+            
+            <!-- Mobile Toggle -->
+            <button class="mobile-menu-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Logo -->
+            <a href="index.html" class="nav-brand">
+                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd Logo">
+            </a>
+
+            <!-- Navigation & Mega Menu -->
+            <nav class="nav-menu">
+                <div class="nav-item">
+                    <a href="category.html" class="nav-link">Kits</a>
+                    <!-- Mega Menu Content -->
+                    <div class="mega-menu">
+                        <div class="container flex justify-between">
+                            <div class="mega-column">
+                                <h4 class="mega-title">Shop By Player</h4>
+                                <ul class="mega-list">
+                                    <li><a href="#">Bruno Fernandes</a></li>
+                                    <li><a href="#">Marcus Rashford</a></li>
+                                    <li><a href="#">Garnacho</a></li>
+                                    <li><a href="#">Mainoo</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-column">
+                                <h4 class="mega-title">Home Kit</h4>
+                                <ul class="mega-list">
+                                    <li><a href="#">Mens Home Kit</a></li>
+                                    <li><a href="#">Womens Home Kit</a></li>
+                                    <li><a href="#">Kids Home Kit</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-column">
+                                <h4 class="mega-title">Away Kit</h4>
+                                <ul class="mega-list">
+                                    <li><a href="#">Mens Away Kit</a></li>
+                                    <li><a href="#">Womens Away Kit</a></li>
+                                    <li><a href="#">Kids Away Kit</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-column">
+                                <img src="https://images.unsplash.com/photo-1518063319789-7217e6706b04?auto=format&fit=crop&w=300&q=80" alt="Kit Promo" style="width:100%; border-radius:8px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="category.html" class="nav-link">Training</a>
+                    <div class="mega-menu">
+                        <div class="container flex justify-between">
+                            <div class="mega-column">
+                                <h4 class="mega-title">Categories</h4>
+                                <ul class="mega-list">
+                                    <li><a href="#">T-Shirts</a></li>
+                                    <li><a href="#">Jackets</a></li>
+                                    <li><a href="#">Tracksuits</a></li>
+                                    <li><a href="#">Shorts & Pants</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-column">
+                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&q=80" alt="Training Promo" style="width:100%; border-radius:8px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="category.html" class="nav-link">Retro</a>
+                </div>
+                
+                <div class="nav-item">
+                    <a href="category.html" class="nav-link">Gifts & Accessories</a>
+                </div>
+            </nav>
+
+            <!-- Actions (Search, Account, Cart) -->
+            <div class="nav-actions">
+                <button class="action-btn" title="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="action-btn" title="Account">
+                    <i class="fa-regular fa-user"></i>
+                </button>
+                <button class="action-btn" id="cart-toggle-btn" title="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count" id="header-cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main id="main-content">
+        <!-- Hero Banner Section -->
+        <section class="hero-section">
+            <div class="hero-slider" id="heroSlider">
+                <div class="hero-slide active">
+                    <img src="https://images.unsplash.com/photo-1551280857-2b9bbe52ccf5?auto=format&fit=crop&w=1600&q=80" alt="Hero 1">
+                    <div class="hero-content">
+                        <h2>NEW 24/25 HOME KIT</h2>
+                        <p>Worn by your heroes. Shop the new home kit today.</p>
+                        <a href="category.html" class="btn btn-primary">SHOP NOW</a>
+                    </div>
+                </div>
+                <div class="hero-slide">
+                    <img src="https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&w=1600&q=80" alt="Hero 2">
+                    <div class="hero-content">
+                        <h2>TRAINING RANGE</h2>
+                        <p>Train like the first team. Discover the new collection.</p>
+                        <a href="category.html" class="btn btn-primary">SHOP TRAINING</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Slider Controls -->
+            <button class="slider-control prev" onclick="moveHeroSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-control next" onclick="moveHeroSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+            <!-- Slider Dots -->
+            <div class="slider-dots" id="heroDots">
+                <span class="dot active" onclick="setHeroSlide(0)"></span>
+                <span class="dot" onclick="setHeroSlide(1)"></span>
+            </div>
+        </section>
+
+        <!-- Product Carousel Section -->
+        <section class="trending-section container">
+            <div class="section-header flex justify-between items-center">
+                <h3 class="section-title">Trending Now</h3>
+                <a href="category.html" class="view-all-link">View All <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="product-carousel-container">
+                <button class="carousel-control prev" onclick="scrollCarousel(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="product-carousel" id="trendingCarousel">
+                    
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=400&q=80" alt="Home Shirt" class="product-img primary">
+                            <img src="https://images.unsplash.com/photo-1577223625856-758c127e1279?auto=format&fit=crop&w=400&q=80" alt="Home Shirt Hover" class="product-img hover-img">
+                            <button class="quick-add-btn">QUICK ADD</button>
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html" class="product-title">Manchester United Home Shirt 24/25</a>
+                            <p class="product-price">$90.00</p>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://images.unsplash.com/photo-1520903928273-0f44b0a2fe08?auto=format&fit=crop&w=400&q=80" alt="Away Shirt" class="product-img primary">
+                            <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=400&q=80" alt="Away Shirt Hover" class="product-img hover-img">
+                            <button class="quick-add-btn">QUICK ADD</button>
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html" class="product-title">Manchester United Away Shirt 24/25</a>
+                            <p class="product-price">$90.00</p>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://images.unsplash.com/photo-1616124619460-ff4ed8f4683c?auto=format&fit=crop&w=400&q=80" alt="Training Top" class="product-img primary">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80" alt="Training Top Hover" class="product-img hover-img">
+                            <button class="quick-add-btn">QUICK ADD</button>
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html" class="product-title">Manchester United Training Top 24/25</a>
+                            <p class="product-price">$65.00</p>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://images.unsplash.com/photo-1556822272-911e860959bb?auto=format&fit=crop&w=400&q=80" alt="Jacket" class="product-img primary">
+                            <img src="https://images.unsplash.com/photo-1509631179647-0c37cb87a5a5?auto=format&fit=crop&w=400&q=80" alt="Jacket Hover" class="product-img hover-img">
+                            <button class="quick-add-btn">QUICK ADD</button>
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html" class="product-title">Manchester United Anthem Jacket</a>
+                            <p class="product-price">$110.00</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <button class="carousel-control next" onclick="scrollCarousel(1)"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-column">
+                    <h4 class="footer-title">Customer Service</h4>
+                    <ul class="footer-list footer-links">
+                        <li><a href="#">Help & FAQs</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Delivery & Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-title">Information</h4>
+                    <ul class="footer-list footer-links">
+                        <li><a href="#">Safe Shopping</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-title">Stay Updated</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 15px; color: var(--color-gray-dark);">Sign up to receive the latest news, updates and offers.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault();">
+                        <input type="email" placeholder="Email Address" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Manchester United FC Ltd. All rights reserved. 
+            </div>
+        </div>
+    </footer>
+
+    <!-- Slide-out Cart Container (Hidden by default) -->
+    <div id="slide-cart-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1001;"></div>
+    <div id="slide-cart" style="position:fixed; top:0; right:-400px; width:400px; max-width:100%; height:100vh; background:#fff; z-index:1002; transition:right 0.3s ease; box-shadow:-5px 0 15px rgba(0,0,0,0.1); padding:20px; display:flex; flex-direction:column;">
+        <div class="flex justify-between items-center" style="border-bottom:1px solid #ccc; padding-bottom:15px; margin-bottom:15px;">
+            <h2 style="font-size:1.5rem;">Your Cart</h2>
+            <button id="close-cart-btn" style="font-size:1.5rem;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cart-items" style="flex:1; overflow-y:auto;">
+            <!-- Cart items will be rendered here by JS -->
+            <p style="text-align:center; color:#666; margin-top:50px;">Your cart is empty.</p>
+        </div>
+        <div id="cart-footer" style="border-top:1px solid #ccc; padding-top:15px; margin-top:15px;">
+            <div class="flex justify-between" style="font-size:1.2rem; font-weight:bold; margin-bottom:15px;">
+                <span>Total:</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="btn btn-primary" style="width:100%; padding:15px;">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="main.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

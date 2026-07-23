@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kits - Manchester United Official Online Store</title>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="container">
+            <a href="#" class="topbar-link">Help</a>
+            <a href="#" class="topbar-link">Track Order</a>
+            <div class="currency-selector">
+                <i class="fa-solid fa-globe"></i> EN / $USD
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="site-header">
+        <div class="container navbar">
+            <button class="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <a href="index.html" class="nav-brand">
+                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd Logo">
+            </a>
+            <!-- Simplified Nav for this page, usually you'd include the full mega menu -->
+            <nav class="nav-menu">
+                <div class="nav-item active"><a href="category.html" class="nav-link">Kits</a></div>
+                <div class="nav-item"><a href="category.html" class="nav-link">Training</a></div>
+                <div class="nav-item"><a href="category.html" class="nav-link">Retro</a></div>
+                <div class="nav-item"><a href="category.html" class="nav-link">Gifts & Accessories</a></div>
+            </nav>
+            <div class="nav-actions">
+                <button class="action-btn" title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="action-btn" title="Account"><i class="fa-regular fa-user"></i></button>
+                <button class="action-btn" id="cart-toggle-btn" title="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count" id="header-cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- BREADCRUMBS -->
+    <div class="breadcrumbs container">
+        <a href="index.html">Home</a> &gt; <span>Kits</span>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="container category-layout">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar-filters">
+            <div class="filter-group">
+                <h4 class="filter-title">Gender</h4>
+                <div class="filter-options">
+                    <label><input type="checkbox" class="filter-checkbox" data-type="gender" value="Mens"> Mens</label>
+                    <label><input type="checkbox" class="filter-checkbox" data-type="gender" value="Womens"> Womens</label>
+                    <label><input type="checkbox" class="filter-checkbox" data-type="gender" value="Kids"> Kids</label>
+                </div>
+            </div>
+            <div class="filter-group">
+                <h4 class="filter-title">Size</h4>
+                <div class="filter-options">
+                    <label><input type="checkbox" class="filter-checkbox" data-type="size" value="S"> S</label>
+                    <label><input type="checkbox" class="filter-checkbox" data-type="size" value="M"> M</label>
+                    <label><input type="checkbox" class="filter-checkbox" data-type="size" value="L"> L</label>
+                    <label><input type="checkbox" class="filter-checkbox" data-type="size" value="XL"> XL</label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Product Grid Area -->
+        <section class="category-main">
+            <!-- Header & Sorting -->
+            <div class="category-header flex justify-between items-center">
+                <h2>Kits (<span id="product-count">4</span>)</h2>
+                <div class="sort-box">
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select">
+                        <option value="newest">Newest</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Grid -->
+            <div class="product-grid" id="product-grid">
+                
+                <!-- Product 1 -->
+                <div class="product-card grid-item" data-price="90" data-gender="Mens" data-size="S,M,L,XL" data-date="2024-07-01">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=400&q=80" alt="Home Shirt" class="product-img primary">
+                        <img src="https://images.unsplash.com/photo-1577223625856-758c127e1279?auto=format&fit=crop&w=400&q=80" alt="Home Shirt Hover" class="product-img hover-img">
+                        <button class="quick-add-btn">QUICK ADD</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html" class="product-title">Mens Manchester United Home Shirt 24/25</a>
+                        <p class="product-price">$90.00</p>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card grid-item" data-price="90" data-gender="Womens" data-size="S,M" data-date="2024-07-02">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1520903928273-0f44b0a2fe08?auto=format&fit=crop&w=400&q=80" alt="Away Shirt" class="product-img primary">
+                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=400&q=80" alt="Away Shirt Hover" class="product-img hover-img">
+                        <button class="quick-add-btn">QUICK ADD</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html" class="product-title">Womens Manchester United Away Shirt 24/25</a>
+                        <p class="product-price">$90.00</p>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card grid-item" data-price="70" data-gender="Kids" data-size="S,M,L" data-date="2024-07-03">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1616124619460-ff4ed8f4683c?auto=format&fit=crop&w=400&q=80" alt="Kids Home" class="product-img primary">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80" alt="Kids Home Hover" class="product-img hover-img">
+                        <button class="quick-add-btn">QUICK ADD</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html" class="product-title">Kids Manchester United Home Shirt 24/25</a>
+                        <p class="product-price">$70.00</p>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card grid-item" data-price="120" data-gender="Mens" data-size="L,XL" data-date="2024-06-15">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1556822272-911e860959bb?auto=format&fit=crop&w=400&q=80" alt="Authentic" class="product-img primary">
+                        <img src="https://images.unsplash.com/photo-1509631179647-0c37cb87a5a5?auto=format&fit=crop&w=400&q=80" alt="Authentic Hover" class="product-img hover-img">
+                        <button class="quick-add-btn">QUICK ADD</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html" class="product-title">Mens Authentic Home Shirt 24/25</a>
+                        <p class="product-price">$120.00</p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div id="no-products-msg" style="display:none; text-align:center; padding:50px; color:#666;">
+                <p>No products found matching your filters.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-column">
+                    <h4 class="footer-title">Customer Service</h4>
+                    <ul class="footer-list footer-links">
+                        <li><a href="#">Help & FAQs</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-title">Stay Updated</h4>
+                    <form class="newsletter-form" onsubmit="event.preventDefault();">
+                        <input type="email" placeholder="Email Address" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Manchester United FC Ltd.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Slide-out Cart Container -->
+    <div id="slide-cart-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1001;"></div>
+    <div id="slide-cart" style="position:fixed; top:0; right:-400px; width:400px; max-width:100%; height:100vh; background:#fff; z-index:1002; transition:right 0.3s ease; box-shadow:-5px 0 15px rgba(0,0,0,0.1); padding:20px; display:flex; flex-direction:column;">
+        <div class="flex justify-between items-center" style="border-bottom:1px solid #ccc; padding-bottom:15px; margin-bottom:15px;">
+            <h2 style="font-size:1.5rem;">Your Cart</h2>
+            <button id="close-cart-btn" style="font-size:1.5rem;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cart-items" style="flex:1; overflow-y:auto;">
+            <p style="text-align:center; color:#666; margin-top:50px;">Your cart is empty.</p>
+        </div>
+        <div id="cart-footer" style="border-top:1px solid #ccc; padding-top:15px; margin-top:15px;">
+            <div class="flex justify-between" style="font-size:1.2rem; font-weight:bold; margin-bottom:15px;">
+                <span>Total:</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="btn btn-primary" style="width:100%; padding:15px;">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="main.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>
