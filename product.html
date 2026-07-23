@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mens Manchester United Home Shirt 24/25</title>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="container">
+            <a href="#" class="topbar-link">Help</a>
+            <a href="#" class="topbar-link">Track Order</a>
+            <div class="currency-selector">
+                <i class="fa-solid fa-globe"></i> EN / $USD
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="site-header">
+        <div class="container navbar">
+            <button class="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <a href="index.html" class="nav-brand">
+                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd Logo">
+            </a>
+            <nav class="nav-menu">
+                <div class="nav-item active"><a href="category.html" class="nav-link">Kits</a></div>
+                <div class="nav-item"><a href="category.html" class="nav-link">Training</a></div>
+                <div class="nav-item"><a href="category.html" class="nav-link">Retro</a></div>
+                <div class="nav-item"><a href="category.html" class="nav-link">Gifts & Accessories</a></div>
+            </nav>
+            <div class="nav-actions">
+                <button class="action-btn" title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="action-btn" title="Account"><i class="fa-regular fa-user"></i></button>
+                <button class="action-btn" id="cart-toggle-btn" title="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count" id="header-cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- BREADCRUMBS -->
+    <div class="breadcrumbs container">
+        <a href="index.html">Home</a> &gt; <a href="category.html">Kits</a> &gt; <span>Mens Manchester United Home Shirt 24/25</span>
+    </div>
+
+    <!-- PRODUCT DETAIL MAIN -->
+    <main class="container pdp-layout">
+        
+        <!-- Image Gallery Area -->
+        <div class="pdp-gallery">
+            <div class="pdp-thumbnails">
+                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=150&q=80" alt="Thumb 1" class="thumb-img active" onclick="changeMainImage(this.src)">
+                <img src="https://images.unsplash.com/photo-1577223625856-758c127e1279?auto=format&fit=crop&w=150&q=80" alt="Thumb 2" class="thumb-img" onclick="changeMainImage(this.src)">
+                <img src="https://images.unsplash.com/photo-1518063319789-7217e6706b04?auto=format&fit=crop&w=150&q=80" alt="Thumb 3" class="thumb-img" onclick="changeMainImage(this.src)">
+            </div>
+            
+            <div class="pdp-main-image-container" id="zoom-container">
+                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=80" alt="Main Product" class="pdp-main-img" id="main-product-image">
+            </div>
+        </div>
+
+        <!-- Product Info Area -->
+        <div class="pdp-info">
+            <h1 class="pdp-title" id="pdp-title">Mens Manchester United Home Shirt 24/25</h1>
+            <p class="pdp-price" id="pdp-price" data-value="90">$90.00</p>
+            
+            <p class="pdp-desc">
+                Embrace the pride of Old Trafford with the new Manchester United 24/25 Home Shirt. 
+                Designed with sweat-wicking technology to keep you dry and comfortable whether you're playing or cheering from the stands.
+            </p>
+
+            <div class="pdp-options">
+                <div class="size-selector">
+                    <h4>Select Size</h4>
+                    <div class="size-options">
+                        <button class="size-btn">S</button>
+                        <button class="size-btn active">M</button>
+                        <button class="size-btn">L</button>
+                        <button class="size-btn">XL</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pdp-actions">
+                <button class="btn btn-primary add-to-cart-btn" id="add-to-cart-btn">
+                    <i class="fa-solid fa-cart-plus"></i> ADD TO CART
+                </button>
+            </div>
+
+            <div class="pdp-details-list">
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> 100% Recycled Polyester</li>
+                    <li><i class="fa-solid fa-check"></i> Standard fit</li>
+                    <li><i class="fa-solid fa-check"></i> Machine wash</li>
+                    <li><i class="fa-solid fa-check"></i> Officially licensed</li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                &copy; 2026 Manchester United FC Ltd.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Slide-out Cart Container -->
+    <div id="slide-cart-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1001;"></div>
+    <div id="slide-cart" style="position:fixed; top:0; right:-400px; width:400px; max-width:100%; height:100vh; background:#fff; z-index:1002; transition:right 0.3s ease; box-shadow:-5px 0 15px rgba(0,0,0,0.1); padding:20px; display:flex; flex-direction:column;">
+        <div class="flex justify-between items-center" style="border-bottom:1px solid #ccc; padding-bottom:15px; margin-bottom:15px;">
+            <h2 style="font-size:1.5rem;">Your Cart</h2>
+            <button id="close-cart-btn" style="font-size:1.5rem;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cart-items" style="flex:1; overflow-y:auto;">
+            <p style="text-align:center; color:#666; margin-top:50px;">Your cart is empty.</p>
+        </div>
+        <div id="cart-footer" style="border-top:1px solid #ccc; padding-top:15px; margin-top:15px;">
+            <div class="flex justify-between" style="font-size:1.2rem; font-weight:bold; margin-bottom:15px;">
+                <span>Total:</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="btn btn-primary" style="width:100%; padding:15px;">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="main.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

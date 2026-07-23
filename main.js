@@ -179,3 +179,89 @@ function applyFiltersAndSort() {
     // Re-append sorted elements
     visibleProducts.forEach(p => grid.appendChild(p));
 }
+
+/* ==========================================================================
+   PRODUCT DETAIL PAGE JS (GALLERY & ADD TO CART)
+   ========================================================================== */
+
+function changeMainImage(src) {
+    const mainImg = document.getElementById('main-product-image');
+    if (!mainImg) return;
+    
+    // Smooth transition
+    mainImg.style.opacity = '0';
+    setTimeout(() => {
+        mainImg.src = src.replace('w=150', 'w=800'); // Load higher res based on unsplash url
+        mainImg.style.opacity = '1';
+    }, 150);
+
+    // Update active thumb
+    const thumbs = document.querySelectorAll('.thumb-img');
+    thumbs.forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+}
+
+// Image Zoom effect on hover
+function initImageZoom() {
+    const container = document.getElementById('zoom-container');
+    const img = document.getElementById('main-product-image');
+    if (!container || !img) return;
+
+    container.addEventListener('mousemove', (e) => {
+        const { left, top, width, height } = container.getBoundingClientRect();
+        const x = (e.clientX - left) / width * 100;
+        const y = (e.clientY - top) / height * 100;
+
+        img.style.transformOrigin = `${x}% ${y}%`;
+        img.style.transform = 'scale(2)';
+    });
+
+    container.addEventListener('mouseleave', () => {
+        img.style.transformOrigin = 'center center';
+        img.style.transform = 'scale(1)';
+    });
+}
+
+// Size Selection
+function initSizeSelection() {
+    const sizeBtns = document.querySelectorAll('.size-btn');
+    sizeBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            sizeBtns.forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+        });
+    });
+}
+
+// Add to Cart Animation (Mock)
+function initAddToCartAnim() {
+    const addBtn = document.getElementById('add-to-cart-btn');
+    if (!addBtn) return;
+
+    addBtn.addEventListener('click', () => {
+        // Shake animation
+        addBtn.classList.add('shake-anim');
+        setTimeout(() => addBtn.classList.remove('shake-anim'), 400);
+
+        // Update header cart count
+        const countSpan = document.getElementById('header-cart-count');
+        if (countSpan) {
+            let count = parseInt(countSpan.textContent);
+            countSpan.textContent = count + 1;
+        }
+
+        // Open cart
+        const slideCart = document.getElementById('slide-cart');
+        const overlay = document.getElementById('slide-cart-overlay');
+        if (slideCart && overlay) {
+            slideCart.style.right = '0';
+            overlay.style.display = 'block';
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initImageZoom();
+    initSizeSelection();
+    initAddToCartAnim();
+});

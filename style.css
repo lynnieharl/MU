@@ -606,14 +606,137 @@ button {
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (Header & Footer & Homepage & Category)
+   PRODUCT DETAIL PAGE STYLES
+   ========================================================================== */
+.pdp-layout {
+    display: flex;
+    gap: 40px;
+    padding: 20px var(--container-padding) 60px;
+    align-items: flex-start;
+}
+.pdp-gallery {
+    flex: 6;
+    display: flex;
+    gap: 20px;
+}
+.pdp-thumbnails {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80px;
+}
+.thumb-img {
+    width: 100%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+.thumb-img.active, .thumb-img:hover {
+    border-color: var(--color-primary);
+}
+.pdp-main-image-container {
+    flex-grow: 1;
+    background-color: var(--color-gray-light);
+    position: relative;
+    overflow: hidden; /* For zoom effect */
+    cursor: zoom-in;
+}
+.pdp-main-img {
+    width: 100%;
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.1s ease-out;
+}
+
+.pdp-info {
+    flex: 4;
+    padding-top: 20px;
+}
+.pdp-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+.pdp-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+.pdp-desc {
+    color: var(--color-gray-dark);
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+.size-selector {
+    margin-bottom: 30px;
+}
+.size-selector h4 {
+    margin-bottom: 10px;
+}
+.size-options {
+    display: flex;
+    gap: 10px;
+}
+.size-btn {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ccc;
+    background: #fff;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+.size-btn:hover {
+    border-color: var(--color-black);
+}
+.size-btn.active {
+    background: var(--color-black);
+    color: var(--color-white);
+    border-color: var(--color-black);
+}
+.add-to-cart-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+.pdp-details-list ul li {
+    margin-bottom: 10px;
+    color: var(--color-gray-dark);
+}
+.pdp-details-list ul li i {
+    color: var(--color-primary);
+    margin-right: 10px;
+}
+
+/* Shake Animation for Add to Cart */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+.shake-anim {
+    animation: shake 0.4s;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Header & Footer & Homepage & Category & Product)
    ========================================================================== */
 @media (max-width: 1024px) {
     .nav-menu { display: none; }
     .mobile-menu-toggle { display: block; }
     .mega-menu { display: none !important; }
+    .category-layout { flex-direction: column; }
+    .sidebar-filters { width: 100%; position: static; display: flex; gap: 20px; overflow-x: auto;}
+    .filter-group { flex: 1; border: none; }
 }
 @media (max-width: 768px) {
     .footer-column { flex: 1 1 100%; }
     .topbar .container { justify-content: center; }
+    .pdp-layout { flex-direction: column; }
+    .pdp-gallery { flex-direction: column-reverse; width: 100%; }
+    .pdp-thumbnails { flex-direction: row; width: 100%; overflow-x: auto; }
+    .thumb-img { width: 80px; }
 }
