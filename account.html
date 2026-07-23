@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Manchester United Official Online Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .account-layout { display: flex; gap: 40px; padding: 40px var(--container-padding); align-items: flex-start; min-height: 60vh;}
+        .account-sidebar { width: 250px; flex-shrink: 0; background: var(--color-gray-light); padding: 20px;}
+        .account-nav { list-style: none; }
+        .account-nav li { margin-bottom: 10px; }
+        .account-nav a { display: block; padding: 10px; color: var(--color-gray-dark); font-weight: bold; cursor: pointer;}
+        .account-nav a:hover, .account-nav a.active { background: var(--color-black); color: var(--color-white); }
+        .account-main { flex: 1; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .order-card { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; border-radius: 4px;}
+        .order-header { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;}
+        @media (max-width: 768px) { .account-layout { flex-direction: column; } .account-sidebar { width: 100%; } }
+    </style>
+</head>
+<body>
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="container">
+            <a href="#" class="topbar-link">Help</a>
+            <div class="currency-selector"><i class="fa-solid fa-globe"></i> EN / $USD</div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="site-header">
+        <div class="container navbar">
+            <button class="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <a href="index.html" class="nav-brand">
+                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd Logo">
+            </a>
+            <nav class="nav-menu">
+                <div class="nav-item"><a href="category.html" class="nav-link">Kits</a></div>
+                <div class="nav-item"><a href="category.html" class="nav-link">Training</a></div>
+            </nav>
+            <div class="nav-actions">
+                <a href="search.html" class="action-btn" title="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="account.html" class="action-btn" id="account-link" title="Account" style="color:var(--color-primary)"><i class="fa-solid fa-user"></i></a>
+                <button class="action-btn" id="cart-toggle-btn" title="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count" id="header-cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container account-layout">
+        <div class="account-sidebar">
+            <h3 style="margin-bottom: 20px; text-transform: uppercase;">Hello, <span id="user-display-name">User</span></h3>
+            <ul class="account-nav">
+                <li><a class="active" onclick="switchTab('profile', this)">My Profile</a></li>
+                <li><a onclick="switchTab('orders', this)">Order History</a></li>
+                <li><a onclick="logoutUser()" style="color: var(--color-primary);">Sign Out</a></li>
+            </ul>
+        </div>
+        
+        <div class="account-main">
+            <!-- Profile Tab -->
+            <div id="profile" class="tab-content active">
+                <h2 style="font-size: 1.8rem; margin-bottom: 20px; text-transform: uppercase;">My Profile</h2>
+                <div class="form-group" style="max-width: 400px;">
+                    <label>Email Address</label>
+                    <input type="text" id="user-email-input" class="form-control" disabled>
+                </div>
+                <div class="form-group" style="max-width: 400px;">
+                    <label>Name</label>
+                    <input type="text" id="user-name-input" class="form-control">
+                </div>
+                <button class="btn btn-primary" onclick="alert('Profile updated!')">Update Profile</button>
+            </div>
+
+            <!-- Orders Tab -->
+            <div id="orders" class="tab-content">
+                <h2 style="font-size: 1.8rem; margin-bottom: 20px; text-transform: uppercase;">Order History</h2>
+                
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <strong>Order #MU-982143</strong>
+                            <p style="color:#666; font-size:0.9rem;">Placed on 21 July 2026</p>
+                        </div>
+                        <div>
+                            <strong>$180.00</strong>
+                            <p style="color:#28a745; font-size:0.9rem; font-weight:bold;">Delivered</p>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=80&q=80" style="width:60px; height:60px; object-fit:cover;">
+                        <img src="https://images.unsplash.com/photo-1520903928273-0f44b0a2fe08?auto=format&fit=crop&w=80&q=80" style="width:60px; height:60px; object-fit:cover;">
+                    </div>
+                </div>
+
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <strong>Order #MU-772819</strong>
+                            <p style="color:#666; font-size:0.9rem;">Placed on 05 July 2026</p>
+                        </div>
+                        <div>
+                            <strong>$65.00</strong>
+                            <p style="color:#28a745; font-size:0.9rem; font-weight:bold;">Delivered</p>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <img src="https://images.unsplash.com/photo-1616124619460-ff4ed8f4683c?auto=format&fit=crop&w=80&q=80" style="width:60px; height:60px; object-fit:cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                &copy; 2026 Manchester United FC Ltd.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Slide-out Cart Container -->
+    <div id="slide-cart-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1001;"></div>
+    <div id="slide-cart" style="position:fixed; top:0; right:-400px; width:400px; max-width:100%; height:100vh; background:#fff; z-index:1002; transition:right 0.3s ease; padding:20px; display:flex; flex-direction:column;">
+        <div class="flex justify-between items-center" style="border-bottom:1px solid #ccc; padding-bottom:15px; margin-bottom:15px;">
+            <h2 style="font-size:1.5rem;">Your Cart</h2>
+            <button id="close-cart-btn" style="font-size:1.5rem;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cart-items" style="flex:1; overflow-y:auto;"></div>
+        <div id="cart-footer" style="border-top:1px solid #ccc; padding-top:15px; margin-top:15px;">
+            <div class="flex justify-between" style="font-size:1.2rem; font-weight:bold; margin-bottom:15px;">
+                <span>Total:</span><span id="cart-total-price">$0.00</span>
+            </div>
+            <a href="checkout.html" class="btn btn-primary" style="width:100%; padding:15px; display:block;">Checkout</a>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="cart.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('vanilla_store_user'));
+            if (!user || !user.isLoggedIn) {
+                // Kick out if not logged in
+                window.location.href = 'login.html';
+                return;
+            }
+
+            document.getElementById('user-display-name').textContent = user.name;
+            document.getElementById('user-name-input').value = user.name;
+            document.getElementById('user-email-input').value = user.email;
+        });
+
+        function switchTab(tabId, el) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            
+            document.querySelectorAll('.account-nav a').forEach(a => a.classList.remove('active'));
+            el.classList.add('active');
+        }
+    </script>
+</body>
+</html>

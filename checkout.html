@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Manchester United Official Online Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .checkout-layout { display: flex; gap: 40px; padding: 40px var(--container-padding); align-items: flex-start; }
+        .checkout-form { flex: 7; }
+        .checkout-summary { flex: 5; background: var(--color-gray-light); padding: 30px; border-radius: 8px; }
+        .checkout-summary h3 { margin-bottom: 20px; font-size: 1.5rem; text-transform: uppercase; border-bottom: 1px solid #ccc; padding-bottom: 10px; }
+        .summary-items { max-height: 400px; overflow-y: auto; margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 20px;}
+        .summary-item { display: flex; gap: 15px; margin-bottom: 15px; }
+        .summary-img { width: 60px; height: 60px; object-fit: cover; background: #fff; }
+        .summary-total { display: flex; justify-content: space-between; font-size: 1.5rem; font-weight: bold; margin-bottom: 20px;}
+        .form-section { margin-bottom: 30px; }
+        .form-section h3 { margin-bottom: 15px; text-transform: uppercase; border-bottom: 2px solid var(--color-black); padding-bottom: 5px;}
+        .form-row { display: flex; gap: 20px; margin-bottom: 15px;}
+        .form-row .form-group { flex: 1; margin-bottom: 0;}
+        @media (max-width: 900px) { .checkout-layout { flex-direction: column-reverse; } .checkout-summary, .checkout-form { width: 100%; } }
+    </style>
+</head>
+<body>
+    <header class="site-header" style="box-shadow: none; border-bottom: 1px solid #eee;">
+        <div class="container navbar" style="justify-content: center;">
+            <a href="index.html" class="nav-brand">
+                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd Logo">
+            </a>
+        </div>
+    </header>
+
+    <main class="container checkout-layout">
+        <!-- Billing / Shipping Form -->
+        <div class="checkout-form">
+            <form id="checkout-form">
+                <div class="form-section">
+                    <h3>Contact Information</h3>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="co-email" placeholder="Email Address" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Shipping Address</h3>
+                    <div class="form-row">
+                        <div class="form-group"><input type="text" class="form-control" placeholder="First Name" required></div>
+                        <div class="form-group"><input type="text" class="form-control" placeholder="Last Name" required></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Address" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><input type="text" class="form-control" placeholder="City" required></div>
+                        <div class="form-group"><input type="text" class="form-control" placeholder="ZIP Code" required></div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Payment</h3>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Card Number" required pattern="[0-9]{16}" title="16 digit card number">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><input type="text" class="form-control" placeholder="MM/YY" required></div>
+                        <div class="form-group"><input type="text" class="form-control" placeholder="CVC" required pattern="[0-9]{3}"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem;">Place Order</button>
+            </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="checkout-summary">
+            <h3>Order Summary</h3>
+            <div class="summary-items" id="summary-items">
+                <!-- Items injected by JS -->
+            </div>
+            <div class="summary-total">
+                <span>Total</span>
+                <span id="summary-total-price">$0.00</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = JSON.parse(localStorage.getItem('vanilla_store_cart')) || [];
+            const summaryContainer = document.getElementById('summary-items');
+            const summaryTotal = document.getElementById('summary-total-price');
+
+            if(cart.length === 0) {
+                summaryContainer.innerHTML = '<p>Your cart is empty.</p>';
+                document.getElementById('checkout-form').style.display = 'none';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                html += `
+                    <div class="summary-item">
+                        <img src="${item.image}" alt="${item.name}" class="summary-img">
+                        <div style="flex:1;">
+                            <h5 style="font-size:0.9rem; margin-bottom:5px;">${item.name}</h5>
+                            <p style="font-size:0.8rem; color:#666;">Size: ${item.size} | Qty: ${item.quantity}</p>
+                            <p style="font-weight:bold;">$${(item.price * item.quantity).toFixed(2)}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            summaryContainer.innerHTML = html;
+            summaryTotal.textContent = '$' + total.toFixed(2);
+
+            // Handle checkout
+            const form = document.getElementById('checkout-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Clear cart
+                localStorage.removeItem('vanilla_store_cart');
+                // Redirect to success
+                window.location.href = 'success.html';
+            });
+        });
+    </script>
+</body>
+</html>

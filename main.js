@@ -233,7 +233,91 @@ function initSizeSelection() {
     });
 }
 
+/* ==========================================================================
+   UX ENHANCEMENTS (TOAST & MOBILE DRAWER)
+   ========================================================================== */
+
+function showToast(message) {
+    let toast = document.getElementById('toast-notification');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast-notification';
+        toast.className = 'toast-notification';
+        document.body.appendChild(toast);
+    }
+
+    toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color:var(--color-primary); font-size:1.2rem;"></i> <span>${message}</span>`;
+    
+    // Force reflow
+    void toast.offsetWidth;
+    toast.classList.add('show');
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
+// Override cart.js addToCart to show Toast instead of opening cart directly
+// We will intercept the global function if needed, but since we are in Vanilla,
+// we can just re-define or hook into it. Since addToCart is in cart.js, 
+// let's just make showToast available globally.
+window.showToast = showToast;
+
+function initMobileDrawer() {
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    if (!mobileToggle) return;
+
+    // Create Drawer DOM if not exists
+    let drawer = document.getElementById('mobile-drawer');
+    let overlay = document.getElementById('mobile-drawer-overlay');
+
+    if (!drawer) {
+        overlay = document.createElement('div');
+        overlay.id = 'mobile-drawer-overlay';
+        overlay.className = 'mobile-drawer-overlay';
+        
+        drawer = document.createElement('div');
+        drawer.id = 'mobile-drawer';
+        drawer.className = 'mobile-side-drawer';
+        drawer.innerHTML = `
+            <div class="mobile-drawer-header">
+                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Logo" style="height:40px;">
+                <button id="close-drawer-btn" style="font-size:1.5rem;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="mobile-nav-list">
+                <a href="index.html">Home</a>
+                <a href="category.html">Kits</a>
+                <a href="category.html">Training</a>
+                <a href="category.html">Retro</a>
+                <a href="category.html">Gifts & Accessories</a>
+                <a href="login.html">My Account</a>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        document.body.appendChild(drawer);
+    }
+
+    const closeBtn = document.getElementById('close-drawer-btn');
+
+    function openDrawer() {
+        drawer.classList.add('open');
+        overlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+        drawer.classList.remove('open');
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    mobileToggle.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initImageZoom();
     initSizeSelection();
+    initMobileDrawer();
 });

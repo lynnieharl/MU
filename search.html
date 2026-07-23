@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Manchester United Official Online Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="container">
+            <a href="#" class="topbar-link">Help</a>
+            <div class="currency-selector"><i class="fa-solid fa-globe"></i> EN / $USD</div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="site-header">
+        <div class="container navbar">
+            <button class="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <a href="index.html" class="nav-brand">
+                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd Logo">
+            </a>
+            <nav class="nav-menu">
+                <div class="nav-item"><a href="category.html" class="nav-link">Kits</a></div>
+                <div class="nav-item"><a href="category.html" class="nav-link">Training</a></div>
+            </nav>
+            <div class="nav-actions">
+                <button class="action-btn" title="Search" id="search-toggle-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <a href="login.html" class="action-btn" id="account-link" title="Account"><i class="fa-regular fa-user"></i></a>
+                <button class="action-btn" id="cart-toggle-btn" title="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count" id="header-cart-count">0</span>
+                </button>
+            </div>
+        </div>
+        <!-- Search Dropdown -->
+        <div id="search-dropdown" style="display:none; padding:20px; background:#f5f5f5; border-top:1px solid #ddd;">
+            <div class="container flex justify-center">
+                <form action="search.html" method="GET" style="display:flex; width:100%; max-width:600px;">
+                    <input type="text" name="q" placeholder="Search for products..." style="flex:1; padding:15px; border:1px solid #ccc; outline:none;" required>
+                    <button type="submit" class="btn btn-primary">SEARCH</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container" style="padding: 40px var(--container-padding); min-height: 50vh;">
+        <h2 style="font-size: 2rem; margin-bottom: 30px; text-transform: uppercase;">Search Results for "<span id="search-query-display"></span>"</h2>
+        
+        <div class="product-grid" id="search-results-grid">
+            <!-- Products will be injected here -->
+        </div>
+        
+        <div id="no-search-results" style="display:none; text-align:center; padding:50px; color:#666;">
+            <p>No products found matching your search.</p>
+        </div>
+    </main>
+
+    <!-- Slide-out Cart Container -->
+    <div id="slide-cart-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1001;"></div>
+    <div id="slide-cart" style="position:fixed; top:0; right:-400px; width:400px; max-width:100%; height:100vh; background:#fff; z-index:1002; transition:right 0.3s ease; padding:20px; display:flex; flex-direction:column;">
+        <div class="flex justify-between items-center" style="border-bottom:1px solid #ccc; padding-bottom:15px; margin-bottom:15px;">
+            <h2 style="font-size:1.5rem;">Your Cart</h2>
+            <button id="close-cart-btn" style="font-size:1.5rem;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cart-items" style="flex:1; overflow-y:auto;"></div>
+        <div id="cart-footer" style="border-top:1px solid #ccc; padding-top:15px; margin-top:15px;">
+            <div class="flex justify-between" style="font-size:1.2rem; font-weight:bold; margin-bottom:15px;">
+                <span>Total:</span><span id="cart-total-price">$0.00</span>
+            </div>
+            <a href="checkout.html" class="btn btn-primary" style="width:100%; padding:15px; display:block;">Checkout</a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+    <script src="cart.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Toggle Search Bar
+            const searchToggleBtn = document.getElementById('search-toggle-btn');
+            const searchDropdown = document.getElementById('search-dropdown');
+            if(searchToggleBtn) {
+                searchToggleBtn.addEventListener('click', () => {
+                    searchDropdown.style.display = searchDropdown.style.display === 'none' ? 'block' : 'none';
+                });
+            }
+
+            // Mock Data
+            const mockProducts = [
+                { id: 'home-shirt-24', name: 'Mens Manchester United Home Shirt 24/25', price: 90, img1: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=400&q=80', img2: 'https://images.unsplash.com/photo-1577223625856-758c127e1279?auto=format&fit=crop&w=400&q=80' },
+                { id: 'away-shirt-24', name: 'Womens Manchester United Away Shirt 24/25', price: 90, img1: 'https://images.unsplash.com/photo-1520903928273-0f44b0a2fe08?auto=format&fit=crop&w=400&q=80', img2: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=400&q=80' },
+                { id: 'training-top-24', name: 'Manchester United Training Top 24/25', price: 65, img1: 'https://images.unsplash.com/photo-1616124619460-ff4ed8f4683c?auto=format&fit=crop&w=400&q=80', img2: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80' },
+                { id: 'jacket-24', name: 'Manchester United Anthem Jacket', price: 110, img1: 'https://images.unsplash.com/photo-1556822272-911e860959bb?auto=format&fit=crop&w=400&q=80', img2: 'https://images.unsplash.com/photo-1509631179647-0c37cb87a5a5?auto=format&fit=crop&w=400&q=80' }
+            ];
+
+            // Get Query
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q') || '';
+            document.getElementById('search-query-display').textContent = query;
+
+            const grid = document.getElementById('search-results-grid');
+            const noResults = document.getElementById('no-search-results');
+
+            if(query.trim() === '') {
+                noResults.style.display = 'block';
+                return;
+            }
+
+            const results = mockProducts.filter(p => p.name.toLowerCase().includes(query.toLowerCase()));
+            
+            if(results.length === 0) {
+                noResults.style.display = 'block';
+            } else {
+                let html = '';
+                results.forEach(p => {
+                    html += `
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="${p.img1}" class="product-img primary">
+                                <img src="${p.img2}" class="product-img hover-img">
+                                <button class="quick-add-btn">QUICK ADD</button>
+                            </div>
+                            <div class="product-info">
+                                <a href="product.html" class="product-title">${p.name}</a>
+                                <p class="product-price">$${p.price.toFixed(2)}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+                grid.innerHTML = html;
+                // Re-bind quick add
+                if(typeof attachAddToCartListeners === 'function') attachAddToCartListeners();
+            }
+        });
+    </script>
+</body>
+</html>

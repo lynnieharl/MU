@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Manchester United Official Online Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="container">
+            <a href="#" class="topbar-link">Help</a>
+            <a href="#" class="topbar-link">Track Order</a>
+            <div class="currency-selector">
+                <i class="fa-solid fa-globe"></i> EN / $USD
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="site-header">
+        <div class="container navbar">
+            <button class="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <a href="index.html" class="nav-brand">
+                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd Logo">
+            </a>
+            <nav class="nav-menu">
+                <div class="nav-item"><a href="category.html" class="nav-link">Kits</a></div>
+                <div class="nav-item"><a href="category.html" class="nav-link">Training</a></div>
+                <div class="nav-item"><a href="category.html" class="nav-link">Retro</a></div>
+                <div class="nav-item"><a href="category.html" class="nav-link">Gifts & Accessories</a></div>
+            </nav>
+            <div class="nav-actions">
+                <a href="search.html" class="action-btn" title="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="login.html" class="action-btn" id="account-link" title="Account"><i class="fa-regular fa-user"></i></a>
+                <button class="action-btn" id="cart-toggle-btn" title="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count" id="header-cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- AUTH MAIN CONTENT -->
+    <main class="container auth-layout">
+        <div class="auth-box">
+            <h2 class="auth-title">Sign In</h2>
+            <p class="auth-desc">Welcome back! Sign in to access your account.</p>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address *</label>
+                    <input type="email" id="login-email" class="form-control" required>
+                    <span class="error-msg" id="email-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password *</label>
+                    <input type="password" id="login-password" class="form-control" required>
+                    <span class="error-msg" id="pwd-error"></span>
+                </div>
+                <div class="form-group flex justify-between items-center" style="margin-bottom: 20px;">
+                    <label style="font-size: 0.9rem; display: flex; align-items: center; gap: 5px;">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" style="font-size: 0.9rem; text-decoration: underline;">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+            </form>
+            <div class="auth-footer">
+                Don't have an account? <a href="register.html">Register here</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                &copy; 2026 Manchester United FC Ltd.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Slide-out Cart Container -->
+    <div id="slide-cart-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1001;"></div>
+    <div id="slide-cart" style="position:fixed; top:0; right:-400px; width:400px; max-width:100%; height:100vh; background:#fff; z-index:1002; transition:right 0.3s ease; padding:20px; display:flex; flex-direction:column;">
+        <div class="flex justify-between items-center" style="border-bottom:1px solid #ccc; padding-bottom:15px; margin-bottom:15px;">
+            <h2 style="font-size:1.5rem;">Your Cart</h2>
+            <button id="close-cart-btn" style="font-size:1.5rem;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cart-items" style="flex:1; overflow-y:auto;"></div>
+        <div id="cart-footer" style="border-top:1px solid #ccc; padding-top:15px; margin-top:15px;">
+            <div class="flex justify-between" style="font-size:1.2rem; font-weight:bold; margin-bottom:15px;">
+                <span>Total:</span><span id="cart-total-price">$0.00</span>
+            </div>
+            <a href="checkout.html" class="btn btn-primary" style="width:100%; padding:15px; display:block;">Checkout</a>
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="main.js"></script>
+    <script src="cart.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

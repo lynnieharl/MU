@@ -106,7 +106,11 @@ function addToCart(product) {
     }
     saveCart();
     renderCart();
-    if (window.openSlideCart) window.openSlideCart();
+    if (window.showToast) {
+        window.showToast(`${product.name} added to cart!`);
+    } else if (window.openSlideCart) {
+        window.openSlideCart();
+    }
 }
 
 window.updateQuantity = function(id, change) {
