@@ -52,4 +52,56 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cập nhật lại khi resize cửa sổ
         window.addEventListener('resize', updateCarousel);
     }
+
+    // ==========================================
+    // PRODUCT DETAIL PAGE (PDP) LOGIC
+    // ==========================================
+    // 1. Thumbnail Image Switcher
+    const thumbnails = document.querySelectorAll('.thumb-img');
+    const mainImg = document.querySelector('.main-product-img');
+
+    if (thumbnails.length > 0 && mainImg) {
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                // Xóa active class của tất cả
+                thumbnails.forEach(t => t.classList.remove('active'));
+                // Thêm active class cho ảnh được click
+                this.classList.add('active');
+                // Đổi src ảnh to
+                mainImg.src = this.src;
+            });
+        });
+    }
+
+    // 2. Quantity Selector
+    const minusBtn = document.querySelector('.qty-btn.minus');
+    const plusBtn = document.querySelector('.qty-btn.plus');
+    const qtyInput = document.querySelector('.qty-input');
+
+    if (minusBtn && plusBtn && qtyInput) {
+        minusBtn.addEventListener('click', () => {
+            let val = parseInt(qtyInput.value);
+            if (val > 1) {
+                qtyInput.value = val - 1;
+            }
+        });
+        
+        plusBtn.addEventListener('click', () => {
+            let val = parseInt(qtyInput.value);
+            if (val < 99) {
+                qtyInput.value = val + 1;
+            }
+        });
+    }
+    
+    // 3. Size Selector
+    const sizeBtns = document.querySelectorAll('.size-btn');
+    if (sizeBtns.length > 0) {
+        sizeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                sizeBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    }
 });
