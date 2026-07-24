@@ -3,44 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
     <title>Official Manchester United Online Store</title>
-    <!-- FontAwesome for exact icons -->
+    <!-- Thư viện FontAwesome chứa icon thật -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
+    <!-- Phải gọi đúng file style.css -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- ==========================================
-         BLOCK 1: TOP BAR & MAIN HEADER
+         [PHẦN 1] HEADER
          ========================================== -->
-    
-    <!-- Top Bar -->
     <div class="top-bar">
         <div class="top-bar-container">
             <div class="top-bar-left">
-                <!-- Currency & Language -->
                 <button class="top-bar-btn"><i class="fa-solid fa-globe"></i> English - US$</button>
             </div>
             <div class="top-bar-right">
-                <a href="#" class="top-bar-link">Track Order</a>
-                <a href="#" class="top-bar-link">Help</a>
+                <a href="track-order.html" class="top-bar-link">Track Order</a>
+                <a href="help.html" class="top-bar-link">Help</a>
             </div>
         </div>
     </div>
 
-    <!-- Main Header -->
     <header class="main-header">
         <div class="header-container">
-            
-            <!-- Logo Left -->
+            <!-- Khối Logo (Cố định chiều rộng/cao, không được khổng lồ) -->
             <div class="header-logo">
                 <a href="index.html">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Manchester United Logo" class="logo-img">
+                    <img src="images/0_Manchester_United_FC_crest.svg" alt="Manchester United Logo" class="logo-img">
                 </a>
             </div>
 
-            <!-- Search Middle -->
+            <!-- Khối Search (Dài, căn giữa) -->
             <div class="header-search">
                 <form action="search.html" method="GET" class="search-form">
                     <input type="text" name="query" class="search-input" placeholder="Search for products, players, and more...">
@@ -48,7 +44,7 @@
                 </form>
             </div>
 
-            <!-- Icons Right -->
+            <!-- Khối Icons (Tài khoản, Wishlist, Giỏ hàng) -->
             <div class="header-icons">
                 <a href="login.html" class="header-icon-link">
                     <i class="fa-regular fa-user"></i>
@@ -64,206 +60,261 @@
                     <span class="icon-label">Cart</span>
                 </a>
             </div>
-
         </div>
     </header>
 
     <!-- ==========================================
-         BLOCK 2: MEGA MENU NAVBAR
+         [PHẦN 1] MEGA MENU
          ========================================== -->
-    
-    <!-- Navigation Bar (Black) -->
     <nav class="mega-navbar">
         <div class="navbar-container">
             <ul class="nav-list">
-                
-                <!-- Kits Dropdown -->
+                <!-- Mục Kits có Dropdown Mega Menu -->
                 <li class="nav-item has-dropdown">
-                    <a href="category.html" class="nav-link">Kits</a>
-                    
-                    <!-- Mega Dropdown Box -->
+                    <a href="kits.html" class="nav-link">Kits</a>
+                    <!-- Bảng Dropdown xổ xuống -->
                     <div class="mega-dropdown">
                         <div class="dropdown-container">
-                            
-                            <!-- Sub menu column 1 -->
                             <div class="dropdown-column">
                                 <h3 class="dropdown-title">Shop By Category</h3>
                                 <ul class="dropdown-list">
-                                    <li><a href="#">Home Kits</a></li>
-                                    <li><a href="#">Away Kits</a></li>
-                                    <li><a href="#">Third Kits</a></li>
-                                    <li><a href="#">Goalkeeper Kits</a></li>
-                                    <li><a href="#">Training Kits</a></li>
+                                    <li><a href="kits-home.html">Home Kits</a></li>
+                                    <li><a href="kits-away.html">Away Kits</a></li>
+                                    <li><a href="kits-third.html">Third Kits</a></li>
+                                    <li><a href="kits-gk.html">Goalkeeper Kits</a></li>
+                                    <li><a href="kits-training.html">Training Kits</a></li>
                                 </ul>
                             </div>
-                            
-                            <!-- Sub menu column 2 -->
                             <div class="dropdown-column">
                                 <h3 class="dropdown-title">Shop By Player</h3>
                                 <ul class="dropdown-list">
-                                    <li><a href="#">Bruno Fernandes</a></li>
-                                    <li><a href="#">Marcus Rashford</a></li>
-                                    <li><a href="#">Alejandro Garnacho</a></li>
-                                    <li><a href="#">Kobbie Mainoo</a></li>
-                                    <li><a href="#">Rasmus Højlund</a></li>
+                                    <li><a href="player-bruno.html">Bruno Fernandes</a></li>
+                                    <li><a href="player-rashford.html">Marcus Rashford</a></li>
+                                    <li><a href="player-garnacho.html">Alejandro Garnacho</a></li>
+                                    <li><a href="player-mainoo.html">Kobbie Mainoo</a></li>
+                                    <li><a href="player-hojlund.html">Rasmus Højlund</a></li>
                                 </ul>
                             </div>
-
-                            <!-- Banner Column 1 -->
+                            <!-- Banner Dropdown Ảnh Thật 1 -->
                             <div class="dropdown-column banner-col">
-                                <a href="#">
-                                    <img src="https://via.placeholder.com/250x300/DA291C/FFFFFF?text=New+Home+Kit" alt="Home Kit Banner" class="dropdown-banner">
+                                <a href="kits-home.html">
+                                    <img src="images/1_lammens005-product-carousel.jpg" alt="Home Kit Banner" class="dropdown-banner">
                                     <span class="banner-text">Shop 24/25 Home Kit</span>
                                 </a>
                             </div>
-
-                            <!-- Banner Column 2 -->
+                            <!-- Banner Dropdown Ảnh Thật 2 -->
                             <div class="dropdown-column banner-col">
-                                <a href="#">
-                                    <img src="https://via.placeholder.com/250x300/000000/FFFFFF?text=New+Away+Kit" alt="Away Kit Banner" class="dropdown-banner">
+                                <a href="kits-away.html">
+                                    <img src="images/2_24295ea4b3319ca1ab4a7b45bc5272e4.jpg" alt="Away Kit Banner" class="dropdown-banner">
                                     <span class="banner-text">Shop 24/25 Away Kit</span>
                                 </a>
                             </div>
-
                         </div>
                     </div>
                 </li>
-
-                <!-- Other Nav Items -->
-                <li class="nav-item"><a href="category.html" class="nav-link">Training</a></li>
-                <li class="nav-item"><a href="category.html" class="nav-link">Mens</a></li>
-                <li class="nav-item"><a href="category.html" class="nav-link">Womens</a></li>
-                <li class="nav-item"><a href="category.html" class="nav-link">Kids</a></li>
-                <li class="nav-item"><a href="category.html" class="nav-link">Homeware</a></li>
-                <li class="nav-item"><a href="category.html" class="nav-link">Souvenirs</a></li>
-                <li class="nav-item sale-item"><a href="category.html" class="nav-link" style="color: #DA291C;">Sale</a></li>
-
+                
+                <!-- Các mục menu khác (Link thật, không dùng #) -->
+                <li class="nav-item"><a href="training.html" class="nav-link">Training</a></li>
+                <li class="nav-item"><a href="mens.html" class="nav-link">Mens</a></li>
+                <li class="nav-item"><a href="womens.html" class="nav-link">Womens</a></li>
+                <li class="nav-item"><a href="kids.html" class="nav-link">Kids</a></li>
+                <li class="nav-item"><a href="homeware.html" class="nav-link">Homeware</a></li>
+                <li class="nav-item"><a href="souvenirs.html" class="nav-link">Souvenirs</a></li>
+                <li class="nav-item sale-item"><a href="sale.html" class="nav-link" style="color: #DA291C;">Sale</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- ==========================================
-         BLOCK 3: PROMO BAR & HERO BANNER
+         [PHẦN 1] PROMO BAR
          ========================================== -->
-
-    <!-- Promo Bar -->
     <div class="promo-bar">
         <div class="promo-text">
             <span>FREE SHIPPING ON ALL ORDERS OVER $100</span>
-            <a href="#" class="promo-link">DETAILS</a>
+            <a href="details.html" class="promo-link">DETAILS</a>
         </div>
     </div>
 
-    <!-- Hero Banner -->
+    <!-- ==========================================
+         [PHẦN 2] HERO BANNER
+         ========================================== -->
     <section class="hero-banner">
         <div class="hero-image-wrapper">
-            <!-- Using a large placeholder image to simulate the hero graphic -->
-            <img src="https://via.placeholder.com/1440x600/1A1A1A/FFFFFF?text=NEW+SEASON.+NEW+GEAR." alt="Hero Banner" class="hero-img">
+            <img src="images/3_mt-gp-1-hero-banner-desktop.jpg" alt="Old Trafford & Hero" class="hero-img">
         </div>
-        
         <div class="hero-content">
-            <h1 class="hero-title">READY FOR THE NEW SEASON</h1>
-            <p class="hero-subtitle">Discover the latest training wear and exclusive merchandise.</p>
-            <div class="hero-actions">
-                <a href="category.html" class="btn-primary">Shop Now</a>
-                <a href="category.html" class="btn-secondary">Shop Training</a>
-            </div>
+            <h1 class="hero-title">NEW HOME KIT 24/25</h1>
+            <a href="kits-home.html" class="btn-primary">SHOP NOW</a>
         </div>
     </section>
 
     <!-- ==========================================
-         BLOCK 4: PRODUCT CAROUSEL (TRENDING NOW)
+         [PHẦN 2] TRENDING NOW (Carousel)
          ========================================== -->
     <section class="carousel-section">
         <div class="carousel-header">
-            <h2 class="section-title">Trending Now</h2>
+            <h2 class="section-title">TRENDING NOW</h2>
             <div class="carousel-controls">
                 <button class="carousel-btn prev-btn" id="trending-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <button class="carousel-btn next-btn" id="trending-next"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
         </div>
-        
         <div class="carousel-container" id="trending-carousel">
             <div class="carousel-track">
-                <!-- Product 1 -->
+                <!-- Áo Sân Nhà -->
                 <div class="product-card">
                     <div class="product-image-container">
-                        <img src="https://via.placeholder.com/300x400/F5F5F5/333333?text=Home+Shirt" class="product-img" alt="Home Shirt">
+                        <img src="images/4_c836596765f00ea79c068d00ff3c4e05.jpg" class="product-img" alt="Manchester United Home Shirt 24/25">
                     </div>
                     <div class="product-info">
-                        <a href="#" class="product-title">Mens Manchester United Home Shirt 24/25</a>
+                        <a href="product.html" class="product-title">Mens Manchester United Home Authentic Shirt 24/25</a>
                         <p class="product-price">$90.00</p>
                     </div>
                 </div>
-                <!-- Product 2 -->
+                <!-- Áo Sân Khách -->
                 <div class="product-card">
                     <div class="product-image-container">
-                        <img src="https://via.placeholder.com/300x400/F5F5F5/333333?text=Away+Shirt" class="product-img" alt="Away Shirt">
+                        <img src="images/5_b42223866496c6fac690a48a9b121da5.jpg" class="product-img" alt="Manchester United Away Shirt 24/25">
                     </div>
                     <div class="product-info">
-                        <a href="#" class="product-title">Womens Manchester United Away Shirt 24/25</a>
+                        <a href="product.html" class="product-title">Mens Manchester United Away Shirt 24/25</a>
                         <p class="product-price">$90.00</p>
                     </div>
                 </div>
-                <!-- Product 3 -->
+                <!-- Áo Tập -->
                 <div class="product-card">
                     <div class="product-image-container">
-                        <img src="https://via.placeholder.com/300x400/F5F5F5/333333?text=Training+Top" class="product-img" alt="Training Top">
+                        <img src="images/6_2ed2651297cac6ec9750f6581a0940e2.jpg" class="product-img" alt="Manchester United Training Top">
                     </div>
                     <div class="product-info">
-                        <a href="#" class="product-title">Manchester United Training Top 24/25</a>
+                        <a href="product.html" class="product-title">Manchester United Training Top 24/25</a>
                         <p class="product-price">$65.00</p>
                     </div>
                 </div>
-                <!-- Product 4 -->
+                <!-- Áo Khoác Anthem -->
                 <div class="product-card">
                     <div class="product-image-container">
-                        <img src="https://via.placeholder.com/300x400/F5F5F5/333333?text=Anthem+Jacket" class="product-img" alt="Anthem Jacket">
+                        <img src="images/7_066d2c004e6666a7d1316d9eb103a421.jpg" class="product-img" alt="Manchester United Anthem Jacket">
                     </div>
                     <div class="product-info">
-                        <a href="#" class="product-title">Manchester United Anthem Jacket</a>
+                        <a href="product.html" class="product-title">Manchester United Anthem Jacket 24/25</a>
                         <p class="product-price">$110.00</p>
-                    </div>
-                </div>
-                <!-- Product 5 -->
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://via.placeholder.com/300x400/F5F5F5/333333?text=Third+Shirt" class="product-img" alt="Third Shirt">
-                    </div>
-                    <div class="product-info">
-                        <a href="#" class="product-title">Kids Manchester United Third Shirt 24/25</a>
-                        <p class="product-price">$70.00</p>
-                    </div>
-                </div>
-                <!-- Product 6 -->
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://via.placeholder.com/300x400/F5F5F5/333333?text=Retro+Shirt" class="product-img" alt="Retro Shirt">
-                    </div>
-                    <div class="product-info">
-                        <a href="#" class="product-title">Manchester United 1999 Retro Shirt</a>
-                        <p class="product-price">$85.00</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Scripts -->
-    <script src="main.js"></script>
     <!-- ==========================================
-         BLOCK 5: FOOTER
+         [PHẦN 3] SHOP BY CATEGORY
+         ========================================== -->
+    <section class="category-grid-section">
+        <h2 class="section-title text-center">Shop By Category</h2>
+        <div class="kit-grid">
+            <div class="kit-card">
+                <img src="images/8_4c77739191924bede382dbf20ab1a413.jpg" alt="Home Kit" class="kit-bg">
+                <div class="kit-overlay">
+                    <h3>Home Kit</h3>
+                    <a href="kits-home.html" class="btn-primary">Shop Now</a>
+                </div>
+            </div>
+            <div class="kit-card">
+                <img src="images/9_bebbf6efd4d3e67fa7281f6bdf8429a6.jpg" alt="Away Kit" class="kit-bg">
+                <div class="kit-overlay">
+                    <h3>Away Kit</h3>
+                    <a href="kits-away.html" class="btn-primary">Shop Now</a>
+                </div>
+            </div>
+            <div class="kit-card">
+                <img src="images/10_557b882a41d5bc6a7934615bbc14b842.jpg" alt="Third Kit" class="kit-bg">
+                <div class="kit-overlay">
+                    <h3>Third Kit</h3>
+                    <a href="kits-third.html" class="btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         [PHẦN 3] SHOP BY PLAYER
+         ========================================== -->
+    <section class="player-section">
+        <h2 class="section-title text-center">SHOP BY PLAYER</h2>
+        <div class="player-container">
+            <a href="player.html" class="player-card">
+                <img src="images/11_p141746.png" alt="Bruno Fernandes" class="player-avatar">
+                <div class="player-info-box">
+                    <span class="player-name">B. Fernandes</span>
+                    <span class="player-number">8</span>
+                </div>
+            </a>
+            <a href="player.html" class="player-card">
+                <img src="images/12_p176297.png" alt="Marcus Rashford" class="player-avatar">
+                <div class="player-info-box">
+                    <span class="player-name">Rashford</span>
+                    <span class="player-number">10</span>
+                </div>
+            </a>
+            <a href="player.html" class="player-card">
+                <img src="images/13_p493105.png" alt="Alejandro Garnacho" class="player-avatar">
+                <div class="player-info-box">
+                    <span class="player-name">Garnacho</span>
+                    <span class="player-number">17</span>
+                </div>
+            </a>
+            <a href="player.html" class="player-card">
+                <img src="https://b.fssta.com/uploads/application/soccer/headshots/100062.png" alt="Kobbie Mainoo" class="player-avatar">
+                <div class="player-info-box">
+                    <span class="player-name">Mainoo</span>
+                    <span class="player-number">37</span>
+                </div>
+            </a>
+            <a href="player.html" class="player-card">
+                <img src="https://b.fssta.com/uploads/application/soccer/headshots/87258.png" alt="Rasmus Højlund" class="player-avatar">
+                <div class="player-info-box">
+                    <span class="player-name">Højlund</span>
+                    <span class="player-number">9</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         [PHẦN 3] SHOP BY DEPARTMENT
+         ========================================== -->
+    <section class="department-section">
+        <div class="dept-grid">
+            <a href="mens.html" class="dept-card">
+                <img src="images/16_a4344ea5b8f98e65d41e2666dc881248.jpg" alt="Mens" class="dept-img">
+                <span class="dept-label">Mens</span>
+            </a>
+            <a href="womens.html" class="dept-card">
+                <img src="images/17_0bb8ce5dfcdaa5f408a0c8cd9c864247.jpg" alt="Womens" class="dept-img">
+                <span class="dept-label">Womens</span>
+            </a>
+            <a href="kids.html" class="dept-card">
+                <img src="images/18_efc356c8f7694d0e6b81af8b55e486dd.jpg" alt="Kids" class="dept-img">
+                <span class="dept-label">Kids</span>
+            </a>
+            <a href="training.html" class="dept-card">
+                <img src="images/19_c09dd81f09a6c8db0ef921ae63aaf881.jpg" alt="Training" class="dept-img">
+                <span class="dept-label">Training</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         [PHẦN 4] NEWSLETTER & FOOTER
          ========================================== -->
     <footer class="site-footer">
-        <!-- Newsletter Section -->
+        <!-- Newsletter -->
         <div class="newsletter-section">
             <div class="newsletter-container">
                 <div class="newsletter-text">
                     <h3>SIGN UP TO OUR NEWSLETTER</h3>
-                    <p>Be the first to hear about new product drops, sales, and exclusive offers.</p>
                 </div>
                 <div class="newsletter-form-container">
-                    <form action="#" class="newsletter-form">
+                    <form action="subscribe.php" method="POST" class="newsletter-form">
                         <input type="email" placeholder="Enter your email address" required class="newsletter-input">
                         <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
                     </form>
@@ -275,67 +326,59 @@
         <div class="footer-main">
             <div class="footer-container">
                 <div class="footer-column">
-                    <h4>Customer Service</h4>
+                    <h4>Help</h4>
                     <ul>
-                        <li><a href="#">Help & FAQs</a></li>
-                        <li><a href="#">Track Order</a></li>
-                        <li><a href="#">Delivery & Shipping</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="faq.html">Help & FAQs</a></li>
+                        <li><a href="track-order.html">Track Order</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>Shopping With Us</h4>
                     <ul>
-                        <li><a href="#">Safe Shopping</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Accessibility</a></li>
+                        <li><a href="safe-shopping.html">Safe Shopping</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Use</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>About Us</h4>
                     <ul>
-                        <li><a href="#">Club History</a></li>
-                        <li><a href="#">Old Trafford Stadium</a></li>
-                        <li><a href="#">MU Foundation</a></li>
-                        <li><a href="#">Careers</a></li>
+                        <li><a href="history.html">Club History</a></li>
+                        <li><a href="stadium.html">Old Trafford Stadium</a></li>
+                        <li><a href="foundation.html">MU Foundation</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>Follow Us</h4>
                     <ul class="social-links">
-                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
-                        <li><a href="#"><i class="fa-brands fa-twitter"></i> Twitter</a></li>
-                        <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
-                        <li><a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+                        <li><a href="https://facebook.com"><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
+                        <li><a href="https://instagram.com"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                        <li><a href="https://twitter.com"><i class="fa-brands fa-x-twitter"></i> X (Twitter)</a></li>
+                        <li><a href="https://youtube.com"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Footer Bottom: Payment & Sponsors -->
+        <!-- Bottom Footer -->
         <div class="footer-bottom">
             <div class="footer-bottom-container">
+                <div class="copyright-text">
+                    <p>&copy; 2024 Manchester United. All rights reserved.</p>
+                </div>
                 <div class="payment-methods">
-                    <img src="https://via.placeholder.com/50x30/FFFFFF/000000?text=Visa" alt="Visa" class="footer-logo">
-                    <img src="https://via.placeholder.com/50x30/FFFFFF/000000?text=MC" alt="Mastercard" class="footer-logo">
-                    <img src="https://via.placeholder.com/50x30/FFFFFF/000000?text=Amex" alt="Amex" class="footer-logo">
-                    <img src="https://via.placeholder.com/50x30/FFFFFF/000000?text=PayPal" alt="PayPal" class="footer-logo">
-                    <img src="https://via.placeholder.com/50x30/FFFFFF/000000?text=Apple" alt="Apple Pay" class="footer-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Visa_Logo_2012.png" alt="Visa" class="payment-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard" class="payment-icon">
+                    <img src="images/22_PayPal.svg" alt="PayPal" class="payment-icon">
+                    <img src="images/23_American_Express_logo_%282018%29.svg" alt="Amex" class="payment-icon">
                 </div>
-                <div class="sponsors">
-                    <span class="sponsor-label">Principal Partners:</span>
-                    <img src="https://via.placeholder.com/80x40/FFFFFF/000000?text=Snapdragon" alt="Snapdragon" class="footer-logo">
-                    <img src="https://via.placeholder.com/80x40/FFFFFF/000000?text=Tezos" alt="Tezos" class="footer-logo">
-                    <img src="https://via.placeholder.com/80x40/FFFFFF/000000?text=Adidas" alt="Adidas" class="footer-logo">
-                </div>
-            </div>
-            <div class="copyright-text">
-                <p>&copy; 2026 Manchester United FC Ltd. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Script JS -->
+    <script src="main.js"></script>
 </body>
 </html>

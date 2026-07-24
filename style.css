@@ -18,11 +18,14 @@
     --container-max-width: 1440px;
 }
 
+/* FIX CSS LAYOUT: Chống tràn text và cuộn ngang */
 body {
     font-family: var(--font-primary);
     background-color: var(--color-white);
     color: var(--color-black);
     line-height: 1.5;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
 }
 
 ul {
@@ -42,7 +45,7 @@ button {
 }
 
 /* ==========================================================================
-   BLOCK 1: TOP BAR & MAIN HEADER
+   [PHẦN 1] HEADER & TOP BAR
    ========================================================================== */
 
 /* Top Bar */
@@ -105,19 +108,22 @@ button {
     align-items: center;
 }
 
-/* Logo */
+/* Logo (FIX: Đảm bảo không bị khổng lồ) */
 .header-logo {
     flex: 1;
     display: flex;
     justify-content: flex-start;
+    align-items: center; /* Căn giữa dọc */
 }
 
 .logo-img {
     height: 70px;
+    max-width: 100%; /* Fix lỗi to quá khổ */
     width: auto;
+    object-fit: contain; /* Cố định tỷ lệ */
 }
 
-/* Search */
+/* Search Bar */
 .header-search {
     flex: 2;
     display: flex;
@@ -130,7 +136,7 @@ button {
     max-width: 500px;
     border: 1px solid var(--color-black);
     border-radius: 4px;
-    overflow: hidden;
+    overflow: hidden; /* Cắt viền gọn gàng */
 }
 
 .search-input {
@@ -155,7 +161,7 @@ button {
     color: var(--color-white);
 }
 
-/* Icons */
+/* Icons Right */
 .header-icons {
     flex: 1;
     display: flex;
@@ -184,6 +190,11 @@ button {
     text-transform: uppercase;
 }
 
+/* Biểu tượng số lượng (Cart Badge) */
+.cart-icon-wrapper {
+    position: relative;
+}
+
 .cart-badge {
     position: absolute;
     top: -8px;
@@ -201,7 +212,7 @@ button {
 }
 
 /* ==========================================================================
-   BLOCK 2: MEGA MENU NAVBAR
+   [PHẦN 1] MEGA MENU NAVBAR
    ========================================================================== */
 
 .mega-navbar {
@@ -210,7 +221,7 @@ button {
     height: 50px;
     display: flex;
     align-items: center;
-    position: relative;
+    position: relative; /* Chuẩn bị cho dropdown thả xuống */
 }
 
 .navbar-container {
@@ -246,7 +257,7 @@ button {
     position: relative;
 }
 
-/* Red underline effect on hover */
+/* Gạch chân màu đỏ khi hover */
 .nav-link::after {
     content: '';
     position: absolute;
@@ -267,10 +278,10 @@ button {
     width: 100%;
 }
 
-/* Mega Dropdown Structure */
+/* MEGA DROPDOWN (Hover hiện Menu thả xuống) */
 .mega-dropdown {
     position: absolute;
-    top: 50px; /* Right below the navbar */
+    top: 50px; /* Thả xuống ngay dưới Navbar 50px */
     left: 0;
     width: 100%;
     background-color: var(--color-white);
@@ -278,7 +289,7 @@ button {
     border-top: 1px solid var(--color-gray-border);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     
-    /* Hidden by default, with transition */
+    /* Ẩn mặc định, thêm hiệu ứng trượt */
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
@@ -286,6 +297,7 @@ button {
     z-index: 1000;
 }
 
+/* Khi hover vào Nav Item có Dropdown thì hiện bảng ra */
 .nav-item.has-dropdown:hover .mega-dropdown {
     opacity: 1;
     visibility: visible;
@@ -330,6 +342,7 @@ button {
     text-decoration: underline;
 }
 
+/* Dropdown Banners */
 .banner-col {
     display: flex;
     flex-direction: column;
@@ -354,10 +367,8 @@ button {
 }
 
 /* ==========================================================================
-   BLOCK 3: PROMO BAR & HERO BANNER
+   [PHẦN 1] PROMO BAR
    ========================================================================== */
-
-/* Promo Bar */
 .promo-bar {
     background-color: var(--color-gray-light);
     border-bottom: 1px solid var(--color-gray-border);
@@ -384,7 +395,9 @@ button {
     color: var(--color-primary);
 }
 
-/* Hero Banner */
+/* ==========================================================================
+   [PHẦN 2] HERO BANNER
+   ========================================================================== */
 .hero-banner {
     position: relative;
     width: 100%;
@@ -395,7 +408,6 @@ button {
 
 .hero-image-wrapper {
     width: 100%;
-    /* Standard 1440x600 ratio */
     aspect-ratio: 2.4 / 1; 
 }
 
@@ -423,19 +435,7 @@ button {
     font-weight: 900;
 }
 
-.hero-subtitle {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    line-height: 1.4;
-}
-
-.hero-actions {
-    display: flex;
-    gap: 15px;
-}
-
-/* Buttons */
-.btn-primary, .btn-secondary {
+.btn-primary {
     display: inline-block;
     padding: 15px 30px;
     font-size: 1rem;
@@ -443,35 +443,20 @@ button {
     text-transform: uppercase;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-primary {
     background-color: var(--color-primary);
     color: var(--color-white);
     border: 2px solid var(--color-primary);
+    transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: transparent;
-    color: var(--color-white);
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--color-white);
-    border: 2px solid var(--color-white);
-}
-
-.btn-secondary:hover {
-    background-color: var(--color-white);
-    color: var(--color-black);
+    background-color: #a81c12; /* Đỏ sẫm */
+    border-color: #a81c12;
 }
 
 /* ==========================================================================
-   BLOCK 4: PRODUCT CAROUSEL (TRENDING NOW)
+   [PHẦN 2] TRENDING NOW (Carousel)
    ========================================================================== */
-
 .carousel-section {
     width: 100%;
     max-width: var(--container-max-width);
@@ -515,7 +500,7 @@ button {
 }
 
 .carousel-container {
-    overflow: hidden; /* Hide scrollbar for JS scroll */
+    overflow: hidden;
     width: 100%;
 }
 
@@ -525,14 +510,14 @@ button {
     transition: transform 0.4s ease-in-out;
 }
 
-/* Product Card */
 .product-card {
-    flex: 0 0 calc(25% - 15px); /* Show 4 items per view */
+    flex: 0 0 calc(25% - 15px); /* Hiển thị 4 cột */
     display: flex;
     flex-direction: column;
 }
 
 .product-image-container {
+    position: relative;
     width: 100%;
     background-color: var(--color-gray-light);
     margin-bottom: 15px;
@@ -543,11 +528,12 @@ button {
     width: 100%;
     height: auto;
     object-fit: cover;
+    display: block;
     transition: transform 0.3s ease;
 }
 
 .product-image-container:hover .product-img {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Zoom nhẹ khi hover áo */
 }
 
 .product-info {
@@ -557,9 +543,13 @@ button {
 }
 
 .product-title {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--color-gray-dark);
     line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .product-title:hover {
@@ -569,20 +559,158 @@ button {
 
 .product-price {
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    color: var(--color-black);
+    margin-top: 5px;
 }
 
 /* ==========================================================================
-   BLOCK 5: FOOTER
+   [PHẦN 3] CATEGORY & PLAYER & DEPARTMENT
    ========================================================================== */
+.text-center { text-align: center; }
 
+.category-grid-section, .player-section, .department-section {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 60px auto;
+    padding: 0 40px;
+}
+
+/* Shop By Category */
+.kit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.kit-card {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    aspect-ratio: 3/4;
+}
+
+.kit-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.kit-card:hover .kit-bg {
+    transform: scale(1.05);
+}
+
+.kit-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+    color: white;
+}
+
+.kit-overlay h3 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+/* Shop By Player */
+.player-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.player-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.player-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 4px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.player-card:hover .player-avatar {
+    border-color: var(--color-primary); /* Hover viền đỏ */
+}
+
+.player-info-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.player-name {
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.player-number {
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    font-weight: 900;
+}
+
+/* Shop By Department */
+.dept-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.dept-card {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    aspect-ratio: 4/3;
+    background: #111;
+}
+
+.dept-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.dept-card:hover .dept-img {
+    opacity: 0.9;
+}
+
+.dept-label {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: var(--color-white);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   [PHẦN 4] NEWSLETTER & FOOTER
+   ========================================================================== */
 .site-footer {
     background-color: var(--color-gray-light);
     color: var(--color-black);
     margin-top: 50px;
 }
 
-/* Newsletter Section */
 .newsletter-section {
     background-color: var(--color-black);
     color: var(--color-white);
@@ -602,7 +730,6 @@ button {
 .newsletter-text h3 {
     font-size: 1.5rem;
     text-transform: uppercase;
-    margin-bottom: 5px;
 }
 
 .newsletter-form-container {
@@ -631,10 +758,10 @@ button {
 }
 
 .newsletter-btn:hover {
-    background-color: #b02116; /* Darker red */
+    background-color: #a81c12; 
 }
 
-/* Main Footer Links */
+/* Footer Links */
 .footer-main {
     padding: 60px 0;
 }
@@ -686,7 +813,7 @@ button {
     gap: 10px;
 }
 
-/* Footer Bottom: Payment & Sponsors */
+/* Footer Bottom */
 .footer-bottom {
     border-top: 1px solid var(--color-gray-border);
     padding: 20px 0;
@@ -700,33 +827,16 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
 }
 
-.payment-methods, .sponsors {
+.payment-methods {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.sponsor-label {
-    font-size: 0.85rem;
-    color: var(--color-gray-dark);
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.footer-logo {
-    opacity: 0.7;
-    transition: opacity 0.2s;
-}
-
-.footer-logo:hover {
-    opacity: 1;
-}
-
-.copyright-text {
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--color-gray-dark);
+.payment-icon {
+    height: 25px;
+    width: auto;
+    object-fit: contain;
 }
