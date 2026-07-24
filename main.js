@@ -1,48 +1,55 @@
-/**
- * OFFICIAL MANCHESTER UNITED STORE - VANILLA JS (NEW VERSION)
- */
-
 document.addEventListener('DOMContentLoaded', () => {
-    initTrendingCarousel();
-});
-
-function initTrendingCarousel() {
+    // ==========================================
+    // TRENDING NOW CAROUSEL LOGIC
+    // ==========================================
     const track = document.querySelector('.carousel-track');
     const prevBtn = document.getElementById('trending-prev');
     const nextBtn = document.getElementById('trending-next');
     
-    if (!track || !prevBtn || !nextBtn) return;
+    if (track && prevBtn && nextBtn) {
+        // Trong trường hợp này có 4 sản phẩm, đang hiển thị 4 cột
+        // Nếu muốn hiệu ứng trượt mượt mà khi có nhiều sản phẩm hơn,
+        // chúng ta sẽ tính toán width và dịch chuyển.
+        
+        let currentIndex = 0;
+        
+        // Mặc định hiện tại có 4 sản phẩm, nên không cần trượt.
+        // Tuy nhiên, logic dưới đây sẵn sàng cho trường hợp thêm sản phẩm vào HTML.
+        const updateCarousel = () => {
+            const cards = document.querySelectorAll('.product-card');
+            if(cards.length === 0) return;
+            
+            // Tính chiều rộng của 1 card cộng với khoảng cách (gap)
+            // Lấy kích thước thực tế từ DOM
+            const cardWidth = cards[0].offsetWidth;
+            const gap = 20; // 20px gap như trong CSS
+            
+            const moveAmount = (cardWidth + gap) * currentIndex;
+            track.style.transform = `translateX(-${moveAmount}px)`;
+        };
 
-    const item = track.querySelector('.product-card');
-    if (!item) return;
+        nextBtn.addEventListener('click', () => {
+            const cards = document.querySelectorAll('.product-card');
+            const maxIndex = Math.max(0, cards.length - 4); // Hiển thị 4 item mỗi lần
+            
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateCarousel();
+            } else {
+                // Quay lại đầu nếu đã đến cuối (tùy chọn)
+                currentIndex = 0;
+                updateCarousel();
+            }
+        });
 
-    let currentIndex = 0;
-    
-    nextBtn.addEventListener('click', () => {
-        const itemWidth = item.offsetWidth;
-        const gap = 20; // 20px gap between items as per CSS
-        const moveAmount = itemWidth + gap;
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
 
-        const totalItems = track.children.length;
-        // On desktop, 4 items are visible. 
-        // Max index we can scroll to is (Total - 4).
-        const visibleItems = 4;
-        const maxIndex = Math.max(0, totalItems - visibleItems);
-
-        if (currentIndex < maxIndex) {
-            currentIndex++;
-            track.style.transform = `translateX(-${currentIndex * moveAmount}px)`;
-        }
-    });
-
-    prevBtn.addEventListener('click', () => {
-        const itemWidth = item.offsetWidth;
-        const gap = 20;
-        const moveAmount = itemWidth + gap;
-
-        if (currentIndex > 0) {
-            currentIndex--;
-            track.style.transform = `translateX(-${currentIndex * moveAmount}px)`;
-        }
-    });
-}
+        // Cập nhật lại khi resize cửa sổ
+        window.addEventListener('resize', updateCarousel);
+    }
+});
