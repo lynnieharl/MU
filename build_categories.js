@@ -16,7 +16,7 @@ const categories = [
     { title: 'Mens', file: 'mens.html' },
     { title: 'Womens', file: 'womens.html' },
     { title: 'Kids', file: 'kids.html' },
-    { title: 'Homeware', file: 'homeware.html' }
+    { title: 'Souvenirs', file: 'souvenirs.html' }
 ];
 
 const images = [
