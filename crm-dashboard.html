@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>United Store - CRM Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-panel: #1e1e1e;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --primary: #c70101; /* Manchester United Red */
+            --primary-hover: #a00101;
+            --danger: #ff4444;
+            --border: #333333;
+            --success: #00c853;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* LOGIN SCREEN */
+        #login-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #000000 0%, #1a0000 100%);
+        }
+
+        .login-box {
+            background: var(--bg-panel);
+            padding: 40px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .login-box h2 {
+            margin-bottom: 25px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .login-box img {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: #2a2a2a;
+            border: 1px solid var(--border);
+            color: white;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        /* DASHBOARD SCREEN */
+        #dashboard-screen {
+            display: none;
+            height: 100vh;
+        }
+
+        .dashboard-container {
+            display: flex;
+            height: 100%;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 250px;
+            background: var(--bg-panel);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .sidebar-header img {
+            width: 40px;
+        }
+
+        .sidebar-menu {
+            flex: 1;
+            padding: 20px 0;
+            list-style: none;
+        }
+
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: var(--text-muted);
+            text-decoration: none;
+            gap: 15px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .sidebar-menu li a:hover, .sidebar-menu li a.active {
+            background: rgba(199, 1, 1, 0.1);
+            color: var(--primary);
+            border-right: 3px solid var(--primary);
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .sidebar-footer button {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .sidebar-footer button:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            background: var(--bg-dark);
+        }
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .top-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .role-badge {
+            background: #333;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .role-badge.admin {
+            background: var(--primary);
+        }
+
+        /* TABLE */
+        .table-container {
+            background: var(--bg-panel);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .table-header-controls {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--text-muted);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            background: rgba(255,255,255,0.02);
+        }
+
+        td {
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .prod-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: white;
+        }
+
+        .action-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .btn-delete {
+            color: var(--danger);
+        }
+
+        .btn-delete:hover {
+            background: rgba(255, 68, 68, 0.1);
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            background: rgba(0, 200, 83, 0.15);
+            color: var(--success);
+        }
+
+        .view-only-tag {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 13px;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--bg-panel);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: white;
+        }
+
+        .btn-add {
+            width: auto;
+            padding: 10px 20px;
+        }
+        
+        .view-only-banner {
+            position: fixed;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 999;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: none;
+        }
+
+        /* Loading Spinner */
+        .loader {
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    </style>
+</head>
+<body>
+
+    <div id="view-only-banner" class="view-only-banner">
+        <i class="fa-solid fa-lock"></i> VIEW ONLY MODE - Admin privileges required to edit
+    </div>
+
+    <!-- ==========================================
+         TRẠNG THÁI 1: LOGIN SCREEN
+         ========================================== -->
+    <div id="login-screen">
+        <div class="login-box">
+            <img src="images/mu-logo.png" alt="MU Logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png'">
+            <h2>CRM SYSTEM</h2>
+            <form id="crm-login-form">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="login-email" required placeholder="admin@manutd.com">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary" id="login-btn">
+                    <span id="login-btn-text">SIGN IN</span>
+                    <div id="login-spinner" class="loader" style="display: none;"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         TRẠNG THÁI 2: DASHBOARD SCREEN
+         ========================================== -->
+    <div id="dashboard-screen">
+        <div class="dashboard-container">
+            
+            <!-- SIDEBAR -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <img src="images/mu-logo.png" alt="MU Logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png'">
+                    <span style="font-weight: 700; font-size: 18px; letter-spacing: 1px;">MU CRM</span>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active"><i class="fa-solid fa-box-open"></i> Products</a></li>
+                    <li><a href="#"><i class="fa-solid fa-users"></i> Customers</a></li>
+                    <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> Orders</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
+                </ul>
+                <div class="sidebar-footer">
+                    <button id="logout-btn" onclick="handleLogout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT -->
+            <main class="main-content">
+                <div class="top-header">
+                    <h1>Product Inventory</h1>
+                    <div class="user-info">
+                        <span id="user-email-display">user@email.com</span>
+                        <span id="user-role-badge" class="role-badge">USER</span>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header-controls">
+                        <div style="color: var(--text-muted); font-size: 14px;">Manage all store products in real-time.</div>
+                        <button id="btn-add-product" class="btn-primary btn-add" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> ADD PRODUCT</button>
+                    </div>
+                    
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th width="80">Image</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th id="th-actions" style="text-align: right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="product-table-body">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; padding: 40px;">
+                                        <div class="loader"></div>
+                                        <div style="margin-top: 15px; color: var(--text-muted);">Loading Database...</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL THÊM SẢN PHẨM
+         ========================================== -->
+    <div id="addModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Product</h3>
+                <button class="modal-close" onclick="closeAddModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="add-product-form">
+                <div class="input-group">
+                    <label>Product Name</label>
+                    <input type="text" id="prod-name" required placeholder="e.g. Manchester United Home Shirt">
+                </div>
+                <div class="input-group">
+                    <label>Price ($)</label>
+                    <input type="number" step="0.01" id="prod-price" required placeholder="100.00">
+                </div>
+                <div class="input-group">
+                    <label>Image URL</label>
+                    <input type="url" id="prod-image" required placeholder="https://...">
+                </div>
+                <button type="submit" class="btn-primary" id="save-product-btn">SAVE PRODUCT</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         JAVASCRIPT & SUPABASE INTEGRATION
+         ========================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // 1. Cấu hình Supabase (Hardcoded credentials)
+        const _supabaseUrl = 'https://suabbqtrggzwgchksenq.supabase.co';
+        const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
+        
+        let supabase = null;
+        if (_supabaseUrl && _supabaseKey) {
+            supabase = window.supabase.createClient(_supabaseUrl, _supabaseKey);
+        }
+
+        // Biến toàn cục
+        let currentUserRole = '';
+        let currentUserEmail = '';
+
+        // DOM Elements
+        const loginScreen = document.getElementById('login-screen');
+        const dashboardScreen = document.getElementById('dashboard-screen');
+        const loginForm = document.getElementById('crm-login-form');
+        const viewOnlyBanner = document.getElementById('view-only-banner');
+
+        // ==========================================
+        // KHỞI TẠO HỆ THỐNG
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!supabase) {
+                alert('CHƯA CẤU HÌNH SUPABASE URL & KEY!');
+                return;
+            }
+            // Kiểm tra session khi load trang
+            checkSessionOnLoad();
+        });
+
+        // ==========================================
+        // XỬ LÝ AUTH (LOGIN & SESSION)
+        // ==========================================
+        async function checkSessionOnLoad() {
+            try {
+                const { data: { session }, error } = await supabase.auth.getSession();
+                if (error) throw error;
+
+                if (session) {
+                    await setupUserContext(session.user.email);
+                    showDashboard();
+                } else {
+                    showLogin();
+                }
+            } catch (err) {
+                console.error('Session Check Error:', err);
+                showLogin();
+            }
+        }
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-password').value;
+            
+            const btnText = document.getElementById('login-btn-text');
+            const spinner = document.getElementById('login-spinner');
+            
+            btnText.style.display = 'none';
+            spinner.style.display = 'block';
+
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: pass
+                });
+
+                if (error) throw error;
+                
+                await setupUserContext(data.user.email);
+                showDashboard();
+                
+            } catch (err) {
+                alert('Lỗi đăng nhập: ' + err.message);
+            } finally {
+                btnText.style.display = 'block';
+                spinner.style.display = 'none';
+            }
+        });
+
+        async function handleLogout() {
+            await supabase.auth.signOut();
+            window.location.reload();
+        }
+
+        // ==========================================
+        // PHÂN QUYỀN (RBAC)
+        // ==========================================
+        async function setupUserContext(email) {
+            currentUserEmail = email;
+            document.getElementById('user-email-display').innerText = email;
+
+            try {
+                const { data, error } = await supabase
+                    .from('users')
+                    .select('role')
+                    .eq('email', email)
+                    .single();
+                
+                if (error) throw error;
+                currentUserRole = data.role;
+                
+                // Cập nhật UI theo quyền
+                const badge = document.getElementById('user-role-badge');
+                badge.innerText = currentUserRole;
+                if(currentUserRole === 'admin') {
+                    badge.classList.add('admin');
+                } else {
+                    badge.classList.remove('admin');
+                }
+
+                applyRBAC();
+                
+                // Tải dữ liệu bảng
+                fetchProducts();
+
+            } catch (err) {
+                console.error('Lỗi lấy quyền:', err);
+                // Nếu lỗi, mặc định cho làm user thường để an toàn
+                currentUserRole = 'user';
+                applyRBAC();
+                fetchProducts();
+            }
+        }
+
+        function applyRBAC() {
+            const addBtn = document.getElementById('btn-add-product');
+            if (currentUserRole !== 'admin') {
+                addBtn.style.display = 'none';
+                viewOnlyBanner.style.display = 'block';
+            } else {
+                addBtn.style.display = 'flex';
+                viewOnlyBanner.style.display = 'none';
+            }
+        }
+
+        // ==========================================
+        // GIAO DIỆN CHUYỂN MÀN HÌNH
+        // ==========================================
+        function showLogin() {
+            loginScreen.style.display = 'flex';
+            dashboardScreen.style.display = 'none';
+        }
+
+        function showDashboard() {
+            loginScreen.style.display = 'none';
+            dashboardScreen.style.display = 'block';
+        }
+
+        // ==========================================
+        // CRUD: READ (LẤY DỮ LIỆU)
+        // ==========================================
+        async function fetchProducts() {
+            try {
+                const { data, error } = await supabase.from('products').select('*');
+                if (error) throw error;
+
+                const tbody = document.getElementById('product-table-body');
+                tbody.innerHTML = '';
+                
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 30px; color: #a0a0a0;">No products found in Database.</td></tr>';
+                    return;
+                }
+
+                data.forEach(p => {
+                    let actionHtml = '';
+                    if (currentUserRole === 'admin') {
+                        actionHtml = `
+                            <td style="text-align: right;">
+                                <button class="action-btn" title="Edit" onclick="alert('Tính năng Edit đang phát triển!')"><i class="fa-solid fa-pen" style="color:#a0a0a0"></i></button>
+                                <button class="action-btn btn-delete" title="Delete" onclick="deleteProduct('${p.id}')"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        `;
+                    } else {
+                        actionHtml = `<td style="text-align: right;"><span class="view-only-tag">View Only</span></td>`;
+                    }
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><img src="${p.image_url}" class="prod-img" onerror="this.src='images/placeholder.jpg'"></td>
+                        <td style="font-weight: 500;">${p.name}</td>
+                        <td>$${p.price}</td>
+                        <td><span class="status-badge">In Stock</span></td>
+                        ${actionHtml}
+                    `;
+                    tbody.appendChild(tr);
+                });
+                
+            } catch (err) {
+                console.error(err);
+                document.getElementById('product-table-body').innerHTML = `<tr><td colspan="5" style="text-align:center; color:red;">Lỗi tải dữ liệu: ${err.message}</td></tr>`;
+            }
+        }
+
+        // ==========================================
+        // CRUD: CREATE (THÊM SẢN PHẨM)
+        // ==========================================
+        document.getElementById('add-product-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Bảo vệ lớp 2
+            if (currentUserRole !== 'admin') {
+                alert('Dừng lại! Bạn không có quyền Admin để thêm dữ liệu.');
+                return;
+            }
+
+            const name = document.getElementById('prod-name').value;
+            const price = document.getElementById('prod-price').value;
+            const img = document.getElementById('prod-image').value;
+
+            const btn = document.getElementById('save-product-btn');
+            btn.innerHTML = 'SAVING...';
+            btn.disabled = true;
+
+            try {
+                const { error } = await supabase.from('products').insert([
+                    { name: name, price: price, image_url: img }
+                ]);
+                
+                if (error) throw error;
+                
+                alert('Thêm sản phẩm thành công!');
+                closeAddModal();
+                document.getElementById('add-product-form').reset();
+                fetchProducts();
+            } catch (err) {
+                alert('Lỗi thêm sản phẩm: ' + err.message);
+            } finally {
+                btn.innerHTML = 'SAVE PRODUCT';
+                btn.disabled = false;
+            }
+        });
+
+        // ==========================================
+        // CRUD: DELETE (XÓA SẢN PHẨM)
+        // ==========================================
+        window.deleteProduct = async function(id) {
+            // Bảo vệ lớp 2
+            if (currentUserRole !== 'admin') {
+                alert('Dừng lại! Bạn không có quyền Admin để xóa dữ liệu.');
+                return;
+            }
+
+            if (!confirm('Bạn có chắc chắn muốn xóa sản phẩm này vĩnh viễn khỏi Database?')) return;
+
+            try {
+                const { error } = await supabase.from('products').delete().eq('id', id);
+                if (error) throw error;
+                
+                alert('Xóa sản phẩm thành công!');
+                fetchProducts();
+            } catch (err) {
+                alert('Lỗi khi xóa: ' + err.message);
+            }
+        }
+
+        // ==========================================
+        // ĐIỀU KHIỂN MODAL
+        // ==========================================
+        function openAddModal() {
+            if (currentUserRole !== 'admin') return alert('Chỉ Admin mới được mở Form này!');
+            document.getElementById('addModal').style.display = 'flex';
+        }
+        
+        function closeAddModal() {
+            document.getElementById('addModal').style.display = 'none';
+        }
+
+    </script>
+</body>
+</html>
