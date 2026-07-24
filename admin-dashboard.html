@@ -3,450 +3,396 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Manchester United Store</title>
-    <link rel="stylesheet" href="admin.css">
+    <title>ADMIN CONTROL PANEL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/svg+xml" href="images/0_Manchester_United_FC_crest.svg">
+    
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-panel: #1e1e1e;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --primary: #c70101;
+            --primary-hover: #a00101;
+            --danger: #ff4444;
+            --border: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; }
+
+        /* ==================== LOGIN SCREEN ==================== */
+        #login-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a, #1a0000);
+        }
+
+        .login-box {
+            background: var(--bg-panel);
+            padding: 40px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .login-box h2 {
+            margin-bottom: 25px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: #2a2a2a;
+            border: 1px solid var(--border);
+            color: white;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .input-group input:focus { outline: none; border-color: var(--primary); }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover { background: var(--primary-hover); }
+
+        /* ==================== DASHBOARD SCREEN ==================== */
+        #dashboard-screen {
+            display: none;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        .header h1 { font-size: 24px; }
+        
+        .user-actions { display: flex; gap: 15px; align-items: center; }
+
+        .btn-logout {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .btn-logout:hover { color: white; background: rgba(255,255,255,0.1); }
+
+        .table-container {
+            background: var(--bg-panel);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .table-header-controls {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-add { width: auto; padding: 10px 20px; }
+
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 15px 20px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { color: var(--text-muted); font-size: 13px; text-transform: uppercase; background: rgba(255,255,255,0.02); }
+        tr:hover { background: rgba(255,255,255,0.02); }
+
+        .prod-img { width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); background: white; }
+
+        .btn-delete { background: transparent; color: var(--danger); border: none; cursor: pointer; padding: 8px; font-size: 16px; }
+        .btn-delete:hover { background: rgba(255, 68, 68, 0.1); border-radius: 4px; }
+
+        /* ==================== MODAL ==================== */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none; justify-content: center; align-items: center;
+            z-index: 1000; backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--bg-panel); width: 100%; max-width: 500px;
+            border-radius: 12px; border: 1px solid var(--border); padding: 30px;
+        }
+
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .modal-close { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; }
+        .modal-close:hover { color: white; }
+    </style>
 </head>
 <body>
 
-<div class="admin-container">
-    <!-- SIDEBAR (20%) -->
-    <aside class="admin-sidebar">
-        <div class="sidebar-header">
-            <img src="images/0_Manchester_United_FC_crest.svg" alt="MU Logo" class="admin-logo">
-            <h2>ADMIN PORTAL</h2>
+    <!-- MÀN HÌNH CỔNG BẢO VỆ -->
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>ADMIN CONTROL PANEL</h2>
+            <form id="admin-login-form">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="login-email" required placeholder="admin@domain.com">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary" id="login-btn">Đăng nhập hệ thống</button>
+            </form>
         </div>
-
-        <div class="admin-profile">
-            <div class="avatar-circle">
-                <i class="fa-solid fa-user-tie"></i>
-            </div>
-            <div class="profile-info">
-                <h3>John Doe</h3>
-                <span class="role-badge">Super Admin</span>
-            </div>
-        </div>
-
-        <nav class="sidebar-nav">
-            <ul>
-                <li class="active"><a href="#"><i class="fa-solid fa-chart-pie"></i> Overview</a></li>
-                <li><a href="#"><i class="fa-solid fa-box-open"></i> Product Management</a></li>
-                <li><a href="#"><i class="fa-solid fa-users"></i> User Activity</a></li>
-                <li><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
-            </ul>
-        </nav>
-        
-        <div class="sidebar-footer">
-            <a href="index.html" class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout to Store</a>
-        </div>
-    </aside>
-
-    <!-- MAIN CONTENT (80%) -->
-    <main class="admin-main">
-        <header class="main-header">
-            <h1>Dashboard Overview</h1>
-            <div class="header-actions">
-                <div class="search-bar">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search anything...">
-                </div>
-                <button class="notification-btn"><i class="fa-regular fa-bell"></i><span class="badge">3</span></button>
-            </div>
-        </header>
-
-        <div class="dashboard-content">
-            
-            <!-- SECTION 1: TOP METRICS -->
-            <section class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-icon revenue-icon"><i class="fa-solid fa-dollar-sign"></i></div>
-                    <div class="metric-data">
-                        <h4>Total Revenue</h4>
-                        <p class="metric-value text-success">$145,200</p>
-                    </div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon product-icon"><i class="fa-solid fa-tags"></i></div>
-                    <div class="metric-data">
-                        <h4>Total Products</h4>
-                        <p class="metric-value">1,240</p>
-                    </div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon user-icon"><i class="fa-solid fa-user-plus"></i></div>
-                    <div class="metric-data">
-                        <h4>New Signups</h4>
-                        <p class="metric-value">45</p>
-                    </div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon session-icon"><i class="fa-solid fa-wave-square"></i></div>
-                    <div class="metric-data">
-                        <h4>Active Sessions</h4>
-                        <p class="metric-value">120</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION 2: PRODUCT MANAGEMENT -->
-            <section class="dashboard-section">
-                <div class="section-header">
-                    <h2>Product Inventory & Status</h2>
-                    <button class="btn-primary" id="btn-add-product" onclick="document.getElementById('addProductModal').style.display='flex'"><i class="fa-solid fa-plus"></i> ADD NEW PRODUCT</button>
-                </div>
-                <div class="table-responsive">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                                <th>Category</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="product-table-body">
-                            <tr>
-                                <td><img src="images/4_c836596765f00ea79c068d00ff3c4e05.jpg" alt="Home Shirt" class="table-img"></td>
-                                <td>Manchester United Mens Home Shirt 24/25</td>
-                                <td>Jerseys / Mens</td>
-                                <td>$100.00</td>
-                                <td><span class="status-badge success">In Stock</span></td>
-                                <td class="action-cell">
-                                    <button class="btn-edit"><i class="fa-solid fa-pen"></i> Edit</button>
-                                    <button class="btn-delete"><i class="fa-solid fa-trash"></i> Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img src="images/5_b42223866496c6fac690a48a9b121da5.jpg" alt="Away Shirt" class="table-img"></td>
-                                <td>Manchester United Mens Away Shirt 24/25</td>
-                                <td>Jerseys / Mens</td>
-                                <td>$100.00</td>
-                                <td><span class="status-badge warning">Out of Stock</span></td>
-                                <td class="action-cell">
-                                    <button class="btn-edit"><i class="fa-solid fa-pen"></i> Edit</button>
-                                    <button class="btn-delete"><i class="fa-solid fa-trash"></i> Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img src="images/17_0bb8ce5dfcdaa5f408a0c8cd9c864247.jpg" alt="Anthem Jacket" class="table-img"></td>
-                                <td>Manchester United Mens Anthem Jacket</td>
-                                <td>Fashion / Jackets</td>
-                                <td>$110.00</td>
-                                <td><span class="status-badge success">In Stock</span></td>
-                                <td class="action-cell">
-                                    <button class="btn-edit"><i class="fa-solid fa-pen"></i> Edit</button>
-                                    <button class="btn-delete"><i class="fa-solid fa-trash"></i> Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img src="images/kids_model.jpg" alt="Kids Kit" class="table-img"></td>
-                                <td>Manchester United Kids Home Kit 24/25</td>
-                                <td>Jerseys / Kids</td>
-                                <td>$65.00</td>
-                                <td><span class="status-badge neutral">Draft</span></td>
-                                <td class="action-cell">
-                                    <button class="btn-edit"><i class="fa-solid fa-pen"></i> Edit</button>
-                                    <button class="btn-delete"><i class="fa-solid fa-trash"></i> Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- SECTION 3: RECENT USER ACTIVITY -->
-            <section class="dashboard-section">
-                <div class="section-header">
-                    <h2>Recent User Activity</h2>
-                    <button class="btn-secondary"><i class="fa-solid fa-download"></i> Export Logs</button>
-                </div>
-                <div class="table-responsive">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>User Email</th>
-                                <th>Role</th>
-                                <th>Action</th>
-                                <th>Timestamp</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>david.beckham@example.com</td>
-                                <td><span class="role-user">User</span></td>
-                                <td>Just Registered</td>
-                                <td>2 mins ago</td>
-                                <td><span class="status-badge success">Success</span></td>
-                            </tr>
-                            <tr>
-                                <td>admin.master@manutd.com</td>
-                                <td><span class="role-admin">Admin</span></td>
-                                <td>Logged In</td>
-                                <td>15 mins ago</td>
-                                <td><span class="status-badge success">Success</span></td>
-                            </tr>
-                            <tr>
-                                <td>guest_9912@example.com</td>
-                                <td><span class="role-user">User</span></td>
-                                <td>Payment Failed</td>
-                                <td>1 hour ago</td>
-                                <td><span class="status-badge danger">Failed</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-        </div>
-    </main>
-</div>
-
-<!-- ADD PRODUCT MODAL -->
-<div id="addProductModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
-    <div style="background:#fff; padding:30px; border-radius:8px; width:400px; max-width:90%;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-            <h3 style="margin:0;">Add New Product</h3>
-            <button onclick="document.getElementById('addProductModal').style.display='none'" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
-        </div>
-        <form id="add-product-form">
-            <div style="margin-bottom:15px;">
-                <label style="display:block; margin-bottom:5px; font-weight:600; font-size:0.9rem;">Product Name</label>
-                <input type="text" id="prod-name" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;">
-            </div>
-            <div style="margin-bottom:15px;">
-                <label style="display:block; margin-bottom:5px; font-weight:600; font-size:0.9rem;">Price</label>
-                <input type="text" id="prod-price" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;">
-            </div>
-            <div style="margin-bottom:20px;">
-                <label style="display:block; margin-bottom:5px; font-weight:600; font-size:0.9rem;">Image URL</label>
-                <input type="text" id="prod-image" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;">
-            </div>
-            <button type="submit" class="btn-primary" style="width:100%; justify-content:center; padding:12px;">SAVE PRODUCT</button>
-        </form>
     </div>
-</div>
 
-<!-- SUPABASE ADMIN SCRIPT (RBAC) -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-    const _supabaseUrl = 'https://suabbqtrggzwgchksenq.supabase.co';
-    const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
-    
-    // Khởi tạo Supabase client
-    let supabase = null;
-    if (_supabaseUrl && _supabaseKey) {
-        supabase = supabase.createClient(_supabaseUrl, _supabaseKey);
-    }
+    <!-- MÀN HÌNH QUẢN TRỊ -->
+    <div id="dashboard-screen">
+        <div class="header">
+            <h1><i class="fa-solid fa-shield-halved" style="color: var(--primary);"></i> Hệ thống Quản trị</h1>
+            <div class="user-actions">
+                <span id="admin-email-display" style="color: var(--text-muted); font-size: 14px;"></span>
+                <button class="btn-logout" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</button>
+            </div>
+        </div>
 
-    let currentUserRole = '';
-    let currentUserEmail = '';
+        <div class="table-container">
+            <div class="table-header-controls">
+                <h3 style="font-weight: 500;">Kho Sản Phẩm</h3>
+                <button class="btn-primary btn-add" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> THÊM SẢN PHẨM</button>
+            </div>
+            
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="80">Ảnh</th>
+                            <th>ID Sản phẩm</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Giá ($)</th>
+                            <th style="text-align: right;">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-table-body">
+                        <!-- Render data -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-    // ==========================================
-    // 1. KIỂM TRA ĐĂNG NHẬP VÀ PHÂN QUYỀN (RBAC)
-    // ==========================================
-    async function checkAuthAndRole() {
-        if (!supabase) return false;
+    <!-- MODAL THÊM SẢN PHẨM -->
+    <div id="addModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Thêm Sản Phẩm Mới</h3>
+                <button class="modal-close" onclick="closeAddModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="add-product-form">
+                <div class="input-group">
+                    <label>Tên Sản Phẩm</label>
+                    <input type="text" id="prod-name" required>
+                </div>
+                <div class="input-group">
+                    <label>Giá</label>
+                    <input type="number" step="0.01" id="prod-price" required>
+                </div>
+                <div class="input-group">
+                    <label>Link Ảnh</label>
+                    <input type="url" id="prod-image" required>
+                </div>
+                <button type="submit" class="btn-primary">LƯU SẢN PHẨM</button>
+            </form>
+        </div>
+    </div>
 
-        try {
-            // Bước 1: Lấy session đăng nhập hiện tại
-            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-            if (sessionError) throw sessionError;
+    <!-- SUPABASE V2 SCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const _supabaseUrl = 'https://suabbqtrggzwgchksenq.supabase.co';
+        const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
+        
+        const supabase = window.supabase.createClient(_supabaseUrl, _supabaseKey);
 
-            // Nếu chưa đăng nhập, đá văng về trang login
-            if (!session) {
-                window.location.href = 'login.html';
-                return false;
+        const loginScreen = document.getElementById('login-screen');
+        const dashboardScreen = document.getElementById('dashboard-screen');
+
+        // KIỂM TRA SESSION KHI LOAD
+        document.addEventListener('DOMContentLoaded', async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                checkAdminRole(session.user.email);
+            } else {
+                loginScreen.style.display = 'flex';
             }
+        });
 
-            currentUserEmail = session.user.email;
-
-            // Bước 2: Lấy Role từ bảng users
-            const { data: userData, error: roleError } = await supabase.from('users')
-                .select('role')
-                .eq('email', currentUserEmail)
-                .single();
-
-            if (roleError) throw roleError;
+        // 1. LOGIC ĐĂNG NHẬP & PHÂN QUYỀN
+        document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-password').value;
+            const btn = document.getElementById('login-btn');
             
-            currentUserRole = userData.role;
+            btn.innerHTML = 'Đang xác thực...';
             
-            // Bước 3: Áp dụng quyền lên giao diện UI
-            applyPermissions();
-            return true;
-
-        } catch (error) {
-            console.error('Lỗi xác thực:', error);
-            alert('Xác thực thất bại: ' + error.message);
-            // Lỗi database hay bất cứ gì cũng đá về trang login cho an toàn
-            window.location.href = 'login.html';
-            return false;
-        }
-    }
-
-    // ==========================================
-    // 2. CẬP NHẬT UI THEO QUYỀN (CONDITIONAL RENDERING)
-    // ==========================================
-    function applyPermissions() {
-        const addBtn = document.getElementById('btn-add-product');
-        
-        if (currentUserRole !== 'admin') {
-            // Ẩn nút Add Product
-            if (addBtn) addBtn.style.display = 'none';
-
-            // Gắn badge cảnh báo View Only Mode màu đỏ góc phải
-            const badge = document.createElement('div');
-            badge.innerHTML = 'View Only Mode - Cấp quyền Admin để chỉnh sửa';
-            badge.style.position = 'fixed';
-            badge.style.bottom = '20px';
-            badge.style.right = '20px';
-            badge.style.backgroundColor = 'var(--color-danger, #ff4444)';
-            badge.style.color = 'white';
-            badge.style.padding = '10px 15px';
-            badge.style.borderRadius = '5px';
-            badge.style.zIndex = '9999';
-            badge.style.fontWeight = 'bold';
-            badge.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
-            document.body.appendChild(badge);
-        }
-    }
-
-    // ==========================================
-    // 3. HÀM ĐỌC SẢN PHẨM (READ)
-    // ==========================================
-    async function fetchProducts() {
-        if (!supabase) return;
-        
-        try {
-            const { data, error } = await supabase.from('products').select('*');
-            if (error) throw error;
-
-            const tbody = document.getElementById('product-table-body') || document.querySelector('tbody');
-            if (!tbody) return;
-            
-            tbody.innerHTML = ''; 
-            
-            data.forEach(product => {
-                const tr = document.createElement('tr');
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({ email, password: pass });
+                if (error) throw error;
                 
-                // Tùy chỉnh cột Action dựa trên Role (Không sinh mã HTML nếu là user)
-                let actionCell = '';
-                if (currentUserRole === 'admin') {
-                    actionCell = `
-                        <td class="action-cell">
-                            <button class="btn-edit" onclick="alert('Tính năng Edit đang phát triển!')"><i class="fa-solid fa-pen"></i> Edit</button>
-                            <button class="btn-delete" onclick="deleteProduct('${product.id}')"><i class="fa-solid fa-trash"></i> Delete</button>
-                        </td>
-                    `;
+                await checkAdminRole(data.user.email);
+            } catch (err) {
+                alert('Đăng nhập thất bại: ' + err.message);
+                btn.innerHTML = 'Đăng nhập hệ thống';
+            }
+        });
+
+        async function checkAdminRole(email) {
+            try {
+                const { data, error } = await supabase
+                    .from('users')
+                    .select('role')
+                    .eq('email', email)
+                    .single();
+                
+                if (error) throw error;
+
+                if (data.role === 'admin') {
+                    // Đúng Admin => Cho vào
+                    document.getElementById('admin-email-display').innerText = email;
+                    loginScreen.style.display = 'none';
+                    dashboardScreen.style.display = 'block';
+                    fetchProducts();
                 } else {
-                    actionCell = `
-                        <td class="action-cell">
-                            <span style="color: gray; font-size: 0.85rem; font-style: italic;">View Only</span>
+                    // User thường => Đuổi ra ngoài
+                    alert('Bạn không có quyền truy cập trang này!');
+                    await supabase.auth.signOut();
+                    window.location.reload();
+                }
+            } catch (err) {
+                alert('Lỗi kiểm tra quyền hạn: ' + err.message);
+                await supabase.auth.signOut();
+                loginScreen.style.display = 'flex';
+            }
+        }
+
+        async function handleLogout() {
+            await supabase.auth.signOut();
+            window.location.reload();
+        }
+
+        // 2. LOGIC CRUD
+        // ĐỌC (READ)
+        async function fetchProducts() {
+            try {
+                const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false });
+                if (error) throw error;
+
+                const tbody = document.getElementById('product-table-body');
+                tbody.innerHTML = '';
+                
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Chưa có sản phẩm nào.</td></tr>';
+                    return;
+                }
+
+                data.forEach(p => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = \`
+                        <td><img src="\${p.image_url}" class="prod-img" onerror="this.src='images/placeholder.jpg'"></td>
+                        <td style="color: var(--text-muted); font-size: 13px;">\${p.id.substring(0,8)}...</td>
+                        <td style="font-weight: 500;">\${p.name}</td>
+                        <td>$\${p.price}</td>
+                        <td style="text-align: right;">
+                            <button class="btn-delete" title="Xóa" onclick="deleteProduct('\${p.id}')"><i class="fa-solid fa-trash"></i></button>
                         </td>
-                    `;
-                }
-
-                tr.innerHTML = `
-                    <td><img src="${product.image_url}" alt="${product.name}" class="table-img" onerror="this.src='images/placeholder.jpg'"></td>
-                    <td>${product.name}</td>
-                    <td>(N/A)</td>
-                    <td>$${product.price}</td>
-                    <td><span class="status-badge success">In Stock</span></td>
-                    ${actionCell}
-                `;
-                tbody.appendChild(tr);
-            });
-        } catch (error) {
-            alert('Lỗi tải dữ liệu sản phẩm: ' + error.message);
-        }
-    }
-
-    // ==========================================
-    // 4. HÀM XÓA SẢN PHẨM (DELETE)
-    // ==========================================
-    async function deleteProduct(id) {
-        // [Function Guard] Chặn nếu không phải admin cố tình gọi hàm
-        if (currentUserRole !== 'admin') {
-            return alert('Bạn không có quyền thực hiện thao tác này!');
+                    \`;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                alert('Lỗi tải dữ liệu: ' + err.message);
+            }
         }
 
-        if (!confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi Database?')) return;
-        
-        try {
-            const { error } = await supabase.from('products').delete().eq('id', id);
-            if (error) throw error;
+        // THÊM (CREATE)
+        document.getElementById('add-product-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
             
-            alert('Xóa sản phẩm thành công!');
-            fetchProducts();
-        } catch (error) {
-            alert('Lỗi xóa sản phẩm: ' + error.message);
-        }
-    }
+            const name = document.getElementById('prod-name').value;
+            const price = document.getElementById('prod-price').value;
+            const img = document.getElementById('prod-image').value;
 
-    // ==========================================
-    // 5. KHỞI TẠO VÀ LẮNG NGHE SỰ KIỆN
-    // ==========================================
-    document.addEventListener('DOMContentLoaded', async () => {
-        // Bắt buộc phải Check Auth & Role trước khi làm bất cứ thứ gì khác
-        const isAuthorized = await checkAuthAndRole();
-        
-        // Nếu qua được ải đăng nhập thì mới tải danh sách sản phẩm
-        if (isAuthorized) {
-            fetchProducts();
-        }
-
-        // Lắng nghe form thêm sản phẩm
-        const addForm = document.getElementById('add-product-form');
-        if (addForm) {
-            addForm.addEventListener('submit', async (e) => {
-                e.preventDefault(); 
+            try {
+                const { error } = await supabase.from('products').insert([
+                    { name: name, price: price, image_url: img }
+                ]);
                 
-                // [Function Guard] Chặn nếu không phải admin
-                if (currentUserRole !== 'admin') {
-                    return alert('Bạn không có quyền thực hiện thao tác này!');
-                }
+                if (error) throw error;
                 
-                if (!supabase) {
-                    alert('Chưa kết nối Supabase!');
-                    return;
-                }
+                alert('Thêm sản phẩm thành công!');
+                closeAddModal();
+                document.getElementById('add-product-form').reset();
+                fetchProducts();
+            } catch (err) {
+                alert('Lỗi thêm sản phẩm: ' + err.message);
+            }
+        });
 
-                const nameInput = document.getElementById('prod-name');
-                const priceInput = document.getElementById('prod-price');
-                const imageInput = document.getElementById('prod-image');
+        // XÓA (DELETE)
+        window.deleteProduct = async function(id) {
+            if (!confirm('Xác nhận xóa vĩnh viễn sản phẩm này?')) return;
 
-                if (!nameInput || !priceInput || !imageInput) {
-                    alert('Lỗi: Form thiếu các ô nhập (prod-name, prod-price, prod-image)');
-                    return;
-                }
-
-                try {
-                    const { error } = await supabase.from('products').insert([
-                        { 
-                            name: nameInput.value, 
-                            price: priceInput.value, 
-                            image_url: imageInput.value 
-                        }
-                    ]);
-
-                    if (error) throw error;
-
-                    alert('Thêm sản phẩm mới vào Database thành công!');
-                    
-                    const modal = document.getElementById('addProductModal');
-                    if (modal) modal.style.display = 'none';
-                    
-                    addForm.reset();
-                    fetchProducts(); 
-                } catch (error) {
-                    alert('Lỗi thêm sản phẩm: ' + error.message);
-                }
-            });
+            try {
+                const { error } = await supabase.from('products').delete().eq('id', id);
+                if (error) throw error;
+                
+                fetchProducts();
+            } catch (err) {
+                alert('Lỗi xóa sản phẩm: ' + err.message);
+            }
         }
-    });
-</script>
+
+        // ĐIỀU KHIỂN MODAL
+        function openAddModal() { document.getElementById('addModal').style.display = 'flex'; }
+        function closeAddModal() { document.getElementById('addModal').style.display = 'none'; }
+    </script>
 </body>
 </html>
