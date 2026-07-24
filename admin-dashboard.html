@@ -1,515 +1,267 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADMIN SYSTEM CONTROL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <!-- Nhúng Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        :root {
-            --bg-dark: #121212;
-            --bg-panel: #1e1e1e;
-            --text-main: #ffffff;
-            --text-muted: #a0a0a0;
-            --primary: #c70101;
-            --primary-hover: #a00101;
-            --danger: #ff4444;
-            --border: #333333;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; }
-
-        /* ==================== AUTH SCREEN (LOGIN & REGISTER) ==================== */
-        #auth-screen {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #0a0a0a, #1a0000);
-        }
-
-        .auth-box {
-            background: var(--bg-panel);
-            padding: 40px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .auth-box h2 {
-            margin-bottom: 25px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            color: #fff;
-        }
-
-        /* Tabs */
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 25px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .auth-tab {
-            flex: 1;
-            padding: 12px 0;
-            cursor: pointer;
-            color: var(--text-muted);
-            font-weight: 600;
-            transition: all 0.3s;
-            border-bottom: 2px solid transparent;
-        }
-
-        .auth-tab.active {
-            color: var(--text-main);
-            border-bottom-color: var(--primary);
-        }
-
-        .auth-form { display: none; }
-        .auth-form.active { display: block; animation: fadeIn 0.3s; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px;
-            background: #2a2a2a;
-            border: 1px solid var(--border);
-            color: white;
-            border-radius: 6px;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background-color: #0d0d0d; color: #fff; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
         
-        .input-group input:focus { outline: none; border-color: var(--primary); }
+        /* Auth Box */
+        .auth-container { background: #1a1a1a; padding: 30px; border-radius: 8px; width: 380px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .auth-container h2 { text-align: center; margin-bottom: 20px; font-size: 20px; letter-spacing: 1px; }
+        .tabs { display: flex; margin-bottom: 20px; border-bottom: 1px solid #333; }
+        .tab-btn { flex: 1; padding: 10px; background: none; border: none; color: #888; font-weight: bold; cursor: pointer; }
+        .tab-btn.active { color: #fff; border-bottom: 2px solid #e50914; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 13px; color: #aaa; }
+        .form-group input { width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #333; background: #222; color: #fff; outline: none; }
+        .btn-submit { width: 100%; padding: 12px; background: #e50914; border: none; color: #fff; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+        .btn-submit:hover { background: #b80710; }
 
-        .btn-primary {
-            width: 100%;
-            padding: 14px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .btn-primary:hover { background: var(--primary-hover); }
-        .btn-primary:disabled { background: #555; cursor: not-allowed; }
-
-        /* ==================== DASHBOARD SCREEN ==================== */
-        #dashboard-screen {
-            display: none;
-            padding: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 20px;
-        }
-
-        .header h1 { font-size: 24px; }
-        
-        .user-actions { display: flex; gap: 15px; align-items: center; }
-
-        .btn-logout {
-            background: transparent;
-            color: var(--text-muted);
-            border: 1px solid var(--border);
-            padding: 8px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-logout:hover { color: white; background: rgba(255,255,255,0.1); }
-
-        .table-container {
-            background: var(--bg-panel);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-        }
-
-        .table-header-controls {
-            padding: 20px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .btn-add { width: auto; padding: 10px 20px; }
-
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 15px 20px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { color: var(--text-muted); font-size: 13px; text-transform: uppercase; background: rgba(255,255,255,0.02); }
-        tr:hover { background: rgba(255,255,255,0.02); }
-
-        .prod-img { width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); background: white; }
-
-        .btn-delete { background: transparent; color: var(--danger); border: none; cursor: pointer; padding: 8px; font-size: 16px; }
-        .btn-delete:hover { background: rgba(255, 68, 68, 0.1); border-radius: 4px; }
-
-        /* ==================== MODAL ==================== */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            display: none; justify-content: center; align-items: center;
-            z-index: 1000; backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: var(--bg-panel); width: 100%; max-width: 500px;
-            border-radius: 12px; border: 1px solid var(--border); padding: 30px;
-        }
-
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-        .modal-close { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; }
-        .modal-close:hover { color: white; }
+        /* Dashboard Screen */
+        #dashboard-screen { display: none; width: 100%; min-height: 100vh; background: #121212; padding: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 1px solid #333; margin-bottom: 20px; }
+        .btn-logout { background: #333; color: #fff; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
+        .crud-box { background: #1a1a1a; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .crud-box input { padding: 8px; margin-right: 10px; background: #222; border: 1px solid #333; color: #fff; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; background: #1a1a1a; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #333; }
+        th { background: #222; }
+        .btn-delete { background: #ff4d4d; color: #fff; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <!-- MÀN HÌNH CỔNG BẢO VỆ -->
-    <div id="auth-screen">
-        <div class="auth-box">
-            <h2>ADMIN SYSTEM CONTROL</h2>
-            
-            <div class="auth-tabs">
-                <div class="auth-tab active" onclick="switchTab('login')">ĐĂNG NHẬP</div>
-                <div class="auth-tab" onclick="switchTab('register')">ĐĂNG KÝ TÀI KHOẢN</div>
-            </div>
-
-            <!-- FORM ĐĂNG NHẬP -->
-            <form id="form-login" class="auth-form active">
-                <div class="input-group">
-                    <label>Email</label>
-                    <input type="email" id="login-email" required placeholder="admin@domain.com">
-                </div>
-                <div class="input-group">
-                    <label>Password</label>
-                    <input type="password" id="login-password" required placeholder="••••••••">
-                </div>
-                <button type="submit" class="btn-primary" id="btn-submit-login">Đăng Nhập</button>
-            </form>
-
-            <!-- FORM ĐĂNG KÝ -->
-            <form id="form-register" class="auth-form">
-                <div class="input-group">
-                    <label>Email đăng ký</label>
-                    <input type="email" id="reg-email" required placeholder="name@domain.com">
-                </div>
-                <div class="input-group">
-                    <label>Password (Tạo mới)</label>
-                    <input type="password" id="reg-password" required placeholder="Tối thiểu 6 ký tự">
-                </div>
-                <button type="submit" class="btn-primary" id="btn-submit-register">Đăng Ký Tài Khoản Admin</button>
-            </form>
+    <!-- MÀN HÌNH ĐĂNG NHẬP / ĐĂNG KÝ -->
+    <div id="auth-screen" class="auth-container">
+        <h2>ADMIN SYSTEM CONTROL</h2>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('login')">ĐĂNG NHẬP</button>
+            <button class="tab-btn" onclick="switchTab('register')">ĐĂNG KÝ TÀI KHOẢN</button>
         </div>
+
+        <!-- Form Đăng nhập -->
+        <form id="form-login" onsubmit="xuLyDangNhap(event)">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="login-email" required placeholder="admin@gmail.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="login-password" required placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn-submit">Đăng Nhập</button>
+        </form>
+
+        <!-- Form Đăng ký -->
+        <form id="form-register" style="display: none;" onsubmit="xuLyDangKy(event)">
+            <div class="form-group">
+                <label>Email Admin Mới</label>
+                <input type="email" id="reg-email" required placeholder="admin@gmail.com">
+            </div>
+            <div class="form-group">
+                <label>Password (>= 6 ký tự)</label>
+                <input type="password" id="reg-password" required minlength="6" placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn-submit" style="background: #28a745;">Tạo Tài Khoản Admin</button>
+        </form>
     </div>
 
-    <!-- MÀN HÌNH QUẢN TRỊ -->
+    <!-- MÀN HÌNH QUẢN TRỊ ADMIN (ẨN MẶC ĐỊNH) -->
     <div id="dashboard-screen">
         <div class="header">
-            <h1><i class="fa-solid fa-shield-halved" style="color: var(--primary);"></i> Hệ thống Quản trị</h1>
-            <div class="user-actions">
-                <span id="admin-email-display" style="color: var(--text-muted); font-size: 14px;"></span>
-                <button class="btn-logout" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</button>
-            </div>
+            <h1>CHÀO MỪNG ADMIN: <span id="admin-email-display" style="color: #28a745;"></span></h1>
+            <button class="btn-logout" onclick="dangXuat()">Đăng Xuất</button>
         </div>
 
-        <div class="table-container">
-            <div class="table-header-controls">
-                <h3 style="font-weight: 500;">Kho Sản Phẩm</h3>
-                <button class="btn-primary btn-add" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> THÊM SẢN PHẨM</button>
-            </div>
-            
-            <div style="overflow-x: auto;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th width="80">Ảnh</th>
-                            <th>ID Sản phẩm</th>
-                            <th>Tên Sản Phẩm</th>
-                            <th>Giá ($)</th>
-                            <th style="text-align: right;">Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody id="product-table-body">
-                        <!-- Render data -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL THÊM SẢN PHẨM -->
-    <div id="addModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Thêm Sản Phẩm Mới</h3>
-                <button class="modal-close" onclick="closeAddModal()"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <form id="add-product-form">
-                <div class="input-group">
-                    <label>Tên Sản Phẩm</label>
-                    <input type="text" id="prod-name" required>
-                </div>
-                <div class="input-group">
-                    <label>Giá</label>
-                    <input type="number" step="0.01" id="prod-price" required>
-                </div>
-                <div class="input-group">
-                    <label>Link Ảnh</label>
-                    <input type="url" id="prod-image" required>
-                </div>
-                <button type="submit" class="btn-primary">LƯU SẢN PHẨM</button>
+        <div class="crud-box">
+            <h3>+ Thêm Sản Phẩm Mới</h3>
+            <form onsubmit="themSanPham(event)" style="margin-top: 10px;">
+                <input type="text" id="p-name" placeholder="Tên sản phẩm" required>
+                <input type="text" id="p-price" placeholder="Giá (VD: $100)" required>
+                <input type="text" id="p-img" placeholder="Link ảnh (URL)" required>
+                <button type="submit" class="btn-submit" style="width: auto; display: inline-block;">Thêm Kho</button>
             </form>
         </div>
+
+        <h3>Danh Sách Sản Phẩm Trong Database</h3>
+        <table style="margin-top: 10px;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody id="product-list">
+                <!-- Dữ liệu từ Supabase sẽ đổ vào đây -->
+            </tbody>
+        </table>
     </div>
 
-    <!-- SUPABASE V2 SCRIPT -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // CẤU HÌNH API KEYS
-        const _supabaseUrl = 'https://suabbqtrggzwgchksenq.supabase.co';
-        const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
-        const supabase = window.supabase.createClient(_supabaseUrl, _supabaseKey);
+        // CẤU HÌNH SUPABASE
+        const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        const authScreen = document.getElementById('auth-screen');
-        const dashboardScreen = document.getElementById('dashboard-screen');
+        // Đổi tab Đăng nhập / Đăng ký
+        function switchTab(type) {
+            const btnLog = document.querySelectorAll('.tab-btn')[0];
+            const btnReg = document.querySelectorAll('.tab-btn')[1];
+            const formLog = document.getElementById('form-login');
+            const formReg = document.getElementById('form-register');
 
-        // CHUYỂN ĐỔI TAB ĐĂNG NHẬP / ĐĂNG KÝ
-        function switchTab(tab) {
-            const tabs = document.querySelectorAll('.auth-tab');
-            const forms = document.querySelectorAll('.auth-form');
-            
-            tabs.forEach(t => t.classList.remove('active'));
-            forms.forEach(f => f.classList.remove('active'));
-
-            if (tab === 'login') {
-                tabs[0].classList.add('active');
-                document.getElementById('form-login').classList.add('active');
+            if (type === 'login') {
+                btnLog.classList.add('active');
+                btnReg.classList.remove('active');
+                formLog.style.display = 'block';
+                formReg.style.display = 'none';
             } else {
-                tabs[1].classList.add('active');
-                document.getElementById('form-register').classList.add('active');
+                btnReg.classList.add('active');
+                btnLog.classList.remove('active');
+                formReg.style.display = 'block';
+                formLog.style.display = 'none';
             }
         }
 
-        // KIỂM TRA SESSION KHI LOAD TRANG
-        document.addEventListener('DOMContentLoaded', async () => {
-            if (!_supabaseUrl || !_supabaseKey) {
-                alert("Bạn chưa điền API Key Supabase vào code!");
-                return;
-            }
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session) {
-                checkAdminRole(session.user.email);
-            }
-        });
-
-        // ==========================================
-        // 1. LOGIC ĐĂNG KÝ
-        // ==========================================
-        document.getElementById('form-register').addEventListener('submit', async (e) => {
+        // 1. XỬ LÝ ĐĂNG KÝ ADMIN TỰ ĐỘNG
+        async function xuLyDangKy(e) {
             e.preventDefault();
             const email = document.getElementById('reg-email').value;
             const password = document.getElementById('reg-password').value;
-            const btn = document.getElementById('btn-submit-register');
-
-            if (password.length < 6) {
-                alert('Mật khẩu phải từ 6 ký tự trở lên!');
-                return;
-            }
-
-            btn.innerHTML = 'Đang xử lý...';
-            btn.disabled = true;
 
             try {
-                // Đăng ký qua Auth
-                const { data, error: authError } = await supabase.auth.signUp({ email, password });
-                if (authError) throw authError;
+                // Tạo user trên Supabase Auth
+                const { data: authData, error: authErr } = await supabase.auth.signUp({ email, password });
+                if (authErr) throw authErr;
 
-                // Ghi vào bảng users với role là 'admin'
-                const { error: dbError } = await supabase.from('users').insert([{ email: email, role: 'admin' }]);
-                if (dbError) throw dbError;
+                // Thêm luôn vào bảng users với role là 'admin'
+                const { error: dbErr } = await supabase.from('users').insert([{ email: email, role: 'admin' }]);
+                if (dbErr) throw dbErr;
 
-                alert("Đã khởi tạo tài khoản Admin thành công! Hãy chuyển sang tab Đăng nhập.");
-                
-                // Đăng xuất ra ngay lập tức vì đăng ký xong Supabase tự động log in (tuỳ cấu hình)
-                await supabase.auth.signOut();
-                
-                // Chuyển về tab đăng nhập
-                document.getElementById('form-register').reset();
+                alert("🎉 Tạo tài khoản Admin thành công! Giờ ông có thể Đăng Nhập.");
                 switchTab('login');
                 document.getElementById('login-email').value = email;
             } catch (err) {
-                alert('Lỗi đăng ký: ' + err.message);
-            } finally {
-                btn.innerHTML = 'Đăng Ký Tài Khoản Admin';
-                btn.disabled = false;
+                alert("❌ Lỗi Đăng Ký: " + err.message);
             }
-        });
+        }
 
-        // ==========================================
-        // 2. LOGIC ĐĂNG NHẬP & KIỂM TRA QUYỀN
-        // ==========================================
-        document.getElementById('form-login').addEventListener('submit', async (e) => {
+        // 2. XỬ LÝ ĐĂNG NHẬP & PHÂN QUYỀN
+        async function xuLyDangNhap(e) {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
-            const btn = document.getElementById('btn-submit-login');
-
-            btn.innerHTML = 'Đang xác thực...';
-            btn.disabled = true;
 
             try {
-                const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-                if (error) throw error;
-                
-                await checkAdminRole(data.user.email);
-            } catch (err) {
-                alert('Đăng nhập thất bại: ' + err.message);
-            } finally {
-                btn.innerHTML = 'Đăng Nhập';
-                btn.disabled = false;
-            }
-        });
+                // Xác thực tài khoản
+                const { data: authData, error: authErr } = await supabase.auth.signInWithPassword({ email, password });
+                if (authErr) throw authErr;
 
-        async function checkAdminRole(email) {
-            try {
-                const { data, error } = await supabase
+                // Kiểm tra xem email này trong bảng 'users' có quyền 'admin' không
+                const { data: userData, error: userErr } = await supabase
                     .from('users')
                     .select('role')
                     .eq('email', email)
                     .single();
-                
-                if (error) throw error;
 
-                if (data.role === 'admin') {
-                    // Quyền Admin -> Mở khoá
-                    document.getElementById('admin-email-display').innerText = email;
-                    authScreen.style.display = 'none';
-                    dashboardScreen.style.display = 'block';
-                    loadProducts();
-                } else {
-                    // Quyền User -> Báo lỗi & Đá văng
-                    alert("Tài khoản của bạn chưa được cấp quyền Admin!");
+                if (userErr || !userData || userData.role !== 'admin') {
                     await supabase.auth.signOut();
-                    window.location.reload();
+                    return alert("⛔ LỖI BẢO MẬT: Tài khoản này chưa được cấp quyền Admin!");
                 }
+
+                // Nếu đúng Admin -> Mở Dashboard
+                alert("✅ Đăng nhập Admin thành công!");
+                document.getElementById('auth-screen').style.display = 'none';
+                document.getElementById('dashboard-screen').style.display = 'block';
+                document.getElementById('admin-email-display').innerText = email;
+
+                // Load danh sách sản phẩm
+                taiDanhSachSanPham();
+
             } catch (err) {
-                alert('Lỗi truy xuất quyền hạn: ' + err.message);
-                await supabase.auth.signOut();
+                alert("❌ Lỗi Đăng Nhập: " + err.message);
             }
         }
 
-        async function handleLogout() {
-            await supabase.auth.signOut();
-            window.location.reload();
-        }
+        // 3. TẢI SAN PHAM TỪ BẢNG 'products'
+        async function taiDanhSachSanPham() {
+            const tbody = document.getElementById('product-list');
+            tbody.innerHTML = '<tr><td colspan="5">Đang tải dữ liệu kho...</td></tr>';
 
-        // ==========================================
-        // 3. LOGIC CRUD SẢN PHẨM
-        // ==========================================
-        async function loadProducts() {
             try {
-                const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false });
+                const { data, error } = await supabase.from('products').select('*');
                 if (error) throw error;
 
-                const tbody = document.getElementById('product-table-body');
                 tbody.innerHTML = '';
-                
                 if (data.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Chưa có sản phẩm nào.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="5">Kho đang trống sản phẩm.</td></tr>';
                     return;
                 }
 
-                data.forEach(p => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = \`
-                        <td><img src="\${p.image_url}" class="prod-img" onerror="this.src='images/placeholder.jpg'"></td>
-                        <td style="color: var(--text-muted); font-size: 13px;">\${p.id.substring(0,8)}...</td>
-                        <td style="font-weight: 500;">\${p.name}</td>
-                        <td>$\${p.price}</td>
-                        <td style="text-align: right;">
-                            <button class="btn-delete" title="Xóa" onclick="deleteProduct('\${p.id}')"><i class="fa-solid fa-trash"></i></button>
-                        </td>
+                data.forEach(item => {
+                    tbody.innerHTML += \`
+                        <tr>
+                            <td>\${item.id}</td>
+                            <td><img src="\${item.image_url || 'https://via.placeholder.com/40'}" width="40" height="40" style="object-fit:cover;"></td>
+                            <td>\${item.name}</td>
+                            <td>\${item.price}</td>
+                            <td><button class="btn-delete" onclick="xoaSanPham(\${item.id})">Xóa</button></td>
+                        </tr>
                     \`;
-                    tbody.appendChild(tr);
                 });
             } catch (err) {
-                alert('Lỗi tải dữ liệu sản phẩm: ' + err.message);
+                console.error("Lỗi tải SP:", err);
+                tbody.innerHTML = '<tr><td colspan="5">Lỗi không thể tải kho hàng (Kiểm tra lại bảng products).</td></tr>';
             }
         }
 
-        // THÊM SẢN PHẨM
-        document.getElementById('add-product-form').addEventListener('submit', async (e) => {
+        // 4. THÊM SẢN PHẨM MỚI
+        async function themSanPham(e) {
             e.preventDefault();
-            
-            const name = document.getElementById('prod-name').value;
-            const price = document.getElementById('prod-price').value;
-            const img = document.getElementById('prod-image').value;
+            const name = document.getElementById('p-name').value;
+            const price = document.getElementById('p-price').value;
+            const image_url = document.getElementById('p-img').value;
 
             try {
-                const { error } = await supabase.from('products').insert([
-                    { name: name, price: price, image_url: img }
-                ]);
-                
+                const { error } = await supabase.from('products').insert([{ name, price, image_url }]);
                 if (error) throw error;
-                
-                alert('Thêm sản phẩm thành công!');
-                closeAddModal();
-                document.getElementById('add-product-form').reset();
-                loadProducts();
-            } catch (err) {
-                alert('Lỗi thêm sản phẩm: ' + err.message);
-            }
-        });
 
-        // XÓA SẢN PHẨM
-        window.deleteProduct = async function(id) {
-            if (!confirm('Xác nhận xóa vĩnh viễn sản phẩm này?')) return;
+                alert("Đã thêm sản phẩm mới vào Supabase!");
+                e.target.reset();
+                taiDanhSachSanPham();
+            } catch (err) {
+                alert("❌ Lỗi thêm SP: " + err.message);
+            }
+        }
+
+        // 5. XÓA SẢN PHẨM
+        async function xoaSanPham(id) {
+            if (!confirm("Ông chắc chắn muốn xóa sản phẩm này khỏi Database?")) return;
 
             try {
                 const { error } = await supabase.from('products').delete().eq('id', id);
                 if (error) throw error;
-                
-                loadProducts();
+
+                alert("Đã xóa!");
+                taiDanhSachSanPham();
             } catch (err) {
-                alert('Lỗi xóa sản phẩm: ' + err.message);
+                alert("❌ Lỗi xóa SP: " + err.message);
             }
         }
 
-        // ĐIỀU KHIỂN MODAL
-        function openAddModal() { document.getElementById('addModal').style.display = 'flex'; }
-        function closeAddModal() { document.getElementById('addModal').style.display = 'none'; }
+        // 6. ĐĂNG XUẤT
+        async function dangXuat() {
+            await supabase.auth.signOut();
+            location.reload();
+        }
     </script>
 </body>
 </html>
