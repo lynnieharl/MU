@@ -5,10 +5,10 @@ let html = fs.readFileSync(path.join(__dirname, 'admin-dashboard.html'), 'utf8')
 
 // Thêm id cho tbody
 html = html.replace('<tbody>', '<tbody id="product-table-body">');
-html = html.replace('<button class="btn-primary"><i class="fa-solid fa-plus"></i> ADD NEW PRODUCT</button>', \`<button class="btn-primary" id="btn-add-product" onclick="document.getElementById('addProductModal').style.display='flex'"><i class="fa-solid fa-plus"></i> ADD NEW PRODUCT</button>\`);
+html = html.replace('<button class="btn-primary"><i class="fa-solid fa-plus"></i> ADD NEW PRODUCT</button>', `<button class="btn-primary" id="btn-add-product" onclick="document.getElementById('addProductModal').style.display='flex'"><i class="fa-solid fa-plus"></i> ADD NEW PRODUCT</button>`);
 
 // Thêm modal HTML trước thẻ đóng body
-const modalHTML = \`
+const modalHTML = `
 <!-- ADD PRODUCT MODAL -->
 <div id="addProductModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
     <div style="background:#fff; padding:30px; border-radius:8px; width:400px; max-width:90%;">
@@ -60,7 +60,7 @@ const modalHTML = \`
             
             data.forEach(product => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = \`
+                tr.innerHTML = `
                     <td><img src="\${product.image_url}" alt="\${product.name}" class="table-img" onerror="this.src='images/placeholder.jpg'"></td>
                     <td>\${product.name}</td>
                     <td>(N/A)</td>
@@ -70,7 +70,7 @@ const modalHTML = \`
                         <button class="btn-edit" onclick="alert('Tính năng Edit đang phát triển!')"><i class="fa-solid fa-pen"></i> Edit</button>
                         <button class="btn-delete" onclick="deleteProduct('\${product.id}')"><i class="fa-solid fa-trash"></i> Delete</button>
                     </td>
-                \`;
+                `;
                 tbody.appendChild(tr);
             });
         } catch (error) {
@@ -135,7 +135,7 @@ const modalHTML = \`
         }
     });
 </script>
-</body>\`;
+</body>`;
 
 html = html.replace('</body>', modalHTML);
 
