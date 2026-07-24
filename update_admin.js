@@ -5,7 +5,7 @@ let html = fs.readFileSync(path.join(__dirname, 'admin-dashboard.html'), 'utf8')
 
 // Thêm id cho tbody
 html = html.replace('<tbody>', '<tbody id="product-table-body">');
-html = html.replace('<button class="btn-primary"><i class="fa-solid fa-plus"></i> ADD NEW PRODUCT</button>', '<button class="btn-primary" id="btn-add-product" onclick="document.getElementById(\\'addProductModal\\').style.display=\\'flex\\'"><i class="fa-solid fa-plus"></i> ADD NEW PRODUCT</button>');
+html = html.replace('<button class="btn-primary"><i class="fa-solid fa-plus"></i> ADD NEW PRODUCT</button>', \`<button class="btn-primary" id="btn-add-product" onclick="document.getElementById('addProductModal').style.display='flex'"><i class="fa-solid fa-plus"></i> ADD NEW PRODUCT</button>\`);
 
 // Thêm modal HTML trước thẻ đóng body
 const modalHTML = \`
