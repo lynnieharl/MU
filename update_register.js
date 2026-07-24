@@ -31,7 +31,7 @@ if (scriptStart !== -1) {
     html = html.substring(0, scriptStart);
 }
 
-const newScript = \`<!-- SUPABASE AUTH SCRIPT -->
+const newScript = `<!-- SUPABASE AUTH SCRIPT -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
     const _supabaseUrl = '';
@@ -98,7 +98,7 @@ const newScript = \`<!-- SUPABASE AUTH SCRIPT -->
         }
     });
 </script>
-</body>\`;
+</body>`;
 
 html = html.replace('</body>', newScript);
 
