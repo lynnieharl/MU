@@ -230,17 +230,93 @@
     </div>
 </div>
 
-<!-- SUPABASE ADMIN SCRIPT -->
+<!-- SUPABASE ADMIN SCRIPT (RBAC) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
     const _supabaseUrl = '';
     const _supabaseKey = '';
     
+    // Khởi tạo Supabase client
     let supabase = null;
     if (_supabaseUrl && _supabaseKey) {
         supabase = supabase.createClient(_supabaseUrl, _supabaseKey);
     }
 
+    let currentUserRole = '';
+    let currentUserEmail = '';
+
+    // ==========================================
+    // 1. KIỂM TRA ĐĂNG NHẬP VÀ PHÂN QUYỀN (RBAC)
+    // ==========================================
+    async function checkAuthAndRole() {
+        if (!supabase) return false;
+
+        try {
+            // Bước 1: Lấy session đăng nhập hiện tại
+            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+            if (sessionError) throw sessionError;
+
+            // Nếu chưa đăng nhập, đá văng về trang chủ không thương tiếc
+            if (!session) {
+                window.location.href = 'index.html';
+                return false;
+            }
+
+            currentUserEmail = session.user.email;
+
+            // Bước 2: Lấy Role từ bảng users
+            const { data: userData, error: roleError } = await supabase.from('users')
+                .select('role')
+                .eq('email', currentUserEmail)
+                .single();
+
+            if (roleError) throw roleError;
+            
+            currentUserRole = userData.role;
+            
+            // Bước 3: Áp dụng quyền lên giao diện UI
+            applyPermissions();
+            return true;
+
+        } catch (error) {
+            console.error('Lỗi xác thực:', error);
+            alert('Xác thực thất bại: ' + error.message);
+            // Lỗi database hay bất cứ gì cũng đá về trang chủ cho an toàn
+            window.location.href = 'index.html';
+            return false;
+        }
+    }
+
+    // ==========================================
+    // 2. CẬP NHẬT UI THEO QUYỀN (CONDITIONAL RENDERING)
+    // ==========================================
+    function applyPermissions() {
+        const addBtn = document.getElementById('btn-add-product');
+        
+        if (currentUserRole !== 'admin') {
+            // Ẩn nút Add Product
+            if (addBtn) addBtn.style.display = 'none';
+
+            // Gắn badge cảnh báo View Only Mode màu đỏ góc phải
+            const badge = document.createElement('div');
+            badge.innerHTML = 'View Only Mode - Cấp quyền Admin để chỉnh sửa';
+            badge.style.position = 'fixed';
+            badge.style.bottom = '20px';
+            badge.style.right = '20px';
+            badge.style.backgroundColor = 'var(--color-danger, #ff4444)';
+            badge.style.color = 'white';
+            badge.style.padding = '10px 15px';
+            badge.style.borderRadius = '5px';
+            badge.style.zIndex = '9999';
+            badge.style.fontWeight = 'bold';
+            badge.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+            document.body.appendChild(badge);
+        }
+    }
+
+    // ==========================================
+    // 3. HÀM ĐỌC SẢN PHẨM (READ)
+    // ==========================================
     async function fetchProducts() {
         if (!supabase) return;
         
@@ -255,16 +331,31 @@
             
             data.forEach(product => {
                 const tr = document.createElement('tr');
+                
+                // Tùy chỉnh cột Action dựa trên Role (Không sinh mã HTML nếu là user)
+                let actionCell = '';
+                if (currentUserRole === 'admin') {
+                    actionCell = `
+                        <td class="action-cell">
+                            <button class="btn-edit" onclick="alert('Tính năng Edit đang phát triển!')"><i class="fa-solid fa-pen"></i> Edit</button>
+                            <button class="btn-delete" onclick="deleteProduct('${product.id}')"><i class="fa-solid fa-trash"></i> Delete</button>
+                        </td>
+                    `;
+                } else {
+                    actionCell = `
+                        <td class="action-cell">
+                            <span style="color: gray; font-size: 0.85rem; font-style: italic;">View Only</span>
+                        </td>
+                    `;
+                }
+
                 tr.innerHTML = `
                     <td><img src="${product.image_url}" alt="${product.name}" class="table-img" onerror="this.src='images/placeholder.jpg'"></td>
                     <td>${product.name}</td>
                     <td>(N/A)</td>
-                    <td>${product.price}</td>
+                    <td>$${product.price}</td>
                     <td><span class="status-badge success">In Stock</span></td>
-                    <td class="action-cell">
-                        <button class="btn-edit" onclick="alert('Tính năng Edit đang phát triển!')"><i class="fa-solid fa-pen"></i> Edit</button>
-                        <button class="btn-delete" onclick="deleteProduct('${product.id}')"><i class="fa-solid fa-trash"></i> Delete</button>
-                    </td>
+                    ${actionCell}
                 `;
                 tbody.appendChild(tr);
             });
@@ -273,7 +364,15 @@
         }
     }
 
+    // ==========================================
+    // 4. HÀM XÓA SẢN PHẨM (DELETE)
+    // ==========================================
     async function deleteProduct(id) {
+        // [Function Guard] Chặn nếu không phải admin cố tình gọi hàm
+        if (currentUserRole !== 'admin') {
+            return alert('Bạn không có quyền thực hiện thao tác này!');
+        }
+
         if (!confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi Database?')) return;
         
         try {
@@ -287,14 +386,28 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        fetchProducts();
-
-        const addForm = document.getElementById('add-product-form');
+    // ==========================================
+    // 5. KHỞI TẠO VÀ LẮNG NGHE SỰ KIỆN
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Bắt buộc phải Check Auth & Role trước khi làm bất cứ thứ gì khác
+        const isAuthorized = await checkAuthAndRole();
         
+        // Nếu qua được ải đăng nhập thì mới tải danh sách sản phẩm
+        if (isAuthorized) {
+            fetchProducts();
+        }
+
+        // Lắng nghe form thêm sản phẩm
+        const addForm = document.getElementById('add-product-form');
         if (addForm) {
             addForm.addEventListener('submit', async (e) => {
                 e.preventDefault(); 
+                
+                // [Function Guard] Chặn nếu không phải admin
+                if (currentUserRole !== 'admin') {
+                    return alert('Bạn không có quyền thực hiện thao tác này!');
+                }
                 
                 if (!supabase) {
                     alert('Chưa kết nối Supabase!');
@@ -306,7 +419,7 @@
                 const imageInput = document.getElementById('prod-image');
 
                 if (!nameInput || !priceInput || !imageInput) {
-                    alert('Lỗi: Form thiếu các ô nhập có id là prod-name, prod-price, prod-image');
+                    alert('Lỗi: Form thiếu các ô nhập (prod-name, prod-price, prod-image)');
                     return;
                 }
 
