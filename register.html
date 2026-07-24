@@ -424,7 +424,47 @@
         </div>
     </footer>
 
+    
     <!-- Script JS -->
     <script src="main.js"></script>
 
-\n\n<!-- Nhúng Supabase -->\n<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>\n<script>\n    const _supabaseUrl = 'https://suabbqtrggzwgchksenq.supabase.co';\n    const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';\n    const supabase = window.supabase.createClient(_supabaseUrl, _supabaseKey);\n\n    async function xuLyDangKy(event) {\n        event.preventDefault(); \n        \n        const emailInput = document.getElementById("email-dang-ky").value;\n        const passInput = document.getElementById("pass-dang-ky").value;\n\n        console.log("Đang xử lý đăng ký cho:", emailInput);\n        alert("Đang gửi yêu cầu đăng ký...");\n\n        try {\n            const { data: authData, error: authErr } = await supabase.auth.signUp({\n                email: emailInput,\n                password: passInput\n            });\n            \n            if (authErr) throw authErr;\n\n            const { error: dbErr } = await supabase\n                .from("users")\n                .insert([{ email: emailInput, role: "user" }]);\n\n            if (dbErr) throw dbErr;\n            \n            alert("ĐĂNG KÝ THÀNH CÔNG! Đã bay thẳng vào Supabase.");\n            window.location.href = "login.html";\n        } catch (loi) {\n            alert("LỖI RỒI: " + loi.message);\n            console.error(loi);\n        }\n    }\n</script>\n</body>\n</html>
+<!-- Nhúng Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const _supabaseUrl = 'https://suabbqtrggzwgchksenq.supabase.co';
+    const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
+    const supabase = window.supabase.createClient(_supabaseUrl, _supabaseKey);
+
+    async function xuLyDangKy(event) {
+        event.preventDefault(); 
+        
+        const emailInput = document.getElementById("email-dang-ky").value;
+        const passInput = document.getElementById("pass-dang-ky").value;
+
+        console.log("Đang xử lý đăng ký cho:", emailInput);
+        alert("Đang gửi yêu cầu đăng ký...");
+
+        try {
+            const { data: authData, error: authErr } = await supabase.auth.signUp({
+                email: emailInput,
+                password: passInput
+            });
+            
+            if (authErr) throw authErr;
+
+            const { error: dbErr } = await supabase
+                .from("users")
+                .insert([{ email: emailInput, role: "user" }]);
+
+            if (dbErr) throw dbErr;
+            
+            alert("ĐĂNG KÝ THÀNH CÔNG! Đã bay thẳng vào Supabase.");
+            window.location.href = "login.html";
+        } catch (loi) {
+            alert("LỖI RỒI: " + loi.message);
+            console.error(loi);
+        }
+    }
+</script>
+</body>
+</html>
