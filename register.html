@@ -255,7 +255,7 @@
             <p class="sso-subtitle" style="text-align: center; margin-bottom: 10px;">Join for FREE and become part of United's global fan community to enjoy exclusive content, perks & rewards.</p>
             <p class="sso-subtitle" style="text-align: center;">Already a member? <a href="login.html">Log In</a></p>
             
-            <form onsubmit="xuLyDangKy(event)">
+            <form id="register-form">
                 
                 <div class="sso-input-wrapper">
                     <label class="sso-label">First Name</label>
@@ -269,7 +269,7 @@
 
                 <div class="sso-input-wrapper">
                     <label class="sso-label">Email Address</label>
-                    <input type="email" id="email-dang-ky" class="sso-input" required>
+                    <input type="email" id="register-email" class="sso-input" required>
                 </div>
 
                 <div class="sso-input-wrapper">
@@ -279,7 +279,7 @@
                 
                 <div class="sso-input-wrapper">
                     <label class="sso-label">Password</label>
-                    <input type="password" id="pass-dang-ky" class="sso-input" required>
+                    <input type="password" id="register-password" class="sso-input" required>
                     <i class="fa-regular fa-eye-slash password-toggle"></i>
                 </div>
 
@@ -435,36 +435,30 @@
     const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
     const supabase = window.supabase.createClient(_supabaseUrl, _supabaseKey);
 
-    async function xuLyDangKy(event) {
-        event.preventDefault(); 
-        
-        const emailInput = document.getElementById("email-dang-ky").value;
-        const passInput = document.getElementById("pass-dang-ky").value;
+    document.addEventListener('DOMContentLoaded', () => {
+        const registerForm = document.getElementById('register-form');
+        if (registerForm) {
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
 
-        console.log("Đang xử lý đăng ký cho:", emailInput);
-        alert("Đang gửi yêu cầu đăng ký...");
+                try {
+                    const { error: authErr } = await supabase.auth.signUp({ email, password });
+                    if (authErr) throw authErr;
 
-        try {
-            const { data: authData, error: authErr } = await supabase.auth.signUp({
-                email: emailInput,
-                password: passInput
+                    const { error: dbErr } = await supabase.from('users').insert([{ email: email, role: 'user' }]);
+                    if (dbErr) throw dbErr;
+
+                    alert('Đăng ký thành công!');
+                    registerForm.reset();
+                    window.location.href = 'login.html';
+                } catch (err) {
+                    alert('Lỗi đăng ký: ' + err.message);
+                }
             });
-            
-            if (authErr) throw authErr;
-
-            const { error: dbErr } = await supabase
-                .from("users")
-                .insert([{ email: emailInput, role: "user" }]);
-
-            if (dbErr) throw dbErr;
-            
-            alert("ĐĂNG KÝ THÀNH CÔNG! Đã bay thẳng vào Supabase.");
-            window.location.href = "login.html";
-        } catch (loi) {
-            alert("LỖI RỒI: " + loi.message);
-            console.error(loi);
         }
-    }
+    });
 </script>
 </body>
 </html>

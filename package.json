@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/lynnieharl/MU#readme",
   "dependencies": {
-    "@supabase/server": "^1.4.1"
+    "@supabase/server": "^1.4.1",
+    "@supabase/supabase-js": "^2.110.8"
   }
 }
