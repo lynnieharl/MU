@@ -183,4 +183,44 @@ document.addEventListener('DOMContentLoaded', () => {
         const breadcrumbSpan = document.querySelector('.breadcrumb span');
         if(breadcrumbSpan) breadcrumbSpan.innerText = pd.title;
     }
+
+    // ==========================================
+    // CART PAGE LOGIC
+    // ==========================================
+    const cartQtyMinus = document.querySelectorAll('.cart-qty .qty-btn.minus');
+    const cartQtyPlus = document.querySelectorAll('.cart-qty .qty-btn.plus');
+
+    cartQtyMinus.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const input = this.nextElementSibling;
+            let val = parseInt(input.value);
+            if (val > 1) {
+                input.value = val - 1;
+                // Có thể thêm hàm tính lại Total ở đây
+            }
+        });
+    });
+
+    cartQtyPlus.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            let val = parseInt(input.value);
+            if (val < 99) {
+                input.value = val + 1;
+                // Có thể thêm hàm tính lại Total ở đây
+            }
+        });
+    });
+
+    const removeBtns = document.querySelectorAll('.remove-btn');
+    removeBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Xóa phần tử cart-item khỏi DOM
+            const item = this.closest('.cart-item');
+            if (item) {
+                item.remove();
+                // Có thể thêm hàm tính lại Total ở đây
+            }
+        });
+    });
 });
