@@ -3,106 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Manchester United Official Online Store</title>
+    <meta name="referrer" content="no-referrer">
+    <title>Official Manchester United Online Store</title>
+    <!-- Thư viện FontAwesome chứa icon thật -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Phải gọi đúng file style.css -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- TOPBAR -->
-    <div class="topbar">
-        <div class="container">
-            <a href="#" class="topbar-link">Help</a>
-            <a href="#" class="topbar-link">Track Order</a>
-            <div class="currency-selector">
-                <i class="fa-solid fa-globe"></i> EN / $USD
+
+    <!-- ==========================================
+         [PHẦN 1] HEADER
+         ========================================== -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-left">
+                <button class="top-bar-btn"><i class="fa-solid fa-globe"></i> English - US$</button>
+            </div>
+            <div class="top-bar-right">
+                <a href="track-order.html" class="top-bar-link">Track Order</a>
+                <a href="help.html" class="top-bar-link">Help</a>
             </div>
         </div>
     </div>
 
-    <!-- MAIN HEADER -->
-    <header class="site-header">
-        <div class="container navbar">
-            <button class="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button>
-            <a href="index.html" class="nav-brand">
-                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd Logo">
-            </a>
-            <nav class="nav-menu">
-                <div class="nav-item"><a href="category.html" class="nav-link">Kits</a></div>
-                <div class="nav-item"><a href="category.html" class="nav-link">Training</a></div>
-                <div class="nav-item"><a href="category.html" class="nav-link">Retro</a></div>
-                <div class="nav-item"><a href="category.html" class="nav-link">Gifts & Accessories</a></div>
-            </nav>
-            <div class="nav-actions">
-                <a href="search.html" class="action-btn" title="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
-                <a href="login.html" class="action-btn" id="account-link" title="Account"><i class="fa-regular fa-user"></i></a>
-                <button class="action-btn" id="cart-toggle-btn" title="Cart">
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Khối Logo (Cố định chiều rộng/cao, không được khổng lồ) -->
+            <div class="header-logo">
+                <a href="index.html">
+                    <img src="images/0_Manchester_United_FC_crest.svg" alt="Manchester United Logo" class="logo-img">
+                </a>
+            </div>
+
+            <!-- Khối Search (Dài, căn giữa) -->
+            <div class="header-search">
+                <form action="search.html" method="GET" class="search-form">
+                    <input type="text" name="query" class="search-input" placeholder="Search for products, players, and more...">
+                    <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
+
+            <!-- Khối Icons (Tài khoản, Wishlist, Giỏ hàng) -->
+            <div class="header-icons">
+                <!-- Account Dropdown -->
+                <div class="header-icon-dropdown">
+                    <a href="login.html" class="header-icon-link">
+                        <i class="fa-regular fa-user"></i>
+                        <span class="icon-label">Account</span>
+                    </a>
+                    <div class="account-menu">
+                        <a href="login.html" class="account-menu-link login-btn">Log In</a>
+                        <a href="register.html" class="account-menu-link">Create an account</a>
+                    </div>
+                </div>
+                <a href="wishlist.html" class="header-icon-link">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="icon-label">Wishlist</span>
+                </a>
+                <a href="cart.html" class="header-icon-link cart-icon-wrapper">
                     <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="cart-count" id="header-cart-count">0</span>
-                </button>
+                    <span class="cart-badge">0</span>
+                    <span class="icon-label">Cart</span>
+                </a>
             </div>
         </div>
     </header>
 
-    <!-- AUTH MAIN CONTENT -->
-    <main class="container auth-layout">
-        <div class="auth-box">
-            <h2 class="auth-title">Create Account</h2>
-            <p class="auth-desc">Join the MU Fan Club for exclusive access and fast checkout.</p>
-            <form id="register-form">
-                <div class="form-group">
-                    <label for="reg-name">Full Name *</label>
-                    <input type="text" id="reg-name" class="form-control" required>
+    <!-- ==========================================
+         [PHẦN 1] MEGA MENU
+         ========================================== -->
+    <nav class="mega-navbar">
+        <div class="navbar-container">
+            <ul class="nav-list">
+                <!-- Mục Kits có Dropdown Mega Menu -->
+                <li class="nav-item has-dropdown">
+                    <a href="kits.html" class="nav-link">Kits</a>
+                    <!-- Bảng Dropdown xổ xuống -->
+                    <div class="mega-dropdown">
+                        <div class="dropdown-container">
+                            <div class="dropdown-column">
+                                <h3 class="dropdown-title">Shop By Category</h3>
+                                <ul class="dropdown-list">
+                                    <li><a href="kits-home.html">Home Kits</a></li>
+                                    <li><a href="kits-away.html">Away Kits</a></li>
+                                    <li><a href="kits-third.html">Third Kits</a></li>
+                                    <li><a href="kits-gk.html">Goalkeeper Kits</a></li>
+                                    <li><a href="kits-training.html">Training Kits</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-column">
+                                <h3 class="dropdown-title">Shop By Player</h3>
+                                <ul class="dropdown-list">
+                                    <li><a href="player-bruno.html">Bruno Fernandes</a></li>
+                                    <li><a href="player-rashford.html">Marcus Rashford</a></li>
+                                    <li><a href="player-garnacho.html">Alejandro Garnacho</a></li>
+                                    <li><a href="player-mainoo.html">Kobbie Mainoo</a></li>
+                                    <li><a href="player-hojlund.html">Rasmus Højlund</a></li>
+                                </ul>
+                            </div>
+                            <!-- Banner Dropdown Ảnh Thật 1 -->
+                            <div class="dropdown-column banner-col">
+                                <a href="kits-home.html">
+                                    <img src="images/1_lammens005-product-carousel.jpg" alt="Home Kit Banner" class="dropdown-banner">
+                                    <span class="banner-text">Shop 24/25 Home Kit</span>
+                                </a>
+                            </div>
+                            <!-- Banner Dropdown Ảnh Thật 2 -->
+                            <div class="dropdown-column banner-col">
+                                <a href="kits-away.html">
+                                    <img src="images/2_24295ea4b3319ca1ab4a7b45bc5272e4.jpg" alt="Away Kit Banner" class="dropdown-banner">
+                                    <span class="banner-text">Shop 24/25 Away Kit</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+                <!-- Các mục menu khác (Link thật, không dùng #) -->
+                <li class="nav-item"><a href="training.html" class="nav-link">Training</a></li>
+                <li class="nav-item"><a href="mens.html" class="nav-link">Mens</a></li>
+                <li class="nav-item"><a href="womens.html" class="nav-link">Womens</a></li>
+                <li class="nav-item"><a href="kids.html" class="nav-link">Kids</a></li>
+                <li class="nav-item"><a href="homeware.html" class="nav-link">Homeware</a></li>
+                <li class="nav-item"><a href="souvenirs.html" class="nav-link">Souvenirs</a></li>
+                <li class="nav-item sale-item"><a href="sale.html" class="nav-link" style="color: #DA291C;">Sale</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+         [PHẦN 1] PROMO BAR
+         ========================================== -->
+    <div class="promo-bar">
+        <div class="promo-text">
+            <span>FREE SHIPPING ON ALL ORDERS OVER $100</span>
+            <a href="details.html" class="promo-link">DETAILS</a>
+        </div>
+    </div>
+
+    
+    <!-- ==========================================
+         [PHẦN MAIN] NEW REGISTER PAGE (SSO)
+         ========================================== -->
+    <main class="sso-auth-page">
+        <div class="sso-container" style="max-width: 500px;">
+            <img src="images/mu-logo.png" alt="MU Logo" class="sso-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png'">
+            
+            <h1 class="sso-title">Create An Account</h1>
+            <p class="sso-subtitle" style="text-align: center; margin-bottom: 10px;">Join for FREE and become part of United's global fan community to enjoy exclusive content, perks & rewards.</p>
+            <p class="sso-subtitle" style="text-align: center;">Already a member? <a href="login.html">Log In</a></p>
+            
+            <form action="#" method="POST" class="sso-form">
+                
+                <div class="sso-input-wrapper">
+                    <label class="sso-label">First Name</label>
+                    <input type="text" class="sso-input" required>
                 </div>
-                <div class="form-group">
-                    <label for="reg-email">Email Address *</label>
-                    <input type="email" id="reg-email" class="form-control" required>
-                    <span class="error-msg" id="reg-email-error"></span>
+                
+                <div class="sso-input-wrapper">
+                    <label class="sso-label">Surname</label>
+                    <input type="text" class="sso-input" required>
                 </div>
-                <div class="form-group">
-                    <label for="reg-password">Password *</label>
-                    <input type="password" id="reg-password" class="form-control" required minlength="6">
+
+                <div class="sso-input-wrapper">
+                    <label class="sso-label">Email Address</label>
+                    <input type="email" class="sso-input" required>
                 </div>
-                <div class="form-group">
-                    <label for="reg-confirm">Confirm Password *</label>
-                    <input type="password" id="reg-confirm" class="form-control" required>
-                    <span class="error-msg" id="reg-pwd-error"></span>
+
+                <div class="sso-input-wrapper">
+                    <label class="sso-label">Confirm Email Address</label>
+                    <input type="email" class="sso-input" required>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Create Account</button>
+                
+                <div class="sso-input-wrapper">
+                    <label class="sso-label">Password</label>
+                    <input type="password" class="sso-input" required>
+                    <i class="fa-regular fa-eye-slash password-toggle"></i>
+                </div>
+
+                <div class="sso-input-wrapper">
+                    <label class="sso-label">Confirm Password</label>
+                    <input type="password" class="sso-input" required>
+                    <i class="fa-regular fa-eye-slash password-toggle"></i>
+                </div>
+
+                <div class="sso-input-wrapper">
+                    <label class="sso-label">Country</label>
+                    <select class="sso-input" required>
+                        <option value="">Country</option>
+                        <option value="GB">United Kingdom</option>
+                        <option value="VN">Vietnam</option>
+                        <option value="US">United States</option>
+                    </select>
+                </div>
+
+                <div class="sso-input-wrapper">
+                    <label class="sso-label">Date of Birth</label>
+                    <div class="sso-row">
+                        <select class="sso-input" style="padding: 15px 10px;" required>
+                            <option value="">Day</option>
+                            <option value="01">1</option>
+                            <option value="15">15</option>
+                            <option value="31">31</option>
+                        </select>
+                        <select class="sso-input" style="padding: 15px 10px;" required>
+                            <option value="">Month</option>
+                            <option value="01">Jan</option>
+                            <option value="06">Jun</option>
+                            <option value="12">Dec</option>
+                        </select>
+                        <select class="sso-input" style="padding: 15px 10px;" required>
+                            <option value="">Year</option>
+                            <option value="2000">2000</option>
+                            <option value="1999">1999</option>
+                            <option value="1990">1990</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="sso-input-wrapper" style="margin-top: 15px;">
+                    <p class="sso-info-text"><strong>After login, you will have access United Store, Ticketing, MUTV, manutd.com, and official app experiences.</strong></p>
+                    <p class="sso-info-text">We want you to be the first to know about New Signings, Competitions, Club News, Ticket Availability and occasional offers from official sponsors and partners. To stay updated, select YES: *</p>
+                    <div class="sso-radio-group">
+                        <label class="sso-radio-label">
+                            <input type="radio" name="marketing" value="yes" required> Yes
+                        </label>
+                        <label class="sso-radio-label">
+                            <input type="radio" name="marketing" value="no" required> No
+                        </label>
+                    </div>
+                </div>
+                
+                <p class="sso-info-text">You can change your preferences or unsubscribe at any time in your Preference Centre.</p>
+                <p class="sso-info-text">If you are under 16 years old you must obtain consent from your parent or legal guardian to continue</p>
+                <p class="sso-info-text">By signing up, you agree to <a href="#">Manchester United (“MU”) Group</a> using your personal data in accordance with our <a href="#">Privacy Policy</a>.</p>
+
+                <button type="submit" class="sso-continue-btn" style="background-color: #c70101;">Create Account</button>
             </form>
-            <div class="auth-footer">
-                Already have an account? <a href="login.html">Sign in</a>
+            
+            <div class="sso-help">
+                Having trouble logging in? <a href="#">Get Help</a>
             </div>
         </div>
     </main>
 
-    <!-- FOOTER -->
+<!-- ==========================================
+         [PHẦN 4] NEWSLETTER & FOOTER
+         ========================================== -->
     <footer class="site-footer">
-        <div class="container">
-            <div class="footer-bottom">
-                &copy; 2026 Manchester United FC Ltd.
+        <!-- Newsletter -->
+        <div class="newsletter-section">
+            <div class="newsletter-container">
+                <div class="newsletter-text">
+                    <h3>SIGN UP TO OUR NEWSLETTER</h3>
+                </div>
+                <div class="newsletter-form-container">
+                    <form action="subscribe.php" method="POST" class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" required class="newsletter-input">
+                        <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Links -->
+        <div class="footer-main">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="faq.html">Help & FAQs</a></li>
+                        <li><a href="track-order.html">Track Order</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Shopping With Us</h4>
+                    <ul>
+                        <li><a href="safe-shopping.html">Safe Shopping</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="history.html">Club History</a></li>
+                        <li><a href="stadium.html">Old Trafford Stadium</a></li>
+                        <li><a href="foundation.html">MU Foundation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Follow Us</h4>
+                    <ul class="social-links">
+                        <li><a href="https://facebook.com"><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
+                        <li><a href="https://instagram.com"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                        <li><a href="https://twitter.com"><i class="fa-brands fa-x-twitter"></i> X (Twitter)</a></li>
+                        <li><a href="https://youtube.com"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Footer -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <div class="copyright-text">
+                    <p>&copy; 2024 Manchester United. All rights reserved.</p>
+                </div>
+                <div class="payment-methods">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Visa_Logo_2012.png" alt="Visa" class="payment-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard" class="payment-icon">
+                    <img src="images/22_PayPal.svg" alt="PayPal" class="payment-icon">
+                    <img src="images/23_American_Express_logo_%282018%29.svg" alt="Amex" class="payment-icon">
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Slide-out Cart Container -->
-    <div id="slide-cart-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1001;"></div>
-    <div id="slide-cart" style="position:fixed; top:0; right:-400px; width:400px; max-width:100%; height:100vh; background:#fff; z-index:1002; transition:right 0.3s ease; padding:20px; display:flex; flex-direction:column;">
-        <div class="flex justify-between items-center" style="border-bottom:1px solid #ccc; padding-bottom:15px; margin-bottom:15px;">
-            <h2 style="font-size:1.5rem;">Your Cart</h2>
-            <button id="close-cart-btn" style="font-size:1.5rem;"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div id="cart-items" style="flex:1; overflow-y:auto;"></div>
-        <div id="cart-footer" style="border-top:1px solid #ccc; padding-top:15px; margin-top:15px;">
-            <div class="flex justify-between" style="font-size:1.2rem; font-weight:bold; margin-bottom:15px;">
-                <span>Total:</span><span id="cart-total-price">$0.00</span>
-            </div>
-            <a href="checkout.html" class="btn btn-primary" style="width:100%; padding:15px; display:block;">Checkout</a>
-        </div>
-    </div>
-
-    <!-- Core Scripts -->
+    <!-- Script JS -->
     <script src="main.js"></script>
-    <script src="cart.js"></script>
-    <script src="auth.js"></script>
 </body>
 </html>
