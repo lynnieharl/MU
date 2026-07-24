@@ -24,9 +24,9 @@ const pages = [
             { name: "Manchester United Mens Casual Hoodie", price: "$85.00", img: "images/19_c09dd81f09a6c8db0ef921ae63aaf881.jpg" },
             { name: "Manchester United Mens Training Top", price: "$60.00", img: "images/7_066d2c004e6666a7d1316d9eb103a421.jpg" }
         ],
-        filters: \`<label><input type="checkbox" checked> Mens</label>
+        filters: `<label><input type="checkbox" checked> Mens</label>
                   <label><input type="checkbox"> Womens</label>
-                  <label><input type="checkbox"> Kids</label>\`
+                  <label><input type="checkbox"> Kids</label>`
     },
     {
         file: 'womens.html',
@@ -40,9 +40,9 @@ const pages = [
             { name: "Manchester United Womens Track Jacket", price: "$85.00", img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=400" },
             { name: "Manchester United Womens Shorts", price: "$45.00", img: "https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&q=80&w=400" }
         ],
-        filters: \`<label><input type="checkbox"> Mens</label>
+        filters: `<label><input type="checkbox"> Mens</label>
                   <label><input type="checkbox" checked> Womens</label>
-                  <label><input type="checkbox"> Kids</label>\`
+                  <label><input type="checkbox"> Kids</label>`
     },
     {
         file: 'kids.html',
@@ -56,9 +56,9 @@ const pages = [
             { name: "Manchester United Kids Training Top", price: "$45.00", img: "https://images.unsplash.com/photo-1514090458221-65bb69cf63e6?auto=format&fit=crop&q=80&w=400" },
             { name: "Manchester United Kids Jacket", price: "$60.00", img: "https://images.unsplash.com/photo-1503919005314-30d93d07d823?auto=format&fit=crop&q=80&w=400" }
         ],
-        filters: \`<label><input type="checkbox"> Mens</label>
+        filters: `<label><input type="checkbox"> Mens</label>
                   <label><input type="checkbox"> Womens</label>
-                  <label><input type="checkbox" checked> Kids</label>\`
+                  <label><input type="checkbox" checked> Kids</label>`
     }
 ];
 
@@ -66,32 +66,32 @@ pages.forEach(page => {
     let productsHtml = '';
     
     page.products.forEach((prod, idx) => {
-        productsHtml += \`
+        productsHtml += `
+                <!-- Product ${idx + 1} -->
                 <div class="product-card">
                     <div class="product-image-container">
-                        <a href="product.html?id=\${page.file.split('.')[0]}-\${idx}">
-                            <img src="\${prod.img}" alt="\${prod.name}" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                        <a href="product.html?id=${page.file.split('.')[0]}-${idx}">
+                            <img src="${prod.img}" alt="${prod.name}" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
                         </a>
                         <button class="quick-view-btn">Quick View</button>
                     </div>
                     <div class="product-info">
-                        <a href="product.html?id=\${page.file.split('.')[0]}-\${idx}" class="product-title">\${prod.name}</a>
-                        <p class="product-price">\${prod.price}</p>
+                        <a href="product.html?id=${page.file.split('.')[0]}-${idx}" class="product-title">${prod.name}</a>
+                        <p class="product-price">${prod.price}</p>
                     </div>
-                </div>\`;
+                </div>`;
     });
 
-    // using plain string concatenation to construct static HTML output for <main>
-    const mainContent = \`
+    const mainContent = `
     <!-- ==========================================
-         [PHẦN MAIN] \${page.title}
+         [PHẦN MAIN] ${page.title}
          ========================================== -->
     <main class="category-page">
         <div class="breadcrumb">
-            <a href="index.html">Home</a> &gt; <span>\${page.breadcrumb}</span>
+            <a href="index.html">Home</a> &gt; <span>${page.breadcrumb}</span>
         </div>
         
-        <h1 class="category-title">\${page.title}</h1>
+        <h1 class="category-title">${page.title}</h1>
 
         <div class="category-layout">
             <!-- Cột Trái: Filter -->
@@ -101,7 +101,7 @@ pages.forEach(page => {
                 <details class="filter-group" open>
                     <summary class="filter-group-title">Department <i class="fa-solid fa-chevron-down"></i></summary>
                     <div class="filter-options">
-                        \${page.filters}
+                        ${page.filters}
                     </div>
                 </details>
 
@@ -128,12 +128,12 @@ pages.forEach(page => {
 
             <!-- Cột Phải: Product Grid (6 Sản phẩm) -->
             <div class="category-product-grid">
-                \${productsHtml}
+                ${productsHtml}
             </div>
         </div>
     </main>
-\`;
+`;
 
     fs.writeFileSync(path.join(__dirname, page.file), header + mainContent + footer, 'utf8');
-    console.log(\`Tạo \${page.file} tĩnh thành công.\`);
+    console.log(`Tạo ${page.file} tĩnh thành công.`);
 });

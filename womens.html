@@ -143,14 +143,14 @@
 
     
     <!-- ==========================================
-         [PHẦN MAIN] CATEGORY PAGE (${category.title})
+         [PHẦN MAIN] WOMENS APPAREL
          ========================================== -->
     <main class="category-page">
         <div class="breadcrumb">
-            <a href="index.html">Home</a> &gt; <span>${category.title}</span>
+            <a href="index.html">Home</a> &gt; <span>Womens</span>
         </div>
         
-        <h1 class="category-title">${category.title}</h1>
+        <h1 class="category-title">WOMENS APPAREL</h1>
 
         <div class="category-layout">
             <!-- Cột Trái: Filter -->
@@ -161,15 +161,15 @@
                     <summary class="filter-group-title">Department <i class="fa-solid fa-chevron-down"></i></summary>
                     <div class="filter-options">
                         <label><input type="checkbox"> Mens</label>
-                        <label><input type="checkbox"> Womens</label>
-                        <label><input type="checkbox"> Kids</label>
+                  <label><input type="checkbox" checked> Womens</label>
+                  <label><input type="checkbox"> Kids</label>
                     </div>
                 </details>
 
                 <details class="filter-group" open>
                     <summary class="filter-group-title">Product Type <i class="fa-solid fa-chevron-down"></i></summary>
                     <div class="filter-options">
-                        <label><input type="checkbox"> T-Shirts</label>
+                        <label><input type="checkbox"> Shirts</label>
                         <label><input type="checkbox"> Hoodies</label>
                         <label><input type="checkbox"> Jackets</label>
                         <label><input type="checkbox"> Shorts</label>
@@ -187,13 +187,90 @@
                 </details>
             </div>
 
-            <!-- Cột Phải: Product Grid -->
+            <!-- Cột Phải: Product Grid (6 Sản phẩm) -->
             <div class="category-product-grid">
-                ${productsHtml}
+                
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <a href="product.html?id=womens-0">
+                            <img src="images/womens_model.jpg" alt="Manchester United Womens Home Shirt 24/25" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                        </a>
+                        <button class="quick-view-btn">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=womens-0" class="product-title">Manchester United Womens Home Shirt 24/25</a>
+                        <p class="product-price">$100.00</p>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <a href="product.html?id=womens-1">
+                            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&q=80&w=400" alt="Manchester United Womens Away Shirt 24/25" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                        </a>
+                        <button class="quick-view-btn">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=womens-1" class="product-title">Manchester United Womens Away Shirt 24/25</a>
+                        <p class="product-price">$100.00</p>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <a href="product.html?id=womens-2">
+                            <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=400" alt="Manchester United Womens Third Shirt 24/25" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                        </a>
+                        <button class="quick-view-btn">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=womens-2" class="product-title">Manchester United Womens Third Shirt 24/25</a>
+                        <p class="product-price">$100.00</p>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <a href="product.html?id=womens-3">
+                            <img src="https://images.unsplash.com/photo-1583496661160-c5d014f6e093?auto=format&fit=crop&q=80&w=400" alt="Manchester United Womens Training Top" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                        </a>
+                        <button class="quick-view-btn">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=womens-3" class="product-title">Manchester United Womens Training Top</a>
+                        <p class="product-price">$60.00</p>
+                    </div>
+                </div>
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <a href="product.html?id=womens-4">
+                            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=400" alt="Manchester United Womens Track Jacket" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                        </a>
+                        <button class="quick-view-btn">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=womens-4" class="product-title">Manchester United Womens Track Jacket</a>
+                        <p class="product-price">$85.00</p>
+                    </div>
+                </div>
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <a href="product.html?id=womens-5">
+                            <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&q=80&w=400" alt="Manchester United Womens Shorts" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                        </a>
+                        <button class="quick-view-btn">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=womens-5" class="product-title">Manchester United Womens Shorts</a>
+                        <p class="product-price">$45.00</p>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
-
 <!-- ==========================================
          [PHẦN 4] NEWSLETTER & FOOTER
          ========================================== -->

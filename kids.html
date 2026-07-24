@@ -143,14 +143,14 @@
 
     
     <!-- ==========================================
-         [PHẦN MAIN] CATEGORY PAGE (${category.title})
+         [PHẦN MAIN] KIDS & INFANTS
          ========================================== -->
     <main class="category-page">
         <div class="breadcrumb">
-            <a href="index.html">Home</a> &gt; <span>${category.title}</span>
+            <a href="index.html">Home</a> &gt; <span>Kids</span>
         </div>
         
-        <h1 class="category-title">${category.title}</h1>
+        <h1 class="category-title">KIDS & INFANTS</h1>
 
         <div class="category-layout">
             <!-- Cột Trái: Filter -->
@@ -161,15 +161,15 @@
                     <summary class="filter-group-title">Department <i class="fa-solid fa-chevron-down"></i></summary>
                     <div class="filter-options">
                         <label><input type="checkbox"> Mens</label>
-                        <label><input type="checkbox"> Womens</label>
-                        <label><input type="checkbox"> Kids</label>
+                  <label><input type="checkbox"> Womens</label>
+                  <label><input type="checkbox" checked> Kids</label>
                     </div>
                 </details>
 
                 <details class="filter-group" open>
                     <summary class="filter-group-title">Product Type <i class="fa-solid fa-chevron-down"></i></summary>
                     <div class="filter-options">
-                        <label><input type="checkbox"> T-Shirts</label>
+                        <label><input type="checkbox"> Shirts</label>
                         <label><input type="checkbox"> Hoodies</label>
                         <label><input type="checkbox"> Jackets</label>
                         <label><input type="checkbox"> Shorts</label>
@@ -187,13 +187,90 @@
                 </details>
             </div>
 
-            <!-- Cột Phải: Product Grid -->
+            <!-- Cột Phải: Product Grid (6 Sản phẩm) -->
             <div class="category-product-grid">
-                ${productsHtml}
+                
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <a href="product.html?id=kids-0">
+                            <img src="images/kids_model.jpg" alt="Manchester United Kids Home Kit 24/25" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                        </a>
+                        <button class="quick-view-btn">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=kids-0" class="product-title">Manchester United Kids Home Kit 24/25</a>
+                        <p class="product-price">$65.00</p>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <a href="product.html?id=kids-1">
+                            <img src="https://images.unsplash.com/photo-1514090458221-65bb69cf63e6?auto=format&fit=crop&q=80&w=400" alt="Manchester United Kids Away Kit 24/25" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                        </a>
+                        <button class="quick-view-btn">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=kids-1" class="product-title">Manchester United Kids Away Kit 24/25</a>
+                        <p class="product-price">$65.00</p>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <a href="product.html?id=kids-2">
+                            <img src="https://images.unsplash.com/photo-1503919005314-30d93d07d823?auto=format&fit=crop&q=80&w=400" alt="Manchester United Kids Third Kit 24/25" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                        </a>
+                        <button class="quick-view-btn">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=kids-2" class="product-title">Manchester United Kids Third Kit 24/25</a>
+                        <p class="product-price">$65.00</p>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <a href="product.html?id=kids-3">
+                            <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=400" alt="Manchester United Baby Home Kit" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                        </a>
+                        <button class="quick-view-btn">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=kids-3" class="product-title">Manchester United Baby Home Kit</a>
+                        <p class="product-price">$50.00</p>
+                    </div>
+                </div>
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <a href="product.html?id=kids-4">
+                            <img src="https://images.unsplash.com/photo-1514090458221-65bb69cf63e6?auto=format&fit=crop&q=80&w=400" alt="Manchester United Kids Training Top" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                        </a>
+                        <button class="quick-view-btn">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=kids-4" class="product-title">Manchester United Kids Training Top</a>
+                        <p class="product-price">$45.00</p>
+                    </div>
+                </div>
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <a href="product.html?id=kids-5">
+                            <img src="https://images.unsplash.com/photo-1503919005314-30d93d07d823?auto=format&fit=crop&q=80&w=400" alt="Manchester United Kids Jacket" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                        </a>
+                        <button class="quick-view-btn">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=kids-5" class="product-title">Manchester United Kids Jacket</a>
+                        <p class="product-price">$60.00</p>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
-
 <!-- ==========================================
          [PHẦN 4] NEWSLETTER & FOOTER
          ========================================== -->
