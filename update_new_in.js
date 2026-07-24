@@ -17,18 +17,18 @@ if (gridStartIdx !== -1) {
         const beforeMain = html.substring(0, gridStartIdx);
         const afterMain = html.substring(mainEndIdx);
         
-        const newGridHtml = \`<div id="product-grid" class="category-product-grid grid-4-cols" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;">
+        const newGridHtml = `<div id="product-grid" class="category-product-grid grid-4-cols" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;">
                 <!-- Dữ liệu sẽ được render bằng JS qua Supabase -->
             </div>
         </div>
-    \`;
+    `;
         
         html = beforeMain + newGridHtml + afterMain;
     }
 }
 
 // Append script before </body>
-const scriptHtml = \`<!-- SUPABASE CLIENT SCRIPT CHO TRANG NEW IN -->
+const scriptHtml = `<!-- SUPABASE CLIENT SCRIPT CHO TRANG NEW IN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
     const _supabaseUrl = '';
@@ -62,22 +62,22 @@ const scriptHtml = \`<!-- SUPABASE CLIENT SCRIPT CHO TRANG NEW IN -->
             }
 
             data.forEach(product => {
-                const cardHtml = \\\`
+                const cardHtml = `
                     <div class="product-card">
                         <div class="product-image-container image-swap">
                             <span class="badge-new-product">New</span>
-                            <a href="product.html?id=\\\${product.id}">
-                                <img src="\\\${product.image_url}" alt="\\\${product.name}" class="product-img img-front" onerror="this.src='images/placeholder.jpg'">
-                                <img src="\\\${product.image_url}" alt="\\\${product.name} Back" class="product-img img-back" onerror="this.src='images/placeholder.jpg'">
+                            <a href="product.html?id=${product.id}">
+                                <img src="${product.image_url}" alt="${product.name}" class="product-img img-front" onerror="this.src='images/placeholder.jpg'">
+                                <img src="${product.image_url}" alt="${product.name} Back" class="product-img img-back" onerror="this.src='images/placeholder.jpg'">
                             </a>
                             <button class="quick-view-btn">Quick View</button>
                         </div>
                         <div class="product-info">
-                            <a href="product.html?id=\\\${product.id}" class="product-title">\\\${product.name}</a>
-                            <p class="product-price">$\\\${product.price}</p>
+                            <a href="product.html?id=${product.id}" class="product-title">${product.name}</a>
+                            <p class="product-price">$${product.price}</p>
                         </div>
                     </div>
-                \\\`;
+                `;
                 grid.innerHTML += cardHtml;
             });
         } catch (error) {
@@ -90,7 +90,7 @@ const scriptHtml = \`<!-- SUPABASE CLIENT SCRIPT CHO TRANG NEW IN -->
         loadProducts();
     });
 </script>
-</body>\`;
+</body>`;
 
 html = html.replace('</body>', scriptHtml);
 
