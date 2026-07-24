@@ -75,6 +75,6 @@ const scriptStr = `
         // Chèn script trước thẻ </body>
         html = html.replace('</body>', scriptStr + '\n</body>');
         fs.writeFileSync(filePath, html, 'utf8');
-        console.log(\`Đã tiêm Script vào \${file}\`);
+        console.log("Đã tiêm Script vào " + file);
     }
 });
