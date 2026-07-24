@@ -256,9 +256,9 @@
             const { data: { session }, error: sessionError } = await supabase.auth.getSession();
             if (sessionError) throw sessionError;
 
-            // Nếu chưa đăng nhập, đá văng về trang chủ không thương tiếc
+            // Nếu chưa đăng nhập, đá văng về trang login
             if (!session) {
-                window.location.href = 'index.html';
+                window.location.href = 'login.html';
                 return false;
             }
 
@@ -281,8 +281,8 @@
         } catch (error) {
             console.error('Lỗi xác thực:', error);
             alert('Xác thực thất bại: ' + error.message);
-            // Lỗi database hay bất cứ gì cũng đá về trang chủ cho an toàn
-            window.location.href = 'index.html';
+            // Lỗi database hay bất cứ gì cũng đá về trang login cho an toàn
+            window.location.href = 'login.html';
             return false;
         }
     }
