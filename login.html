@@ -46,10 +46,17 @@
 
             <!-- Khối Icons (Tài khoản, Wishlist, Giỏ hàng) -->
             <div class="header-icons">
-                <a href="login.html" class="header-icon-link">
-                    <i class="fa-regular fa-user"></i>
-                    <span class="icon-label">Account</span>
-                </a>
+                <!-- Account Dropdown -->
+                <div class="header-icon-dropdown">
+                    <a href="login.html" class="header-icon-link">
+                        <i class="fa-regular fa-user"></i>
+                        <span class="icon-label">Account</span>
+                    </a>
+                    <div class="account-menu">
+                        <a href="login.html" class="account-menu-link login-btn">Log In</a>
+                        <a href="register.html" class="account-menu-link">Create an account</a>
+                    </div>
+                </div>
                 <a href="wishlist.html" class="header-icon-link">
                     <i class="fa-regular fa-heart"></i>
                     <span class="icon-label">Wishlist</span>
@@ -137,71 +144,53 @@
 
     
     <!-- ==========================================
-         [PHẦN MAIN] LOGIN / REGISTER PAGE
+         [PHẦN MAIN] NEW LOGIN PAGE (SSO)
          ========================================== -->
-    <main class="auth-page">
-        <div class="auth-container">
+    <main class="sso-auth-page">
+        <div class="sso-container">
+            <img src="images/mu-logo.png" alt="MU Logo" class="sso-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png'">
             
-            <!-- Cột Trái: LOG IN -->
-            <section class="auth-section login-section">
-                <h1 class="auth-title">LOG IN</h1>
-                <p class="auth-subtitle">Welcome back! Sign in to your account.</p>
+            <h1 class="sso-title">Log In</h1>
+            <p class="sso-subtitle">Don't have an account? <a href="register.html">Create an account</a></p>
+            
+            <form action="#" method="POST" class="sso-form">
+                <div class="sso-input-wrapper">
+                    <input type="text" placeholder="Email or Supporter ID" class="sso-input" required>
+                </div>
                 
-                <form action="#" method="POST" class="auth-form">
-                    <div class="form-group">
-                        <label for="login-email">Email Address *</label>
-                        <input type="email" id="login-email" name="email" class="form-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="login-password">Password *</label>
-                        <input type="password" id="login-password" name="password" class="form-input" required>
-                    </div>
-                    
-                    <div class="form-options">
-                        <a href="#" class="forgot-link">Forgotten password?</a>
-                    </div>
-                    
-                    <button type="submit" class="auth-btn btn-login">LOG IN</button>
-                </form>
-            </section>
-
-            <!-- Cột Phải: CREATE ACCOUNT -->
-            <section class="auth-section register-section">
-                <h2 class="auth-title">CREATE ACCOUNT</h2>
-                <p class="auth-subtitle">New here? Register to checkout faster and track your orders.</p>
+                <div class="sso-input-wrapper">
+                    <input type="password" placeholder="Password" class="sso-input" required>
+                    <i class="fa-regular fa-eye-slash password-toggle"></i>
+                </div>
                 
-                <form action="#" method="POST" class="auth-form">
-                    <div class="form-row">
-                        <div class="form-group half-width">
-                            <label for="reg-firstname">First Name *</label>
-                            <input type="text" id="reg-firstname" name="firstname" class="form-input" required>
-                        </div>
-                        <div class="form-group half-width">
-                            <label for="reg-lastname">Last Name *</label>
-                            <input type="text" id="reg-lastname" name="lastname" class="form-input" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="reg-email">Email Address *</label>
-                        <input type="email" id="reg-email" name="email" class="form-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="reg-password">Password *</label>
-                        <input type="password" id="reg-password" name="password" class="form-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="reg-confirm-password">Confirm Password *</label>
-                        <input type="password" id="reg-confirm-password" name="confirm_password" class="form-input" required>
-                    </div>
-                    
-                    <button type="submit" class="auth-btn btn-register">CREATE ACCOUNT</button>
-                </form>
-            </section>
+                <button type="submit" class="sso-continue-btn">Continue</button>
+                
+                <div class="sso-links">
+                    <a href="#">Forgot password?</a>
+                    <a href="#">Forgot Supporter ID?</a>
+                </div>
+            </form>
 
+            <div class="sso-divider">
+                <span>Or</span>
+            </div>
+
+            <button class="sso-social-btn apple">
+                <i class="fa-brands fa-apple"></i>
+                Sign in with Apple
+            </button>
+            <button class="sso-social-btn google">
+                <i class="fa-brands fa-google"></i>
+                Sign in with Google
+            </button>
+            <button class="sso-social-btn facebook">
+                <i class="fa-brands fa-facebook"></i>
+                Sign in with Facebook
+            </button>
+
+            <div class="sso-help">
+                Having trouble logging in? <a href="#">Get Help</a>
+            </div>
         </div>
     </main>
 

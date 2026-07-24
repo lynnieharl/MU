@@ -46,10 +46,17 @@
 
             <!-- Khối Icons (Tài khoản, Wishlist, Giỏ hàng) -->
             <div class="header-icons">
-                <a href="login.html" class="header-icon-link">
-                    <i class="fa-regular fa-user"></i>
-                    <span class="icon-label">Account</span>
-                </a>
+                <!-- Account Dropdown -->
+                <div class="header-icon-dropdown">
+                    <a href="login.html" class="header-icon-link">
+                        <i class="fa-regular fa-user"></i>
+                        <span class="icon-label">Account</span>
+                    </a>
+                    <div class="account-menu">
+                        <a href="login.html" class="account-menu-link login-btn">Log In</a>
+                        <a href="register.html" class="account-menu-link">Create an account</a>
+                    </div>
+                </div>
                 <a href="wishlist.html" class="header-icon-link">
                     <i class="fa-regular fa-heart"></i>
                     <span class="icon-label">Wishlist</span>
