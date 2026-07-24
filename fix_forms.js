@@ -8,7 +8,7 @@ const fixFile = (fileName, formId) => {
     let html = fs.readFileSync(filePath, 'utf8');
 
     // Remove action="#" method="POST" from .sso-form and add the specific ID
-    html = html.replace(/<form action="#" method="POST" class="sso-form">/g, \`<form id="\${formId}" class="sso-form">\`);
+    html = html.replace(/<form action="#" method="POST" class="sso-form">/g, '<form id="' + formId + '" class="sso-form">');
     
     // Also fix the JS block that was injected previously
     // The previous block used document.querySelector('.sso-form')
@@ -19,7 +19,7 @@ const fixFile = (fileName, formId) => {
         html = html.substring(0, scriptStart);
     }
     
-    const scriptStr = \`
+    const scriptStr = `
 <!-- SUPABASE AUTH SCRIPT -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -94,7 +94,7 @@ const fixFile = (fileName, formId) => {
         }
     });
 </script>
-</body>\`;
+</body>`;
 
     html = html.replace('</body>', scriptStr);
     
