@@ -143,17 +143,17 @@
 
     
     <!-- ==========================================
-         [PHẦN MAIN] CATEGORY PAGE TEMPLATE
+         [PHẦN MAIN] CATEGORY PAGE (${category.title})
          ========================================== -->
     <main class="category-page">
         <div class="breadcrumb">
-            <a href="index.html">Home</a> &gt; <span>Womens</span>
+            <a href="index.html">Home</a> &gt; <span>${category.title}</span>
         </div>
         
-        <h1 class="category-title">WOMENS</h1>
+        <h1 class="category-title">${category.title}</h1>
 
         <div class="category-layout">
-            <!-- Cột Trái: Filter (25%) sử dụng thẻ details/summary HTML5 (Accordion) -->
+            <!-- Cột Trái: Filter -->
             <div class="sidebar-filter">
                 <h2 class="filter-title">Filter By</h2>
                 
@@ -175,7 +175,7 @@
                         <label><input type="checkbox"> Shorts</label>
                     </div>
                 </details>
-
+                
                 <details class="filter-group" open>
                     <summary class="filter-group-title">Size <i class="fa-solid fa-chevron-down"></i></summary>
                     <div class="filter-options">
@@ -183,122 +183,13 @@
                         <label><input type="checkbox"> M</label>
                         <label><input type="checkbox"> L</label>
                         <label><input type="checkbox"> XL</label>
-                        <label><input type="checkbox"> XXL</label>
                     </div>
                 </details>
             </div>
 
-            <!-- Cột Phải: Product Grid (75%) -->
+            <!-- Cột Phải: Product Grid -->
             <div class="category-product-grid">
-                
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <a href="product.html?id=training-top"><img src="images/6_2ed2651297cac6ec9750f6581a0940e2.jpg" alt="Manchester United Training Top 24/25" class="product-img"></a>
-                            <div class="product-badge badge-exclusive">Exclusive</div>
-                            <button class="quick-view-btn">Quick View</button>
-                        </div>
-                        <div class="product-info">
-                            <a href="product.html?id=training-top" class="product-title">Manchester United Training Top 24/25</a>
-                            <p class="product-price">$58.00</p>
-                        </div>
-                    </div>
-        
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <a href="product.html?id=training-top"><img src="images/7_066d2c004e6666a7d1316d9eb103a421.jpg" alt="Manchester United Anthem Jacket 24/25" class="product-img"></a>
-                            <div class="product-badge badge-exclusive">Exclusive</div>
-                            <button class="quick-view-btn">Quick View</button>
-                        </div>
-                        <div class="product-info">
-                            <a href="product.html?id=training-top" class="product-title">Manchester United Anthem Jacket 24/25</a>
-                            <p class="product-price">$57.00</p>
-                        </div>
-                    </div>
-        
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <a href="product.html?id=training-top"><img src="https://mufc-live.cdn.scayle.cloud/images/b2c94380b2a95c47936a715f5c80ac87.jpg" alt="Manchester United Warm Up Top 24/25" class="product-img"></a>
-                            <div class="product-badge badge-exclusive">Exclusive</div>
-                            <button class="quick-view-btn">Quick View</button>
-                        </div>
-                        <div class="product-info">
-                            <a href="product.html?id=training-top" class="product-title">Manchester United Warm Up Top 24/25</a>
-                            <p class="product-price">$93.00</p>
-                        </div>
-                    </div>
-        
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <a href="product.html?id=training-top"><img src="https://mufc-live.cdn.scayle.cloud/images/8ab5a7a7bb629399eb2a0ec17e3f4f1d.jpg" alt="Manchester United Hoodie 24/25" class="product-img"></a>
-                            <div class="product-badge badge-exclusive">Exclusive</div>
-                            <button class="quick-view-btn">Quick View</button>
-                        </div>
-                        <div class="product-info">
-                            <a href="product.html?id=training-top" class="product-title">Manchester United Hoodie 24/25</a>
-                            <p class="product-price">$56.00</p>
-                        </div>
-                    </div>
-        
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <a href="product.html?id=training-top"><img src="images/6_2ed2651297cac6ec9750f6581a0940e2.jpg" alt="Manchester United Training Top 24/25" class="product-img"></a>
-                            <div class="product-badge badge-exclusive">Exclusive</div>
-                            <button class="quick-view-btn">Quick View</button>
-                        </div>
-                        <div class="product-info">
-                            <a href="product.html?id=training-top" class="product-title">Manchester United Training Top 24/25</a>
-                            <p class="product-price">$73.00</p>
-                        </div>
-                    </div>
-        
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <a href="product.html?id=training-top"><img src="images/7_066d2c004e6666a7d1316d9eb103a421.jpg" alt="Manchester United Anthem Jacket 24/25" class="product-img"></a>
-                            <div class="product-badge badge-exclusive">Exclusive</div>
-                            <button class="quick-view-btn">Quick View</button>
-                        </div>
-                        <div class="product-info">
-                            <a href="product.html?id=training-top" class="product-title">Manchester United Anthem Jacket 24/25</a>
-                            <p class="product-price">$52.00</p>
-                        </div>
-                    </div>
-        
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <a href="product.html?id=training-top"><img src="https://mufc-live.cdn.scayle.cloud/images/b2c94380b2a95c47936a715f5c80ac87.jpg" alt="Manchester United Warm Up Top 24/25" class="product-img"></a>
-                            <div class="product-badge badge-exclusive">Exclusive</div>
-                            <button class="quick-view-btn">Quick View</button>
-                        </div>
-                        <div class="product-info">
-                            <a href="product.html?id=training-top" class="product-title">Manchester United Warm Up Top 24/25</a>
-                            <p class="product-price">$63.00</p>
-                        </div>
-                    </div>
-        
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <a href="product.html?id=training-top"><img src="https://mufc-live.cdn.scayle.cloud/images/8ab5a7a7bb629399eb2a0ec17e3f4f1d.jpg" alt="Manchester United Hoodie 24/25" class="product-img"></a>
-                            <div class="product-badge badge-exclusive">Exclusive</div>
-                            <button class="quick-view-btn">Quick View</button>
-                        </div>
-                        <div class="product-info">
-                            <a href="product.html?id=training-top" class="product-title">Manchester United Hoodie 24/25</a>
-                            <p class="product-price">$89.00</p>
-                        </div>
-                    </div>
-        
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <a href="product.html?id=training-top"><img src="images/6_2ed2651297cac6ec9750f6581a0940e2.jpg" alt="Manchester United Training Top 24/25" class="product-img"></a>
-                            <div class="product-badge badge-exclusive">Exclusive</div>
-                            <button class="quick-view-btn">Quick View</button>
-                        </div>
-                        <div class="product-info">
-                            <a href="product.html?id=training-top" class="product-title">Manchester United Training Top 24/25</a>
-                            <p class="product-price">$98.00</p>
-                        </div>
-                    </div>
-        
+                ${productsHtml}
             </div>
         </div>
     </main>

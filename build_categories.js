@@ -83,7 +83,7 @@ categories.forEach(category => {
     const prods = categoryProducts[category.key];
     
     prods.forEach((prod, idx) => {
-        productsHtml += \`
+        productsHtml += `
                 <div class="product-card">
                     <div class="product-image-container">
                         <a href="product.html?id=\${category.key}-\${idx}"><img src="\${prod.img}" alt="\${prod.name}" class="product-img" onerror="this.src='images/0_Manchester_United_FC_crest.svg'"></a>
@@ -94,10 +94,10 @@ categories.forEach(category => {
                         <p class="product-price">\${prod.price}</p>
                     </div>
                 </div>
-        \`;
+        `;
     });
 
-    const mainContent = \`
+    const mainContent = `
     <!-- ==========================================
          [PHẦN MAIN] CATEGORY PAGE (\${category.title})
          ========================================== -->
@@ -150,8 +150,8 @@ categories.forEach(category => {
         </div>
     </main>
 
-\`;
+`;
 
     fs.writeFileSync(path.join(__dirname, category.file), header + mainContent + footer, 'utf8');
-    console.log(\`Tạo \${category.file} thành công.\`);
+    console.log(`Tạo ${category.file} thành công.`);
 });
