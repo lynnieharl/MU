@@ -1117,26 +1117,110 @@ button {
     background-color: #a81c12;
 }
 
-.product-description {
+/* Accordion CSS */
+.product-accordion {
     margin-top: 20px;
     border-top: 1px solid var(--color-gray-border);
-    padding-top: 20px;
 }
 
-.product-description h3 {
+.accordion-item {
+    border-bottom: 1px solid var(--color-gray-border);
+}
+
+.accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 15px;
+    cursor: pointer;
+    color: var(--color-black);
 }
 
-.product-description p {
+.accordion-header:hover {
+    color: var(--color-primary);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
+}
+
+.accordion-content p, .accordion-content ul {
     color: var(--color-gray-dark);
     line-height: 1.6;
     margin-bottom: 15px;
 }
 
-.product-description ul {
+.accordion-content ul {
     list-style-position: inside;
-    color: var(--color-gray-dark);
-    line-height: 1.8;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 500px;
+    padding-bottom: 20px;
+}
+
+.accordion-item.active .accordion-header .icon {
+    transform: rotate(45deg); /* Đổi dấu + thành dấu x */
+    transition: transform 0.3s ease;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MOBILE & TABLET)
+   ========================================================================== */
+@media (max-width: 992px) {
+    /* Trang chủ */
+    .hero-title { font-size: 3rem; }
+    .kit-grid { grid-template-columns: repeat(2, 1fr); }
+    .dept-grid { grid-template-columns: repeat(2, 1fr); }
+    
+    /* Trang sản phẩm */
+    .product-container { flex-direction: column; }
+    .product-gallery, .product-details { flex: 0 0 100%; }
+}
+
+@media (max-width: 768px) {
+    /* Global */
+    .container, .carousel-section, .category-grid-section, .player-section, .department-section, .newsletter-container, .footer-container, .footer-bottom-container, .category-page, .product-page {
+        padding: 0 20px;
+    }
+
+    /* Header */
+    .header-container { flex-direction: column; gap: 15px; }
+    .header-search { width: 100%; }
+    .nav-list { flex-wrap: wrap; justify-content: center; }
+    .mega-dropdown { display: none; } /* Có thể làm dạng accordion cho mobile menu sau */
+
+    /* Trang chủ */
+    .hero-content { left: 20px; right: 20px; text-align: center; }
+    .hero-title { font-size: 2.2rem; }
+    .product-card { flex: 0 0 calc(50% - 10px); } /* 2 cột trên mobile */
+    .kit-grid { grid-template-columns: 1fr; }
+    .player-container { flex-wrap: wrap; }
+    
+    /* Footer */
+    .newsletter-container { flex-direction: column; gap: 20px; text-align: center; }
+    .newsletter-form-container { flex: 0 0 100%; width: 100%; }
+    .footer-container { flex-direction: column; gap: 30px; }
+    .footer-bottom-container { flex-direction: column; gap: 15px; }
+    
+    /* Trang Danh Mục (Kits) */
+    .category-layout { flex-direction: column; }
+    .sidebar-filter { flex: none; width: 100%; }
+    .category-product-grid { grid-template-columns: repeat(2, 1fr); }
+    
+    /* Trang Chi Tiết Sản Phẩm (PDP) */
+    .product-gallery { flex-direction: column-reverse; } /* Thumbnail xuống dưới */
+    .thumbnail-list { flex-direction: row; width: 100%; justify-content: center; }
+    .thumb-img { width: 80px; height: 80px; }
+    .product-title-large { font-size: 1.5rem; }
+    .product-price-large { font-size: 1.4rem; }
 }
 

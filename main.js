@@ -104,4 +104,83 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // 4. Accordion Logic
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    if (accordionHeaders.length > 0) {
+        // Mở sẵn tab đầu tiên
+        accordionHeaders[0].parentElement.classList.add('active');
+        
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const item = this.parentElement;
+                
+                // Toggle trạng thái của tab hiện tại
+                if (item.classList.contains('active')) {
+                    item.classList.remove('active');
+                } else {
+                    // Tùy chọn: Đóng các tab khác
+                    document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                }
+            });
+        });
+    }
+
+    // 5. Dynamic Product Loading (Xử lý bấm sản phẩm nào ra sản phẩm đó)
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+    
+    // Database ảo bằng Javascript thuần
+    const productDatabase = {
+        'home-shirt': {
+            title: 'Mens Manchester United Home Authentic Shirt 24/25',
+            price: '$90.00',
+            img: 'images/4_c836596765f00ea79c068d00ff3c4e05.jpg'
+        },
+        'away-shirt': {
+            title: 'Mens Manchester United Away Shirt 24/25',
+            price: '$75.00',
+            img: 'images/5_b42223866496c6fac690a48a9b121da5.jpg'
+        },
+        'third-shirt': {
+            title: 'Mens Manchester United Third Shirt 24/25',
+            price: '$90.00',
+            img: 'images/10_557b882a41d5bc6a7934615bbc14b842.jpg'
+        },
+        'gk-shirt': {
+            title: 'Mens Manchester United Goalkeeper Shirt 24/25',
+            price: '$95.00',
+            img: 'https://mufc-live.cdn.scayle.cloud/images/b08cc3092b199551aacc2528c7b4c45b.jpg'
+        },
+        'training-top': {
+            title: 'Mens Manchester United Training Top 24/25',
+            price: '$65.00',
+            img: 'images/6_2ed2651297cac6ec9750f6581a0940e2.jpg'
+        },
+        'anthem-jacket': {
+            title: 'Mens Manchester United Anthem Jacket 24/25',
+            price: '$110.00',
+            img: 'images/7_066d2c004e6666a7d1316d9eb103a421.jpg'
+        }
+    };
+
+    if (productId && productDatabase[productId] && document.querySelector('.product-page')) {
+        const pd = productDatabase[productId];
+        document.querySelector('.product-title-large').innerText = pd.title;
+        document.querySelector('.product-price-large').innerText = pd.price;
+        
+        // Cập nhật ảnh to
+        document.querySelector('.main-product-img').src = pd.img;
+        
+        // Cập nhật thumbnail (tạm thời lặp lại ảnh chính để mô phỏng)
+        const thumbs = document.querySelectorAll('.thumb-img');
+        if(thumbs.length > 0) {
+            thumbs.forEach(t => t.src = pd.img);
+        }
+        
+        // Cập nhật Breadcrumb
+        const breadcrumbSpan = document.querySelector('.breadcrumb span');
+        if(breadcrumbSpan) breadcrumbSpan.innerText = pd.title;
+    }
 });
