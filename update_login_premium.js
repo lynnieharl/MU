@@ -3,29 +3,36 @@ const fs = require('fs');
 const loginPath = 'login.html';
 const content = fs.readFileSync(loginPath, 'utf8');
 
-// Phân tách file
-const headerEnd = content.indexOf('<main class="sso-auth-page">');
-const footerStart = content.indexOf('<!-- ==========================================\\r\\n         [PHẦN 4] NEWSLETTER & FOOTER');
-const altFooterStart = content.indexOf('<!-- ==========================================\\n         [PHẦN 4] NEWSLETTER & FOOTER');
+// Phân tách file an toàn
+const startMarker = '<!-- ==========================================\\r\\n         [PHẦN MAIN] NEW LOGIN PAGE (SSO)';
+const startMarkerAlt = '<!-- ==========================================\\n         [PHẦN MAIN] NEW LOGIN PAGE (SSO)';
+const endMarker = '<!-- ==========================================\\r\\n         [PHẦN 4] NEWSLETTER & FOOTER';
+const endMarkerAlt = '<!-- ==========================================\\n         [PHẦN 4] NEWSLETTER & FOOTER';
 
-const footerIndex = footerStart !== -1 ? footerStart : altFooterStart;
+let headerIndex = content.indexOf(startMarker);
+if (headerIndex === -1) headerIndex = content.indexOf(startMarkerAlt);
+if (headerIndex === -1) headerIndex = content.indexOf('<main class="sso-auth-page">');
 
-if (headerEnd !== -1 && footerIndex !== -1) {
-    const header = content.substring(0, headerEnd);
+let footerIndex = content.indexOf(endMarker);
+if (footerIndex === -1) footerIndex = content.indexOf(endMarkerAlt);
+
+if (headerIndex !== -1 && footerIndex !== -1) {
+    const header = content.substring(0, headerIndex);
     const footerAndBeyond = content.substring(footerIndex);
 
-    // Xóa script cũ ở phần footer nếu có để thay bằng script mới
     let cleanFooter = footerAndBeyond;
     const scriptStart = cleanFooter.indexOf('<!-- Script JS -->');
     if (scriptStart !== -1) {
         cleanFooter = cleanFooter.substring(0, scriptStart);
     }
-    // Hoặc xóa </body> và </html> đi để mình nối vào sau
     cleanFooter = cleanFooter.replace('</body>', '').replace('</html>', '');
+    cleanFooter = cleanFooter.replace('<script src="main.js"></script>', '');
 
     const newMain = `
+    <!-- ==========================================
+         [PHẦN MAIN] PREMIUM LOGIN PAGE
+         ========================================== -->
     <style>
-        /* CSS CHUYÊN NGHIỆP CHO TRANG LOGIN */
         .premium-login-container {
             min-height: 80vh;
             display: flex;
@@ -34,6 +41,7 @@ if (headerEnd !== -1 && footerIndex !== -1) {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('images/bruno_fernandes_banner_1783089680400.jpg') center/cover no-repeat fixed;
             padding: 40px 20px;
             font-family: 'Inter', sans-serif;
+            position: relative;
         }
 
         .premium-login-card {
@@ -185,7 +193,6 @@ if (headerEnd !== -1 && footerIndex !== -1) {
             color: #fff;
         }
 
-        /* Loading Spinner */
         .premium-loader {
             border: 3px solid rgba(255,255,255,0.2);
             border-top: 3px solid white;
@@ -196,7 +203,6 @@ if (headerEnd !== -1 && footerIndex !== -1) {
             display: none;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
     </style>
 
     <main class="premium-login-container">
@@ -284,16 +290,16 @@ if (headerEnd !== -1 && footerIndex !== -1) {
 
                         if (error) throw error;
                         
-                        // Đăng nhập thành công, check role để chuyển hướng
+                        // Check role for redirection
                         const { data: userData } = await supabase.from('users').select('role').eq('email', email).single();
                         
                         let role = userData ? userData.role : 'user';
                         
-                        // Chuyển hướng
+                        // Redirect based on role
                         if (role === 'admin') {
                             window.location.href = 'admin-dashboard.html';
                         } else {
-                            window.location.href = 'index.html'; // user thường cho về trang chủ
+                            window.location.href = 'index.html'; 
                         }
 
                     } catch (err) {
@@ -317,4 +323,5 @@ if (headerEnd !== -1 && footerIndex !== -1) {
     console.log('Update login.html successfully.');
 } else {
     console.error('Could not find split markers in login.html');
+    console.error('headerIndex', headerIndex, 'footerIndex', footerIndex);
 }
