@@ -80,7 +80,9 @@ const mainContent = `
                     <span>$252.00</span>
                 </div>
 
-                <button class="checkout-btn">CHECKOUT</button>
+                <a href="checkout.html" style="text-decoration: none; display: block;">
+                    <button class="checkout-btn" style="width: 100%;">CHECKOUT</button>
+                </a>
 
                 <div class="promo-section">
                     <p class="promo-title">Apply Promo Code</p>
