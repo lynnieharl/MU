@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>Official Manchester United Online Store</title>
+    <!-- Thư viện FontAwesome chứa icon thật -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Phải gọi đúng file style.css -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ==========================================
+         [PHẦN 1] HEADER
+         ========================================== -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-left">
+                <button class="top-bar-btn"><i class="fa-solid fa-globe"></i> English - US$</button>
+            </div>
+            <div class="top-bar-right">
+                <a href="track-order.html" class="top-bar-link">Track Order</a>
+                <a href="help.html" class="top-bar-link">Help</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Khối Logo (Cố định chiều rộng/cao, không được khổng lồ) -->
+            <div class="header-logo">
+                <a href="index.html">
+                    <img src="images/0_Manchester_United_FC_crest.svg" alt="Manchester United Logo" class="logo-img">
+                </a>
+            </div>
+
+            <!-- Khối Search (Dài, căn giữa) -->
+            <div class="header-search">
+                <form action="search.html" method="GET" class="search-form">
+                    <input type="text" name="query" class="search-input" placeholder="Search for products, players, and more...">
+                    <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
+
+            <!-- Khối Icons (Tài khoản, Wishlist, Giỏ hàng) -->
+            <div class="header-icons">
+                <!-- Account Dropdown -->
+                <div class="header-icon-dropdown">
+                    <a href="login.html" class="header-icon-link">
+                        <i class="fa-regular fa-user"></i>
+                        <span class="icon-label">Account</span>
+                    </a>
+                    <div class="account-menu">
+                        <a href="login.html" class="account-menu-link login-btn">Log In</a>
+                        <a href="register.html" class="account-menu-link">Create an account</a>
+                    </div>
+                </div>
+                <a href="wishlist.html" class="header-icon-link">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="icon-label">Wishlist</span>
+                </a>
+                <a href="cart.html" class="header-icon-link cart-icon-wrapper">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-badge">0</span>
+                    <span class="icon-label">Cart</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         [PHẦN 1] MEGA MENU
+         ========================================== -->
+    <nav class="mega-navbar">
+        <div class="navbar-container">
+            <ul class="nav-list">
+                <!-- Mục Kits có Dropdown Mega Menu -->
+                <li class="nav-item has-dropdown">
+                    <a href="kits.html" class="nav-link">Kits</a>
+                    <!-- Bảng Dropdown xổ xuống -->
+                    <div class="mega-dropdown">
+                        <div class="dropdown-container">
+                            <div class="dropdown-column">
+                                <h3 class="dropdown-title">Shop By Category</h3>
+                                <ul class="dropdown-list">
+                                    <li><a href="kits-home.html">Home Kits</a></li>
+                                    <li><a href="kits-away.html">Away Kits</a></li>
+                                    <li><a href="kits-third.html">Third Kits</a></li>
+                                    <li><a href="kits-gk.html">Goalkeeper Kits</a></li>
+                                    <li><a href="kits-training.html">Training Kits</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-column">
+                                <h3 class="dropdown-title">Shop By Player</h3>
+                                <ul class="dropdown-list">
+                                    <li><a href="player-bruno.html">Bruno Fernandes</a></li>
+                                    <li><a href="player-rashford.html">Marcus Rashford</a></li>
+                                    <li><a href="player-garnacho.html">Alejandro Garnacho</a></li>
+                                    <li><a href="player-mainoo.html">Kobbie Mainoo</a></li>
+                                    <li><a href="player-hojlund.html">Rasmus Højlund</a></li>
+                                </ul>
+                            </div>
+                            <!-- Banner Dropdown Ảnh Thật 1 -->
+                            <div class="dropdown-column banner-col">
+                                <a href="kits-home.html">
+                                    <img src="images/1_lammens005-product-carousel.jpg" alt="Home Kit Banner" class="dropdown-banner">
+                                    <span class="banner-text">Shop 24/25 Home Kit</span>
+                                </a>
+                            </div>
+                            <!-- Banner Dropdown Ảnh Thật 2 -->
+                            <div class="dropdown-column banner-col">
+                                <a href="kits-away.html">
+                                    <img src="images/2_24295ea4b3319ca1ab4a7b45bc5272e4.jpg" alt="Away Kit Banner" class="dropdown-banner">
+                                    <span class="banner-text">Shop 24/25 Away Kit</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+                <!-- Các mục menu khác (Link thật, không dùng #) -->
+                <li class="nav-item"><a href="training.html" class="nav-link">Training</a></li>
+                <li class="nav-item"><a href="mens.html" class="nav-link">Mens</a></li>
+                <li class="nav-item"><a href="womens.html" class="nav-link">Womens</a></li>
+                <li class="nav-item"><a href="kids.html" class="nav-link">Kids</a></li>
+                <li class="nav-item"><a href="homeware.html" class="nav-link">Homeware</a></li>
+                <li class="nav-item"><a href="souvenirs.html" class="nav-link">Souvenirs</a></li>
+                <li class="nav-item sale-item"><a href="sale.html" class="nav-link" style="color: #DA291C;">Sale</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+         [PHẦN 1] PROMO BAR
+         ========================================== -->
+    <div class="promo-bar">
+        <div class="promo-text">
+            <span>FREE SHIPPING ON ALL ORDERS OVER $100</span>
+            <a href="details.html" class="promo-link">DETAILS</a>
+        </div>
+    </div>
+
+    
+    <!-- ==========================================
+         [PHẦN MAIN] CATEGORY PAGE TEMPLATE
+         ========================================== -->
+    <main class="category-page">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> &gt; <span>Homeware</span>
+        </div>
+        
+        <h1 class="category-title">HOMEWARE</h1>
+
+        <div class="category-layout">
+            <!-- Cột Trái: Filter (25%) sử dụng thẻ details/summary HTML5 (Accordion) -->
+            <div class="sidebar-filter">
+                <h2 class="filter-title">Filter By</h2>
+                
+                <details class="filter-group" open>
+                    <summary class="filter-group-title">Department <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="filter-options">
+                        <label><input type="checkbox"> Mens</label>
+                        <label><input type="checkbox"> Womens</label>
+                        <label><input type="checkbox"> Kids</label>
+                    </div>
+                </details>
+
+                <details class="filter-group" open>
+                    <summary class="filter-group-title">Product Type <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="filter-options">
+                        <label><input type="checkbox"> T-Shirts</label>
+                        <label><input type="checkbox"> Hoodies</label>
+                        <label><input type="checkbox"> Jackets</label>
+                        <label><input type="checkbox"> Shorts</label>
+                    </div>
+                </details>
+
+                <details class="filter-group" open>
+                    <summary class="filter-group-title">Size <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="filter-options">
+                        <label><input type="checkbox"> S</label>
+                        <label><input type="checkbox"> M</label>
+                        <label><input type="checkbox"> L</label>
+                        <label><input type="checkbox"> XL</label>
+                        <label><input type="checkbox"> XXL</label>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Cột Phải: Product Grid (75%) -->
+            <div class="category-product-grid">
+                
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <a href="product.html?id=training-top"><img src="images/6_2ed2651297cac6ec9750f6581a0940e2.jpg" alt="Manchester United Training Top 24/25" class="product-img"></a>
+                            <div class="product-badge badge-exclusive">Exclusive</div>
+                            <button class="quick-view-btn">Quick View</button>
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html?id=training-top" class="product-title">Manchester United Training Top 24/25</a>
+                            <p class="product-price">$73.00</p>
+                        </div>
+                    </div>
+        
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <a href="product.html?id=training-top"><img src="images/7_066d2c004e6666a7d1316d9eb103a421.jpg" alt="Manchester United Anthem Jacket 24/25" class="product-img"></a>
+                            <div class="product-badge badge-exclusive">Exclusive</div>
+                            <button class="quick-view-btn">Quick View</button>
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html?id=training-top" class="product-title">Manchester United Anthem Jacket 24/25</a>
+                            <p class="product-price">$95.00</p>
+                        </div>
+                    </div>
+        
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <a href="product.html?id=training-top"><img src="https://mufc-live.cdn.scayle.cloud/images/b2c94380b2a95c47936a715f5c80ac87.jpg" alt="Manchester United Warm Up Top 24/25" class="product-img"></a>
+                            <div class="product-badge badge-exclusive">Exclusive</div>
+                            <button class="quick-view-btn">Quick View</button>
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html?id=training-top" class="product-title">Manchester United Warm Up Top 24/25</a>
+                            <p class="product-price">$56.00</p>
+                        </div>
+                    </div>
+        
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <a href="product.html?id=training-top"><img src="https://mufc-live.cdn.scayle.cloud/images/8ab5a7a7bb629399eb2a0ec17e3f4f1d.jpg" alt="Manchester United Hoodie 24/25" class="product-img"></a>
+                            <div class="product-badge badge-exclusive">Exclusive</div>
+                            <button class="quick-view-btn">Quick View</button>
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html?id=training-top" class="product-title">Manchester United Hoodie 24/25</a>
+                            <p class="product-price">$56.00</p>
+                        </div>
+                    </div>
+        
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <a href="product.html?id=training-top"><img src="images/6_2ed2651297cac6ec9750f6581a0940e2.jpg" alt="Manchester United Training Top 24/25" class="product-img"></a>
+                            <div class="product-badge badge-exclusive">Exclusive</div>
+                            <button class="quick-view-btn">Quick View</button>
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html?id=training-top" class="product-title">Manchester United Training Top 24/25</a>
+                            <p class="product-price">$59.00</p>
+                        </div>
+                    </div>
+        
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <a href="product.html?id=training-top"><img src="images/7_066d2c004e6666a7d1316d9eb103a421.jpg" alt="Manchester United Anthem Jacket 24/25" class="product-img"></a>
+                            <div class="product-badge badge-exclusive">Exclusive</div>
+                            <button class="quick-view-btn">Quick View</button>
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html?id=training-top" class="product-title">Manchester United Anthem Jacket 24/25</a>
+                            <p class="product-price">$92.00</p>
+                        </div>
+                    </div>
+        
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <a href="product.html?id=training-top"><img src="https://mufc-live.cdn.scayle.cloud/images/b2c94380b2a95c47936a715f5c80ac87.jpg" alt="Manchester United Warm Up Top 24/25" class="product-img"></a>
+                            <div class="product-badge badge-exclusive">Exclusive</div>
+                            <button class="quick-view-btn">Quick View</button>
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html?id=training-top" class="product-title">Manchester United Warm Up Top 24/25</a>
+                            <p class="product-price">$80.00</p>
+                        </div>
+                    </div>
+        
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <a href="product.html?id=training-top"><img src="https://mufc-live.cdn.scayle.cloud/images/8ab5a7a7bb629399eb2a0ec17e3f4f1d.jpg" alt="Manchester United Hoodie 24/25" class="product-img"></a>
+                            <div class="product-badge badge-exclusive">Exclusive</div>
+                            <button class="quick-view-btn">Quick View</button>
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html?id=training-top" class="product-title">Manchester United Hoodie 24/25</a>
+                            <p class="product-price">$58.00</p>
+                        </div>
+                    </div>
+        
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <a href="product.html?id=training-top"><img src="images/6_2ed2651297cac6ec9750f6581a0940e2.jpg" alt="Manchester United Training Top 24/25" class="product-img"></a>
+                            <div class="product-badge badge-exclusive">Exclusive</div>
+                            <button class="quick-view-btn">Quick View</button>
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html?id=training-top" class="product-title">Manchester United Training Top 24/25</a>
+                            <p class="product-price">$75.00</p>
+                        </div>
+                    </div>
+        
+            </div>
+        </div>
+    </main>
+
+<!-- ==========================================
+         [PHẦN 4] NEWSLETTER & FOOTER
+         ========================================== -->
+    <footer class="site-footer">
+        <!-- Newsletter -->
+        <div class="newsletter-section">
+            <div class="newsletter-container">
+                <div class="newsletter-text">
+                    <h3>SIGN UP TO OUR NEWSLETTER</h3>
+                </div>
+                <div class="newsletter-form-container">
+                    <form action="subscribe.php" method="POST" class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" required class="newsletter-input">
+                        <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Links -->
+        <div class="footer-main">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="faq.html">Help & FAQs</a></li>
+                        <li><a href="track-order.html">Track Order</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Shopping With Us</h4>
+                    <ul>
+                        <li><a href="safe-shopping.html">Safe Shopping</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="history.html">Club History</a></li>
+                        <li><a href="stadium.html">Old Trafford Stadium</a></li>
+                        <li><a href="foundation.html">MU Foundation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Follow Us</h4>
+                    <ul class="social-links">
+                        <li><a href="https://facebook.com"><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
+                        <li><a href="https://instagram.com"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                        <li><a href="https://twitter.com"><i class="fa-brands fa-x-twitter"></i> X (Twitter)</a></li>
+                        <li><a href="https://youtube.com"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Footer -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <div class="copyright-text">
+                    <p>&copy; 2024 Manchester United. All rights reserved.</p>
+                </div>
+                <div class="payment-methods">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Visa_Logo_2012.png" alt="Visa" class="payment-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard" class="payment-icon">
+                    <img src="images/22_PayPal.svg" alt="PayPal" class="payment-icon">
+                    <img src="images/23_American_Express_logo_%282018%29.svg" alt="Amex" class="payment-icon">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script JS -->
+    <script src="main.js"></script>
+</body>
+</html>
