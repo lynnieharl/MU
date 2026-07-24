@@ -87,8 +87,16 @@ const fixFile = (fileName, formId) => {
                 if (error) {
                     alert('Đăng ký thất bại: ' + error.message);
                 } else {
-                    alert('Đăng ký thành công! Bạn có thể đăng nhập ngay.');
-                    inputs.forEach(input => input.value = ''); 
+                    const { error: insertError } = await supabase.from('users').insert([
+                        { email: email, role: 'user', created_at: new Date() }
+                    ]);
+
+                    if (insertError) {
+                        alert('Lỗi lưu dữ liệu người dùng: ' + insertError.message);
+                    } else {
+                        alert('Đăng ký và lưu dữ liệu thành công!');
+                        inputs.forEach(input => input.value = ''); 
+                    }
                 }
             });
         }
