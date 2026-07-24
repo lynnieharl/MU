@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Manchester United Store</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="images/0_Manchester_United_FC_crest.svg">
+</head>
+<body>
+
+<div class="admin-container">
+    <!-- SIDEBAR (20%) -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <img src="images/0_Manchester_United_FC_crest.svg" alt="MU Logo" class="admin-logo">
+            <h2>ADMIN PORTAL</h2>
+        </div>
+
+        <div class="admin-profile">
+            <div class="avatar-circle">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <div class="profile-info">
+                <h3>John Doe</h3>
+                <span class="role-badge">Super Admin</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active"><a href="#"><i class="fa-solid fa-chart-pie"></i> Overview</a></li>
+                <li><a href="#"><i class="fa-solid fa-box-open"></i> Product Management</a></li>
+                <li><a href="#"><i class="fa-solid fa-users"></i> User Activity</a></li>
+                <li><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+            </ul>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="index.html" class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout to Store</a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT (80%) -->
+    <main class="admin-main">
+        <header class="main-header">
+            <h1>Dashboard Overview</h1>
+            <div class="header-actions">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search anything...">
+                </div>
+                <button class="notification-btn"><i class="fa-regular fa-bell"></i><span class="badge">3</span></button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            
+            <!-- SECTION 1: TOP METRICS -->
+            <section class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon revenue-icon"><i class="fa-solid fa-dollar-sign"></i></div>
+                    <div class="metric-data">
+                        <h4>Total Revenue</h4>
+                        <p class="metric-value text-success">$145,200</p>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon product-icon"><i class="fa-solid fa-tags"></i></div>
+                    <div class="metric-data">
+                        <h4>Total Products</h4>
+                        <p class="metric-value">1,240</p>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon user-icon"><i class="fa-solid fa-user-plus"></i></div>
+                    <div class="metric-data">
+                        <h4>New Signups</h4>
+                        <p class="metric-value">45</p>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon session-icon"><i class="fa-solid fa-wave-square"></i></div>
+                    <div class="metric-data">
+                        <h4>Active Sessions</h4>
+                        <p class="metric-value">120</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: PRODUCT MANAGEMENT -->
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2>Product Inventory & Status</h2>
+                    <button class="btn-primary"><i class="fa-solid fa-plus"></i> ADD NEW PRODUCT</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Product Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="images/4_c836596765f00ea79c068d00ff3c4e05.jpg" alt="Home Shirt" class="table-img"></td>
+                                <td>Manchester United Mens Home Shirt 24/25</td>
+                                <td>Jerseys / Mens</td>
+                                <td>$100.00</td>
+                                <td><span class="status-badge success">In Stock</span></td>
+                                <td class="action-cell">
+                                    <button class="btn-edit"><i class="fa-solid fa-pen"></i> Edit</button>
+                                    <button class="btn-delete"><i class="fa-solid fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img src="images/5_b42223866496c6fac690a48a9b121da5.jpg" alt="Away Shirt" class="table-img"></td>
+                                <td>Manchester United Mens Away Shirt 24/25</td>
+                                <td>Jerseys / Mens</td>
+                                <td>$100.00</td>
+                                <td><span class="status-badge warning">Out of Stock</span></td>
+                                <td class="action-cell">
+                                    <button class="btn-edit"><i class="fa-solid fa-pen"></i> Edit</button>
+                                    <button class="btn-delete"><i class="fa-solid fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img src="images/17_0bb8ce5dfcdaa5f408a0c8cd9c864247.jpg" alt="Anthem Jacket" class="table-img"></td>
+                                <td>Manchester United Mens Anthem Jacket</td>
+                                <td>Fashion / Jackets</td>
+                                <td>$110.00</td>
+                                <td><span class="status-badge success">In Stock</span></td>
+                                <td class="action-cell">
+                                    <button class="btn-edit"><i class="fa-solid fa-pen"></i> Edit</button>
+                                    <button class="btn-delete"><i class="fa-solid fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img src="images/kids_model.jpg" alt="Kids Kit" class="table-img"></td>
+                                <td>Manchester United Kids Home Kit 24/25</td>
+                                <td>Jerseys / Kids</td>
+                                <td>$65.00</td>
+                                <td><span class="status-badge neutral">Draft</span></td>
+                                <td class="action-cell">
+                                    <button class="btn-edit"><i class="fa-solid fa-pen"></i> Edit</button>
+                                    <button class="btn-delete"><i class="fa-solid fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION 3: RECENT USER ACTIVITY -->
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2>Recent User Activity</h2>
+                    <button class="btn-secondary"><i class="fa-solid fa-download"></i> Export Logs</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>User Email</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                                <th>Timestamp</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>david.beckham@example.com</td>
+                                <td><span class="role-user">User</span></td>
+                                <td>Just Registered</td>
+                                <td>2 mins ago</td>
+                                <td><span class="status-badge success">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>admin.master@manutd.com</td>
+                                <td><span class="role-admin">Admin</span></td>
+                                <td>Logged In</td>
+                                <td>15 mins ago</td>
+                                <td><span class="status-badge success">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>guest_9912@example.com</td>
+                                <td><span class="role-user">User</span></td>
+                                <td>Payment Failed</td>
+                                <td>1 hour ago</td>
+                                <td><span class="status-badge danger">Failed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+</body>
+</html>
