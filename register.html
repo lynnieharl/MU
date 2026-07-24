@@ -255,7 +255,7 @@
             <p class="sso-subtitle" style="text-align: center; margin-bottom: 10px;">Join for FREE and become part of United's global fan community to enjoy exclusive content, perks & rewards.</p>
             <p class="sso-subtitle" style="text-align: center;">Already a member? <a href="login.html">Log In</a></p>
             
-            <form id="register-form" class="sso-form">
+            <form onsubmit="xuLyDangKy(event)">
                 
                 <div class="sso-input-wrapper">
                     <label class="sso-label">First Name</label>
@@ -269,7 +269,7 @@
 
                 <div class="sso-input-wrapper">
                     <label class="sso-label">Email Address</label>
-                    <input type="email" class="sso-input" required>
+                    <input type="email" id="email-dang-ky" class="sso-input" required>
                 </div>
 
                 <div class="sso-input-wrapper">
@@ -279,7 +279,7 @@
                 
                 <div class="sso-input-wrapper">
                     <label class="sso-label">Password</label>
-                    <input type="password" class="sso-input" required>
+                    <input type="password" id="pass-dang-ky" class="sso-input" required>
                     <i class="fa-regular fa-eye-slash password-toggle"></i>
                 </div>
 
@@ -427,4 +427,4 @@
     <!-- Script JS -->
     <script src="main.js"></script>
 
-\n<!-- SCRIPT XỬ LÝ ĐĂNG KÝ -->\n<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>\n<script>\n    const _supabaseUrl = 'https://suabbqtrggzwgchksenq.supabase.co';\n    const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';\n    let supabase = null;\n    if (_supabaseUrl && _supabaseKey) { supabase = supabase.createClient(_supabaseUrl, _supabaseKey); }\n\n    document.addEventListener("DOMContentLoaded", () => {\n        const form = document.getElementById("register-form");\n        if (form) {\n            form.addEventListener("submit", async (e) => {\n                e.preventDefault();\n                if (!supabase) {\n                    alert("Chưa cấu hình kết nối Supabase!");\n                    return;\n                }\n\n                const emailInput = document.getElementById("register-email");\n                const passwordInput = document.getElementById("register-password");\n\n                if (!emailInput || !passwordInput) {\n                    alert("Lỗi: Không tìm thấy ô nhập Email hoặc Password!");\n                    return;\n                }\n\n                const email = emailInput.value;\n                const password = passwordInput.value;\n\n                try {\n                    // 1. Đăng ký user Auth\n                    const { data: authData, error: authError } = await supabase.auth.signUp({\n                        email: email,\n                        password: password\n                    });\n\n                    if (authError) throw authError;\n\n                    // 2. Thêm vào bảng users\n                    const { error: dbError } = await supabase.from("users").insert([\n                        { email: email, role: "user" }\n                    ]);\n\n                    if (dbError) throw dbError;\n\n                    // Thành công cả 2 bước\n                    alert("Đăng ký thành công! Hãy dùng tài khoản này để đăng nhập.");\n                    form.reset();\n                    // Chuyển hướng sang trang đăng nhập\n                    window.location.href = "login.html";\n                } catch (error) {\n                    console.error("Lỗi đăng ký:", error);\n                    alert("Lỗi: " + error.message);\n                }\n            });\n        }\n    });\n</script>\n</body>\n</html>
+\n\n<!-- Nhúng Supabase -->\n<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>\n<script>\n    const _supabaseUrl = 'https://suabbqtrggzwgchksenq.supabase.co';\n    const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';\n    const supabase = window.supabase.createClient(_supabaseUrl, _supabaseKey);\n\n    async function xuLyDangKy(event) {\n        event.preventDefault(); \n        \n        const emailInput = document.getElementById("email-dang-ky").value;\n        const passInput = document.getElementById("pass-dang-ky").value;\n\n        console.log("Đang xử lý đăng ký cho:", emailInput);\n        alert("Đang gửi yêu cầu đăng ký...");\n\n        try {\n            const { data: authData, error: authErr } = await supabase.auth.signUp({\n                email: emailInput,\n                password: passInput\n            });\n            \n            if (authErr) throw authErr;\n\n            const { error: dbErr } = await supabase\n                .from("users")\n                .insert([{ email: emailInput, role: "user" }]);\n\n            if (dbErr) throw dbErr;\n            \n            alert("ĐĂNG KÝ THÀNH CÔNG! Đã bay thẳng vào Supabase.");\n            window.location.href = "login.html";\n        } catch (loi) {\n            alert("LỖI RỒI: " + loi.message);\n            console.error(loi);\n        }\n    }\n</script>\n</body>\n</html>
