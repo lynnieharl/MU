@@ -443,6 +443,11 @@
                 const email = document.getElementById('register-email').value;
                 const password = document.getElementById('register-password').value;
 
+                if (password.length < 6) {
+                    alert('Mật khẩu phải từ 6 ký tự trở lên!');
+                    return;
+                }
+
                 try {
                     const { error: authErr } = await supabase.auth.signUp({ email, password });
                     if (authErr) throw authErr;
@@ -450,7 +455,7 @@
                     const { error: dbErr } = await supabase.from('users').insert([{ email: email, role: 'user' }]);
                     if (dbErr) throw dbErr;
 
-                    alert('Đăng ký thành công!');
+                    alert('Đăng ký tài khoản thành công!');
                     registerForm.reset();
                     window.location.href = 'login.html';
                 } catch (err) {

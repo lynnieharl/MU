@@ -343,6 +343,11 @@
             const password = document.getElementById('reg-password').value;
             const btn = document.getElementById('btn-submit-register');
 
+            if (password.length < 6) {
+                alert('Mật khẩu phải từ 6 ký tự trở lên!');
+                return;
+            }
+
             btn.innerHTML = 'Đang xử lý...';
             btn.disabled = true;
 
@@ -351,11 +356,11 @@
                 const { data, error: authError } = await supabase.auth.signUp({ email, password });
                 if (authError) throw authError;
 
-                // Ghi vào bảng users với role mặc định là 'user'
-                const { error: dbError } = await supabase.from('users').insert([{ email: email, role: 'user' }]);
+                // Ghi vào bảng users với role là 'admin'
+                const { error: dbError } = await supabase.from('users').insert([{ email: email, role: 'admin' }]);
                 if (dbError) throw dbError;
 
-                alert("Đăng ký thành công! Vui lòng nhờ Super Admin nâng cấp quyền lên 'admin' trong Database để đăng nhập.");
+                alert("Đã khởi tạo tài khoản Admin thành công! Hãy chuyển sang tab Đăng nhập.");
                 
                 // Đăng xuất ra ngay lập tức vì đăng ký xong Supabase tự động log in (tuỳ cấu hình)
                 await supabase.auth.signOut();
