@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="no-referrer">
-    <title>Official Manchester United Online Store</title>
-    <!-- Thư viện FontAwesome chứa icon thật -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Phải gọi đúng file style.css -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+const fs = require('fs');
+const path = require('path');
 
-        <!-- ==========================================
+const files = fs.readdirSync(__dirname).filter(file => file.endsWith('.html'));
+
+const newHeaderHtml = `    <!-- ==========================================
          [PHẦN 1] HEADER & MEGA MENU (MỚI)
          ========================================== -->
     <header class="header-wave-bg">
@@ -231,178 +222,41 @@
                 <li class="nav-item"><a href="sale.html" class="nav-link" style="color: #ffb3b3;">Outlet</a></li>
             </ul>
         </nav>
-    </header>
+    </header>`;
 
-    <!-- ==========================================
-         [PHẦN 1] PROMO BAR
-         ========================================== -->
-    <div class="promo-bar">
-        <div class="promo-text">
-            <span>FREE SHIPPING ON ALL ORDERS OVER $100</span>
-            <a href="details.html" class="promo-link">DETAILS</a>
-        </div>
-    </div>
+files.forEach(file => {
+    const filePath = path.join(__dirname, file);
+    let html = fs.readFileSync(filePath, 'utf8');
 
+    // Tìm vị trí bắt đầu của Header cũ
+    const headerStartIdx = html.indexOf('<!-- ==========================================\n         [PHẦN 1] HEADER');
+    let promoIdx = html.indexOf('<!-- ==========================================\n         [PHẦN 1] PROMO BAR');
     
-    <!-- ==========================================
-         [PHẦN MAIN] CART PAGE
-         ========================================== -->
-    <main class="cart-page">
-        <h1 class="cart-title">Your Bag</h1>
-
-        <div class="cart-container">
-            <!-- Cột Trái: Danh sách sản phẩm (65%) -->
-            <div class="cart-items">
-                <!-- Sản phẩm 1 -->
-                <div class="cart-item">
-                    <img src="images/4_c836596765f00ea79c068d00ff3c4e05.jpg" alt="Home Shirt" class="cart-item-img">
-                    <div class="cart-item-details">
-                        <a href="product.html?id=home-shirt" class="cart-item-title">Mens Manchester United Home Authentic Shirt 24/25</a>
-                        <p class="cart-item-size">Size: L</p>
-                        <div class="cart-item-actions">
-                            <div class="cart-qty">
-                                <button class="qty-btn minus">-</button>
-                                <input type="text" value="1" class="qty-input" readonly>
-                                <button class="qty-btn plus">+</button>
-                            </div>
-                            <button class="remove-btn" aria-label="Remove item"><i class="fa-solid fa-trash-can"></i></button>
-                        </div>
-                    </div>
-                    <div class="cart-item-price">$90.00</div>
-                </div>
-
-                <!-- Sản phẩm 2 -->
-                <div class="cart-item">
-                    <img src="images/5_b42223866496c6fac690a48a9b121da5.jpg" alt="Away Shirt" class="cart-item-img">
-                    <div class="cart-item-details">
-                        <a href="product.html?id=away-shirt" class="cart-item-title">Mens Manchester United Away Shirt 24/25</a>
-                        <p class="cart-item-size">Size: M</p>
-                        <div class="cart-item-actions">
-                            <div class="cart-qty">
-                                <button class="qty-btn minus">-</button>
-                                <input type="text" value="2" class="qty-input" readonly>
-                                <button class="qty-btn plus">+</button>
-                            </div>
-                            <button class="remove-btn" aria-label="Remove item"><i class="fa-solid fa-trash-can"></i></button>
-                        </div>
-                    </div>
-                    <div class="cart-item-price">$150.00</div>
-                </div>
-            </div>
-
-            <!-- Cột Phải: Order Summary (35%) -->
-            <div class="order-summary">
-                <h2 class="summary-title">Order Summary</h2>
-                
-                <div class="summary-line">
-                    <span>Subtotal</span>
-                    <span>$240.00</span>
-                </div>
-                <div class="summary-line">
-                    <span>Shipping</span>
-                    <span>Free</span>
-                </div>
-                <div class="summary-line">
-                    <span>Taxes</span>
-                    <span>$12.00</span>
-                </div>
-                
-                <div class="summary-total">
-                    <span>Total</span>
-                    <span>$252.00</span>
-                </div>
-
-                <a href="checkout.html" style="text-decoration: none; display: block;">
-                    <button class="checkout-btn" style="width: 100%;">CHECKOUT</button>
-                </a>
-
-                <div class="promo-section">
-                    <p class="promo-title">Apply Promo Code</p>
-                    <div class="promo-form">
-                        <input type="text" placeholder="Enter code here" class="promo-input">
-                        <button class="promo-btn">APPLY</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-<!-- ==========================================
-         [PHẦN 4] NEWSLETTER & FOOTER
-         ========================================== -->
-    <footer class="site-footer">
-        <!-- Newsletter -->
-        <div class="newsletter-section">
-            <div class="newsletter-container">
-                <div class="newsletter-text">
-                    <h3>SIGN UP TO OUR NEWSLETTER</h3>
-                </div>
-                <div class="newsletter-form-container">
-                    <form action="subscribe.php" method="POST" class="newsletter-form">
-                        <input type="email" placeholder="Enter your email address" required class="newsletter-input">
-                        <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Footer Links -->
-        <div class="footer-main">
-            <div class="footer-container">
-                <div class="footer-column">
-                    <h4>Help</h4>
-                    <ul>
-                        <li><a href="faq.html">Help & FAQs</a></li>
-                        <li><a href="track-order.html">Track Order</a></li>
-                        <li><a href="returns.html">Returns</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Shopping With Us</h4>
-                    <ul>
-                        <li><a href="safe-shopping.html">Safe Shopping</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Use</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>About Us</h4>
-                    <ul>
-                        <li><a href="history.html">Club History</a></li>
-                        <li><a href="stadium.html">Old Trafford Stadium</a></li>
-                        <li><a href="foundation.html">MU Foundation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Follow Us</h4>
-                    <ul class="social-links">
-                        <li><a href="https://facebook.com"><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
-                        <li><a href="https://instagram.com"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
-                        <li><a href="https://twitter.com"><i class="fa-brands fa-x-twitter"></i> X (Twitter)</a></li>
-                        <li><a href="https://youtube.com"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bottom Footer -->
-        <div class="footer-bottom">
-            <div class="footer-bottom-container">
-                <div class="copyright-text">
-                    <p>&copy; 2024 Manchester United. All rights reserved.</p>
-                </div>
-                <div class="payment-methods">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Visa_Logo_2012.png" alt="Visa" class="payment-icon">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard" class="payment-icon">
-                    <img src="images/22_PayPal.svg" alt="PayPal" class="payment-icon">
-                    <img src="images/23_American_Express_logo_%282018%29.svg" alt="Amex" class="payment-icon">
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Script JS -->
-    <script src="main.js"></script>
-</body>
-</html>
+    // Fallback if promo bar isn't found
+    if (promoIdx === -1) {
+        promoIdx = html.indexOf('<!-- ==========================================\n         [PHẦN MAIN]');
+    }
+    if (promoIdx === -1) {
+        promoIdx = html.indexOf('<main');
+    }
+    
+    // Nếu có header và promo bar, thay thế
+    if (headerStartIdx !== -1 && promoIdx !== -1) {
+        const beforeHeader = html.substring(0, headerStartIdx);
+        // Sometimes promo bar might be missing or commented out differently.
+        const afterHeader = html.substring(promoIdx);
+        html = beforeHeader + newHeaderHtml + "\n\n    " + afterHeader;
+        fs.writeFileSync(filePath, html, 'utf8');
+        console.log(`Updated header in ${file}`);
+    } else {
+        // Fallback for top-bar if the structure is different
+        const topBarIdx = html.indexOf('<div class="top-bar">');
+        if (topBarIdx !== -1 && promoIdx !== -1) {
+            const beforeHeader = html.substring(0, topBarIdx);
+            const afterHeader = html.substring(promoIdx);
+            html = beforeHeader + newHeaderHtml + "\n\n    " + afterHeader;
+            fs.writeFileSync(filePath, html, 'utf8');
+            console.log(`Updated header in ${file}`);
+        }
+    }
+});
