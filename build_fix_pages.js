@@ -18,7 +18,7 @@ const pages = [
         breadcrumb: 'Mens',
         products: [
             { name: "Manchester United Mens Home Shirt 24/25", price: "$100.00", img: "images/mens_model.jpg" },
-            { name: "Manchester United Mens Away Shirt 24/25", price: "$100.00", img: "images/5_b42223866496c6fac690a48a9b121da5.jpg" },
+            { name: "Manchester United Mens Away Shirt 24/25", price: "$100.00", img: "images/mens_model_away.jpg" },
             { name: "Manchester United Mens Third Shirt 24/25", price: "$100.00", img: "images/8_4c77739191924bede382dbf20ab1a413.jpg" },
             { name: "Manchester United Mens Anthem Jacket", price: "$110.00", img: "images/17_0bb8ce5dfcdaa5f408a0c8cd9c864247.jpg" },
             { name: "Manchester United Mens Casual Hoodie", price: "$85.00", img: "images/19_c09dd81f09a6c8db0ef921ae63aaf881.jpg" },
