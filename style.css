@@ -840,3 +840,100 @@ button {
     width: auto;
     object-fit: contain;
 }
+
+/* ==========================================================================
+   CATEGORY PAGE (MENS KITS)
+   ========================================================================== */
+.category-page {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 30px auto 60px;
+    padding: 0 40px;
+}
+
+.breadcrumb {
+    font-size: 0.85rem;
+    color: var(--color-gray-dark);
+    margin-bottom: 20px;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    color: var(--color-black);
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb span {
+    font-weight: bold;
+    color: var(--color-black);
+}
+
+.category-header {
+    border-bottom: 2px solid var(--color-black);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.category-title {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.category-layout {
+    display: flex;
+    gap: 40px;
+}
+
+/* Sidebar Filter (25%) */
+.sidebar-filter {
+    flex: 0 0 25%;
+}
+
+.filter-group {
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--color-gray-border);
+    padding-bottom: 20px;
+}
+
+.filter-title {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.filter-list li {
+    margin-bottom: 10px;
+}
+
+.filter-list label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.filter-list input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--color-primary);
+}
+
+/* Product Grid (75%) */
+.category-product-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px 20px;
+}
+
+.category-product-grid .product-card {
+    flex: none; /* Xóa thuộc tính flex từ carousel */
+    width: 100%;
+}
+
