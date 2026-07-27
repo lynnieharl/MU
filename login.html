@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>Official Manchester United Online Store</title>
+    <title>Log In - Official Manchester United Online Store</title>
     <!-- Thư viện FontAwesome chứa icon thật -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Phải gọi đúng file style.css -->
@@ -12,7 +12,7 @@
 </head>
 <body>
 
-        <!-- ==========================================
+    <!-- ==========================================
          [PHẦN 1] HEADER & MEGA MENU (MỚI)
          ========================================== -->
     <header class="header-wave-bg">
@@ -48,15 +48,20 @@
                         <a href="login.html" class="header-icon-link">
                             <i class="fa-regular fa-user"></i>
                         </a>
-                        <div class="account-menu">
+                        <div class="account-dropdown-menu">
+                            <p class="account-menu-welcome">Welcome to United Store</p>
                             <a href="login.html" class="account-menu-link login-btn">Log In</a>
-                            <a href="register.html" class="account-menu-link">Create an account</a>
+                            <a href="register.html" class="account-menu-link register-btn">Create An Account</a>
+                            <hr class="account-menu-divider">
+                            <a href="account.html" class="account-menu-link"><i class="fa-regular fa-user"></i> My Account</a>
+                            <a href="track-order.html" class="account-menu-link"><i class="fa-solid fa-box"></i> Track Order</a>
+                            <a href="wishlist.html" class="account-menu-link"><i class="fa-regular fa-heart"></i> My Wishlist</a>
                         </div>
                     </div>
                     <a href="wishlist.html" class="header-icon-link">
                         <i class="fa-regular fa-heart"></i>
                     </a>
-                    <a href="cart.html" class="header-icon-link cart-icon-wrapper">
+                    <a href="cart.html" class="header-icon-link cart-icon-container">
                         <i class="fa-solid fa-bag-shopping"></i>
                         <span class="cart-badge">0</span>
                     </a>
@@ -64,169 +69,131 @@
             </div>
         </div>
 
-        <nav class="new-mega-nav">
+        <!-- Navigation Bar -->
+        <nav class="nav-bar">
             <ul class="nav-list">
-                <li class="nav-item"><a href="new-in.html" class="nav-link">New In</a></li>
-                <li class="nav-item has-mega-menu">
-                    <a href="kits.html" class="nav-link">Jerseys <span class="badge-new">New</span></a>
+                <li class="nav-item">
+                    <a href="kits.html" class="nav-link">Kits <i class="fa-solid fa-chevron-down"></i></a>
                     <div class="mega-menu-wrapper">
                         <div class="mega-menu-container">
                             <div class="mega-col">
-                                <h3>Home</h3>
+                                <h3>Home Kit 23/24</h3>
                                 <ul>
-                                    <li><a href="mens.html">Men</a></li>
-                                    <li><a href="womens.html">Women</a></li>
-                                    <li><a href="kids.html">Kids</a></li>
-                                    <li><a href="kids.html">Baby & Infant</a></li>
+                                    <li><a href="kits.html">Mens Home Kit</a></li>
+                                    <li><a href="kits.html">Womens Home Kit</a></li>
+                                    <li><a href="kits.html">Kids Home Kit</a></li>
+                                    <li><a href="kits.html">Home Shorts & Socks</a></li>
                                 </ul>
                             </div>
                             <div class="mega-col">
-                                <h3>Away <span class="badge-new">New</span></h3>
+                                <h3>Away & Third</h3>
                                 <ul>
-                                    <li><a href="mens.html">Men</a></li>
-                                    <li><a href="womens.html">Women</a></li>
-                                    <li><a href="kids.html">Kids</a></li>
-                                    <li><a href="kids.html">Baby & Infant</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Third</h3>
-                                <ul>
-                                    <li><a href="mens.html">Men</a></li>
-                                    <li><a href="womens.html">Women</a></li>
-                                    <li><a href="kids.html">Kids</a></li>
-                                    <li><a href="kids.html">Baby & Infant</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Goalkeeper</h3>
-                                <ul>
-                                    <li><a href="mens.html">Men</a></li>
-                                    <li><a href="womens.html">Women</a></li>
-                                    <li><a href="kids.html">Kids</a></li>
+                                    <li><a href="kits.html">Away Kit 23/24</a></li>
+                                    <li><a href="kits.html">Third Kit 23/24</a></li>
+                                    <li><a href="kits.html">Goalkeeper Kit</a></li>
                                 </ul>
                             </div>
                             <div class="mega-col">
                                 <h3>Shop By Player</h3>
                                 <ul>
-                                    <li><a href="player.html">Men's team</a></li>
-                                    <li><a href="player.html">Women's Team</a></li>
-                                    <li><a href="player.html">Player Printed Jerseys</a></li>
+                                    <li><a href="kits.html">7 - Mount</a></li>
+                                    <li><a href="kits.html">8 - Bruno Fernandes</a></li>
+                                    <li><a href="kits.html">10 - Rashford</a></li>
+                                    <li><a href="kits.html">11 - Hojlund</a></li>
+                                    <li><a href="kits.html">17 - Garnacho</a></li>
                                 </ul>
+                            </div>
+                            <div class="mega-col mega-banner">
+                                <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=300&q=80" alt="New Kit Banner">
+                                <span>NEW SEASON 23/24</span>
+                                <a href="kits.html" class="btn-mega">SHOP NOW</a>
                             </div>
                         </div>
                     </div>
                 </li>
-                <li class="nav-item"><a href="training.html" class="nav-link">Trainingwear</a></li>
-                <li class="nav-item has-mega-menu">
-                    <a href="mens.html" class="nav-link">Fashion <span class="badge-new">New</span></a>
+                <li class="nav-item">
+                    <a href="training.html" class="nav-link">Training <i class="fa-solid fa-chevron-down"></i></a>
                     <div class="mega-menu-wrapper">
                         <div class="mega-menu-container">
                             <div class="mega-col">
-                                <h3>Men</h3>
+                                <h3>Training Wear</h3>
                                 <ul>
-                                    <li><a href="mens.html">Tops</a></li>
-                                    <li><a href="mens.html">Jackets & coats</a></li>
-                                    <li><a href="mens.html">Trousers & shorts</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Women</h3>
-                                <ul>
-                                    <li><a href="womens.html">Tops</a></li>
-                                    <li><a href="womens.html">Jackets & coats</a></li>
-                                    <li><a href="womens.html">Trousers & shorts</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Kids</h3>
-                                <ul>
-                                    <li><a href="kids.html">Tops</a></li>
-                                    <li><a href="kids.html">Jacket & Coat</a></li>
-                                    <li><a href="kids.html">Trousers & Shorts</a></li>
+                                    <li><a href="training.html">Training Tops</a></li>
+                                    <li><a href="training.html">Training Pants & Shorts</a></li>
+                                    <li><a href="training.html">Warm Up Jackets</a></li>
                                 </ul>
                             </div>
                             <div class="mega-col">
                                 <h3>Collections</h3>
                                 <ul>
-                                    <li><a href="training.html">Trainingwear</a></li>
-                                    <li><a href="training.html">Pre Match</a></li>
-                                    <li><a href="training.html">Anthem Jackets</a></li>
+                                    <li><a href="training.html">adidas Teambase</a></li>
+                                    <li><a href="training.html">European Training</a></li>
+                                    <li><a href="training.html">Pre-Match</a></li>
                                 </ul>
+                            </div>
+                            <div class="mega-col mega-banner">
+                                <img src="https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=300&q=80" alt="Training Banner">
+                                <span>TRAINING COLLECTION</span>
+                                <a href="training.html" class="btn-mega">SHOP NOW</a>
                             </div>
                         </div>
                     </div>
                 </li>
-                <li class="nav-item has-mega-menu">
-                    <a href="souvenirs.html" class="nav-link">Accessories</a>
+                <li class="nav-item">
+                    <a href="fashion.html" class="nav-link">Fashion <i class="fa-solid fa-chevron-down"></i></a>
                     <div class="mega-menu-wrapper">
                         <div class="mega-menu-container">
                             <div class="mega-col">
-                                <h3>Accessories</h3>
+                                <h3>Mens Fashion</h3>
                                 <ul>
-                                    <li><a href="souvenirs.html">Headwear</a></li>
-                                    <li><a href="souvenirs.html">Watches</a></li>
-                                    <li><a href="souvenirs.html">Keyrings</a></li>
+                                    <li><a href="fashion.html">T-Shirts & Polos</a></li>
+                                    <li><a href="fashion.html">Hoodies & Sweatshirts</a></li>
+                                    <li><a href="fashion.html">Jackets & Coats</a></li>
                                 </ul>
                             </div>
                             <div class="mega-col">
-                                <h3>Souvenirs</h3>
+                                <h3>Womens & Kids</h3>
                                 <ul>
-                                    <li><a href="souvenirs.html">Flags & Pennants</a></li>
-                                    <li><a href="souvenirs.html">Badges & Pins</a></li>
-                                    <li><a href="souvenirs.html">Mugs & Glasses</a></li>
+                                    <li><a href="fashion.html">Womens Fashion</a></li>
+                                    <li><a href="fashion.html">Kids Fashion</a></li>
+                                    <li><a href="fashion.html">Baby & Toddler</a></li>
                                 </ul>
                             </div>
                             <div class="mega-col">
-                                <h3>Homeware</h3>
+                                <h3>Headwear</h3>
                                 <ul>
-                                    <li><a href="souvenirs.html">Bedroom</a></li>
-                                    <li><a href="souvenirs.html">Bathroom</a></li>
-                                    <li><a href="souvenirs.html">Kitchen</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Kids</h3>
-                                <ul>
-                                    <li><a href="kids.html">Toys & Games</a></li>
-                                    <li><a href="kids.html">School Supplies</a></li>
-                                    <li><a href="kids.html">Soft Toys</a></li>
+                                    <li><a href="fashion.html">Caps & Hats</a></li>
+                                    <li><a href="fashion.html">Beanies</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </li>
-                <li class="nav-item has-mega-menu">
-                    <a href="gifts.html" class="nav-link">Gifts</a>
+                <li class="nav-item">
+                    <a href="retro.html" class="nav-link">Retro <i class="fa-solid fa-chevron-down"></i></a>
                     <div class="mega-menu-wrapper">
                         <div class="mega-menu-container">
                             <div class="mega-col">
-                                <h3>By Recipient</h3>
+                                <h3>Classic Kits</h3>
                                 <ul>
-                                    <li><a href="gifts.html">Gifts for Him</a></li>
-                                    <li><a href="gifts.html">Gifts for Her</a></li>
-                                    <li><a href="gifts.html">Gifts for Kids</a></li>
+                                    <li><a href="retro.html">1999 Treble Winners</a></li>
+                                    <li><a href="retro.html">1990-1992 Era</a></li>
+                                    <li><a href="retro.html">1980s Classics</a></li>
+                                    <li><a href="retro.html">1968 European Cup</a></li>
                                 </ul>
                             </div>
                             <div class="mega-col">
-                                <h3>Accessories</h3>
+                                <h3>Retro Collections</h3>
                                 <ul>
-                                    <li><a href="gifts.html">Wallets</a></li>
-                                    <li><a href="gifts.html">Bags</a></li>
-                                    <li><a href="gifts.html">Scarves</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h3>By Price</h3>
-                                <ul>
-                                    <li><a href="gifts.html">Under $25</a></li>
-                                    <li><a href="gifts.html">Under $50</a></li>
-                                    <li><a href="gifts.html">Under $100</a></li>
+                                    <li><a href="retro.html">Retro Track Jackets</a></li>
+                                    <li><a href="retro.html">Heritage T-Shirts</a></li>
+                                    <li><a href="retro.html">Scarf & Accessories</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </li>
+                <li class="nav-item"><a href="gifts.html" class="nav-link">Gifts</a></li>
                 <li class="nav-item"><a href="auctions.html" class="nav-link">Auctions</a></li>
                 <li class="nav-item"><a href="sale.html" class="nav-link" style="color: #ffb3b3;">Outlet</a></li>
             </ul>
@@ -243,59 +210,57 @@
         </div>
     </div>
 
-    
     <!-- ==========================================
-         [PHẦN MAIN] NEW LOGIN PAGE (SSO)
+         [PHẦN MAIN] PREMIUM DYNAMIC LOGIN PORTAL
          ========================================== -->
     <main class="sso-auth-page">
         <div class="sso-container">
-            <img src="images/mu-logo.png" alt="MU Logo" class="sso-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png'">
+            <img src="images/0_Manchester_United_FC_crest.svg" alt="Manchester United Logo" class="sso-logo">
             
-            <h1 class="sso-title">Log In</h1>
-            <p class="sso-subtitle">Don't have an account? <a href="register.html">Create an account</a></p>
+            <h1 class="sso-title">Welcome Back</h1>
+            <p class="sso-subtitle">Don't have an account yet? <a href="register.html">Create an account</a></p>
             
-            <form id="login-form" class="sso-form">
+            <div id="login-alert" class="auth-alert-box">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span id="login-alert-text"></span>
+            </div>
+
+            <form id="login-form" class="sso-form" novalidate>
                 <div class="sso-input-wrapper">
-                    <input type="text" id="login-email" placeholder="Email or Supporter ID" class="sso-input" required>
+                    <label class="sso-label" for="login-email">Email Address</label>
+                    <div class="sso-input-box">
+                        <input type="email" id="login-email" placeholder="Enter your email address" class="sso-input" required autocomplete="email">
+                        <i class="fa-regular fa-envelope sso-input-icon"></i>
+                    </div>
                 </div>
                 
                 <div class="sso-input-wrapper">
-                    <input type="password" id="login-password" placeholder="Password" class="sso-input" required>
-                    <i class="fa-regular fa-eye-slash password-toggle"></i>
+                    <label class="sso-label" for="login-password">Password</label>
+                    <div class="sso-input-box">
+                        <input type="password" id="login-password" placeholder="Enter your password" class="sso-input" required autocomplete="current-password">
+                        <i class="fa-solid fa-lock sso-input-icon"></i>
+                        <i class="fa-regular fa-eye-slash password-toggle" id="toggle-login-pwd" title="Toggle password visibility"></i>
+                    </div>
                 </div>
                 
-                <button type="submit" class="sso-continue-btn">Continue</button>
+                <button type="submit" class="sso-continue-btn" id="login-submit-btn">
+                    <span id="login-btn-text">SIGN IN TO ACCOUNT</span>
+                    <div id="login-spinner" class="auth-spinner"></div>
+                </button>
                 
                 <div class="sso-links">
-                    <a href="#">Forgot password?</a>
-                    <a href="#">Forgot Supporter ID?</a>
+                    <a href="help.html">Forgot password?</a>
+                    <a href="help.html">Need help logging in?</a>
                 </div>
             </form>
 
-            <div class="sso-divider">
-                <span>Or</span>
-            </div>
-
-            <button class="sso-social-btn apple">
-                <i class="fa-brands fa-apple"></i>
-                Sign in with Apple
-            </button>
-            <button class="sso-social-btn google">
-                <i class="fa-brands fa-google"></i>
-                Sign in with Google
-            </button>
-            <button class="sso-social-btn facebook">
-                <i class="fa-brands fa-facebook"></i>
-                Sign in with Facebook
-            </button>
-
             <div class="sso-help">
-                Having trouble logging in? <a href="#">Get Help</a>
+                By signing in, you agree to United Store's <a href="terms.html">Terms of Use</a> & <a href="privacy.html">Privacy Policy</a>.
             </div>
         </div>
     </main>
 
-<!-- ==========================================
+    <!-- ==========================================
          [PHẦN 4] NEWSLETTER & FOOTER
          ========================================== -->
     <footer class="site-footer">
@@ -371,32 +336,92 @@
     </footer>
 
     <!-- Script JS -->
-    
-    <!-- SCRIPT XỬ LÝ SUPABASE ĐĂNG NHẬP -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="main.js"></script>
     <script>
         const _supabaseUrl = 'https://suabbqtrggzwgchksenq.supabase.co';
         const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
         
         let supabase = null;
-        if (_supabaseUrl && _supabaseKey) {
+        if (window.supabase && _supabaseUrl && _supabaseKey) {
             supabase = window.supabase.createClient(_supabaseUrl, _supabaseKey);
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        function showLoginAlert(msg, type = 'error') {
+            const alertBox = document.getElementById('login-alert');
+            const alertText = document.getElementById('login-alert-text');
+            if (!alertBox || !alertText) return;
+            alertBox.className = 'auth-alert-box ' + type;
+            alertBox.style.display = 'flex';
+            alertText.textContent = msg;
+            if (type === 'error') {
+                alertBox.querySelector('i').className = 'fa-solid fa-circle-exclamation';
+            } else {
+                alertBox.querySelector('i').className = 'fa-solid fa-circle-check';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Password toggle logic
+            const togglePwd = document.getElementById('toggle-login-pwd');
+            const pwdInput = document.getElementById('login-password');
+            if (togglePwd && pwdInput) {
+                togglePwd.addEventListener('click', () => {
+                    if (pwdInput.type === 'password') {
+                        pwdInput.type = 'text';
+                        togglePwd.classList.remove('fa-eye-slash');
+                        togglePwd.classList.add('fa-eye');
+                    } else {
+                        pwdInput.type = 'password';
+                        togglePwd.classList.remove('fa-eye');
+                        togglePwd.classList.add('fa-eye-slash');
+                    }
+                });
+            }
+
+            // Check existing session
+            if (supabase) {
+                try {
+                    const { data: { session } } = await supabase.auth.getSession();
+                    if (session && session.user) {
+                        showLoginAlert(`You are already logged in as ${session.user.email}. Redirecting...`, 'success');
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 1500);
+                        return;
+                    }
+                } catch (e) {
+                    console.error('Session check error:', e);
+                }
+            }
+
+            // Login form submit
             const form = document.getElementById('login-form');
             if (form) {
                 form.addEventListener('submit', async (e) => {
                     e.preventDefault();
-                    if (!supabase) return alert('Chưa kết nối Supabase!');
+                    if (!supabase) {
+                        showLoginAlert('Unable to connect to authentication server. Please try again later.');
+                        return;
+                    }
 
-                    const email = document.getElementById('login-email').value;
+                    const email = document.getElementById('login-email').value.trim();
                     const pass = document.getElementById('login-password').value;
                     
-                    const btn = form.querySelector('button[type="submit"]');
-                    const originalText = btn.innerHTML;
-                    btn.innerHTML = 'Đang xử lý...';
-                    btn.disabled = true;
+                    if (!email || !pass) {
+                        showLoginAlert('Please enter both email and password.');
+                        return;
+                    }
+
+                    const btn = document.getElementById('login-submit-btn');
+                    const btnText = document.getElementById('login-btn-text');
+                    const spinner = document.getElementById('login-spinner');
+                    const alertBox = document.getElementById('login-alert');
+
+                    if (alertBox) alertBox.style.display = 'none';
+                    if (btn) btn.disabled = true;
+                    if (btnText) btnText.textContent = 'AUTHENTICATING...';
+                    if (spinner) spinner.style.display = 'inline-block';
 
                     try {
                         const { data, error } = await supabase.auth.signInWithPassword({
@@ -406,29 +431,42 @@
 
                         if (error) throw error;
                         
+                        showLoginAlert('Login successful! Welcome back to United Store.', 'success');
+
                         // Check role for redirection
-                        const { data: userData } = await supabase.from('users').select('role').eq('email', email).single();
-                        
-                        let role = userData ? userData.role : 'user';
-                        
-                        // Redirect based on role
-                        if (role === 'admin') {
-                            window.location.href = 'admin-dashboard.html';
-                        } else {
-                            window.location.href = 'index.html'; 
+                        let role = 'user';
+                        try {
+                            const { data: userData } = await supabase.from('users').select('role').eq('email', email).single();
+                            if (userData && userData.role) role = userData.role;
+                        } catch (dbErr) {
+                            console.warn('Could not fetch role, defaulting to user:', dbErr);
                         }
+                        
+                        setTimeout(() => {
+                            if (role === 'admin') {
+                                window.location.href = 'admin-dashboard.html';
+                            } else {
+                                window.location.href = 'index.html'; 
+                            }
+                        }, 1000);
 
                     } catch (err) {
-                        console.error('Lỗi đăng nhập:', err);
-                        alert('Sai email hoặc mật khẩu! Vui lòng thử lại.');
+                        console.error('Login error:', err);
+                        let errMsg = 'Invalid email or password. Please try again.';
+                        if (err.message && err.message.includes('Invalid login credentials')) {
+                            errMsg = 'Invalid email or password. Please check your credentials.';
+                        } else if (err.message) {
+                            errMsg = err.message;
+                        }
+                        showLoginAlert(errMsg, 'error');
                     } finally {
-                        btn.innerHTML = originalText;
-                        btn.disabled = false;
+                        if (btn) btn.disabled = false;
+                        if (btnText) btnText.textContent = 'SIGN IN TO ACCOUNT';
+                        if (spinner) spinner.style.display = 'none';
                     }
                 });
             }
         });
     </script>
-    <script src="main.js"></script>
-
-
+</body>
+</html>

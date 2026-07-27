@@ -245,106 +245,69 @@
 
     
     <!-- ==========================================
-         [PHẦN MAIN] NEW REGISTER PAGE (SSO)
+         [PHẦN MAIN] PREMIUM DYNAMIC REGISTER PORTAL
          ========================================== -->
     <main class="sso-auth-page">
-        <div class="sso-container" style="max-width: 500px;">
-            <img src="images/mu-logo.png" alt="MU Logo" class="sso-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png'">
+        <div class="sso-container" style="max-width: 550px;">
+            <img src="images/0_Manchester_United_FC_crest.svg" alt="Manchester United Logo" class="sso-logo">
             
-            <h1 class="sso-title">Create An Account</h1>
-            <p class="sso-subtitle" style="text-align: center; margin-bottom: 10px;">Join for FREE and become part of United's global fan community to enjoy exclusive content, perks & rewards.</p>
-            <p class="sso-subtitle" style="text-align: center;">Already a member? <a href="login.html">Log In</a></p>
+            <h1 class="sso-title">Join United Store</h1>
+            <p class="sso-subtitle">Become part of Manchester United's official global family today.<br>Already a member? <a href="login.html">Log In</a></p>
             
-            <form id="register-form">
-                
-                <div class="sso-input-wrapper">
-                    <label class="sso-label">First Name</label>
-                    <input type="text" class="sso-input" required>
-                </div>
-                
-                <div class="sso-input-wrapper">
-                    <label class="sso-label">Surname</label>
-                    <input type="text" class="sso-input" required>
-                </div>
+            <div class="auth-perks-row">
+                <div class="perk-pill"><i class="fa-solid fa-bolt"></i> Instant Club Access</div>
+                <div class="perk-pill"><i class="fa-solid fa-gift"></i> Member Discounts</div>
+                <div class="perk-pill"><i class="fa-solid fa-shield-halved"></i> Official Rewards</div>
+            </div>
 
-                <div class="sso-input-wrapper">
-                    <label class="sso-label">Email Address</label>
-                    <input type="email" id="register-email" class="sso-input" required>
-                </div>
+            <div id="register-alert" class="auth-alert-box">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span id="register-alert-text"></span>
+            </div>
 
+            <form id="register-form" class="sso-form" novalidate>
                 <div class="sso-input-wrapper">
-                    <label class="sso-label">Confirm Email Address</label>
-                    <input type="email" class="sso-input" required>
-                </div>
-                
-                <div class="sso-input-wrapper">
-                    <label class="sso-label">Password</label>
-                    <input type="password" id="register-password" class="sso-input" required>
-                    <i class="fa-regular fa-eye-slash password-toggle"></i>
-                </div>
-
-                <div class="sso-input-wrapper">
-                    <label class="sso-label">Confirm Password</label>
-                    <input type="password" class="sso-input" required>
-                    <i class="fa-regular fa-eye-slash password-toggle"></i>
-                </div>
-
-                <div class="sso-input-wrapper">
-                    <label class="sso-label">Country</label>
-                    <select class="sso-input" required>
-                        <option value="">Country</option>
-                        <option value="GB">United Kingdom</option>
-                        <option value="VN">Vietnam</option>
-                        <option value="US">United States</option>
-                    </select>
-                </div>
-
-                <div class="sso-input-wrapper">
-                    <label class="sso-label">Date of Birth</label>
-                    <div class="sso-row">
-                        <select class="sso-input" style="padding: 15px 10px;" required>
-                            <option value="">Day</option>
-                            <option value="01">1</option>
-                            <option value="15">15</option>
-                            <option value="31">31</option>
-                        </select>
-                        <select class="sso-input" style="padding: 15px 10px;" required>
-                            <option value="">Month</option>
-                            <option value="01">Jan</option>
-                            <option value="06">Jun</option>
-                            <option value="12">Dec</option>
-                        </select>
-                        <select class="sso-input" style="padding: 15px 10px;" required>
-                            <option value="">Year</option>
-                            <option value="2000">2000</option>
-                            <option value="1999">1999</option>
-                            <option value="1990">1990</option>
-                        </select>
+                    <label class="sso-label" for="register-name">Full Name</label>
+                    <div class="sso-input-box">
+                        <input type="text" id="register-name" placeholder="Enter your full name" class="sso-input" required autocomplete="name">
+                        <i class="fa-regular fa-user sso-input-icon"></i>
                     </div>
                 </div>
 
-                <div class="sso-input-wrapper" style="margin-top: 15px;">
-                    <p class="sso-info-text"><strong>After login, you will have access United Store, Ticketing, MUTV, manutd.com, and official app experiences.</strong></p>
-                    <p class="sso-info-text">We want you to be the first to know about New Signings, Competitions, Club News, Ticket Availability and occasional offers from official sponsors and partners. To stay updated, select YES: *</p>
-                    <div class="sso-radio-group">
-                        <label class="sso-radio-label">
-                            <input type="radio" name="marketing" value="yes" required> Yes
-                        </label>
-                        <label class="sso-radio-label">
-                            <input type="radio" name="marketing" value="no" required> No
-                        </label>
+                <div class="sso-input-wrapper">
+                    <label class="sso-label" for="register-email">Email Address</label>
+                    <div class="sso-input-box">
+                        <input type="email" id="register-email" placeholder="Enter your email address" class="sso-input" required autocomplete="email">
+                        <i class="fa-regular fa-envelope sso-input-icon"></i>
                     </div>
                 </div>
                 
-                <p class="sso-info-text">You can change your preferences or unsubscribe at any time in your Preference Centre.</p>
-                <p class="sso-info-text">If you are under 16 years old you must obtain consent from your parent or legal guardian to continue</p>
-                <p class="sso-info-text">By signing up, you agree to <a href="#">Manchester United (“MU”) Group</a> using your personal data in accordance with our <a href="#">Privacy Policy</a>.</p>
+                <div class="sso-input-wrapper">
+                    <label class="sso-label" for="register-password">Password (Min. 6 characters)</label>
+                    <div class="sso-input-box">
+                        <input type="password" id="register-password" placeholder="Create a secure password" class="sso-input" required autocomplete="new-password">
+                        <i class="fa-solid fa-lock sso-input-icon"></i>
+                        <i class="fa-regular fa-eye-slash password-toggle" id="toggle-reg-pwd" title="Toggle password visibility"></i>
+                    </div>
+                </div>
 
-                <button type="submit" class="sso-continue-btn" style="background-color: #c70101;">Create Account</button>
+                <div class="sso-input-wrapper">
+                    <label class="sso-label" for="register-confirm-password">Confirm Password</label>
+                    <div class="sso-input-box">
+                        <input type="password" id="register-confirm-password" placeholder="Confirm your password" class="sso-input" required autocomplete="new-password">
+                        <i class="fa-solid fa-shield-cat sso-input-icon"></i>
+                        <i class="fa-regular fa-eye-slash password-toggle" id="toggle-reg-confirm-pwd" title="Toggle password visibility"></i>
+                    </div>
+                </div>
+                
+                <button type="submit" class="sso-continue-btn" id="register-submit-btn" style="margin-top: 15px;">
+                    <span id="register-btn-text">CREATE OFFICIAL ACCOUNT</span>
+                    <div id="register-spinner" class="auth-spinner"></div>
+                </button>
             </form>
             
             <div class="sso-help">
-                Having trouble logging in? <a href="#">Get Help</a>
+                By creating an account, you agree to Manchester United's <a href="terms.html">Terms of Use</a> and <a href="privacy.html">Privacy Policy</a>.
             </div>
         </div>
     </main>
@@ -426,44 +389,150 @@
 
     
     <!-- Script JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="main.js"></script>
-
-<!-- Nhúng Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-    const _supabaseUrl = 'https://suabbqtrggzwgchksenq.supabase.co';
-    const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
-    const supabase = window.supabase.createClient(_supabaseUrl, _supabaseKey);
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const registerForm = document.getElementById('register-form');
-        if (registerForm) {
-            registerForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = document.getElementById('register-email').value;
-                const password = document.getElementById('register-password').value;
-
-                if (password.length < 6) {
-                    alert('Mật khẩu phải từ 6 ký tự trở lên!');
-                    return;
-                }
-
-                try {
-                    const { error: authErr } = await supabase.auth.signUp({ email, password });
-                    if (authErr) throw authErr;
-
-                    const { error: dbErr } = await supabase.from('users').insert([{ email: email, role: 'user' }]);
-                    if (dbErr) throw dbErr;
-
-                    alert('Đăng ký tài khoản thành công!');
-                    registerForm.reset();
-                    window.location.href = 'login.html';
-                } catch (err) {
-                    alert('Lỗi đăng ký: ' + err.message);
-                }
-            });
+    <script>
+        const _supabaseUrl = 'https://suabbqtrggzwgchksenq.supabase.co';
+        const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
+        
+        let supabase = null;
+        if (window.supabase && _supabaseUrl && _supabaseKey) {
+            supabase = window.supabase.createClient(_supabaseUrl, _supabaseKey);
         }
-    });
-</script>
+
+        function showRegisterAlert(msg, type = 'error') {
+            const alertBox = document.getElementById('register-alert');
+            const alertText = document.getElementById('register-alert-text');
+            if (!alertBox || !alertText) return;
+            alertBox.className = 'auth-alert-box ' + type;
+            alertBox.style.display = 'flex';
+            alertText.textContent = msg;
+            if (type === 'error') {
+                alertBox.querySelector('i').className = 'fa-solid fa-circle-exclamation';
+            } else {
+                alertBox.querySelector('i').className = 'fa-solid fa-circle-check';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Password toggle logic
+            const togglePwd = document.getElementById('toggle-reg-pwd');
+            const pwdInput = document.getElementById('register-password');
+            if (togglePwd && pwdInput) {
+                togglePwd.addEventListener('click', () => {
+                    if (pwdInput.type === 'password') {
+                        pwdInput.type = 'text';
+                        togglePwd.classList.remove('fa-eye-slash');
+                        togglePwd.classList.add('fa-eye');
+                    } else {
+                        pwdInput.type = 'password';
+                        togglePwd.classList.remove('fa-eye');
+                        togglePwd.classList.add('fa-eye-slash');
+                    }
+                });
+            }
+
+            const toggleConfirmPwd = document.getElementById('toggle-reg-confirm-pwd');
+            const confirmPwdInput = document.getElementById('register-confirm-password');
+            if (toggleConfirmPwd && confirmPwdInput) {
+                toggleConfirmPwd.addEventListener('click', () => {
+                    if (confirmPwdInput.type === 'password') {
+                        confirmPwdInput.type = 'text';
+                        toggleConfirmPwd.classList.remove('fa-eye-slash');
+                        toggleConfirmPwd.classList.add('fa-eye');
+                    } else {
+                        confirmPwdInput.type = 'password';
+                        toggleConfirmPwd.classList.remove('fa-eye');
+                        toggleConfirmPwd.classList.add('fa-eye-slash');
+                    }
+                });
+            }
+
+            const registerForm = document.getElementById('register-form');
+            if (registerForm) {
+                registerForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    if (!supabase) {
+                        showRegisterAlert('Unable to connect to authentication server. Please try again later.');
+                        return;
+                    }
+
+                    const name = document.getElementById('register-name').value.trim();
+                    const email = document.getElementById('register-email').value.trim();
+                    const password = document.getElementById('register-password').value;
+                    const confirmPassword = document.getElementById('register-confirm-password').value;
+
+                    if (!name || !email || !password || !confirmPassword) {
+                        showRegisterAlert('Please fill in all required fields.');
+                        return;
+                    }
+
+                    if (password.length < 6) {
+                        showRegisterAlert('Password must be at least 6 characters long.');
+                        return;
+                    }
+
+                    if (password !== confirmPassword) {
+                        showRegisterAlert('Passwords do not match. Please re-enter your password.');
+                        return;
+                    }
+
+                    const btn = document.getElementById('register-submit-btn');
+                    const btnText = document.getElementById('register-btn-text');
+                    const spinner = document.getElementById('register-spinner');
+                    const alertBox = document.getElementById('register-alert');
+
+                    if (alertBox) alertBox.style.display = 'none';
+                    if (btn) btn.disabled = true;
+                    if (btnText) btnText.textContent = 'CREATING ACCOUNT...';
+                    if (spinner) spinner.style.display = 'inline-block';
+
+                    try {
+                        const { data: authData, error: authErr } = await supabase.auth.signUp({ 
+                            email: email, 
+                            password: password,
+                            options: {
+                                data: {
+                                    full_name: name
+                                }
+                            }
+                        });
+                        
+                        if (authErr) throw authErr;
+
+                        try {
+                            const { error: dbErr } = await supabase.from('users').insert([{ 
+                                email: email, 
+                                name: name, 
+                                role: 'user' 
+                            }]);
+                            if (dbErr) console.warn('Note: DB insert returned warning/error:', dbErr);
+                        } catch (dbEx) {
+                            console.warn('Could not insert into users table:', dbEx);
+                        }
+
+                        showRegisterAlert('Account created successfully! Redirecting to login...', 'success');
+                        registerForm.reset();
+                        
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 1800);
+
+                    } catch (err) {
+                        console.error('Registration error:', err);
+                        let errMsg = 'Registration failed: ' + err.message;
+                        if (err.message && err.message.includes('already registered')) {
+                            errMsg = 'This email address is already registered. Please Log In instead.';
+                        }
+                        showRegisterAlert(errMsg, 'error');
+                    } finally {
+                        if (btn) btn.disabled = false;
+                        if (btnText) btnText.textContent = 'CREATE OFFICIAL ACCOUNT';
+                        if (spinner) spinner.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
