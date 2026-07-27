@@ -494,11 +494,25 @@
 <script>
     const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    let supabaseClient = null;
+    if (window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
 
     document.addEventListener('DOMContentLoaded', async () => {
+        // Ngăn reload cho form newsletter
+        const newsletterForms = document.querySelectorAll('.newsletter-form');
+        newsletterForms.forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Cảm ơn bạn đã đăng ký bản tin!');
+                form.reset();
+            });
+        });
+
+        if (!supabaseClient) return;
         try {
-            const { data: { session } } = await supabase.auth.getSession();
+            const { data: { session } } = await supabaseClient.auth.getSession();
             const accountMenu = document.querySelector('.account-menu');
             
             if (session && accountMenu) {
@@ -516,7 +530,9 @@
 
     async function handleLogout(e) {
         e.preventDefault();
-        await supabase.auth.signOut();
+        if (supabaseClient) {
+            await supabaseClient.auth.signOut();
+        }
         window.location.reload();
     }
 </script>

@@ -451,27 +451,32 @@
                 registerForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
                     if (!supabase) {
-                        showRegisterAlert('Unable to connect to authentication server. Please try again later.');
+                        alert('Không thể kết nối đến máy chủ Supabase.');
                         return;
                     }
 
-                    const name = document.getElementById('register-name').value.trim();
+                    const nameInput = document.getElementById('register-name');
+                    const name = nameInput ? nameInput.value.trim() : '';
                     const email = document.getElementById('register-email').value.trim();
                     const password = document.getElementById('register-password').value;
-                    const confirmPassword = document.getElementById('register-confirm-password').value;
+                    const confirmInput = document.getElementById('register-confirm-password');
+                    const confirmPassword = confirmInput ? confirmInput.value : '';
 
-                    if (!name || !email || !password || !confirmPassword) {
-                        showRegisterAlert('Please fill in all required fields.');
+                    if (!email || !password) {
+                        alert('Vui lòng nhập email và mật khẩu!');
+                        showRegisterAlert('Vui lòng nhập email và mật khẩu!');
                         return;
                     }
 
                     if (password.length < 6) {
-                        showRegisterAlert('Password must be at least 6 characters long.');
+                        alert('Mật khẩu tối thiểu 6 ký tự!');
+                        showRegisterAlert('Mật khẩu tối thiểu 6 ký tự!');
                         return;
                     }
 
-                    if (password !== confirmPassword) {
-                        showRegisterAlert('Passwords do not match. Please re-enter your password.');
+                    if (confirmInput && password !== confirmPassword) {
+                        alert('Mật khẩu xác nhận không khớp!');
+                        showRegisterAlert('Mật khẩu xác nhận không khớp!');
                         return;
                     }
 
@@ -488,41 +493,30 @@
                     try {
                         const { data: authData, error: authErr } = await supabase.auth.signUp({ 
                             email: email, 
-                            password: password,
-                            options: {
-                                data: {
-                                    full_name: name
-                                }
-                            }
+                            password: password 
                         });
                         
                         if (authErr) throw authErr;
 
                         try {
-                            const { error: dbErr } = await supabase.from('users').insert([{ 
-                                email: email, 
-                                name: name, 
-                                role: 'user' 
-                            }]);
-                            if (dbErr) console.warn('Note: DB insert returned warning/error:', dbErr);
+                            await supabase.from('users').insert([{ email: email, role: 'user' }]);
                         } catch (dbEx) {
-                            console.warn('Could not insert into users table:', dbEx);
+                            console.warn('Lưu vào bảng users gặp lỗi/cảnh báo:', dbEx);
                         }
 
-                        showRegisterAlert('Account created successfully! Redirecting to login...', 'success');
+                        showRegisterAlert('Đăng ký thành công!', 'success');
+                        alert('Đăng ký thành công!');
                         registerForm.reset();
-                        
-                        setTimeout(() => {
-                            window.location.href = 'login.html';
-                        }, 1800);
+                        window.location.href = 'login.html';
 
                     } catch (err) {
                         console.error('Registration error:', err);
-                        let errMsg = 'Registration failed: ' + err.message;
+                        let errMsg = 'Lỗi đăng ký: ' + err.message;
                         if (err.message && err.message.includes('already registered')) {
-                            errMsg = 'This email address is already registered. Please Log In instead.';
+                            errMsg = 'Email này đã được đăng ký!';
                         }
                         showRegisterAlert(errMsg, 'error');
+                        alert(errMsg);
                     } finally {
                         if (btn) btn.disabled = false;
                         if (btnText) btnText.textContent = 'CREATE OFFICIAL ACCOUNT';

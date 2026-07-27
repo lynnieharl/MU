@@ -223,4 +223,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // ==========================================
+    // GLOBAL NEWSLETTER FORM LOGIC
+    // ==========================================
+    const newsletterForms = document.querySelectorAll('.newsletter-form');
+    newsletterForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Cảm ơn bạn đã đăng ký bản tin!');
+            this.reset();
+        });
+    });
 });
