@@ -374,10 +374,12 @@
     <script>
         const _supabaseUrl = 'https://suabbqtrggzwgchksenq.supabase.co';
         const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
-        
-        let supabase = null;
-        if (window.supabase && _supabaseUrl && _supabaseKey) {
-            supabase = window.supabase.createClient(_supabaseUrl, _supabaseKey);
+        let _supabaseInstance = null;
+        function getSupabaseClient() {
+            if (!_supabaseInstance && window.supabase && _supabaseUrl && _supabaseKey) {
+                _supabaseInstance = window.supabase.createClient(_supabaseUrl, _supabaseKey);
+            }
+            return _supabaseInstance;
         }
 
         function showLoginAlert(msg, type = 'error') {
@@ -395,6 +397,19 @@
         }
 
         document.addEventListener('DOMContentLoaded', async () => {
+            // Đảm bảo trang đăng nhập luôn trống và sạch sẽ để người dùng tự do nhập
+            const emailInputElem = document.getElementById('login-email');
+            const pwdInputElem = document.getElementById('login-password');
+            if (emailInputElem) emailInputElem.value = '';
+            if (pwdInputElem) pwdInputElem.value = '';
+
+            const supabase = getSupabaseClient();
+            if (supabase) {
+                try {
+                    await supabase.auth.signOut();
+                } catch(e) {}
+            }
+
             // Password toggle logic
             const togglePwd = document.getElementById('toggle-login-pwd');
             const pwdInput = document.getElementById('login-password');
@@ -412,29 +427,14 @@
                 });
             }
 
-            // Check existing session
-            if (supabase) {
-                try {
-                    const { data: { session } } = await supabase.auth.getSession();
-                    if (session && session.user) {
-                        showLoginAlert(`You are already logged in as ${session.user.email}. Redirecting...`, 'success');
-                        setTimeout(() => {
-                            window.location.href = 'index.html';
-                        }, 1500);
-                        return;
-                    }
-                } catch (e) {
-                    console.error('Session check error:', e);
-                }
-            }
-
             // Login form submit
             const form = document.getElementById('login-form');
             if (form) {
                 form.addEventListener('submit', async (e) => {
                     e.preventDefault();
-                    if (!supabase) {
-                        alert('Không thể kết nối đến máy chủ Supabase.');
+                    const client = getSupabaseClient();
+                    if (!client) {
+                        alert('Không thể kết nối đến máy chủ Supabase. Vui lòng thử lại!');
                         return;
                     }
 
@@ -458,7 +458,7 @@
                     if (spinner) spinner.style.display = 'inline-block';
 
                     try {
-                        const { data, error } = await supabase.auth.signInWithPassword({
+                        const { data, error } = await client.auth.signInWithPassword({
                             email: email,
                             password: password
                         });
@@ -471,7 +471,7 @@
                         // Check role for redirection
                         let role = 'user';
                         try {
-                            const { data: userData } = await supabase.from('users').select('role').eq('email', email).single();
+                            const { data: userData } = await client.from('users').select('role').eq('email', email).single();
                             if (userData && userData.role) role = userData.role;
                         } catch (dbErr) {
                             console.warn('Could not fetch role, defaulting to user:', dbErr);

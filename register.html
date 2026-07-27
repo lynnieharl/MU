@@ -392,10 +392,12 @@
     <script>
         const _supabaseUrl = 'https://suabbqtrggzwgchksenq.supabase.co';
         const _supabaseKey = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
-        
-        let supabase = null;
-        if (window.supabase && _supabaseUrl && _supabaseKey) {
-            supabase = window.supabase.createClient(_supabaseUrl, _supabaseKey);
+        let _supabaseInstance = null;
+        function getSupabaseClient() {
+            if (!_supabaseInstance && window.supabase && _supabaseUrl && _supabaseKey) {
+                _supabaseInstance = window.supabase.createClient(_supabaseUrl, _supabaseKey);
+            }
+            return _supabaseInstance;
         }
 
         function showRegisterAlert(msg, type = 'error') {
@@ -450,6 +452,7 @@
             if (registerForm) {
                 registerForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
+                    const supabase = getSupabaseClient();
                     if (!supabase) {
                         alert('Không thể kết nối đến máy chủ Supabase.');
                         return;
@@ -503,6 +506,11 @@
                         } catch (dbEx) {
                             console.warn('Lưu vào bảng users gặp lỗi/cảnh báo:', dbEx);
                         }
+
+                        // Đăng xuất ngay sau khi đăng ký để khi qua trang Login luôn trống và không bị phiên cũ cản trở
+                        try {
+                            await supabase.auth.signOut();
+                        } catch(soErr) {}
 
                         showRegisterAlert('Đăng ký thành công!', 'success');
                         alert('Đăng ký thành công!');
