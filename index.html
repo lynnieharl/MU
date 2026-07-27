@@ -518,9 +518,19 @@
             if (session && accountMenu) {
                 // Người dùng đã đăng nhập
                 const email = session.user.email;
+                let crmLink = '';
+                try {
+                    const { data: userData } = await supabaseClient.from('users').select('role').eq('email', email).single();
+                    if (userData && userData.role === 'admin') {
+                        crmLink = `<a href="admin-crm.html" class="account-menu-link" style="color: #d31145; font-weight: bold;"><i class="fa-solid fa-shield-halved" style="margin-right:6px;"></i> CRM Admin</a>`;
+                    }
+                } catch(e) {}
+
                 accountMenu.innerHTML = `
-                    <p style="padding: 10px 15px; color: #888; font-size: 13px; font-weight: bold;">${email}</p>
-                    <a href="#" class="account-menu-link" onclick="handleLogout(event)">Log Out</a>
+                    <p style="padding: 10px 15px; color: #888; font-size: 13px; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1);">${email}</p>
+                    ${crmLink}
+                    <a href="manage-products.html" class="account-menu-link" style="color: #f39c12; font-weight: 600;"><i class="fa-solid fa-boxes-stacked" style="margin-right:6px;"></i> Quản lý Sản phẩm</a>
+                    <a href="#" class="account-menu-link" onclick="handleLogout(event)"><i class="fa-solid fa-right-from-bracket" style="margin-right:6px;"></i> Log Out</a>
                 `;
             }
         } catch (err) {

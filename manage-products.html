@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Sản Phẩm (CRUD) | United Store</title>
+    <!-- Favicon & Fonts -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔴</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS dùng chung -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root {
+            --prd-bg: #0a0a0c;
+            --prd-card: rgba(22, 22, 26, 0.75);
+            --prd-border: rgba(255, 255, 255, 0.08);
+            --prd-accent: #d31145;
+            --prd-gold: #f39c12;
+            --prd-text-dim: #9aa0a6;
+        }
+
+        body {
+            background-color: var(--prd-bg);
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(211, 17, 69, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(243, 156, 18, 0.05) 0%, transparent 40%);
+        }
+
+        /* Loading Overlay Bảo Vệ */
+        #prd-guard-overlay {
+            position: fixed;
+            inset: 0;
+            background: #0a0a0c;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .guard-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid var(--prd-accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Navbar */
+        .prd-navbar {
+            background: rgba(15, 15, 18, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--prd-border);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .prd-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .prd-brand img { height: 40px; }
+        .prd-brand-title {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .prd-badge {
+            background: rgba(243, 156, 18, 0.2);
+            color: var(--prd-gold);
+            border: 1px solid rgba(243, 156, 18, 0.4);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .prd-nav-links { display: flex; align-items: center; gap: 25px; }
+        .prd-nav-link {
+            color: var(--prd-text-dim);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .prd-nav-link:hover, .prd-nav-link.active { color: #fff; }
+        .prd-nav-link.active { color: var(--prd-accent); }
+        
+        .prd-user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 6px 15px;
+            border-radius: 30px;
+            border: 1px solid var(--prd-border);
+        }
+        .prd-user-email { font-size: 13px; font-weight: 600; color: #e0e0e0; }
+        .btn-prd-logout {
+            background: transparent;
+            border: none;
+            color: #ff4d4d;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .btn-prd-logout:hover { background: rgba(255, 77, 77, 0.1); }
+
+        /* Main Container */
+        .prd-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 0 40px;
+            flex: 1;
+        }
+        .prd-page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: var(--prd-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--prd-border);
+            border-radius: 16px;
+            padding: 25px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .prd-title h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+        .prd-title p { color: var(--prd-text-dim); font-size: 14px; }
+        
+        .btn-create {
+            background: linear-gradient(135deg, #d31145, #9b0b31);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(211, 17, 69, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-create:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(211, 17, 69, 0.6);
+        }
+
+        /* Products Display Area */
+        .prd-panel {
+            background: var(--prd-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--prd-border);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--prd-border);
+        }
+        .panel-title {
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .panel-title i { color: var(--prd-accent); }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--prd-border);
+            border-radius: 8px;
+            padding: 8px 15px;
+            width: 320px;
+        }
+        .search-box i { color: #666; margin-right: 10px; font-size: 14px; }
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 14px;
+            width: 100%;
+            outline: none;
+        }
+
+        /* Table View */
+        .table-responsive { overflow-x: auto; }
+        .prd-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .prd-table th {
+            padding: 14px 18px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--prd-text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border-bottom: 1px solid var(--prd-border);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .prd-table td {
+            padding: 16px 18px;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: #e0e0e0;
+            vertical-align: middle;
+        }
+        .prd-table tr:hover td { background: rgba(255, 255, 255, 0.02); }
+        
+        .prd-img-thumb {
+            width: 50px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--prd-border);
+            background: #111;
+        }
+        
+        .btn-action {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--prd-border);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-action:hover { background: rgba(255, 255, 255, 0.15); border-color: #fff; }
+        .btn-action.edit:hover { background: #3498db; border-color: #3498db; }
+        .btn-action.delete:hover { background: #ff4d4d; border-color: #ff4d4d; }
+
+        /* Modal CRUD Form */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-box {
+            background: #16161a;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 520px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-box { transform: translateY(0); }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--prd-border);
+        }
+        .modal-title { font-size: 20px; font-weight: 700; color: #fff; }
+        .btn-close-modal {
+            background: transparent;
+            border: none;
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .btn-close-modal:hover { color: #fff; }
+
+        .form-group { margin-bottom: 18px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--prd-text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--prd-border);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--prd-accent);
+        }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        .btn-cancel {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-cancel:hover { background: rgba(255, 255, 255, 0.15); }
+        .btn-submit-form {
+            background: var(--prd-accent);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-submit-form:hover { background: #b80d3b; }
+
+        /* Guide Box for Table Missing */
+        .guide-box {
+            background: rgba(243, 156, 18, 0.1);
+            border: 1px dashed var(--prd-gold);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 15px;
+            text-align: left;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        /* Footer */
+        .prd-footer {
+            border-top: 1px solid var(--prd-border);
+            padding: 25px 40px;
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .prd-navbar { padding: 15px 20px; flex-direction: column; gap: 15px; }
+            .prd-container { padding: 0 20px; }
+            .prd-page-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .search-box { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MÀN HÌNH CHẶN & KIỂM TRA PHIÊN (GUARD OVERLAY) -->
+    <div id="prd-guard-overlay">
+        <div class="guard-spinner"></div>
+        <h2 style="font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px;">ĐANG KIỂM TRA PHIÊN ĐĂNG NHẬP...</h2>
+        <p style="color: #888; font-size: 14px;">Hệ thống Quản lý Sản phẩm United Store</p>
+    </div>
+
+    <!-- THANH ĐIỀU HƯỚNG -->
+    <nav class="prd-navbar">
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <a href="index.html" class="prd-brand">
+                <img src="images/logo-mu.png" alt="United Store" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg'">
+                <span class="prd-brand-title">UNITED STORE</span>
+            </a>
+            <span class="prd-badge"><i class="fa-solid fa-users-gear"></i> SHARED PRODUCT MANAGER</span>
+        </div>
+
+        <div class="prd-nav-links">
+            <a href="index.html" class="prd-nav-link"><i class="fa-solid fa-house"></i> Trang Chủ</a>
+            <a href="admin-crm.html" class="prd-nav-link"><i class="fa-solid fa-chart-line"></i> Dashboard CRM</a>
+            <a href="manage-products.html" class="prd-nav-link active"><i class="fa-solid fa-boxes-stacked"></i> Quản Lý Sản Phẩm</a>
+        </div>
+
+        <div class="prd-user-info">
+            <i class="fa-solid fa-circle-user" style="color: var(--prd-accent);"></i>
+            <span class="prd-user-email" id="prd-user-display-email">user...</span>
+            <button class="btn-prd-logout" onclick="handlePrdLogout(event)" title="Đăng xuất">
+                <i class="fa-solid fa-right-from-bracket"></i> Log Out
+            </button>
+        </div>
+    </nav>
+
+    <!-- NỘI DUNG CHÍNH -->
+    <main class="prd-container">
+        <div class="prd-page-header">
+            <div class="prd-title">
+                <h1>QUẢN LÝ DANH SÁCH SẢN PHẨM (CRUD)</h1>
+                <p>Cho phép Admin và các User đã đăng nhập thêm mới, cập nhật hoặc xóa sản phẩm khỏi kho hàng.</p>
+            </div>
+            <div>
+                <button class="btn-create" onclick="openCreateModal()">
+                    <i class="fa-solid fa-plus"></i> Thêm Sản Phẩm Mới
+                </button>
+            </div>
+        </div>
+
+        <!-- BẢNG DANH SÁCH SẢN PHẨM -->
+        <section class="prd-panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <i class="fa-solid fa-boxes-packing"></i> Kho Hàng Trực Tuyến (Products Table)
+                </div>
+                <form class="search-box" onsubmit="handleProductSearch(event)">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="prd-search-input" placeholder="Tìm kiếm theo tên hoặc mô tả...">
+                </form>
+            </div>
+
+            <div class="table-responsive">
+                <table class="prd-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 70px;">Ảnh</th>
+                            <th style="width: 80px;">ID</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Giá Bán</th>
+                            <th>Mô Tả Chi Tiết</th>
+                            <th style="text-align: right; width: 180px;">Thao Tác (CRUD)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-table-body">
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 30px; color: #888;">Đang truy vấn bảng products từ Supabase...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL FORM THÊM / SỬA SẢN PHẨM -->
+    <div id="product-modal-overlay" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-form-title">Thêm Sản Phẩm Mới</h3>
+                <button class="btn-close-modal" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <form id="product-form" onsubmit="handleSaveProduct(event)">
+                <input type="hidden" id="prd-edit-id" value="">
+                
+                <div class="form-group">
+                    <label for="prd-name">Tên Sản Phẩm *</label>
+                    <input type="text" id="prd-name" placeholder="VD: Áo Đấu Man Utd Home 2026..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="prd-price">Giá Bán (VNĐ) *</label>
+                    <input type="number" id="prd-price" placeholder="VD: 2500000" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="prd-image">Link Hình Ảnh (URL)</label>
+                    <input type="text" id="prd-image" placeholder="https://... (để trống sẽ dùng ảnh mặc định)">
+                </div>
+
+                <div class="form-group">
+                    <label for="prd-desc">Mô Tả Sản Phẩm</label>
+                    <textarea id="prd-desc" placeholder="Nhập mô tả chi tiết sản phẩm, chất liệu, mùa giải..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeProductModal()">Hủy Bỏ</button>
+                    <button type="submit" class="btn-submit-form" id="btn-save-prd">
+                        <i class="fa-solid fa-floppy-disk"></i> Lưu Sản Phẩm
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="prd-footer">
+        <p>© 2026 Manchester United Official Store. Product Management Module (Shared RBAC Access).</p>
+    </footer>
+
+    <!-- SUPABASE & SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
+        let supabaseClient = null;
+        if (window.supabase) {
+            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        }
+
+        let allProductsData = [];
+        const DEFAULT_IMG = 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!supabaseClient) {
+                alert('Lỗi khởi tạo máy chủ Supabase!');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                // 1. KIỂM TRA ĐĂNG NHẬP (BẮT BUỘC ĐÃ LOG IN MỚI ĐƯỢC VÀO TRANG)
+                const { data: { session }, error: sessErr } = await supabaseClient.auth.getSession();
+                if (sessErr || !session || !session.user) {
+                    alert('Vui lòng đăng nhập để truy cập trang Quản Lý Sản Phẩm!');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // -> ĐÃ ĐĂNG NHẬP (ADMIN HOẶC USER ĐỀU ĐƯỢC THAO TÁC)
+                document.getElementById('prd-user-display-email').textContent = session.user.email;
+                
+                // Ẩn màn hình bảo vệ
+                const overlay = document.getElementById('prd-guard-overlay');
+                if (overlay) {
+                    overlay.style.opacity = '0';
+                    setTimeout(() => overlay.style.visibility = 'hidden', 400);
+                }
+
+                // 2. TẢI DANH SÁCH SẢN PHẨM (READ)
+                await loadProducts();
+
+            } catch (err) {
+                console.error('Lỗi kiểm tra quyền hạn Quản lý Sản phẩm:', err);
+                alert('Có lỗi xảy ra khi kiểm tra phiên đăng nhập: ' + err.message);
+                window.location.href = 'login.html';
+            }
+        });
+
+        // ==========================================
+        // 1. READ: TẢI DANH SÁCH SẢN PHẨM
+        // ==========================================
+        async function loadProducts() {
+            try {
+                const { data: products, error } = await supabaseClient
+                    .from('products')
+                    .select('*')
+                    .order('id', { ascending: false });
+
+                const tbody = document.getElementById('products-table-body');
+                if (!tbody) return;
+
+                if (error) {
+                    if (error.code === 'PGRST205') {
+                        // Bảng chưa tồn tại trên Supabase
+                        tbody.innerHTML = `
+                            <tr>
+                                <td colspan="6">
+                                    <div class="guide-box">
+                                        <h3 style="color: var(--prd-gold); margin-bottom: 10px; font-size: 16px;">
+                                            <i class="fa-solid fa-triangle-exclamation"></i> Bảng "products" chưa tồn tại trên máy chủ Supabase!
+                                        </h3>
+                                        <p style="margin-bottom: 10px;">Để hệ thống hoạt động, bạn hãy vào <b>Supabase Dashboard -> Table Editor -> Create Table</b> với cấu hình sau:</p>
+                                        <ul style="margin-left: 20px; margin-bottom: 15px; color: #ccc;">
+                                            <li><b>Name:</b> <code>products</code> (tắt Enable RLS hoặc thêm Policy cho All)</li>
+                                            <li><b>Columns:</b></li>
+                                            <ul>
+                                                <li><code>id</code> (int8 hoặc serial, Primary Key)</li>
+                                                <li><code>name</code> (text, Not Null)</li>
+                                                <li><code>price</code> (numeric hoặc int8, Default 0)</li>
+                                                <li><code>image_url</code> (text)</li>
+                                                <li><code>description</code> (text)</li>
+                                            </ul>
+                                        </ul>
+                                        <p>Sau khi tạo bảng xong, nhấn nút bên dưới để tải lại dữ liệu:</p>
+                                        <button class="btn-create" style="margin-top: 15px; padding: 8px 16px; font-size: 13px;" onclick="loadProducts()">
+                                            <i class="fa-solid fa-rotate-right"></i> Tải Lại Dữ Liệu
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
+                        return;
+                    }
+                    throw error;
+                }
+
+                allProductsData = products || [];
+                renderProductsTable(allProductsData);
+
+            } catch (ex) {
+                console.error('Lỗi truy vấn sản phẩm:', ex);
+                document.getElementById('products-table-body').innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 25px; color: #ff4d4d;">
+                            Lỗi tải dữ liệu sản phẩm: ${ex.message}
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        function renderProductsTable(list) {
+            const tbody = document.getElementById('products-table-body');
+            if (!tbody) return;
+
+            if (!list || list.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 40px; color: #888;">
+                            <i class="fa-solid fa-box-open" style="font-size: 32px; margin-bottom: 10px; display: block; color: #555;"></i>
+                            Chưa có sản phẩm nào trong kho. Hãy nhấn <b>"Thêm Sản Phẩm Mới"</b> để bắt đầu!
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = list.map(p => {
+                const imgUrl = p.image_url && p.image_url.trim() !== '' ? p.image_url : DEFAULT_IMG;
+                const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price || 0);
+                return `
+                    <tr>
+                        <td>
+                            <img src="${imgUrl}" alt="${p.name || ''}" class="prd-img-thumb" onerror="this.src='${DEFAULT_IMG}'">
+                        </td>
+                        <td style="font-weight: bold; color: #aaa;">#${p.id || '-'}</td>
+                        <td style="font-weight: 700; color: #fff; font-size: 15px;">${p.name || 'Sản phẩm không tên'}</td>
+                        <td style="color: var(--prd-gold); font-weight: 800; font-size: 15px;">${priceFormatted}</td>
+                        <td style="color: #aaa; max-width: 300px; line-height: 1.4;">${p.description || '<em style="color:#555;">Không có mô tả</em>'}</td>
+                        <td style="text-align: right;">
+                            <button class="btn-action edit" onclick="openEditModal(${p.id})" title="Chỉnh sửa sản phẩm">
+                                <i class="fa-solid fa-pen"></i> Sửa
+                            </button>
+                            <button class="btn-action delete" onclick="handleDeleteProduct(${p.id}, '${p.name ? p.name.replace(/'/g, "\\'") : ''}')" title="Xóa sản phẩm">
+                                <i class="fa-solid fa-trash"></i> Xóa
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // ==========================================
+        // 2. TÌM KIẾM SẢN PHẨM
+        // ==========================================
+        function handleProductSearch(e) {
+            e.preventDefault();
+            const keyword = document.getElementById('prd-search-input').value.trim().toLowerCase();
+            if (!keyword) {
+                renderProductsTable(allProductsData);
+                return;
+            }
+            const filtered = allProductsData.filter(p => 
+                (p.name && p.name.toLowerCase().includes(keyword)) || 
+                (p.description && p.description.toLowerCase().includes(keyword))
+            );
+            renderProductsTable(filtered);
+        }
+
+        // ==========================================
+        // 3. CREATE / UPDATE MODAL
+        // ==========================================
+        function openCreateModal() {
+            document.getElementById('modal-form-title').textContent = 'Thêm Sản Phẩm Mới';
+            document.getElementById('prd-edit-id').value = '';
+            document.getElementById('product-form').reset();
+            
+            const overlay = document.getElementById('product-modal-overlay');
+            overlay.classList.add('active');
+        }
+
+        function openEditModal(id) {
+            const prd = allProductsData.find(p => p.id === id);
+            if (!prd) {
+                alert('Không tìm thấy thông tin sản phẩm!');
+                return;
+            }
+
+            document.getElementById('modal-form-title').textContent = 'Chỉnh Sửa Sản Phẩm #' + id;
+            document.getElementById('prd-edit-id').value = prd.id;
+            document.getElementById('prd-name').value = prd.name || '';
+            document.getElementById('prd-price').value = prd.price || 0;
+            document.getElementById('prd-image').value = prd.image_url || '';
+            document.getElementById('prd-desc').value = prd.description || '';
+            
+            const overlay = document.getElementById('product-modal-overlay');
+            overlay.classList.add('active');
+        }
+
+        function closeProductModal() {
+            const overlay = document.getElementById('product-modal-overlay');
+            overlay.classList.remove('active');
+        }
+
+        async function handleSaveProduct(e) {
+            e.preventDefault();
+            
+            const editId = document.getElementById('prd-edit-id').value;
+            const name = document.getElementById('prd-name').value.trim();
+            const price = parseFloat(document.getElementById('prd-price').value) || 0;
+            const image_url = document.getElementById('prd-image').value.trim();
+            const description = document.getElementById('prd-desc').value.trim();
+
+            if (!name) {
+                alert('Vui lòng nhập tên sản phẩm!');
+                return;
+            }
+
+            const btnSave = document.getElementById('btn-save-prd');
+            const originalText = btnSave.innerHTML;
+            btnSave.disabled = true;
+            btnSave.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang Xử Lý...';
+
+            try {
+                if (!editId) {
+                    // CREATE: Thêm mới
+                    const { error } = await supabaseClient
+                        .from('products')
+                        .insert([{ name, price, image_url, description }]);
+
+                    if (error) throw error;
+                    alert('Đã thêm sản phẩm mới vào kho thành công!');
+                } else {
+                    // UPDATE: Cập nhật
+                    const { error } = await supabaseClient
+                        .from('products')
+                        .update({ name, price, image_url, description })
+                        .eq('id', parseInt(editId));
+
+                    if (error) throw error;
+                    alert(`Đã cập nhật thông tin sản phẩm #${editId} thành công!`);
+                }
+
+                closeProductModal();
+                await loadProducts();
+
+            } catch (err) {
+                console.error('Lỗi lưu sản phẩm:', err);
+                alert('Lỗi thao tác Supabase: ' + err.message);
+            } finally {
+                btnSave.disabled = false;
+                btnSave.innerHTML = originalText;
+            }
+        }
+
+        // ==========================================
+        // 4. DELETE: XÓA SẢN PHẨM
+        // ==========================================
+        async function handleDeleteProduct(id, name) {
+            if (!confirm(`Bạn có chắc muốn xóa sản phẩm "${name || '#' + id}" khỏi hệ thống không?\nHành động này không thể hoàn tác!`)) {
+                return;
+            }
+
+            try {
+                const { error } = await supabaseClient
+                    .from('products')
+                    .delete()
+                    .eq('id', id);
+
+                if (error) throw error;
+                alert('Đã xóa sản phẩm thành công!');
+                await loadProducts();
+
+            } catch (err) {
+                console.error('Lỗi xóa sản phẩm:', err);
+                alert('Lỗi xóa sản phẩm: ' + err.message);
+            }
+        }
+
+        async function handlePrdLogout(e) {
+            e.preventDefault();
+            if (supabaseClient) {
+                await supabaseClient.auth.signOut();
+            }
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
