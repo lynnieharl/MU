@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Phải gọi đúng file style.css -->
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -579,6 +580,8 @@
     opacity: 1;
   }
   .premium-modal-content {
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+
     background: #121212;
     border: 1px solid rgba(218, 2, 14, 0.3);
     border-radius: 16px;
@@ -619,6 +622,8 @@
     filter: drop-shadow(0 0 10px rgba(218, 2, 14, 0.5));
   }
   .premium-modal-header p {
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+
     font-size: 12px;
     color: #aaa;
     letter-spacing: 2px;
@@ -651,6 +656,8 @@
     box-shadow: 0 4px 10px rgba(218, 2, 14, 0.4);
   }
   .premium-input {
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+
     width: 100%;
     padding: 14px 15px;
     margin-bottom: 15px;
@@ -671,6 +678,8 @@
     color: #666;
   }
   .premium-submit-btn {
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+
     width: 100%;
     padding: 14px;
     background: linear-gradient(135deg, #da020e, #9e0008);
@@ -757,12 +766,15 @@ async function handlePopupLogin(e) {
     const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
     if (error) throw error;
     
-    // Lấy role từ bảng users
-    const { data: userRole } = await supabaseClient.from('users').select('role').eq('email', email).single();
+    // Lưu Session vào localStorage
+    if (data.session) {
+      await supabaseClient.auth.setSession(data.session);
+    }
     
-    alert('🎉 Đăng nhập thành công!');
     closeAuthModal();
-    location.reload(); // Reload lại trang để cập nhật Header Avatar
+    // Kiểm tra và cập nhật giao diện ngay lập tức mà không cần reload
+    await checkAuthState();
+    alert('🎉 Đăng nhập thành công!');
   } catch (err) {
     alert('Lỗi đăng nhập: ' + err.message);
   }
@@ -793,33 +805,45 @@ async function handlePopupRegister(e) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    setTimeout(async () => {
-        if (!window.supabaseClient) return;
-        const { data: { session } } = await window.supabaseClient.auth.getSession();
-        const btn = document.getElementById('user-account-btn');
-        if (session && btn) {
-            const email = session.user.email;
-            const { data: userData } = await window.supabaseClient.from('users').select('role').eq('email', email).single();
-            let role = userData ? userData.role : 'user';
-            
-            if (role === 'admin') {
-                btn.innerHTML = '<a href="admin-crm.html" title="Admin CRM"><img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" width="25"></a>';
-            } else {
-                btn.innerHTML = `
-                    <div style="position:relative;" class="dropdown-user" onmouseenter="document.getElementById('user-menu-drop').style.display='block'" onmouseleave="document.getElementById('user-menu-drop').style.display='none'">
-                        <img src="https://i.pinimg.com/originals/81/2f/78/812f78a2e1d7cf9d2eb05bcfb1b1c312.png" style="width:25px; border-radius:50%;" title="User Account">
-                        <div id="user-menu-drop" style="display:none; position:absolute; right:0; top:30px; background:#fff; color:#333; width:150px; padding:10px; box-shadow:0 5px 15px rgba(0,0,0,0.2); border-radius:4px; z-index:1000; font-size:14px; text-align:left;">
-                            <a href="manage-products.html" style="display:block; padding:8px; color:#333; text-decoration:none; border-bottom: 1px solid #eee;">Sản Phẩm</a>
-                            <a href="#" onclick="window.supabaseClient.auth.signOut(); window.location.reload();" style="display:block; padding:8px; color:#da020e; text-decoration:none;">Đăng xuất</a>
-                        </div>
-                    </div>
-                `;
-            }
-            btn.onclick = null;
-        }
-    }, 500);
-});
+async function checkAuthState() {
+  if (!supabaseClient) return;
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  const accountBtn = document.getElementById('user-account-btn');
+  
+  if (session) {
+    const email = session.user.email;
+    // Truy vấn role từ bảng users
+    const { data: userData } = await supabaseClient.from('users').select('role').eq('email', email).single();
+    const role = userData ? userData.role : 'user';
+    
+    // ĐÃ ĐĂNG NHẬP: Đổi nút Icon Account thành Avatar theo Role
+    if (role === 'admin') {
+      accountBtn.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" style="width: 28px; height: 28px; cursor: pointer;" title="Trang Admin CRM" onclick="window.location.href='admin-crm.html'">`;
+    } else if (role === 'staff') {
+      accountBtn.innerHTML = `<i class="fas fa-id-badge" style="font-size: 22px; color: #ffbe00;" title="Quản Lý Sản Phẩm" onclick="window.location.href='manage-products.html'">`;
+    } else {
+      // User thường
+      accountBtn.innerHTML = `<i class="fas fa-user-circle" style="font-size: 24px; color: #da020e;" title="${email} - Bấm để Đăng xuất" onclick="handleLogout()"></i>`;
+    }
+    // Remove inline onclick from container to not interfere with icons
+    accountBtn.onclick = null;
+  } else {
+    // CHƯA ĐĂNG NHẬP: Giữ nguyên icon mặc định mở Popup
+    accountBtn.innerHTML = `<i class="far fa-user" id="user-icon-img" style="font-size: 20px; color: #fff;"></i>`;
+    accountBtn.onclick = openAuthModal;
+  }
+}
+
+// Hàm Đăng xuất
+async function handleLogout() {
+  if (confirm('Bạn có muốn đăng xuất khỏi tài khoản?')) {
+    await supabaseClient.auth.signOut();
+    location.reload();
+  }
+}
+
+// Bắt sự kiện load trang
+document.addEventListener('DOMContentLoaded', checkAuthState);
 </script>
 </body>
 </html>
