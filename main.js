@@ -351,7 +351,7 @@ async function loadProducts() {
           <span class="store-card-badge-new">New</span> 
         </div> 
         <div class="store-card-info"> 
-          <div class="card-price">₫${formattedPrice}</div> 
+          <div class="card-price">${formattedPrice} ₫</div> 
           <h3 class="card-title">${item.name || 'Manchester United Jersey'}</h3> 
         </div> 
       </div>`;

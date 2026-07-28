@@ -504,11 +504,7 @@ button {
     width: 100%;
 }
 
-.carousel-track {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.4s ease-in-out;
-}
+
 
 .product-card {
     flex: 0 0 calc(25% - 15px); /* Hiển thị 4 cột */
@@ -3041,11 +3037,7 @@ details[open] .filter-group-title i {
   text-align: left !important;
 }
 
-.store-card-info .card-price {
-  font-size: 18px !important;
-  font-weight: 800 !important;
-  color: #000000 !important;
-}
+
 
 .store-card-info .card-title {
   font-size: 14px !important;
@@ -3077,4 +3069,31 @@ details[open] .filter-group-title i {
     .carousel-track .store-card-item {
         flex: 0 0 100%;
     }
+}
+
+
+/* PRICE STYLING REFACTOR */
+.store-card-info .card-price {
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  color: #d31145 !important;
+  text-decoration: none !important;
+  font-family: var(--font-primary), sans-serif !important;
+}
+
+/* CAROUSEL NATIVE SCROLL */
+.carousel-track {
+    overflow-x: auto !important;
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE/Edge */
+}
+.carousel-track::-webkit-scrollbar {
+    display: none !important;
+}
+.carousel-container {
+    overflow: visible !important;
 }
