@@ -197,7 +197,8 @@
                 }
 
                 // -> ĐÃ XÁC THỰC ADMIN THÀNH CÔNG!
-                document.getElementById('crm-user-display-email').textContent = email;
+                const userEl = document.getElementById('crm-user-email');
+                if (userEl) userEl.textContent = email;
                 
                 // Ẩn màn hình bảo vệ
                 const overlay = document.getElementById('crm-guard-overlay');

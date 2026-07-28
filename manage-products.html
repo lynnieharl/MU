@@ -257,7 +257,8 @@
                 }
 
                 // -> ĐÃ ĐĂNG NHẬP (ADMIN HOẶC USER ĐỀU ĐƯỢC THAO TÁC)
-                document.getElementById('prd-user-display-email').textContent = session.user.email;
+                const userEl = document.getElementById('prd-user-email');
+                if (userEl) userEl.textContent = session.user.email;
                 
                 // Ẩn màn hình bảo vệ
                 const overlay = document.getElementById('prd-guard-overlay');
