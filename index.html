@@ -10,7 +10,13 @@
     <!-- Phải gọi đúng file style.css -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
+  window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+</script>
 </head>
 <body>
 
@@ -451,11 +457,6 @@
 
 <!-- Nhúng Supabase JS & Logic Cập nhật Header -->
 <script>
-    const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
-const supabase = (window.supabase && window.supabase.createClient) 
-  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) 
-  : null;
 
     document.addEventListener('DOMContentLoaded', async () => {
         // Ngăn reload cho form newsletter
@@ -468,9 +469,9 @@ const supabase = (window.supabase && window.supabase.createClient)
             });
         });
 
-        if (!supabase) return;
+        if (!window.supabaseClient) return;
         try {
-            const { data: { session } } = await supabase.auth.getSession();
+            const { data: { session } } = await window.supabaseClient.auth.getSession();
             const accountMenu = document.querySelector('.account-menu');
             
             if (session && accountMenu) {
@@ -478,7 +479,7 @@ const supabase = (window.supabase && window.supabase.createClient)
                 const email = session.user.email;
                 let crmLink = '';
                 try {
-                    const { data: userData } = await supabase.from('users').select('role').eq('email', email).single();
+                    const { data: userData } = await window.supabaseClient.from('users').select('role').eq('email', email).single();
                     if (userData && userData.role === 'admin') {
                         crmLink = `<a href="admin-crm.html" class="account-menu-link" style="color: #d31145; font-weight: bold;"><i class="fa-solid fa-shield-halved" style="margin-right:6px;"></i> CRM Admin</a>`;
                     }
@@ -500,7 +501,7 @@ const supabase = (window.supabase && window.supabase.createClient)
     });
 
     async function fetchRealProducts() {
-        if (!supabase) return;
+        if (!window.supabaseClient) return;
         const track = document.getElementById('real-products-track');
         if (!track) return;
 
@@ -553,10 +554,10 @@ const supabase = (window.supabase && window.supabase.createClient)
     async function handleLogout(e) {
   if (e && e.preventDefault) e.preventDefault();
   if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
-    if (typeof supabase !== 'undefined') {
-        await supabase.auth.signOut();
-    } else if (typeof supabase !== 'undefined') {
-        await supabase.auth.signOut();
+    if (typeof window.supabaseClient !== 'undefined') {
+        await window.supabaseClient.auth.signOut();
+    } else if (typeof window.supabaseClient !== 'undefined') {
+        await window.supabaseClient.auth.signOut();
     }
     localStorage.clear();
     window.location.href = 'index.html';
@@ -777,11 +778,11 @@ async function handlePopupLogin(e) {
   const password = document.getElementById('pop-login-pass').value;
   
   try {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await window.supabaseClient.auth.signInWithPassword({ email, password });
     if (error) throw error;
     
     if (data.session) {
-      await supabase.auth.setSession(data.session);
+      await window.supabaseClient.auth.setSession(data.session);
     }
     
     closeAuthModal();
@@ -804,10 +805,10 @@ async function handlePopupRegister(e) {
   }
   
   try {
-    const { data, error } = await supabase.auth.signUp({ email, password });
+    const { data, error } = await window.supabaseClient.auth.signUp({ email, password });
     if (error) throw error;
     
-    await supabase.from('users').insert([{ email, role: 'user' }]);
+    await window.supabaseClient.from('users').insert([{ email, role: 'user' }]);
     
     alert('🎉 Đăng ký thành công! Hãy đăng nhập ngay.');
     switchAuthTab('login');
@@ -820,8 +821,8 @@ async function handlePopupRegister(e) {
 async function handleLogout(e) {
   if (e && e.preventDefault) e.preventDefault();
   if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
-    if (typeof supabase !== 'undefined') {
-        await supabase.auth.signOut();
+    if (typeof window.supabaseClient !== 'undefined') {
+        await window.supabaseClient.auth.signOut();
     }
     localStorage.clear();
     window.location.href = 'index.html';
@@ -829,14 +830,14 @@ async function handleLogout(e) {
 }
 
 async function checkAuthState() {
-  if (!supabase) return;
+  if (!window.supabaseClient) return;
   try {
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await window.supabaseClient.auth.getSession();
     const accountBtn = document.getElementById('user-account-btn');
     
     if (session) {
       const email = session.user.email;
-      const { data: userData } = await supabase.from('users').select('role').eq('email', email).single();
+      const { data: userData } = await window.supabaseClient.from('users').select('role').eq('email', email).single();
       const role = userData ? userData.role : 'user';
       
       if (role === 'admin') {
