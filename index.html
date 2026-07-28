@@ -552,10 +552,17 @@
     }
 
     async function handleLogout(e) {
-        e.preventDefault();
-        if (supabaseClient) {
-            await supabaseClient.auth.signOut();
-        }
+  if (e && e.preventDefault) e.preventDefault();
+  if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+    if (typeof supabaseClient !== 'undefined') {
+        await supabaseClient.auth.signOut();
+    } else if (typeof supabase !== 'undefined') {
+        await supabase.auth.signOut();
+    }
+    localStorage.clear();
+    window.location.href = 'index.html';
+  }
+}
         window.location.reload();
     }
 </script>
@@ -835,15 +842,31 @@ async function checkAuthState() {
 }
 
 // Hàm Đăng xuất
-async function handleLogout() {
-  if (confirm('Bạn có muốn đăng xuất khỏi tài khoản?')) {
-    await supabaseClient.auth.signOut();
-    location.reload();
+async function handleLogout(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+    if (typeof supabaseClient !== 'undefined') {
+        await supabaseClient.auth.signOut();
+    } else if (typeof supabase !== 'undefined') {
+        await supabase.auth.signOut();
+    }
+    localStorage.clear();
+    window.location.href = 'index.html';
   }
+}
 }
 
 // Bắt sự kiện load trang
-document.addEventListener('DOMContentLoaded', checkAuthState);
+document.addEventListener('DOMContentLoaded', async () => {
+    await checkAuthState();
+    if (window.location.hash === '#login') {
+        openAuthModal();
+        switchAuthTab('login');
+    } else if (window.location.hash === '#register') {
+        openAuthModal();
+        switchAuthTab('register');
+    }
+});
 </script>
 </body>
 </html>

@@ -588,7 +588,7 @@
         document.addEventListener('DOMContentLoaded', async () => {
             if (!supabaseClient) {
                 alert('Lỗi khởi tạo máy chủ Supabase!');
-                window.location.href = 'login.html';
+                window.location.href = 'index.html#login';
                 return;
             }
 
@@ -597,7 +597,7 @@
                 const { data: { session }, error: sessErr } = await supabaseClient.auth.getSession();
                 if (sessErr || !session || !session.user) {
                     alert('Vui lòng đăng nhập để truy cập trang Quản Lý Sản Phẩm!');
-                    window.location.href = 'login.html';
+                    window.location.href = 'index.html#login';
                     return;
                 }
 
@@ -617,7 +617,7 @@
             } catch (err) {
                 console.error('Lỗi kiểm tra quyền hạn Quản lý Sản phẩm:', err);
                 alert('Có lỗi xảy ra khi kiểm tra phiên đăng nhập: ' + err.message);
-                window.location.href = 'login.html';
+                window.location.href = 'index.html#login';
             }
         });
 
@@ -863,7 +863,7 @@
             if (supabaseClient) {
                 await supabaseClient.auth.signOut();
             }
-            window.location.href = 'login.html';
+            window.location.href = 'index.html#login';
         }
     </script>
     <script src="js/auth-modal.js"></script>

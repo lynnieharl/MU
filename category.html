@@ -517,10 +517,17 @@
     }
 
     async function handleLogout(e) {
-        e.preventDefault();
-        if (supabaseClient) {
-            await supabaseClient.auth.signOut();
-        }
+  if (e && e.preventDefault) e.preventDefault();
+  if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+    if (typeof supabaseClient !== 'undefined') {
+        await supabaseClient.auth.signOut();
+    } else if (typeof supabase !== 'undefined') {
+        await supabase.auth.signOut();
+    }
+    localStorage.clear();
+    window.location.href = 'index.html';
+  }
+}
         window.location.reload();
     }
 </script>
