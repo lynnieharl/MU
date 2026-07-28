@@ -285,15 +285,15 @@
             try {
                 let query = client.from('products').select('*');
                 if (catType !== 'All') {
-                    // Dùng ilike lọc không phân biệt hoa thường theo yêu cầu
-                    query = query.ilike('category', `%${catType}%`);
+                    // Dùng eq lọc chính xác danh mục theo yêu cầu
+                    query = query.eq('category', catType);
                 }
                 
                 const { data: products, error } = await query.order('id', { ascending: false });
 
                 if (error) {
                     console.error("Lỗi Supabase:", error);
-                    grid.innerHTML = '<div style="width: 100%; text-align: center; padding: 40px; color: #ff4d4d; grid-column: 1 / -1;">Chưa có sản phẩm nào thuộc danh mục này.</div>';
+                    grid.innerHTML = `<div style="width: 100%; text-align: center; padding: 40px; color: #ff4d4d; grid-column: 1 / -1;">Hiện chưa có sản phẩm nào trong danh mục ${catType}.</div>`;
                     return;
                 }
 
@@ -301,7 +301,7 @@
                     grid.innerHTML = `
                         <div style="width: 100%; text-align: center; padding: 50px; color: #888; grid-column: 1 / -1; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px dashed rgba(255,255,255,0.1);">
                             <i class="fa-solid fa-box-open" style="font-size: 48px; margin-bottom: 15px; color: #444;"></i>
-                            <h3 style="color: #fff; font-size: 20px; margin-bottom: 8px;">Danh mục ${catType} hiện chưa có sản phẩm.</h3>
+                            <h3 style="color: #fff; font-size: 20px; margin-bottom: 8px;">Hiện chưa có sản phẩm nào trong danh mục ${catType}.</h3>
                             <a href="index.html" class="btn-primary" style="display: inline-block; margin-top: 20px; text-decoration: none;">Về Trang Chủ</a>
                         </div>
                     `;
