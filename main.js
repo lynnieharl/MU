@@ -263,7 +263,8 @@ async function loadProducts() {
                     document.querySelector('.products-grid') || 
                     document.getElementById('trending-products') ||
                     document.getElementById('cat-product-grid') ||
-                    document.getElementById('products-container');
+                    document.getElementById('products-container') ||
+                    document.getElementById('real-products-track');
   if (!container) return;
 
   // Cơ chế Polling: Đợi tối đa 5 giây cho SDK Supabase tải xong nếu mạng chậm
