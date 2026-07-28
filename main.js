@@ -127,62 +127,80 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Dynamic Product Loading (Xử lý bấm sản phẩm nào ra sản phẩm đó)
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('id');
-    
     // 5. Dynamic Product Loading
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
 
-    if (productId && document.querySelector('.product-page')) {
-        document.querySelector('.product-title-large').innerText = 'Đang tải thông tin sản phẩm...';
-        
-        const loadProductDetails = async () => {
-            try {
-                if (!window.supabaseClient && window.supabase) {
-                    // Try initializing if not present but supabase is available
-                    console.warn("supabaseClient not found globally, please ensure it's initialized.");
-                }
-
-                if (window.supabaseClient) {
-                    const { data: pd, error } = await window.supabaseClient
-                        .from('products')
-                        .select('*')
-                        .eq('id', productId)
-                        .single();
-                    
-                    if (error || !pd) {
-                        document.querySelector('.product-title-large').innerText = 'Không tìm thấy sản phẩm';
-                        return;
+    if (document.querySelector('.product-page')) {
+        if (!productId) {
+            // Redirect to home if no ID is present
+            window.location.href = 'index.html';
+        } else {
+            document.querySelector('.product-title-large').innerText = 'Đang tải thông tin sản phẩm...';
+            
+            const loadProductDetails = async () => {
+                try {
+                    if (!window.supabaseClient && window.supabase) {
+                        console.warn("supabaseClient not found globally, please ensure it's initialized.");
                     }
 
-                    const imgUrl = pd.image_url || 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
-                    const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(pd.price || 0);
+                    if (window.supabaseClient) {
+                        const { data: pd, error } = await window.supabaseClient
+                            .from('products')
+                            .select('*')
+                            .eq('id', productId)
+                            .single();
+                        
+                        if (error || !pd) {
+                            alert('Không tìm thấy sản phẩm này!');
+                            window.location.href = 'index.html';
+                            return;
+                        }
 
-                    document.querySelector('.product-title-large').innerText = pd.name;
-                    document.querySelector('.product-price-large').innerText = priceFormatted;
-                    
-                    document.querySelector('.main-product-img').src = imgUrl;
-                    
-                    const thumbs = document.querySelectorAll('.thumb-img');
-                    if(thumbs.length > 0) {
-                        thumbs.forEach(t => t.src = imgUrl);
+                        const imgUrl = pd.image_url || 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
+                        const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(pd.price || 0);
+
+                        // Cập nhật tên và giá
+                        document.querySelector('.product-title-large').innerText = pd.name;
+                        document.querySelector('.product-price-large').innerText = priceFormatted;
+                        
+                        // Cập nhật ảnh chính
+                        document.querySelector('.main-product-img').src = imgUrl;
+                        
+                        // Cập nhật các ảnh thumbnail
+                        const thumbs = document.querySelectorAll('.thumb-img');
+                        if(thumbs.length > 0) {
+                            thumbs.forEach(t => t.src = imgUrl);
+                        }
+                        
+                        // Cập nhật Breadcrumb (Home > Category > Product Name)
+                        const breadcrumb = document.querySelector('.breadcrumb');
+                        if(breadcrumb) {
+                            const cat = pd.category || 'Accessories';
+                            breadcrumb.innerHTML = `<a href="index.html">Home</a> &gt; <a href="category.html?type=${cat}">${cat}</a> &gt; <span>${pd.name}</span>`;
+                        }
+
+                        // Cập nhật Description
+                        const descContainer = document.querySelector('.product-description');
+                        if (descContainer) {
+                            if (pd.description && pd.description.trim() !== '') {
+                                descContainer.innerHTML = `<h3>Description</h3><p style="white-space: pre-wrap;">${pd.description}</p>`;
+                            } else {
+                                descContainer.innerHTML = `<h3>Description</h3><p>Đang cập nhật thông tin mô tả cho sản phẩm này.</p>`;
+                            }
+                        }
+                    } else {
+                        document.querySelector('.product-title-large').innerText = 'Lỗi kết nối CSDL (Missing Supabase Client)';
                     }
-                    
-                    const breadcrumbSpan = document.querySelector('.breadcrumb span');
-                    if(breadcrumbSpan) breadcrumbSpan.innerText = pd.name;
-                } else {
-                    document.querySelector('.product-title-large').innerText = 'Lỗi kết nối CSDL (Missing Supabase Client)';
+                } catch (err) {
+                    console.error('Lỗi tải sản phẩm:', err);
+                    document.querySelector('.product-title-large').innerText = 'Lỗi tải sản phẩm';
                 }
-            } catch (err) {
-                console.error('Lỗi tải sản phẩm:', err);
-                document.querySelector('.product-title-large').innerText = 'Lỗi tải sản phẩm';
-            }
-        };
+            };
 
-        // Delay slightly to ensure Supabase client is initialized from inline scripts
-        setTimeout(loadProductDetails, 300);
+            // Delay slightly to ensure Supabase client is initialized from inline scripts
+            setTimeout(loadProductDetails, 300);
+        }
     }
 
     // ==========================================
