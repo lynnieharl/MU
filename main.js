@@ -261,6 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function loadProducts() {
   const container = document.getElementById('product-list') || 
                     document.querySelector('.products-grid') || 
+                    document.getElementById('trending-products') ||
                     document.getElementById('cat-product-grid') ||
                     document.getElementById('products-container');
   if (!container) return;
@@ -305,14 +306,19 @@ async function loadProducts() {
     }
     
     // Render danh sách sản phẩm thật
+    // RENDER LẠI THEO CLASS CSS CỦA DỰ ÁN GỐC (GIỮ NGUYÊN HOÀN TOÀN CẤU TRÚC CARD CŨ)
     container.innerHTML = data.map(item => `
-      <div class="product-card" style="border: 1px solid #333; padding: 15px; border-radius: 8px; background: #18181c; text-align: center; color: #fff;">
-        <img src="${item.image_url || item.image || 'https://via.placeholder.com/200'}" alt="${item.name}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px;">
-        <h4 style="margin: 10px 0; font-size: 16px;">${item.name || 'Sản phẩm MU'}</h4>
-        <p style="color: #da020e; font-weight: bold; font-size: 18px;">$${item.price || 0}</p>
-        <button style="background: #da020e; color: #fff; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%;">THÊM VÀO GIỎ</button>
-      </div>
-    `).join('');
+  <div class="product-card">
+    <div class="product-image">
+      <img src="${item.image_url || item.image || 'https://via.placeholder.com/200'}" alt="${item.name}">
+    </div>
+    <div class="product-info">
+      <h3 class="product-title">${item.name || 'Sản phẩm MU'}</h3>
+      <div class="product-price">${item.price || 0}</div>
+      <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
+    </div>
+  </div>
+`).join('');
   } catch (err) {
     container.innerHTML = `<div style="text-align: center; color: #da020e; padding: 30px; grid-column: 1/-1;">Lỗi hệ thống: ${err.message}</div>`;
   }
