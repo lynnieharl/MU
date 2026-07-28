@@ -3089,6 +3089,7 @@ details[open] .filter-group-title i {
     scroll-snap-type: x mandatory !important;
     display: flex !important;
     flex-wrap: nowrap !important;
+    gap: 20px !important;
     scrollbar-width: none !important; /* Firefox */
     -ms-overflow-style: none !important; /* IE/Edge */
     cursor: grab;
@@ -3101,6 +3102,7 @@ details[open] .filter-group-title i {
     display: none !important;
 }
 .carousel-track .store-card-item {
+    flex: 0 0 calc(25% - 15px) !important;
     scroll-snap-align: start !important;
     user-select: none; /* Prevent text selection while dragging */
 }

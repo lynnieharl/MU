@@ -33,31 +33,73 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Mouse Drag to Scroll
+        // Mouse Drag to Scroll with Momentum & Click Prevention
         let isDown = false;
         let startX;
         let scrollLeft;
+        let velX = 0;
+        let momentumID;
+
+        const beginMomentumTracking = () => {
+            cancelAnimationFrame(momentumID);
+            momentumID = requestAnimationFrame(momentumLoop);
+        };
+
+        const momentumLoop = () => {
+            if (!isDown) {
+                track.scrollLeft += velX;
+                velX *= 0.95; // Friction
+                if (Math.abs(velX) > 0.5) {
+                    momentumID = requestAnimationFrame(momentumLoop);
+                } else {
+                    track.style.scrollSnapType = 'x mandatory'; // Restore snap
+                }
+            }
+        };
 
         track.addEventListener('mousedown', (e) => {
             isDown = true;
             track.classList.add('active');
+            track.style.scrollSnapType = 'none'; // Disable snap during drag
             startX = e.pageX - track.offsetLeft;
             scrollLeft = track.scrollLeft;
+            cancelAnimationFrame(momentumID);
+            velX = 0;
         });
+
         track.addEventListener('mouseleave', () => {
+            if (!isDown) return;
             isDown = false;
             track.classList.remove('active');
+            beginMomentumTracking();
         });
+
         track.addEventListener('mouseup', () => {
             isDown = false;
             track.classList.remove('active');
+            beginMomentumTracking();
+            // Restore clicks after a short delay
+            setTimeout(() => {
+                track.querySelectorAll('.store-card-item').forEach(card => {
+                    card.style.pointerEvents = 'auto';
+                });
+            }, 50);
         });
+
         track.addEventListener('mousemove', (e) => {
             if (!isDown) return;
             e.preventDefault();
+            
+            // Prevent clicks on cards while dragging
+            track.querySelectorAll('.store-card-item').forEach(card => {
+                card.style.pointerEvents = 'none';
+            });
+            
             const x = e.pageX - track.offsetLeft;
             const walk = (x - startX) * 2; // Scroll-fast
+            const prevScrollLeft = track.scrollLeft;
             track.scrollLeft = scrollLeft - walk;
+            velX = track.scrollLeft - prevScrollLeft;
         });
     }
 
