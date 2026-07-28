@@ -268,46 +268,10 @@
             </div>
         </div>
         <div class="carousel-container" id="trending-carousel">
-            <div class="carousel-track">
-                <!-- Áo Sân Nhà -->
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img src="images/4_c836596765f00ea79c068d00ff3c4e05.jpg" class="product-img" alt="Manchester United Home Shirt 24/25">
-                    </div>
-                    <div class="product-info">
-                        <a href="product.html?id=home-shirt" class="product-title">Mens Manchester United Home Authentic Shirt 24/25</a>
-                        <p class="product-price">$90.00</p>
-                    </div>
-                </div>
-                <!-- Áo Sân Khách -->
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img src="images/5_b42223866496c6fac690a48a9b121da5.jpg" class="product-img" alt="Manchester United Away Shirt 24/25">
-                    </div>
-                    <div class="product-info">
-                        <a href="product.html?id=away-shirt" class="product-title">Mens Manchester United Away Shirt 24/25</a>
-                        <p class="product-price">$90.00</p>
-                    </div>
-                </div>
-                <!-- Áo Tập -->
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img src="images/6_2ed2651297cac6ec9750f6581a0940e2.jpg" class="product-img" alt="Manchester United Training Top">
-                    </div>
-                    <div class="product-info">
-                        <a href="product.html" class="product-title">Manchester United Training Top 24/25</a>
-                        <p class="product-price">$65.00</p>
-                    </div>
-                </div>
-                <!-- Áo Khoác Anthem -->
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img src="images/7_066d2c004e6666a7d1316d9eb103a421.jpg" class="product-img" alt="Manchester United Anthem Jacket">
-                    </div>
-                    <div class="product-info">
-                        <a href="product.html" class="product-title">Manchester United Anthem Jacket 24/25</a>
-                        <p class="product-price">$110.00</p>
-                    </div>
+            <div class="carousel-track" id="real-products-track">
+                <div style="width: 100%; text-align: center; padding: 40px; color: #888;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
+                    <p>Đang tải sản phẩm từ kho hàng...</p>
                 </div>
             </div>
         </div>
@@ -536,7 +500,59 @@
         } catch (err) {
             console.error('Lỗi kiểm tra session:', err);
         }
+
+        // Tải danh sách sản phẩm thật từ Supabase
+        await fetchRealProducts();
     });
+
+    async function fetchRealProducts() {
+        if (!supabaseClient) return;
+        const track = document.getElementById('real-products-track');
+        if (!track) return;
+
+        try {
+            const { data: products, error } = await supabaseClient
+                .from('products')
+                .select('*')
+                .order('id', { ascending: false });
+
+            if (error) {
+                if (error.code === 'PGRST205') {
+                    track.innerHTML = '<div style="width: 100%; text-align: center; padding: 40px; color: #888;">Bảng products chưa tồn tại.</div>';
+                } else {
+                    throw error;
+                }
+                return;
+            }
+
+            if (!products || products.length === 0) {
+                track.innerHTML = '<div style="width: 100%; text-align: center; padding: 40px; color: #888;">Chưa có sản phẩm nào trong kho. Hãy thêm sản phẩm mới!</div>';
+                return;
+            }
+
+            // Render dữ liệu
+            track.innerHTML = products.map(p => {
+                const imgUrl = p.image_url || 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
+                const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price || 0);
+                
+                return `
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="${imgUrl}" class="product-img" alt="${p.name || ''}" onerror="this.src='https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80'">
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=${p.id}" class="product-title">${p.name || 'Sản phẩm mới'}</a>
+                        <p class="product-price" style="color: #d31145; font-weight: bold;">${priceFormatted}</p>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+        } catch (err) {
+            console.error('Lỗi tải sản phẩm:', err);
+            track.innerHTML = '<div style="width: 100%; text-align: center; padding: 40px; color: #ff4d4d;">Không thể tải sản phẩm.</div>';
+        }
+    }
 
     async function handleLogout(e) {
         e.preventDefault();

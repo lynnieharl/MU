@@ -131,57 +131,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
     
-    // Database ảo bằng Javascript thuần
-    const productDatabase = {
-        'home-shirt': {
-            title: 'Mens Manchester United Home Authentic Shirt 24/25',
-            price: '$90.00',
-            img: 'images/4_c836596765f00ea79c068d00ff3c4e05.jpg'
-        },
-        'away-shirt': {
-            title: 'Mens Manchester United Away Shirt 24/25',
-            price: '$75.00',
-            img: 'images/5_b42223866496c6fac690a48a9b121da5.jpg'
-        },
-        'third-shirt': {
-            title: 'Mens Manchester United Third Shirt 24/25',
-            price: '$90.00',
-            img: 'images/10_557b882a41d5bc6a7934615bbc14b842.jpg'
-        },
-        'gk-shirt': {
-            title: 'Mens Manchester United Goalkeeper Shirt 24/25',
-            price: '$95.00',
-            img: 'https://mufc-live.cdn.scayle.cloud/images/b08cc3092b199551aacc2528c7b4c45b.jpg'
-        },
-        'training-top': {
-            title: 'Mens Manchester United Training Top 24/25',
-            price: '$65.00',
-            img: 'images/6_2ed2651297cac6ec9750f6581a0940e2.jpg'
-        },
-        'anthem-jacket': {
-            title: 'Mens Manchester United Anthem Jacket 24/25',
-            price: '$110.00',
-            img: 'images/7_066d2c004e6666a7d1316d9eb103a421.jpg'
-        }
-    };
+    // 5. Dynamic Product Loading
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
 
-    if (productId && productDatabase[productId] && document.querySelector('.product-page')) {
-        const pd = productDatabase[productId];
-        document.querySelector('.product-title-large').innerText = pd.title;
-        document.querySelector('.product-price-large').innerText = pd.price;
+    if (productId && document.querySelector('.product-page')) {
+        document.querySelector('.product-title-large').innerText = 'Đang tải thông tin sản phẩm...';
         
-        // Cập nhật ảnh to
-        document.querySelector('.main-product-img').src = pd.img;
-        
-        // Cập nhật thumbnail (tạm thời lặp lại ảnh chính để mô phỏng)
-        const thumbs = document.querySelectorAll('.thumb-img');
-        if(thumbs.length > 0) {
-            thumbs.forEach(t => t.src = pd.img);
-        }
-        
-        // Cập nhật Breadcrumb
-        const breadcrumbSpan = document.querySelector('.breadcrumb span');
-        if(breadcrumbSpan) breadcrumbSpan.innerText = pd.title;
+        const loadProductDetails = async () => {
+            try {
+                if (!window.supabaseClient && window.supabase) {
+                    // Try initializing if not present but supabase is available
+                    console.warn("supabaseClient not found globally, please ensure it's initialized.");
+                }
+
+                if (window.supabaseClient) {
+                    const { data: pd, error } = await window.supabaseClient
+                        .from('products')
+                        .select('*')
+                        .eq('id', productId)
+                        .single();
+                    
+                    if (error || !pd) {
+                        document.querySelector('.product-title-large').innerText = 'Không tìm thấy sản phẩm';
+                        return;
+                    }
+
+                    const imgUrl = pd.image_url || 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
+                    const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(pd.price || 0);
+
+                    document.querySelector('.product-title-large').innerText = pd.name;
+                    document.querySelector('.product-price-large').innerText = priceFormatted;
+                    
+                    document.querySelector('.main-product-img').src = imgUrl;
+                    
+                    const thumbs = document.querySelectorAll('.thumb-img');
+                    if(thumbs.length > 0) {
+                        thumbs.forEach(t => t.src = imgUrl);
+                    }
+                    
+                    const breadcrumbSpan = document.querySelector('.breadcrumb span');
+                    if(breadcrumbSpan) breadcrumbSpan.innerText = pd.name;
+                } else {
+                    document.querySelector('.product-title-large').innerText = 'Lỗi kết nối CSDL (Missing Supabase Client)';
+                }
+            } catch (err) {
+                console.error('Lỗi tải sản phẩm:', err);
+                document.querySelector('.product-title-large').innerText = 'Lỗi tải sản phẩm';
+            }
+        };
+
+        // Delay slightly to ensure Supabase client is initialized from inline scripts
+        setTimeout(loadProductDetails, 300);
     }
 
     // ==========================================
