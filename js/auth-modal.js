@@ -174,7 +174,7 @@ const authStyles = `
         object-fit: contain;
     }
     .header-dynamic-avatar i {
-        color: #000;
+        color: #fff;
         font-size: 20px;
     }
 
@@ -460,6 +460,10 @@ function renderGuestAvatar(container) {
 }
 
 // Chạy cập nhật Avatar ngay khi tải xong file
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        updateHeaderAvatar();
+    });
+} else {
     updateHeaderAvatar();
-});
+}
