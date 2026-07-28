@@ -2959,7 +2959,8 @@ details[open] .filter-group-title i {
 
 
 
-/* Khung chứa danh sách 4 cột chuẩn E-Commerce */
+
+/* Grid danh sách sản phẩm */
 #product-list, .products-grid, #trending-products, #products-container, #cat-product-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
@@ -2967,101 +2968,90 @@ details[open] .filter-group-title i {
   padding: 20px 0 !important;
   width: 100% !important;
 }
-
-/* Card sản phẩm sạch sẽ, không viền cứng */
-.product-card {
-  background: transparent;
-  display: flex;
-  flex-direction: column;
+/* Khung Card Sản Phẩm */
+.store-card-item {
+  background: transparent !important;
+  display: flex !important;
+  flex-direction: column !important;
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.2s ease;
-  border: none;
-  padding: 0;
-  box-shadow: none;
-}
-
-.product-card:hover {
-  transform: translateY(-3px);
-  border-color: transparent;
-  box-shadow: none;
-}
-
-/* Khung chứa ảnh bo góc chuẩn mẫu */
-.product-image-box {
   position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  background-color: #e5e5e5;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 12px;
 }
 
-.product-image-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+/* Frame chứa hình ảnh */
+.store-card-img-wrap {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 4 / 5 !important;
+  background-color: #e5e5e5 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  margin-bottom: 12px !important;
 }
 
-/* Nút thả tim wishlist */
-.wishlist-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 36px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
+.store-card-img-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* Nút Thả Tim */
+.store-card-wishlist {
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  width: 36px !important;
+  height: 36px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  z-index: 5 !important;
   cursor: pointer;
-  backdrop-filter: blur(4px);
-  transition: background 0.2s;
-  z-index: 10;
-}
-.wishlist-btn:hover {
-  background: #ffffff;
 }
 
-/* Nhãn Badge New góc dưới */
-.badge-new {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  background: #ffffff;
-  color: #111111;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+/* Nhãn NEW - Ép kích thước chuẩn không bị phình to */
+.store-card-badge-new {
+  position: absolute !important;
+  bottom: 12px !important;
+  left: 12px !important;
+  background: #ffffff !important;
+  color: #111111 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 4px 10px !important;
+  border-radius: 4px !important;
+  width: auto !important;
+  height: auto !important;
+  line-height: 1 !important;
+  display: inline-block !important;
+  z-index: 5 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
 }
 
-/* Khung thông tin chữ */
-.product-info-box {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  text-align: left;
+/* Thông tin giá & tên */
+.store-card-info {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  text-align: left !important;
 }
 
-.product-info-box .price {
-  font-size: 18px;
-  font-weight: 700;
-  color: #fff; /* United Store Dark mode - user had #000 but the page is dark */
-  font-family: sans-serif;
+.store-card-info .card-price {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: #ffffff !important; /* Update to white for dark theme */
 }
 
-.product-info-box .title {
-  font-size: 14px;
-  color: #aaa;
-  font-weight: 400;
-  line-height: 1.4;
-  margin: 0;
+.store-card-info .card-title {
+  font-size: 14px !important;
+  color: #aaaaaa !important; /* Update to light grey for dark theme */
+  font-weight: 400 !important;
+  margin: 0 !important;
 }
+
 
