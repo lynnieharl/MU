@@ -287,41 +287,53 @@ async function loadProducts() {
   }
 
   try {
-    // Query dữ liệu THẬT từ Supabase
-    const { data, error } = await window.supabaseClient.from('products').select('*');
+    // 1. TỰ ĐỘNG LẤY THAM SỐ PHÂN LOẠI TỪ URL (Ví dụ: page.html?cat=jerseys&sub=home)
+    const urlParams = new URLSearchParams(window.location.search);
+    const catParam = urlParams.get('cat') || urlParams.get('category');
+    const subParam = urlParams.get('sub') || urlParams.get('subcategory');
+
+    // 2. TẠO QUERY SUPABASE NĂNG ĐỘNG
+    let query = window.supabaseClient.from('products').select('*');
+
+    // Nếu có phân loại trên URL -> Mới tiến hành lọc (Lưu ý ilike để không phân biệt hoa/thường)
+    if (catParam) {
+      query = query.ilike('category', `%${catParam}%`);
+    }
+    if (subParam) {
+      query = query.ilike('subcategory', `%${subParam}%`);
+    }
+
+    const { data, error } = await query;
 
     if (error) {
-      container.innerHTML = `<div style="text-align: center; color: #da020e; padding: 40px; grid-column: 1/-1;">Lỗi truy vấn Database: ${error.message}</div>`;
+      console.error("Lỗi lấy sản phẩm:", error);
+      container.innerHTML = `<p style="text-align: center; width: 100%; color: #888;">Không thể tải sản phẩm (${error.message}).</p>`;
       return;
     }
     
     if (!data || data.length === 0) {
-      container.innerHTML = `
-        <div style="text-align: center; color: #aaa; padding: 50px; grid-column: 1/-1;">
-          <i class="fas fa-box-open" style="font-size: 40px; margin-bottom: 10px; display: block; color: #666;"></i>
-          Kho hàng trên Supabase hiện đang rỗng (0 sản phẩm).
-        </div>
-      `;
+      container.innerHTML = `<p style="text-align: center; width: 100%; color: #888; padding: 40px;">Chưa có sản phẩm nào thuộc phân loại này.</p>`;
       return;
     }
     
-    // Render danh sách sản phẩm thật
-    // RENDER LẠI THEO CLASS CSS CỦA DỰ ÁN GỐC (GIỮ NGUYÊN HOÀN TOÀN CẤU TRÚC CARD CŨ)
+    // 3. RENDER CHUẨN CLASS CSS CŨ CỦA DỰ ÁN (KHÔNG DÙNG STYLE INLINE MỚI)
     container.innerHTML = data.map(item => `
-  <div class="product-card">
-    <div class="product-image">
-      <img src="${item.image_url || item.image || 'https://via.placeholder.com/200'}" alt="${item.name}">
-    </div>
-    <div class="product-info">
-      <h3 class="product-title">${item.name || 'Sản phẩm MU'}</h3>
-      <div class="product-price">${item.price || 0}</div>
-      <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-    </div>
-  </div>
-`).join('');
+      <div class="product-card">
+        <div class="product-image">
+          <img src="${item.image_url || item.image || 'https://via.placeholder.com/200'}" alt="${item.name}">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">${item.name || 'Sản phẩm MU'}</h3>
+          <div class="product-price">$${item.price || 0}</div>
+          <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
+        </div>
+      </div>
+    `).join('');
   } catch (err) {
-    container.innerHTML = `<div style="text-align: center; color: #da020e; padding: 30px; grid-column: 1/-1;">Lỗi hệ thống: ${err.message}</div>`;
+    console.error("Crash JS:", err);
+    container.innerHTML = `<p style="text-align: center; width: 100%; color: #888;">Đã xảy ra lỗi khi tải dữ liệu (${err.message}).</p>`;
   }
 }
 
+document.addEventListener('DOMContentLoaded', loadProducts);
 window.addEventListener('load', loadProducts);
