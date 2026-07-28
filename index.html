@@ -51,8 +51,8 @@
   <a href="cart.html" class="icon-btn cart-btn"><i class="fas fa-shopping-bag" style="font-size: 20px; color: #fff;"></i><span class="badge" style="background:red; border-radius:50%; padding:2px 5px; font-size:12px; margin-left:3px; color:white;">0</span></a>
   
   <!-- NÚT TÀI KHOẢN BẮT BUỘC PHẢI CÓ -->
-  <div id="user-account-btn" onclick="openAuthModal()" style="cursor: pointer; display: flex; align-items: center;">
-    <i class="far fa-user" id="user-icon-img" style="font-size: 20px; color: #fff;"></i>
+  <div id="user-account-btn" onclick="window.openAuthModal()" style="cursor: pointer; padding: 5px; display: flex; align-items: center; justify-content: center;">
+    <i class="far fa-user" id="user-icon-img" style="font-size: 22px; color: #ffffff;"></i>
   </div>
 </div>
                 </div>
@@ -577,7 +577,8 @@
     top: 0; left: 0; width: 100%; height: 100%; 
     background: rgba(0,0,0,0.75);
     backdrop-filter: blur(12px);
-    z-index: 9999; 
+    z-index: 999999;
+    pointer-events: auto; 
     justify-content: center; 
     align-items: center;
     opacity: 0;
@@ -709,7 +710,7 @@
 
 <div id="auth-modal" class="premium-modal-overlay">
   <div class="premium-modal-content">
-    <div class="premium-close-btn" onclick="closeAuthModal()">
+    <div class="premium-close-btn" onclick="window.closeAuthModal()">
       <i class="fas fa-times"></i>
     </div>
     
@@ -719,8 +720,8 @@
     </div>
 
     <div class="premium-tabs">
-      <button type="button" id="tab-login-btn" class="premium-tab-btn active" onclick="switchAuthTab('login')">ĐĂNG NHẬP</button>
-      <button type="button" id="tab-reg-btn" class="premium-tab-btn" onclick="switchAuthTab('register')">ĐĂNG KÝ</button>
+      <button type="button" id="tab-login-btn" class="premium-tab-btn active" onclick="window.switchAuthTab(\'login\')">ĐĂNG NHẬP</button>
+      <button type="button" id="tab-reg-btn" class="premium-tab-btn" onclick="window.switchAuthTab(\'register\')">ĐĂNG KÝ</button>
     </div>
     
     <!-- Form Login -->
@@ -740,29 +741,44 @@
 </div>
 
 <script>
-function openAuthModal() {
-    const modal = document.getElementById('auth-modal');
+window.openAuthModal = function() {
+  const modal = document.getElementById('auth-modal');
+  if (modal) {
     modal.style.display = 'flex';
-    setTimeout(() => { modal.classList.add('show'); }, 10);
-}
-function closeAuthModal() {
-    const modal = document.getElementById('auth-modal');
+    modal.style.visibility = 'visible';
+    setTimeout(() => { modal.style.opacity = '1'; modal.classList.add('show'); }, 10);
+  } else {
+    console.error("Không tìm thấy element #auth-modal trong HTML!");
+  }
+};
+
+window.closeAuthModal = function() {
+  const modal = document.getElementById('auth-modal');
+  if (modal) {
+    modal.style.opacity = '0';
     modal.classList.remove('show');
     setTimeout(() => { modal.style.display = 'none'; }, 300);
-}
-function switchAuthTab(tab) {
-    if(tab === 'login') {
-        document.getElementById('popup-login-form').style.display = 'block';
-        document.getElementById('popup-reg-form').style.display = 'none';
-        document.getElementById('tab-login-btn').classList.add('active');
-        document.getElementById('tab-reg-btn').classList.remove('active');
-    } else {
-        document.getElementById('popup-login-form').style.display = 'none';
-        document.getElementById('popup-reg-form').style.display = 'block';
-        document.getElementById('tab-login-btn').classList.remove('active');
-        document.getElementById('tab-reg-btn').classList.add('active');
-    }
-}
+  }
+};
+
+window.switchAuthTab = function(tabName) {
+  const loginForm = document.getElementById('popup-login-form');
+  const regForm = document.getElementById('popup-reg-form');
+  const tabLoginBtn = document.getElementById('tab-login-btn');
+  const tabRegBtn = document.getElementById('tab-reg-btn');
+
+  if (tabName === 'login') {
+    if(loginForm) loginForm.style.display = 'block';
+    if(regForm) regForm.style.display = 'none';
+    if(tabLoginBtn) tabLoginBtn.classList.add('active');
+    if(tabRegBtn) tabRegBtn.classList.remove('active');
+  } else {
+    if(loginForm) loginForm.style.display = 'none';
+    if(regForm) regForm.style.display = 'block';
+    if(tabRegBtn) tabRegBtn.classList.add('active');
+    if(tabLoginBtn) tabLoginBtn.classList.remove('active');
+  }
+};
 // Hàm Đăng Nhập Popup
 async function handlePopupLogin(e) {
   e.preventDefault();
@@ -836,8 +852,8 @@ async function checkAuthState() {
     accountBtn.onclick = null;
   } else {
     // CHƯA ĐĂNG NHẬP: Giữ nguyên icon mặc định mở Popup
-    accountBtn.innerHTML = `<i class="far fa-user" id="user-icon-img" style="font-size: 20px; color: #fff;"></i>`;
-    accountBtn.onclick = openAuthModal;
+    accountBtn.innerHTML = `<i class="far fa-user" id="user-icon-img" style="font-size: 22px; color: #ffffff;"></i>`;
+    accountBtn.onclick = window.openAuthModal;
   }
 }
 
