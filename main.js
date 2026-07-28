@@ -317,18 +317,19 @@ async function loadProducts() {
     }
     
     // 3. RENDER CHUẨN CLASS CSS CŨ CỦA DỰ ÁN (KHÔNG DÙNG STYLE INLINE MỚI)
+    // 3. RENDER CHUẨN CLASS CSS CŨ CỦA DỰ ÁN (KHÔNG DÙNG STYLE INLINE MỚI)
     container.innerHTML = data.map(item => `
-      <div class="product-card">
-        <div class="product-image">
-          <img src="${item.image_url || item.image || 'https://via.placeholder.com/200'}" alt="${item.name}">
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">${item.name || 'Sản phẩm MU'}</h3>
-          <div class="product-price">$${item.price || 0}</div>
-          <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-        </div>
-      </div>
-    `).join('');
+  <div class="product-card">
+    <div class="product-image-wrapper">
+      <img src="${item.image_url || item.image || 'https://via.placeholder.com/240'}" alt="${item.name}">
+    </div>
+    <div class="product-details">
+      <h3 class="product-title">${item.name || 'Sản phẩm MU'}</h3>
+      <div class="product-price">${Number(item.price || 0).toLocaleString()}</div>
+    </div>
+    <button class="btn-add-cart">THÊM VÀO GIỎ</button>
+  </div>
+`).join('');
   } catch (err) {
     console.error("Crash JS:", err);
     container.innerHTML = `<p style="text-align: center; width: 100%; color: #888;">Đã xảy ra lỗi khi tải dữ liệu (${err.message}).</p>`;
