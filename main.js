@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             .single();
                         
                         if (error || !pd) {
-                            alert('Không tìm thấy sản phẩm này!');
+                            console.error('Không tìm thấy sản phẩm này!');
                             window.location.href = 'index.html';
                             return;
                         }
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         }
                     } else {
-                        document.querySelector('.product-title-large').innerText = 'Lỗi kết nối CSDL (Missing Supabase Client)';
+                        
                     }
                 } catch (err) {
                     console.error('Lỗi tải sản phẩm:', err);

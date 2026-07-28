@@ -453,7 +453,9 @@
 <script>
     const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = (window.supabase && window.supabase.createClient) 
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) 
+  : null;
 
     document.addEventListener('DOMContentLoaded', async () => {
         // Ngăn reload cho form newsletter

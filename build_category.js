@@ -50,7 +50,7 @@ const categoryBody = `
 
             const grid = document.getElementById('cat-product-grid');
             if (!window.supabaseClient) {
-                grid.innerHTML = '<div style="width: 100%; text-align: center; padding: 40px; color: #ff4d4d; grid-column: 1 / -1;">Lỗi kết nối máy chủ Supabase!</div>';
+                grid.innerHTML = '<div style="text-align: center; padding: 50px 20px; color: #888; font-size: 15px; width: 100%; grid-column: 1 / -1;"><p>🛒 Hiện chưa có sản phẩm nào thuộc mục này.</p></div>';
                 return;
             }
 
