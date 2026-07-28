@@ -746,43 +746,51 @@ function switchAuthTab(tab) {
         document.getElementById('tab-login-btn').classList.remove('active');
         document.getElementById('tab-reg-btn').classList.add('active');
     }
-} else {
-        document.getElementById('popup-login-form').style.display = 'none';
-        document.getElementById('popup-reg-form').style.display = 'block';
-        document.getElementById('tab-login-btn').style.borderBottom = 'none';
-        document.getElementById('tab-login-btn').style.color = '#888';
-        document.getElementById('tab-reg-btn').style.borderBottom = '2px solid #da020e';
-        document.getElementById('tab-reg-btn').style.color = '#333';
-    }
 }
+// Hàm Đăng Nhập Popup
 async function handlePopupLogin(e) {
-    e.preventDefault();
-    if (!window.supabaseClient) return console.error('Lỗi kết nối máy chủ!');
-    const email = document.getElementById('pop-login-email').value;
-    const pwd = document.getElementById('pop-login-pass').value;
-    try {
-        const { error } = await window.supabaseClient.auth.signInWithPassword({ email, password: pwd });
-        if (error) throw error;
-        closeAuthModal();
-        window.location.reload();
-    } catch (err) {
-        alert('Đăng nhập thất bại: ' + err.message);
-    }
+  e.preventDefault();
+  const email = document.getElementById('pop-login-email').value.trim();
+  const password = document.getElementById('pop-login-pass').value;
+  
+  try {
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    
+    // Lấy role từ bảng users
+    const { data: userRole } = await supabaseClient.from('users').select('role').eq('email', email).single();
+    
+    alert('🎉 Đăng nhập thành công!');
+    closeAuthModal();
+    location.reload(); // Reload lại trang để cập nhật Header Avatar
+  } catch (err) {
+    alert('Lỗi đăng nhập: ' + err.message);
+  }
 }
+
+// Hàm Đăng Ký Popup
 async function handlePopupRegister(e) {
-    e.preventDefault();
-    if (!window.supabaseClient) return console.error('Lỗi kết nối máy chủ!');
-    const email = document.getElementById('pop-reg-email').value;
-    const pwd = document.getElementById('pop-reg-pass').value;
-    try {
-        const { error } = await window.supabaseClient.auth.signUp({ email, password: pwd });
-        if (error) throw error;
-        await window.supabaseClient.from('users').insert([{ email, role: 'user' }]);
-        alert('Đăng ký thành công!');
-        switchAuthTab('login');
-    } catch (err) {
-        alert('Đăng ký thất bại: ' + err.message);
-    }
+  e.preventDefault();
+  const email = document.getElementById('pop-reg-email').value.trim();
+  const password = document.getElementById('pop-reg-pass').value;
+  
+  if (password.length < 6) {
+    alert('Mật khẩu phải từ 6 ký tự trở lên!');
+    return;
+  }
+  
+  try {
+    const { data, error } = await supabaseClient.auth.signUp({ email, password });
+    if (error) throw error;
+    
+    // Chép bản ghi vào bảng users
+    await supabaseClient.from('users').insert([{ email, role: 'user' }]);
+    
+    alert('🎉 Đăng ký thành công! Hãy đăng nhập ngay.');
+    switchAuthTab('login'); // Chuyển sang tab đăng nhập
+  } catch (err) {
+    alert('Lỗi đăng ký: ' + err.message);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
