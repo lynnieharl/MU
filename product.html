@@ -36,7 +36,7 @@
             
             <div class="header-search-icons">
                 <div class="header-search">
-                    <form action="search.html" method="GET" class="search-form">
+                    <form onsubmit="event.preventDefault(); window.location.href='search.html?query='+this.querySelector('input').value;" class="search-form">
                         <input type="text" name="query" class="search-input" placeholder="Search for products, players, and more...">
                         <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
@@ -327,7 +327,7 @@
                     <h3>SIGN UP TO OUR NEWSLETTER</h3>
                 </div>
                 <div class="newsletter-form-container">
-                    <form action="subscribe.php" method="POST" class="newsletter-form">
+                    <form onsubmit="event.preventDefault(); console.log('Subscribed');" class="newsletter-form">
                         <input type="email" placeholder="Enter your email address" required class="newsletter-input">
                         <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
                     </form>

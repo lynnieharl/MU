@@ -304,7 +304,7 @@ window.switchAuthTab = function(tab) {
 // ==========================================
 window.handleAuthRegister = async function(e) {
     e.preventDefault();
-    if (!authClient) return alert('Lỗi kết nối máy chủ!');
+    if (!authClient) return console.error('Lỗi kết nối máy chủ!');
     
     const email = document.getElementById('reg-email').value;
     const pwd = document.getElementById('reg-pwd').value;
@@ -350,7 +350,7 @@ window.handleAuthRegister = async function(e) {
 // ==========================================
 window.handleAuthLogin = async function(e) {
     e.preventDefault();
-    if (!authClient) return alert('Lỗi kết nối máy chủ!');
+    if (!authClient) return console.error('Lỗi kết nối máy chủ!');
 
     const email = document.getElementById('login-email').value;
     const pwd = document.getElementById('login-pwd').value;

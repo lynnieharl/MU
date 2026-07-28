@@ -28,7 +28,7 @@ const newHeaderHtml = `    <!-- ==========================================
             
             <div class="header-search-icons">
                 <div class="header-search">
-                    <form action="search.html" method="GET" class="search-form">
+                    <form onsubmit="event.preventDefault(); window.location.href='search.html?query='+this.querySelector('input').value;" class="search-form">
                         <input type="text" name="query" class="search-input" placeholder="Search for products, players, and more...">
                         <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
