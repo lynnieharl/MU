@@ -12,567 +12,222 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- CSS dùng chung -->
-    <link rel="stylesheet" href="style.css">
-
-    <style>
-        :root {
-            --prd-bg: #0a0a0c;
-            --prd-card: rgba(22, 22, 26, 0.75);
-            --prd-border: rgba(255, 255, 255, 0.08);
-            --prd-accent: #d31145;
-            --prd-gold: #f39c12;
-            --prd-text-dim: #9aa0a6;
-        }
-
-        body {
-            background-color: var(--prd-bg);
-            color: #ffffff;
-            font-family: 'Outfit', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 80% 20%, rgba(211, 17, 69, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 20% 80%, rgba(243, 156, 18, 0.05) 0%, transparent 40%);
-        }
-
-        /* Loading Overlay Bảo Vệ */
-        #prd-guard-overlay {
-            position: fixed;
-            inset: 0;
-            background: #0a0a0c;
-            z-index: 99999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
-        }
-        .guard-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top: 4px solid var(--prd-accent);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-bottom: 20px;
-        }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        /* Navbar */
-        .prd-navbar {
-            background: rgba(15, 15, 18, 0.85);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--prd-border);
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .prd-brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            color: #fff;
-        }
-        .prd-brand img { height: 40px; }
-        .prd-brand-title {
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            background: linear-gradient(90deg, #fff, #aaa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .prd-badge {
-            background: rgba(243, 156, 18, 0.2);
-            color: var(--prd-gold);
-            border: 1px solid rgba(243, 156, 18, 0.4);
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-        .prd-nav-links { display: flex; align-items: center; gap: 25px; }
-        .prd-nav-link {
-            color: var(--prd-text-dim);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .prd-nav-link:hover, .prd-nav-link.active { color: #fff; }
-        .prd-nav-link.active { color: var(--prd-accent); }
-        
-        .prd-user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: rgba(255, 255, 255, 0.04);
-            padding: 6px 15px;
-            border-radius: 30px;
-            border: 1px solid var(--prd-border);
-        }
-        .prd-user-email { font-size: 13px; font-weight: 600; color: #e0e0e0; }
-        .btn-prd-logout {
-            background: transparent;
-            border: none;
-            color: #ff4d4d;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 8px;
-            border-radius: 4px;
-            transition: all 0.2s;
-        }
-        .btn-prd-logout:hover { background: rgba(255, 77, 77, 0.1); }
-
-        /* Main Container */
-        .prd-container {
-            max-width: 1400px;
-            width: 100%;
-            margin: 30px auto;
-            padding: 0 40px;
-            flex: 1;
-        }
-        .prd-page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            background: var(--prd-card);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--prd-border);
-            border-radius: 16px;
-            padding: 25px 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        .prd-title h1 {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 6px;
-            color: #fff;
-        }
-        .prd-title p { color: var(--prd-text-dim); font-size: 14px; }
-        
-        .btn-create {
-            background: linear-gradient(135deg, #d31145, #9b0b31);
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(211, 17, 69, 0.4);
-            transition: all 0.3s ease;
-        }
-        .btn-create:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(211, 17, 69, 0.6);
-        }
-
-        /* Products Display Area */
-        .prd-panel {
-            background: var(--prd-card);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--prd-border);
-            border-radius: 16px;
-            padding: 28px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        .panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--prd-border);
-        }
-        .panel-title {
-            font-size: 20px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .panel-title i { color: var(--prd-accent); }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--prd-border);
-            border-radius: 8px;
-            padding: 8px 15px;
-            width: 320px;
-        }
-        .search-box i { color: #666; margin-right: 10px; font-size: 14px; }
-        .search-box input {
-            background: transparent;
-            border: none;
-            color: #fff;
-            font-size: 14px;
-            width: 100%;
-            outline: none;
-        }
-
-        /* Table View */
-        .table-responsive { overflow-x: auto; }
-        .prd-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-        .prd-table th {
-            padding: 14px 18px;
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--prd-text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            border-bottom: 1px solid var(--prd-border);
-            background: rgba(255, 255, 255, 0.02);
-        }
-        .prd-table td {
-            padding: 16px 18px;
-            font-size: 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            color: #e0e0e0;
-            vertical-align: middle;
-        }
-        .prd-table tr:hover td { background: rgba(255, 255, 255, 0.02); }
-        
-        .prd-img-thumb {
-            width: 50px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid var(--prd-border);
-            background: #111;
-        }
-        
-        .btn-action {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--prd-border);
-            color: #fff;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .btn-action:hover { background: rgba(255, 255, 255, 0.15); border-color: #fff; }
-        .btn-action.edit:hover { background: #3498db; border-color: #3498db; }
-        .btn-action.delete:hover { background: #ff4d4d; border-color: #ff4d4d; }
-
-        /* Modal CRUD Form */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-            z-index: 10000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .modal-overlay.active { display: flex; opacity: 1; }
-        .modal-box {
-            background: #16161a;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
-            width: 100%;
-            max-width: 520px;
-            padding: 30px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            position: relative;
-            transform: translateY(-20px);
-            transition: transform 0.3s ease;
-        }
-        .modal-overlay.active .modal-box { transform: translateY(0); }
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--prd-border);
-        }
-        .modal-title { font-size: 20px; font-weight: 700; color: #fff; }
-        .btn-close-modal {
-            background: transparent;
-            border: none;
-            color: #888;
-            font-size: 20px;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .btn-close-modal:hover { color: #fff; }
-
-        .form-group { margin-bottom: 18px; }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--prd-text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--prd-border);
-            border-radius: 8px;
-            color: #fff;
-            font-size: 14px;
-            font-family: inherit;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: var(--prd-accent);
-        }
-        .form-group textarea { resize: vertical; min-height: 80px; }
-
-        .modal-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 25px;
-        }
-        .btn-cancel {
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .btn-cancel:hover { background: rgba(255, 255, 255, 0.15); }
-        .btn-submit-form {
-            background: var(--prd-accent);
-            color: #fff;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-submit-form:hover { background: #b80d3b; }
-
-        /* Guide Box for Table Missing */
-        .guide-box {
-            background: rgba(243, 156, 18, 0.1);
-            border: 1px dashed var(--prd-gold);
-            border-radius: 12px;
-            padding: 25px;
-            margin-top: 15px;
-            text-align: left;
-            line-height: 1.6;
-            color: #e0e0e0;
-        }
-
-        /* Footer */
-        .prd-footer {
-            border-top: 1px solid var(--prd-border);
-            padding: 25px 40px;
-            text-align: center;
-            color: #666;
-            font-size: 13px;
-            margin-top: auto;
-        }
-
-        @media (max-width: 768px) {
-            .prd-navbar { padding: 15px 20px; flex-direction: column; gap: 15px; }
-            .prd-container { padding: 0 20px; }
-            .prd-page-header { flex-direction: column; align-items: flex-start; gap: 15px; }
-            .search-box { width: 100%; }
-        }
-    </style>
+        <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-
-    <!-- MÀN HÌNH CHẶN & KIỂM TRA PHIÊN (GUARD OVERLAY) -->
+    <!-- Overlay Bảo Vệ -->
     <div id="prd-guard-overlay">
         <div class="guard-spinner"></div>
-        <h2 style="font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px;">ĐANG KIỂM TRA PHIÊN ĐĂNG NHẬP...</h2>
-        <p style="color: #888; font-size: 14px;">Hệ thống Quản lý Sản phẩm United Store</p>
+        <p style="color: #9aa0a6; font-size: 14px; font-weight: 500;">Đang xác thực quyền Admin...</p>
     </div>
 
-    <!-- THANH ĐIỀU HƯỚNG -->
-    <nav class="prd-navbar">
-        <div style="display: flex; align-items: center; gap: 20px;">
-            <a href="index.html" class="prd-brand">
-                <img src="images/logo-mu.png" alt="United Store" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg'">
-                <span class="prd-brand-title">UNITED STORE</span>
-            </a>
-            <span class="prd-badge"><i class="fa-solid fa-users-gear"></i> SHARED PRODUCT MANAGER</span>
-        </div>
-
-        <div class="prd-nav-links">
-            <a href="index.html" class="prd-nav-link"><i class="fa-solid fa-house"></i> Trang Chủ</a>
-            <a href="admin-crm.html" class="prd-nav-link"><i class="fa-solid fa-chart-line"></i> Dashboard CRM</a>
-            <a href="manage-products.html" class="prd-nav-link active"><i class="fa-solid fa-boxes-stacked"></i> Quản Lý Sản Phẩm</a>
-        </div>
-
-        <div class="prd-user-info">
-            <i class="fa-solid fa-circle-user" style="color: var(--prd-accent);"></i>
-            <span class="prd-user-email" id="prd-user-display-email">user...</span>
-            <button class="btn-prd-logout" onclick="handlePrdLogout(event)" title="Đăng xuất">
-                <i class="fa-solid fa-right-from-bracket"></i> Log Out
-            </button>
-        </div>
-    </nav>
-
-    <!-- NỘI DUNG CHÍNH -->
-    <main class="prd-container">
-        <div class="prd-page-header">
-            <div class="prd-title">
-                <h1>QUẢN LÝ DANH SÁCH SẢN PHẨM (CRUD)</h1>
-                <p>Cho phép Admin và các User đã đăng nhập thêm mới, cập nhật hoặc xóa sản phẩm khỏi kho hàng.</p>
+    <div class="admin-container">
+        <!-- SIDEBAR -->
+        <div class="admin-sidebar">
+            <div class="sidebar-header">
+                <img src="images/0_Manchester_United_FC_crest.svg" alt="United Logo" class="admin-logo">
+                <h2>UNITED STORE</h2>
             </div>
-            <div>
-                <button class="btn-create" onclick="openCreateModal()">
-                    <i class="fa-solid fa-plus"></i> Thêm Sản Phẩm Mới
-                </button>
-            </div>
-        </div>
-
-        <!-- BẢNG DANH SÁCH SẢN PHẨM -->
-        <section class="prd-panel">
-            <div class="panel-header">
-                <div class="panel-title">
-                    <i class="fa-solid fa-boxes-packing"></i> Kho Hàng Trực Tuyến (Products Table)
+            <div class="admin-profile">
+                <div class="avatar-circle"><i class="fas fa-user-shield"></i></div>
+                <div class="profile-info">
+                    <h3 id="prd-user-email">Admin User</h3>
+                    <span class="role-badge">SUPER ADMIN</span>
                 </div>
-                <form class="search-box" onsubmit="handleProductSearch(event)">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="prd-search-input" placeholder="Tìm kiếm theo tên hoặc mô tả...">
-                </form>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="admin-crm.html"><i class="fas fa-chart-line"></i> CRM & Orders</a></li>
+                    <li class="active"><a href="manage-products.html"><i class="fas fa-box"></i> Products</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="prd-btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="admin-main">
+            <div class="main-header">
+                <h1>Product Management</h1>
+                <div class="header-actions">
+                    <form class="search-bar" id="prd-search-form">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="prd-search-input" placeholder="Search products by name...">
+                    </form>
+                    <button class="btn-create" onclick="openCreateModal()">
+                        <i class="fas fa-plus"></i> Add New Product
+                    </button>
+                </div>
             </div>
 
-            <div class="table-responsive">
-                <table class="prd-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 70px;">Ảnh</th>
-                            <th style="width: 80px;">ID</th>
-                            <th>Category</th>
-                            <th>Subcategory</th>
-                            <th>Tên Sản Phẩm</th>
-                            <th>Giá Bán</th>
-                            <th>Mô Tả Chi Tiết</th>
-                            <th style="text-align: right; width: 180px;">Thao Tác (CRUD)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="products-table-body">
-                        <tr>
-                            <td colspan="7" style="text-align: center; padding: 30px; color: #888;">Đang truy vấn bảng products từ Supabase...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </main>
+            <div class="dashboard-content">
+                <!-- KPI METRICS -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon product-icon"><i class="fas fa-box-open"></i></div>
+                        <div class="metric-data">
+                            <h4>Total Products</h4>
+                            <div class="metric-value" id="stat-total">0</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon revenue-icon"><i class="fas fa-tshirt"></i></div>
+                        <div class="metric-data">
+                            <h4>Total Jerseys</h4>
+                            <div class="metric-value" id="stat-jerseys">0</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon user-icon"><i class="fas fa-running"></i></div>
+                        <div class="metric-data">
+                            <h4>Training Gear</h4>
+                            <div class="metric-value" id="stat-training">0</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon" style="background: rgba(111, 66, 193, 0.1); color: #6f42c1;"><i class="fas fa-tags"></i></div>
+                        <div class="metric-data">
+                            <h4>Other Items</h4>
+                            <div class="metric-value" id="stat-other">0</div>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- MODAL FORM THÊM / SỬA SẢN PHẨM -->
-    <div id="product-modal-overlay" class="modal-overlay">
-        <div class="modal-box">
+                <!-- PRODUCT TABLE SECTION -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-list"></i> Product Inventory
+                        </div>
+                        <div class="filter-pills">
+                            <div class="filter-pill active">ALL</div>
+                            <div class="filter-pill">JERSEYS</div>
+                            <div class="filter-pill">TRAINING</div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 80px;">Image</th>
+                                    <th style="width: 60px;">ID</th>
+                                    <th style="width: 120px;">Category</th>
+                                    <th style="width: 150px;">Subcategory</th>
+                                    <th>Product Name</th>
+                                    <th style="width: 150px;">Price</th>
+                                    <th style="width: 250px;">Description</th>
+                                    <th style="width: 150px; text-align: right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="prd-table-body">
+                                <tr><td colspan="8" style="text-align:center; padding:30px;">Loading data...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FORM -->
+    <div class="modal-overlay" id="product-modal-overlay">
+        <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="modal-form-title">Thêm Sản Phẩm Mới</h3>
-                <button class="btn-close-modal" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+                <h3 id="modal-form-title">Thêm Sản Phẩm Mới</h3>
+                <button class="btn-close-modal" onclick="closeProductModal()">&times;</button>
             </div>
-
-            <form id="product-form" onsubmit="handleSaveProduct(event)">
-                <input type="hidden" id="prd-edit-id" value="">
+            <form id="product-form" class="modal-form">
+                <input type="hidden" id="prd-edit-id">
                 
                 <div class="form-group">
-                    <label for="prd-name">Tên Sản Phẩm *</label>
-                    <input type="text" id="prd-name" placeholder="VD: Áo Đấu Man Utd Home 2026..." required>
+                    <label>Tên Sản Phẩm <span style="color:#d31145">*</span></label>
+                    <input type="text" id="prd-name" placeholder="VD: Manchester United 24/25 Home Jersey" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="prd-category">
+                            <option value="Jerseys">Jerseys</option>
+                            <option value="Training">Training</option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Gifts">Gifts</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Subcategory</label>
+                        <select id="prd-subcategory">
+                            <option value="Home">Home</option>
+                            <option value="Away">Away</option>
+                            <option value="Goalkeeper">Goalkeeper</option>
+                            <option value="Third">Third</option>
+                            <option value="None">None</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Giá (VND) <span style="color:#d31145">*</span></label>
+                        <input type="number" id="prd-price" placeholder="VD: 2490000" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Link Ảnh Thumbnail (URL)</label>
+                        <input type="text" id="prd-image" placeholder="https://...">
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="prd-category">Category (Loại Sản Phẩm) *</label>
-                    <select id="prd-category" required style="width: 100%; padding: 12px 15px; background: rgba(0, 0, 0, 0.5); border: 1px solid var(--prd-border); border-radius: 8px; color: #fff; font-size: 14px; outline: none; margin-bottom: 15px;">
-                        <option value="Home">Home (Áo Sân Nhà)</option>
-                        <option value="Away">Away (Áo Sân Khách)</option>
-                        <option value="Third">Third (Áo Thứ Ba)</option>
-                        <option value="Goalkeeper">Goalkeeper (Áo Thủ Môn)</option>
-                        <option value="Training">Training (Đồ Tập)</option>
-                        <option value="Accessories" selected>Accessories (Phụ Kiện)</option>
-                    </select>
-
-                    <label for="prd-subcategory">Subcategory (Đối Tượng) *</label>
-                    <select id="prd-subcategory" required style="width: 100%; padding: 12px 15px; background: rgba(0, 0, 0, 0.5); border: 1px solid var(--prd-border); border-radius: 8px; color: #fff; font-size: 14px; outline: none;">
-                        <option value="Men">Men (Đồ Nam)</option>
-                        <option value="Women">Women (Đồ Nữ)</option>
-                        <option value="Kids">Kids (Trẻ Em)</option>
-                        <option value="Baby & Infant">Baby & Infant (Sơ Sinh)</option>
-                        <option value="None" selected>None (Không phân loại)</option>
-                    </select>
+                    <label>Mô tả sản phẩm</label>
+                    <textarea id="prd-desc" rows="3" placeholder="Nhập mô tả ngắn..."></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label for="prd-price">Giá Bán (VNĐ) *</label>
-                    <input type="number" id="prd-price" placeholder="VD: 2500000" min="0" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="prd-image">Link Hình Ảnh (URL)</label>
-                    <input type="text" id="prd-image" placeholder="https://... (để trống sẽ dùng ảnh mặc định)">
-                </div>
-
-                <div class="form-group">
-                    <label for="prd-desc">Mô Tả Sản Phẩm</label>
-                    <textarea id="prd-desc" placeholder="Nhập mô tả chi tiết sản phẩm, chất liệu, mùa giải..."></textarea>
-                </div>
-
-                <div class="modal-actions">
+                <div class="modal-footer">
                     <button type="button" class="btn-cancel" onclick="closeProductModal()">Hủy Bỏ</button>
-                    <button type="submit" class="btn-submit-form" id="btn-save-prd">
-                        <i class="fa-solid fa-floppy-disk"></i> Lưu Sản Phẩm
-                    </button>
+                    <button type="submit" class="btn-save" id="btn-save-prd"><i class="fa-solid fa-floppy-disk"></i> Lưu Sản Phẩm</button>
                 </div>
             </form>
         </div>
     </div>
+    
+    <style>
+        /* CSS cho Modal (Tái sử dụng style gọn nhẹ) */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+            z-index: 10000; display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: all 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: var(--admin-white); border-radius: 12px; width: 600px; max-width: 95%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2); transform: translateY(-20px); transition: all 0.3s ease;
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .modal-header {
+            padding: 20px 25px; border-bottom: 1px solid var(--admin-border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-header h3 { font-family: var(--admin-font-serif); font-size: 1.4rem; color: var(--admin-text-main); }
+        .btn-close-modal { font-size: 24px; color: #999; cursor: pointer; border: none; background: transparent; }
+        .btn-close-modal:hover { color: var(--admin-danger); }
+        .modal-form { padding: 25px; }
+        .form-group { margin-bottom: 20px; }
+        .form-row { display: flex; gap: 20px; }
+        .form-row .form-group { flex: 1; }
+        .form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--admin-text-muted); margin-bottom: 8px; text-transform: uppercase;}
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 10px 15px; border: 1px solid var(--admin-border); border-radius: 6px;
+            font-size: 14px; font-family: inherit; color: var(--admin-text-main); background: #fff; outline: none;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--admin-primary); }
+        .modal-footer { margin-top: 30px; display: flex; justify-content: flex-end; gap: 15px; }
+        .btn-cancel { padding: 10px 20px; border-radius: 6px; border: 1px solid var(--admin-border); background: #fff; color: var(--admin-text-main); cursor: pointer; font-weight: 600; }
+        .btn-save { padding: 10px 20px; border-radius: 6px; border: none; background: var(--admin-primary); color: #fff; cursor: pointer; font-weight: 600; }
+        .btn-save:hover { background: var(--admin-primary-hover); }
+    </style>
 
-    <!-- FOOTER -->
-    <footer class="prd-footer">
-        <p>© 2026 Manchester United Official Store. Product Management Module (Shared RBAC Access).</p>
-    </footer>
-
-    <!-- SUPABASE & SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
@@ -706,19 +361,19 @@
                 return `
                     <tr>
                         <td>
-                            <img src="${imgUrl}" alt="${p.name || ''}" class="prd-img-thumb" onerror="this.src='${DEFAULT_IMG}'">
+                            <img src="${imgUrl}" alt="${p.name || ''}" class="table-img" onerror="this.src='${DEFAULT_IMG}'">
                         </td>
-                        <td style="font-weight: bold; color: #aaa;">#${p.id || '-'}</td>
-                        <td style="color: #3498db; font-weight: bold; font-size: 13px;">${p.category || 'Accessories'}</td>
-                        <td style="color: #9b59b6; font-weight: bold; font-size: 13px;">${p.subcategory || '-'}</td>
-                        <td style="font-weight: 700; color: #fff; font-size: 15px;">${p.name || 'Sản phẩm không tên'}</td>
-                        <td style="color: var(--prd-gold); font-weight: 800; font-size: 15px;">${priceFormatted}</td>
-                        <td style="color: #aaa; max-width: 300px; line-height: 1.4;">${p.description || '<em style="color:#555;">Không có mô tả</em>'}</td>
-                        <td style="text-align: right;">
-                            <button class="btn-action edit" onclick="openEditModal(${p.id})" title="Chỉnh sửa sản phẩm">
+                        <td style="color: var(--admin-text-muted); font-weight: 600;">#${p.id || '-'}</td>
+                        <td style="color: var(--admin-primary); font-weight: 600; font-size: 13px;">${p.category || 'Accessories'}</td>
+                        <td style="font-weight: 600; font-size: 13px;">${p.subcategory || '-'}</td>
+                        <td style="font-weight: 700; color: var(--admin-text-main); font-size: 15px;">${p.name || 'Sản phẩm không tên'}</td>
+                        <td style="color: var(--admin-text-main); font-weight: 800; font-size: 15px;">${priceFormatted}</td>
+                        <td style="color: var(--admin-text-muted); max-width: 300px; line-height: 1.4; font-size: 13px;">${p.description || '<em style="color:#999;">Không có mô tả</em>'}</td>
+                        <td class="action-cell" style="text-align: right;">
+                            <button class="btn-edit" onclick="openEditModal(${p.id})" title="Chỉnh sửa sản phẩm">
                                 <i class="fa-solid fa-pen"></i> Sửa
                             </button>
-                            <button class="btn-action delete" onclick="handleDeleteProduct(${p.id}, '${p.name ? p.name.replace(/'/g, "\\'") : ''}')" title="Xóa sản phẩm">
+                            <button class="btn-delete" onclick="handleDeleteProduct(${p.id}, '${p.name ? p.name.replace(/'/g, "\\'") : ''}')" title="Xóa sản phẩm">
                                 <i class="fa-solid fa-trash"></i> Xóa
                             </button>
                         </td>
