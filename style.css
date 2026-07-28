@@ -3328,24 +3328,47 @@ details[open] .filter-group-title i {
 }
 .hero-slide .hero-content {
     position: absolute;
-    bottom: 50px;
-    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 80px;
     z-index: 10;
+    max-width: 600px;
 }
 .hero-slide .hero-title {
     color: #fff;
     font-size: 3.5rem;
     font-weight: 900;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
     font-family: "Georgia", "Times New Roman", serif;
+}
+.hero-slide .hero-subtitle {
+    color: #fff;
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+.hero-cta-btn {
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    border-radius: 25px;
+    padding: 12px 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+    text-decoration: none;
+}
+.hero-cta-btn:hover {
+    background: #f0f0f0;
 }
 /* Hero Navigation */
 .hero-nav-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
     border: none;
     width: 50px;
     height: 50px;
@@ -3359,7 +3382,7 @@ details[open] .filter-group-title i {
     transition: background 0.3s;
 }
 .hero-nav-btn:hover {
-    background: #fff;
+    background: rgba(0, 0, 0, 0.6);
 }
 .hero-nav-btn.prev {
     left: 20px;
