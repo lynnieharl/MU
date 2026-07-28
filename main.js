@@ -296,12 +296,28 @@ async function loadProducts() {
     // 2. TẠO QUERY SUPABASE NĂNG ĐỘNG
     let query = window.supabaseClient.from('products').select('*');
 
-    // Nếu có phân loại trên URL -> Mới tiến hành lọc (Lưu ý ilike để không phân biệt hoa/thường)
+    // Nếu có phân loại trên URL -> Lọc chính xác (không dùng % để tránh Men khớp Women)
     if (catParam) {
-      query = query.ilike('category', `%${catParam}%`);
+      query = query.ilike('category', catParam);
     }
     if (subParam) {
-      query = query.ilike('subcategory', `%${subParam}%`);
+      query = query.ilike('subcategory', subParam);
+    }
+
+    // 2.5 CẬP NHẬT BREADCRUMB ĐỘNG NẾU ĐANG Ở TRANG CATEGORY
+    const breadcrumb = document.getElementById('cat-breadcrumb');
+    const pageTitle = document.getElementById('cat-page-title');
+    if (breadcrumb || pageTitle) {
+      let displayTitle = 'Tất cả sản phẩm';
+      if (catParam && subParam) {
+        displayTitle = `${catParam} - ${subParam}`;
+      } else if (catParam || subParam) {
+        displayTitle = catParam || subParam;
+      }
+      
+      if (breadcrumb) breadcrumb.innerText = displayTitle;
+      if (pageTitle) pageTitle.innerText = (!catParam && !subParam) ? 'TẤT CẢ SẢN PHẨM' : 'DANH MỤC: ' + displayTitle.toUpperCase();
+      document.title = displayTitle + ' - United Store';
     }
 
     const { data, error } = await query;

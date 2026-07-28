@@ -255,29 +255,8 @@
 
     <!-- Supabase Logic -->
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const catType = urlParams.get('category');
-            const subCatType = urlParams.get('subcategory');
-            const oldType = urlParams.get('type'); // Fallback cho link cũ
-            
-            const isAll = (!catType && !subCatType && (!oldType || oldType === 'All'));
-            
-            // Format chuỗi hiển thị
-            let displayTitle = 'Tất Cả';
-            if (catType && subCatType) {
-                displayTitle = `${catType} - ${subCatType}`;
-            } else if (catType || subCatType) {
-                displayTitle = catType || subCatType;
-            } else if (oldType && oldType !== 'All') {
-                displayTitle = oldType;
-            }
-            
-            document.title = (isAll ? 'Tất Cả Sản Phẩm' : displayTitle) + ' - United Store';
-            document.getElementById('cat-breadcrumb').innerText = displayTitle;
-            document.getElementById('cat-page-title').innerText = (isAll ? 'TẤT CẢ SẢN PHẨM' : 'DANH MỤC: ' + displayTitle.toUpperCase());
-
-            // const grid = document.getElementById('cat-product-grid');
+        // Breadcrumb và lọc dữ liệu đã được chuyển vào main.js (hàm loadProducts)
+        // const grid = document.getElementById('cat-product-grid');
 /*
             
             // Lấy client từ global (window.supabaseClient hoặc biến local supabaseClient nếu có)
