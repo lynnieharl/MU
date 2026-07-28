@@ -52,8 +52,8 @@
   <a href="cart.html" class="icon-btn cart-btn"><i class="fas fa-shopping-bag" style="font-size: 20px; color: #fff;"></i><span class="badge" style="background:red; border-radius:50%; padding:2px 5px; font-size:12px; margin-left:3px; color:white;">0</span></a>
   
   <!-- NÚT TÀI KHOẢN BẮT BUỘC PHẢI CÓ -->
-  <div id="user-account-btn" onclick="openAuthModal()" style="cursor: pointer;">
-  <i class="far fa-user" style="font-size: 22px; color: #fff;"></i>
+  <div id="user-account-btn" style="cursor: pointer; padding: 5px; display: inline-block;">
+  <i class="far fa-user" id="user-icon-img" style="font-size: 22px; color: #ffffff;"></i>
 </div>
 </div>
                 </div>
@@ -707,7 +707,7 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 <div id="auth-modal" class="premium-modal-overlay">
   <div class="premium-modal-content">
-    <div class="premium-close-btn" onclick="window.closeAuthModal()">
+    <div class="premium-close-btn" onclick="closeAuthModal()">
       <i class="fas fa-times"></i>
     </div>
     
@@ -738,50 +738,39 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 </div>
 
 <script>
-window.openAuthModal = function() {
-  const modal = document.getElementById('auth-modal');
-  if (modal) {
-    modal.style.display = 'flex';
-    modal.style.zIndex = '999999';
-    // restore opacity for premium look just in case, but keep user logic
-    modal.style.visibility = 'visible';
-    modal.style.opacity = '1';
-    modal.classList.add('show');
-  } else {
-    console.error("Chưa có #auth-modal trong HTML!");
+// Hàm đóng Modal
+function closeAuthModal() {
+  const authModal = document.getElementById('auth-modal');
+  if (authModal) {
+    authModal.style.opacity = '0';
+    authModal.classList.remove('show');
+    setTimeout(() => { authModal.style.display = 'none'; }, 300);
   }
-};
+}
 
-window.closeAuthModal = function() {
-  const modal = document.getElementById('auth-modal');
-  if (modal) {
-    modal.style.opacity = '0';
-    modal.classList.remove('show');
-    setTimeout(() => { modal.style.display = 'none'; }, 300);
-  }
-};
-
-window.switchAuthTab = function(tabName) {
+// Hàm chuyển Tab Đăng Nhập / Đăng Ký
+function switchAuthTab(tab) {
   const loginForm = document.getElementById('popup-login-form');
   const regForm = document.getElementById('popup-reg-form');
   const tabLoginBtn = document.getElementById('tab-login-btn');
   const tabRegBtn = document.getElementById('tab-reg-btn');
-
-  if (tabName === 'login') {
-    if(loginForm) loginForm.style.display = 'block';
-    if(regForm) regForm.style.display = 'none';
+  
+  if (tab === 'login') {
+    if (loginForm) loginForm.style.display = 'block';
+    if (regForm) regForm.style.display = 'none';
     if(tabLoginBtn) tabLoginBtn.classList.add('active');
     if(tabRegBtn) tabRegBtn.classList.remove('active');
   } else {
-    if(loginForm) loginForm.style.display = 'none';
-    if(regForm) regForm.style.display = 'block';
+    if (loginForm) loginForm.style.display = 'none';
+    if (regForm) regForm.style.display = 'block';
     if(tabRegBtn) tabRegBtn.classList.add('active');
     if(tabLoginBtn) tabLoginBtn.classList.remove('active');
   }
-};
+}
+
 // Hàm Đăng Nhập Popup
 async function handlePopupLogin(e) {
-  e.preventDefault();
+  if(e && e.preventDefault) e.preventDefault();
   const email = document.getElementById('pop-login-email').value.trim();
   const password = document.getElementById('pop-login-pass').value;
   
@@ -789,13 +778,11 @@ async function handlePopupLogin(e) {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) throw error;
     
-    // Lưu Session vào localStorage
     if (data.session) {
       await supabase.auth.setSession(data.session);
     }
     
     closeAuthModal();
-    // Kiểm tra và cập nhật giao diện ngay lập tức mà không cần reload
     await checkAuthState();
     alert('🎉 Đăng nhập thành công!');
   } catch (err) {
@@ -805,7 +792,7 @@ async function handlePopupLogin(e) {
 
 // Hàm Đăng Ký Popup
 async function handlePopupRegister(e) {
-  e.preventDefault();
+  if(e && e.preventDefault) e.preventDefault();
   const email = document.getElementById('pop-reg-email').value.trim();
   const password = document.getElementById('pop-reg-pass').value;
   
@@ -818,13 +805,24 @@ async function handlePopupRegister(e) {
     const { data, error } = await supabase.auth.signUp({ email, password });
     if (error) throw error;
     
-    // Chép bản ghi vào bảng users
     await supabase.from('users').insert([{ email, role: 'user' }]);
     
     alert('🎉 Đăng ký thành công! Hãy đăng nhập ngay.');
-    switchAuthTab('login'); // Chuyển sang tab đăng nhập
+    switchAuthTab('login');
   } catch (err) {
     alert('Lỗi đăng ký: ' + err.message);
+  }
+}
+
+// Hàm Đăng xuất
+async function handleLogout(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+    if (typeof supabase !== 'undefined') {
+        await supabase.auth.signOut();
+    }
+    localStorage.clear();
+    window.location.href = 'index.html';
   }
 }
 
@@ -844,44 +842,53 @@ async function checkAuthState() {
       } else if (role === 'staff') {
         accountBtn.innerHTML = `<i class="fas fa-id-badge" style="font-size: 22px; color: #ffbe00;" title="Quản Lý Sản Phẩm" onclick="window.location.href='manage-products.html'"></i>`;
       } else {
-        accountBtn.innerHTML = `<i class="fas fa-user-circle" style="font-size: 24px; color: #da020e;" title="${email} - Bấm để Đăng xuất" onclick="handleLogout()"></i>`;
+        accountBtn.innerHTML = `<i class="fas fa-user-circle" style="font-size: 24px; color: #da020e;" title="${email} - Bấm để Đăng xuất" onclick="handleLogout(event)"></i>`;
       }
-      accountBtn.onclick = null;
     } else {
-      accountBtn.innerHTML = `<i class="far fa-user" style="font-size: 22px; color: #fff;"></i>`;
-      accountBtn.onclick = openAuthModal;
+      accountBtn.innerHTML = `<i class="far fa-user" id="user-icon-img" style="font-size: 22px; color: #ffffff;"></i>`;
     }
   } catch (err) {
     console.error("Lỗi xác thực:", err.message);
   }
 }
-}
 
-// Hàm Đăng xuất
-async function handleLogout(e) {
-  if (e && e.preventDefault) e.preventDefault();
-  if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
-    if (typeof supabase !== 'undefined') {
-        await supabase.auth.signOut();
-    } else if (typeof supabase !== 'undefined') {
-        await supabase.auth.signOut();
-    }
-    localStorage.clear();
-    window.location.href = 'index.html';
+// Đảm bảo DOM đã load xong mới gán event để không bị lỗi null
+document.addEventListener('DOMContentLoaded', async function() {
+  const accountBtn = document.getElementById('user-account-btn');
+  const authModal = document.getElementById('auth-modal');
+  
+  if (accountBtn && authModal) {
+    accountBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Mở modal an toàn
+      authModal.style.display = 'flex';
+      authModal.style.zIndex = '999999';
+      authModal.style.visibility = 'visible';
+      setTimeout(() => { authModal.style.opacity = '1'; authModal.classList.add('show'); }, 10);
+    });
+  } else {
+    console.error('Thiếu #user-account-btn hoặc #auth-modal trong HTML!');
   }
-}
-}
 
-// Bắt sự kiện load trang
-document.addEventListener('DOMContentLoaded', async () => {
+  // Khởi động session check an toàn
+  try {
     await checkAuthState();
     if (window.location.hash === '#login') {
-        openAuthModal();
+        authModal.style.display = 'flex';
+        authModal.style.zIndex = '999999';
+        authModal.style.visibility = 'visible';
+        setTimeout(() => { authModal.style.opacity = '1'; authModal.classList.add('show'); }, 10);
         switchAuthTab('login');
     } else if (window.location.hash === '#register') {
-        openAuthModal();
+        authModal.style.display = 'flex';
+        authModal.style.zIndex = '999999';
+        authModal.style.visibility = 'visible';
+        setTimeout(() => { authModal.style.opacity = '1'; authModal.classList.add('show'); }, 10);
         switchAuthTab('register');
     }
+  } catch(e) {
+    console.error(e);
+  }
 });
 </script>
 </body>
