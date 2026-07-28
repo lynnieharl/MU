@@ -356,6 +356,12 @@ async function loadProducts() {
         </div> 
       </div>`;
     }).join('');
+
+    // Update totals on Jerseys page
+    const countText = document.getElementById('jerseys-count-text');
+    const pillCount = document.getElementById('total-count-pill');
+    if (countText) countText.innerText = data.length + ' products';
+    if (pillCount && !catParam && !subParam) pillCount.innerText = data.length; // Only update ALL pill if no filter
   } catch (err) {
     console.error("Crash JS:", err);
     container.innerHTML = `<p style="text-align: center; width: 100%; color: #888;">Đã xảy ra lỗi khi tải dữ liệu (${err.message}).</p>`;
