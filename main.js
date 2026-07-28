@@ -255,3 +255,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+// Cấp cứu: Debug Load Products
+async function loadProducts() {
+  const container = document.getElementById('product-list') || document.querySelector('.products-grid') || document.getElementById('cat-product-grid');
+  if (!container) return;
+
+  try {
+    console.log("🔄 Đang kết nối Supabase lấy danh sách sản phẩm...");
+    
+    // 1. Query lấy TOÀN BỘ sản phẩm (Chưa lọc category để kiểm tra dữ liệu trước)
+    const { data, error } = await (window.supabaseClient || window.supabase).from('products').select('*');
+
+    // 2. Nếu bị lỗi Query
+    if (error) {
+      console.error("❌ Lỗi Query Supabase:", error);
+      container.innerHTML = `<p style="color: red; text-align: center; padding: 20px;">Lỗi lấy dữ liệu: ${error.message}</p>`;
+      return;
+    }
+    
+    console.log("📦 Dữ liệu sản phẩm nhận được từ Supabase:", data);
+    
+    // 3. Nếu Bảng rỗng (Chưa có sản phẩm nào)
+    if (!data || data.length === 0) {
+      container.innerHTML = `<div style="text-align: center; color: #ccc; padding: 40px; grid-column: 1/-1;">
+        <h3>🛒 Bảng sản phẩm trên Supabase hiện đang RỖNG!</h3>
+        <p>Vui lòng vào Supabase (Bảng 'products') hoặc trang Nhân viên để thêm sản phẩm mới.</p>
+      </div>`;
+      return;
+    }
+    
+    // 4. Nếu CÓ dữ liệu: Render thẻ sản phẩm ra HTML
+    container.innerHTML = data.map(item => `
+      <div class="product-card" style="border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; background: #18181c; text-align: center; color: #fff;">
+        <img src="${item.image_url || item.image || 'https://via.placeholder.com/200'}" alt="${item.name}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px;">
+        <h4 style="margin: 10px 0; font-size: 16px;">${item.name || item.title || 'Sản phẩm MU'}</h4>
+        <p style="color: #da020e; font-weight: bold; font-size: 18px;">$${item.price || 0}</p>
+        <button style="background: #da020e; color: #fff; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%;">THÊM VÀO GIỎ</button>
+      </div>
+    `).join('');
+  } catch (err) {
+    console.error("❌ Crash JS:", err);
+  }
+}
+
+// Gọi hàm ngay khi DOM sẵn sàng
+document.addEventListener('DOMContentLoaded', loadProducts);
