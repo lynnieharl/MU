@@ -1,3 +1,17 @@
+
+// Highlight active nav link
+document.addEventListener('DOMContentLoaded', () => {
+    const currentPath = window.location.pathname.split('/').pop();
+    if (currentPath === 'jerseys.html') {
+        const jerseysLink = document.querySelector('a[href="jerseys.html"].nav-link');
+        if (jerseysLink) {
+            jerseysLink.classList.add('active');
+            jerseysLink.style.color = '#d31145'; // Optional red color indicator
+            jerseysLink.style.borderBottom = '2px solid #d31145';
+        }
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // TRENDING NOW CAROUSEL LOGIC
@@ -297,9 +311,18 @@ async function loadProducts() {
     let query = window.supabaseClient.from('products').select('*');
 
     // Nếu có phân loại trên URL -> Lọc chính xác (không dùng % để tránh Men khớp Women)
-    if (catParam) {
-      query = query.ilike('category', catParam);
+    
+    const isJerseysPage = window.location.pathname.includes('jerseys.html');
+    
+    // Nếu ở trang jerseys.html mà không có tham số lọc thì lấy toàn bộ áo (Home, Away, Third, Goalkeeper)
+    if (isJerseysPage && !catParam && !subParam) {
+        query = query.in('category', ['Home', 'Away', 'Third', 'Goalkeeper']);
+    } else {
+        if (catParam) {
+            query = query.ilike('category', catParam);
+        }
     }
+
     if (subParam) {
       query = query.ilike('subcategory', subParam);
     }
