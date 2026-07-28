@@ -487,6 +487,7 @@
                         <tr>
                             <th style="width: 70px;">Ảnh</th>
                             <th style="width: 80px;">ID</th>
+                            <th>Phân Loại</th>
                             <th>Tên Sản Phẩm</th>
                             <th>Giá Bán</th>
                             <th>Mô Tả Chi Tiết</th>
@@ -495,7 +496,7 @@
                     </thead>
                     <tbody id="products-table-body">
                         <tr>
-                            <td colspan="6" style="text-align: center; padding: 30px; color: #888;">Đang truy vấn bảng products từ Supabase...</td>
+                            <td colspan="7" style="text-align: center; padding: 30px; color: #888;">Đang truy vấn bảng products từ Supabase...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -517,6 +518,18 @@
                 <div class="form-group">
                     <label for="prd-name">Tên Sản Phẩm *</label>
                     <input type="text" id="prd-name" placeholder="VD: Áo Đấu Man Utd Home 2026..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="prd-category">Phân Loại Sản Phẩm *</label>
+                    <select id="prd-category" required style="width: 100%; padding: 12px 15px; background: rgba(0, 0, 0, 0.5); border: 1px solid var(--prd-border); border-radius: 8px; color: #fff; font-size: 14px; outline: none;">
+                        <option value="Men">Men (Đồ Nam)</option>
+                        <option value="Women">Women (Đồ Nữ)</option>
+                        <option value="Home">Home (Áo Sân Nhà)</option>
+                        <option value="Away">Away (Áo Sân Khách)</option>
+                        <option value="Training">Training (Đồ Tập)</option>
+                        <option value="Accessories" selected>Accessories (Phụ Kiện)</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -686,6 +699,7 @@
                             <img src="${imgUrl}" alt="${p.name || ''}" class="prd-img-thumb" onerror="this.src='${DEFAULT_IMG}'">
                         </td>
                         <td style="font-weight: bold; color: #aaa;">#${p.id || '-'}</td>
+                        <td style="color: #3498db; font-weight: bold; font-size: 13px;">${p.category || 'Accessories'}</td>
                         <td style="font-weight: 700; color: #fff; font-size: 15px;">${p.name || 'Sản phẩm không tên'}</td>
                         <td style="color: var(--prd-gold); font-weight: 800; font-size: 15px;">${priceFormatted}</td>
                         <td style="color: #aaa; max-width: 300px; line-height: 1.4;">${p.description || '<em style="color:#555;">Không có mô tả</em>'}</td>
@@ -741,6 +755,7 @@
             document.getElementById('modal-form-title').textContent = 'Chỉnh Sửa Sản Phẩm #' + id;
             document.getElementById('prd-edit-id').value = prd.id;
             document.getElementById('prd-name').value = prd.name || '';
+            document.getElementById('prd-category').value = prd.category || 'Accessories';
             document.getElementById('prd-price').value = prd.price || 0;
             document.getElementById('prd-image').value = prd.image_url || '';
             document.getElementById('prd-desc').value = prd.description || '';
@@ -759,6 +774,7 @@
             
             const editId = document.getElementById('prd-edit-id').value;
             const name = document.getElementById('prd-name').value.trim();
+            const category = document.getElementById('prd-category').value;
             const price = parseFloat(document.getElementById('prd-price').value) || 0;
             const image_url = document.getElementById('prd-image').value.trim();
             const description = document.getElementById('prd-desc').value.trim();
@@ -778,7 +794,7 @@
                     // CREATE: Thêm mới
                     const { error } = await supabaseClient
                         .from('products')
-                        .insert([{ name, price, image_url, description }]);
+                        .insert([{ name, category, price, image_url, description }]);
 
                     if (error) throw error;
                     alert('Đã thêm sản phẩm mới vào kho thành công!');
@@ -786,7 +802,7 @@
                     // UPDATE: Cập nhật
                     const { error } = await supabaseClient
                         .from('products')
-                        .update({ name, price, image_url, description })
+                        .update({ name, category, price, image_url, description })
                         .eq('id', parseInt(editId));
 
                     if (error) throw error;

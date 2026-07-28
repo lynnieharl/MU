@@ -3,202 +3,520 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kits - Manchester United Official Online Store</title>
-    <!-- FontAwesome -->
+    <meta name="referrer" content="no-referrer">
+    <title>Official Manchester United Online Store</title>
+    <!-- Thư viện FontAwesome chứa icon thật -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
+    <!-- Phải gọi đúng file style.css -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- TOPBAR -->
-    <div class="topbar">
-        <div class="container">
-            <a href="#" class="topbar-link">Help</a>
-            <a href="#" class="topbar-link">Track Order</a>
-            <div class="currency-selector">
-                <i class="fa-solid fa-globe"></i> EN / $USD
+        <!-- ==========================================
+         [PHẦN 1] HEADER & MEGA MENU (MỚI)
+         ========================================== -->
+    <header class="header-wave-bg">
+        <div class="top-bar-container">
+            <div class="top-bar-left">
+                <button class="top-bar-btn"><i class="fa-solid fa-globe"></i> English - US$</button>
+            </div>
+            <div class="top-bar-right">
+                <a href="track-order.html" class="top-bar-link">Track Order</a>
+                <a href="help.html" class="top-bar-link">Help</a>
             </div>
         </div>
-    </div>
 
-    <!-- MAIN HEADER -->
-    <header class="site-header">
-        <div class="container navbar">
-            <button class="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button>
-            <a href="index.html" class="nav-brand">
-                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd Logo">
-            </a>
-            <!-- Simplified Nav for this page, usually you'd include the full mega menu -->
-            <nav class="nav-menu">
-                <div class="nav-item active"><a href="category.html" class="nav-link">Kits</a></div>
-                <div class="nav-item"><a href="category.html" class="nav-link">Training</a></div>
-                <div class="nav-item"><a href="category.html" class="nav-link">Retro</a></div>
-                <div class="nav-item"><a href="category.html" class="nav-link">Gifts & Accessories</a></div>
-            </nav>
-            <div class="nav-actions">
-                <button class="action-btn" title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <button class="action-btn" title="Account"><i class="fa-regular fa-user"></i></button>
-                <button class="action-btn" id="cart-toggle-btn" title="Cart">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="cart-count" id="header-cart-count">0</span>
-                </button>
+        <div class="header-main">
+            <div class="header-logo">
+                <a href="index.html">
+                    <span class="logo-text">UNITED</span>
+                    <img src="images/0_Manchester_United_FC_crest.svg" alt="Manchester United Logo" class="logo-img">
+                    <span class="logo-text">STORE</span>
+                </a>
+            </div>
+            
+            <div class="header-search-icons">
+                <div class="header-search">
+                    <form action="search.html" method="GET" class="search-form">
+                        <input type="text" name="query" class="search-input" placeholder="Search for products, players, and more...">
+                        <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+                
+                <div class="header-icons">
+                    <div class="header-icon-dropdown">
+                        <a href="login.html" class="header-icon-link">
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                        <div class="account-menu">
+                            <a href="login.html" class="account-menu-link login-btn">Log In</a>
+                            <a href="register.html" class="account-menu-link">Create an account</a>
+                        </div>
+                    </div>
+                    <a href="wishlist.html" class="header-icon-link">
+                        <i class="fa-regular fa-heart"></i>
+                    </a>
+                    <a href="cart.html" class="header-icon-link cart-icon-wrapper">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span class="cart-badge">0</span>
+                    </a>
+                </div>
             </div>
         </div>
+
+        <nav class="new-mega-nav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="category.html" class="nav-link">New In</a></li>
+                <li class="nav-item has-mega-menu">
+                    <a href="category.html?type=Home" class="nav-link">Jerseys <span class="badge-new">New</span></a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-container">
+                            <div class="mega-col">
+                                <h3>Home</h3>
+                                <ul>
+                                    <li><a href="category.html?type=Men">Men</a></li>
+                                    <li><a href="category.html?type=Women">Women</a></li>
+                                    <li><a href="category.html?type=Accessories">Kids</a></li>
+                                    <li><a href="category.html?type=Accessories">Baby & Infant</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Away <span class="badge-new">New</span></h3>
+                                <ul>
+                                    <li><a href="category.html?type=Men">Men</a></li>
+                                    <li><a href="category.html?type=Women">Women</a></li>
+                                    <li><a href="category.html?type=Accessories">Kids</a></li>
+                                    <li><a href="category.html?type=Accessories">Baby & Infant</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Third</h3>
+                                <ul>
+                                    <li><a href="category.html?type=Men">Men</a></li>
+                                    <li><a href="category.html?type=Women">Women</a></li>
+                                    <li><a href="category.html?type=Accessories">Kids</a></li>
+                                    <li><a href="category.html?type=Accessories">Baby & Infant</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Goalkeeper</h3>
+                                <ul>
+                                    <li><a href="category.html?type=Men">Men</a></li>
+                                    <li><a href="category.html?type=Women">Women</a></li>
+                                    <li><a href="category.html?type=Accessories">Kids</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Shop By Player</h3>
+                                <ul>
+                                    <li><a href="player.html">Men's team</a></li>
+                                    <li><a href="player.html">Women's Team</a></li>
+                                    <li><a href="player.html">Player Printed Jerseys</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="category.html?type=Training" class="nav-link">Trainingwear</a></li>
+                <li class="nav-item has-mega-menu">
+                    <a href="category.html?type=Men" class="nav-link">Fashion <span class="badge-new">New</span></a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-container">
+                            <div class="mega-col">
+                                <h3>Men</h3>
+                                <ul>
+                                    <li><a href="category.html?type=Men">Tops</a></li>
+                                    <li><a href="category.html?type=Men">Jackets & coats</a></li>
+                                    <li><a href="category.html?type=Men">Trousers & shorts</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Women</h3>
+                                <ul>
+                                    <li><a href="category.html?type=Women">Tops</a></li>
+                                    <li><a href="category.html?type=Women">Jackets & coats</a></li>
+                                    <li><a href="category.html?type=Women">Trousers & shorts</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Kids</h3>
+                                <ul>
+                                    <li><a href="category.html?type=Accessories">Tops</a></li>
+                                    <li><a href="category.html?type=Accessories">Jacket & Coat</a></li>
+                                    <li><a href="category.html?type=Accessories">Trousers & Shorts</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Collections</h3>
+                                <ul>
+                                    <li><a href="category.html?type=Training">Trainingwear</a></li>
+                                    <li><a href="category.html?type=Training">Pre Match</a></li>
+                                    <li><a href="category.html?type=Training">Anthem Jackets</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item has-mega-menu">
+                    <a href="category.html?type=Accessories" class="nav-link">Accessories</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-container">
+                            <div class="mega-col">
+                                <h3>Accessories</h3>
+                                <ul>
+                                    <li><a href="category.html?type=Accessories">Headwear</a></li>
+                                    <li><a href="category.html?type=Accessories">Watches</a></li>
+                                    <li><a href="category.html?type=Accessories">Keyrings</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Souvenirs</h3>
+                                <ul>
+                                    <li><a href="category.html?type=Accessories">Flags & Pennants</a></li>
+                                    <li><a href="category.html?type=Accessories">Badges & Pins</a></li>
+                                    <li><a href="category.html?type=Accessories">Mugs & Glasses</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Homeware</h3>
+                                <ul>
+                                    <li><a href="category.html?type=Accessories">Bedroom</a></li>
+                                    <li><a href="category.html?type=Accessories">Bathroom</a></li>
+                                    <li><a href="category.html?type=Accessories">Kitchen</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Kids</h3>
+                                <ul>
+                                    <li><a href="category.html?type=Accessories">Toys & Games</a></li>
+                                    <li><a href="category.html?type=Accessories">School Supplies</a></li>
+                                    <li><a href="category.html?type=Accessories">Soft Toys</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item has-mega-menu">
+                    <a href="gifts.html" class="nav-link">Gifts</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-container">
+                            <div class="mega-col">
+                                <h3>By Recipient</h3>
+                                <ul>
+                                    <li><a href="gifts.html">Gifts for Him</a></li>
+                                    <li><a href="gifts.html">Gifts for Her</a></li>
+                                    <li><a href="gifts.html">Gifts for Kids</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Accessories</h3>
+                                <ul>
+                                    <li><a href="gifts.html">Wallets</a></li>
+                                    <li><a href="gifts.html">Bags</a></li>
+                                    <li><a href="gifts.html">Scarves</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h3>By Price</h3>
+                                <ul>
+                                    <li><a href="gifts.html">Under $25</a></li>
+                                    <li><a href="gifts.html">Under $50</a></li>
+                                    <li><a href="gifts.html">Under $100</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="auctions.html" class="nav-link">Auctions</a></li>
+                <li class="nav-item"><a href="category.html" class="nav-link" style="color: #ffb3b3;">Outlet</a></li>
+            </ul>
+        </nav>
     </header>
-
     <!-- BREADCRUMBS -->
-    <div class="breadcrumbs container">
-        <a href="index.html">Home</a> &gt; <span>Kits</span>
+    <div class="breadcrumbs container" style="margin-top: 20px;">
+        <a href="index.html">Trang Chủ</a> &gt; <span id="cat-breadcrumb" style="font-weight: bold; color: #d31145;">Danh Mục</span>
     </div>
 
     <!-- MAIN CONTENT AREA -->
-    <main class="container category-layout">
-        <!-- Sidebar Filters -->
-        <aside class="sidebar-filters">
-            <div class="filter-group">
-                <h4 class="filter-title">Gender</h4>
-                <div class="filter-options">
-                    <label><input type="checkbox" class="filter-checkbox" data-type="gender" value="Mens"> Mens</label>
-                    <label><input type="checkbox" class="filter-checkbox" data-type="gender" value="Womens"> Womens</label>
-                    <label><input type="checkbox" class="filter-checkbox" data-type="gender" value="Kids"> Kids</label>
-                </div>
+    <main class="container category-layout" style="margin-top: 30px; margin-bottom: 60px;">
+        
+        <div class="category-header flex justify-between items-center" style="margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
+            <h2 style="font-size: 28px; font-weight: 800; color: #fff;" id="cat-page-title">SẢN PHẨM</h2>
+            <div class="sort-box">
+                <label for="sort-select" style="color: #aaa; margin-right: 10px;">Sắp xếp:</label>
+                <select id="sort-select" style="background: #111; color: #fff; border: 1px solid #333; padding: 5px 10px; border-radius: 4px;">
+                    <option value="newest">Mới nhất</option>
+                    <option value="price-asc">Giá: Thấp đến Cao</option>
+                    <option value="price-desc">Giá: Cao đến Thấp</option>
+                </select>
             </div>
-            <div class="filter-group">
-                <h4 class="filter-title">Size</h4>
-                <div class="filter-options">
-                    <label><input type="checkbox" class="filter-checkbox" data-type="size" value="S"> S</label>
-                    <label><input type="checkbox" class="filter-checkbox" data-type="size" value="M"> M</label>
-                    <label><input type="checkbox" class="filter-checkbox" data-type="size" value="L"> L</label>
-                    <label><input type="checkbox" class="filter-checkbox" data-type="size" value="XL"> XL</label>
-                </div>
+        </div>
+
+        <!-- Grid -->
+        <div class="product-grid" id="cat-product-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px;">
+            <div style="width: 100%; text-align: center; padding: 40px; color: #888; grid-column: 1 / -1;">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 32px; margin-bottom: 10px;"></i>
+                <p>Đang tải dữ liệu sản phẩm từ hệ thống...</p>
             </div>
-        </aside>
-
-        <!-- Product Grid Area -->
-        <section class="category-main">
-            <!-- Header & Sorting -->
-            <div class="category-header flex justify-between items-center">
-                <h2>Kits (<span id="product-count">4</span>)</h2>
-                <div class="sort-box">
-                    <label for="sort-select">Sort by:</label>
-                    <select id="sort-select">
-                        <option value="newest">Newest</option>
-                        <option value="price-asc">Price: Low to High</option>
-                        <option value="price-desc">Price: High to Low</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Grid -->
-            <div class="product-grid" id="product-grid">
-                
-                <!-- Product 1 -->
-                <div class="product-card grid-item" data-price="90" data-gender="Mens" data-size="S,M,L,XL" data-date="2024-07-01">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=400&q=80" alt="Home Shirt" class="product-img primary">
-                        <img src="https://images.unsplash.com/photo-1577223625856-758c127e1279?auto=format&fit=crop&w=400&q=80" alt="Home Shirt Hover" class="product-img hover-img">
-                        <button class="quick-add-btn">QUICK ADD</button>
-                    </div>
-                    <div class="product-info">
-                        <a href="product.html" class="product-title">Mens Manchester United Home Shirt 24/25</a>
-                        <p class="product-price">$90.00</p>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="product-card grid-item" data-price="90" data-gender="Womens" data-size="S,M" data-date="2024-07-02">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1520903928273-0f44b0a2fe08?auto=format&fit=crop&w=400&q=80" alt="Away Shirt" class="product-img primary">
-                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=400&q=80" alt="Away Shirt Hover" class="product-img hover-img">
-                        <button class="quick-add-btn">QUICK ADD</button>
-                    </div>
-                    <div class="product-info">
-                        <a href="product.html" class="product-title">Womens Manchester United Away Shirt 24/25</a>
-                        <p class="product-price">$90.00</p>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="product-card grid-item" data-price="70" data-gender="Kids" data-size="S,M,L" data-date="2024-07-03">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1616124619460-ff4ed8f4683c?auto=format&fit=crop&w=400&q=80" alt="Kids Home" class="product-img primary">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80" alt="Kids Home Hover" class="product-img hover-img">
-                        <button class="quick-add-btn">QUICK ADD</button>
-                    </div>
-                    <div class="product-info">
-                        <a href="product.html" class="product-title">Kids Manchester United Home Shirt 24/25</a>
-                        <p class="product-price">$70.00</p>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="product-card grid-item" data-price="120" data-gender="Mens" data-size="L,XL" data-date="2024-06-15">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1556822272-911e860959bb?auto=format&fit=crop&w=400&q=80" alt="Authentic" class="product-img primary">
-                        <img src="https://images.unsplash.com/photo-1509631179647-0c37cb87a5a5?auto=format&fit=crop&w=400&q=80" alt="Authentic Hover" class="product-img hover-img">
-                        <button class="quick-add-btn">QUICK ADD</button>
-                    </div>
-                    <div class="product-info">
-                        <a href="product.html" class="product-title">Mens Authentic Home Shirt 24/25</a>
-                        <p class="product-price">$120.00</p>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div id="no-products-msg" style="display:none; text-align:center; padding:50px; color:#666;">
-                <p>No products found matching your filters.</p>
-            </div>
-        </section>
+        </div>
+        
     </main>
 
-    <!-- FOOTER -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-column">
-                    <h4 class="footer-title">Customer Service</h4>
-                    <ul class="footer-list footer-links">
-                        <li><a href="#">Help & FAQs</a></li>
-                        <li><a href="#">Track Order</a></li>
-                    </ul>
+    <!-- Supabase Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const catType = urlParams.get('type') || 'All';
+            
+            document.title = (catType === 'All' ? 'Tất Cả Sản Phẩm' : catType) + ' - United Store';
+            document.getElementById('cat-breadcrumb').innerText = catType === 'All' ? 'Tất Cả' : catType;
+            document.getElementById('cat-page-title').innerText = (catType === 'All' ? 'TẤT CẢ SẢN PHẨM' : 'DANH MỤC: ' + catType.toUpperCase());
+
+            const grid = document.getElementById('cat-product-grid');
+            if (!window.supabaseClient) {
+                grid.innerHTML = '<div style="width: 100%; text-align: center; padding: 40px; color: #ff4d4d; grid-column: 1 / -1;">Lỗi kết nối máy chủ Supabase!</div>';
+                return;
+            }
+
+            try {
+                let query = window.supabaseClient.from('products').select('*');
+                if (catType !== 'All') {
+                    query = query.eq('category', catType);
+                }
+                
+                const { data: products, error } = await query.order('id', { ascending: false });
+
+                if (error) {
+                    if (error.code === 'PGRST205') {
+                        grid.innerHTML = '<div style="width: 100%; text-align: center; padding: 40px; color: #888; grid-column: 1 / -1;">Bảng products chưa tồn tại.</div>';
+                    } else {
+                        throw error;
+                    }
+                    return;
+                }
+
+                if (!products || products.length === 0) {
+                    grid.innerHTML = `
+                        <div style="width: 100%; text-align: center; padding: 50px; color: #888; grid-column: 1 / -1; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px dashed rgba(255,255,255,0.1);">
+                            <i class="fa-solid fa-box-open" style="font-size: 48px; margin-bottom: 15px; color: #444;"></i>
+                            <h3 style="color: #fff; font-size: 20px; margin-bottom: 8px;">Mục này đang trống</h3>
+                            <p>Hiện chưa có sản phẩm nào trong mục ${catType === 'All' ? 'này' : '"' + catType + '"'}. Vui lòng quay lại sau!</p>
+                            <a href="index.html" class="btn-primary" style="display: inline-block; margin-top: 20px; text-decoration: none;">Về Trang Chủ</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Render dữ liệu
+                grid.innerHTML = products.map(p => {
+                    const imgUrl = p.image_url || 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
+                    const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price || 0);
+                    const catTag = p.category ? `<span style="position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.7); color:#fff; padding:4px 10px; font-size:11px; font-weight:bold; border-radius:4px; border:1px solid #333; z-index:10;">${p.category}</span>` : '';
+                    
+                    return `
+                    <div class="product-card grid-item" style="position: relative;">
+                        ${catTag}
+                        <div class="product-image-container">
+                            <img src="${imgUrl}" class="product-img" alt="${p.name || ''}" onerror="this.src='https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80'">
+                        </div>
+                        <div class="product-info">
+                            <a href="product.html?id=${p.id}" class="product-title" style="display: block; font-weight: 600; margin-bottom: 8px; color: #fff; text-decoration: none; font-size: 14px;">${p.name || 'Sản phẩm mới'}</a>
+                            <p class="product-price" style="color: #d31145; font-weight: 800; font-size: 16px;">${priceFormatted}</p>
+                        </div>
+                    </div>
+                    `;
+                }).join('');
+
+            } catch (err) {
+                console.error('Lỗi tải sản phẩm:', err);
+                grid.innerHTML = '<div style="width: 100%; text-align: center; padding: 40px; color: #ff4d4d; grid-column: 1 / -1;">Không thể tải sản phẩm.</div>';
+            }
+        });
+    </script>
+<footer class="site-footer">
+        <!-- Newsletter -->
+        <div class="newsletter-section">
+            <div class="newsletter-container">
+                <div class="newsletter-text">
+                    <h3>SIGN UP TO OUR NEWSLETTER</h3>
                 </div>
-                <div class="footer-column">
-                    <h4 class="footer-title">Stay Updated</h4>
-                    <form class="newsletter-form" onsubmit="event.preventDefault();">
-                        <input type="email" placeholder="Email Address" class="newsletter-input" required>
-                        <button type="submit" class="newsletter-btn">Sign Up</button>
+                <div class="newsletter-form-container">
+                    <form action="subscribe.php" method="POST" class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" required class="newsletter-input">
+                        <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
                     </form>
                 </div>
             </div>
-            <div class="footer-bottom">
-                &copy; 2026 Manchester United FC Ltd.
+        </div>
+
+        <!-- Main Footer Links -->
+        <div class="footer-main">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="faq.html">Help & FAQs</a></li>
+                        <li><a href="track-order.html">Track Order</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Shopping With Us</h4>
+                    <ul>
+                        <li><a href="safe-shopping.html">Safe Shopping</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="history.html">Club History</a></li>
+                        <li><a href="stadium.html">Old Trafford Stadium</a></li>
+                        <li><a href="foundation.html">MU Foundation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Follow Us</h4>
+                    <ul class="social-links">
+                        <li><a href="https://facebook.com"><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
+                        <li><a href="https://instagram.com"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                        <li><a href="https://twitter.com"><i class="fa-brands fa-x-twitter"></i> X (Twitter)</a></li>
+                        <li><a href="https://youtube.com"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Footer -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <div class="copyright-text">
+                    <p>&copy; 2024 Manchester United. All rights reserved.</p>
+                </div>
+                <div class="payment-methods">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Visa_Logo_2012.png" alt="Visa" class="payment-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard" class="payment-icon">
+                    <img src="images/22_PayPal.svg" alt="PayPal" class="payment-icon">
+                    <img src="images/23_American_Express_logo_%282018%29.svg" alt="Amex" class="payment-icon">
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Slide-out Cart Container -->
-    <div id="slide-cart-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1001;"></div>
-    <div id="slide-cart" style="position:fixed; top:0; right:-400px; width:400px; max-width:100%; height:100vh; background:#fff; z-index:1002; transition:right 0.3s ease; box-shadow:-5px 0 15px rgba(0,0,0,0.1); padding:20px; display:flex; flex-direction:column;">
-        <div class="flex justify-between items-center" style="border-bottom:1px solid #ccc; padding-bottom:15px; margin-bottom:15px;">
-            <h2 style="font-size:1.5rem;">Your Cart</h2>
-            <button id="close-cart-btn" style="font-size:1.5rem;"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div id="cart-items" style="flex:1; overflow-y:auto;">
-            <p style="text-align:center; color:#666; margin-top:50px;">Your cart is empty.</p>
-        </div>
-        <div id="cart-footer" style="border-top:1px solid #ccc; padding-top:15px; margin-top:15px;">
-            <div class="flex justify-between" style="font-size:1.2rem; font-weight:bold; margin-bottom:15px;">
-                <span>Total:</span>
-                <span id="cart-total-price">$0.00</span>
-            </div>
-            <button class="btn btn-primary" style="width:100%; padding:15px;">Checkout</button>
-        </div>
-    </div>
-
-    <!-- Core Scripts -->
+    <!-- Script JS -->
     <script src="main.js"></script>
-    <script src="cart.js"></script>
+
+<!-- Nhúng Supabase JS & Logic Cập nhật Header -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
+    let supabaseClient = null;
+    if (window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Ngăn reload cho form newsletter
+        const newsletterForms = document.querySelectorAll('.newsletter-form');
+        newsletterForms.forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Cảm ơn bạn đã đăng ký bản tin!');
+                form.reset();
+            });
+        });
+
+        if (!supabaseClient) return;
+        try {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            const accountMenu = document.querySelector('.account-menu');
+            
+            if (session && accountMenu) {
+                // Người dùng đã đăng nhập
+                const email = session.user.email;
+                let crmLink = '';
+                try {
+                    const { data: userData } = await supabaseClient.from('users').select('role').eq('email', email).single();
+                    if (userData && userData.role === 'admin') {
+                        crmLink = `<a href="admin-crm.html" class="account-menu-link" style="color: #d31145; font-weight: bold;"><i class="fa-solid fa-shield-halved" style="margin-right:6px;"></i> CRM Admin</a>`;
+                    }
+                } catch(e) {}
+
+                accountMenu.innerHTML = `
+                    <p style="padding: 10px 15px; color: #888; font-size: 13px; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1);">${email}</p>
+                    ${crmLink}
+                    <a href="manage-products.html" class="account-menu-link" style="color: #f39c12; font-weight: 600;"><i class="fa-solid fa-boxes-stacked" style="margin-right:6px;"></i> Quản lý Sản phẩm</a>
+                    <a href="#" class="account-menu-link" onclick="handleLogout(event)"><i class="fa-solid fa-right-from-bracket" style="margin-right:6px;"></i> Log Out</a>
+                `;
+            }
+        } catch (err) {
+            console.error('Lỗi kiểm tra session:', err);
+        }
+
+        // Tải danh sách sản phẩm thật từ Supabase
+        await fetchRealProducts();
+    });
+
+    async function fetchRealProducts() {
+        if (!supabaseClient) return;
+        const track = document.getElementById('real-products-track');
+        if (!track) return;
+
+        try {
+            const { data: products, error } = await supabaseClient
+                .from('products')
+                .select('*')
+                .order('id', { ascending: false });
+
+            if (error) {
+                if (error.code === 'PGRST205') {
+                    track.innerHTML = '<div style="width: 100%; text-align: center; padding: 40px; color: #888;">Bảng products chưa tồn tại.</div>';
+                } else {
+                    throw error;
+                }
+                return;
+            }
+
+            if (!products || products.length === 0) {
+                track.innerHTML = '<div style="width: 100%; text-align: center; padding: 40px; color: #888;">Chưa có sản phẩm nào trong kho. Hãy thêm sản phẩm mới!</div>';
+                return;
+            }
+
+            // Render dữ liệu
+            track.innerHTML = products.map(p => {
+                const imgUrl = p.image_url || 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
+                const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price || 0);
+                
+                return `
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="${imgUrl}" class="product-img" alt="${p.name || ''}" onerror="this.src='https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80'">
+                    </div>
+                    <div class="product-info">
+                        <a href="product.html?id=${p.id}" class="product-title">${p.name || 'Sản phẩm mới'}</a>
+                        <p class="product-price" style="color: #d31145; font-weight: bold;">${priceFormatted}</p>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+        } catch (err) {
+            console.error('Lỗi tải sản phẩm:', err);
+            track.innerHTML = '<div style="width: 100%; text-align: center; padding: 40px; color: #ff4d4d;">Không thể tải sản phẩm.</div>';
+        }
+    }
+
+    async function handleLogout(e) {
+        e.preventDefault();
+        if (supabaseClient) {
+            await supabaseClient.auth.signOut();
+        }
+        window.location.reload();
+    }
+</script>
+
 </body>
 </html>
