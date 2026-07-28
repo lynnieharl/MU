@@ -13,18 +13,11 @@
     
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+  // Khởi tạo ngay lập tức vào window object
   const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
-  // Lưu ý: Nếu có Anon Key dạng eyJ... hãy dán vào đây, nếu dùng sb_publishable_ thì khởi tạo như sau:
   const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
   
-  try {
-    window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-      auth: { persistSession: true }
-    });
-    console.log("✅ Supabase Client initialized!");
-  } catch (err) {
-    console.error("❌ Lỗi khởi tạo Supabase Client:", err);
-  }
+  window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 </script>
 </head>
 <body>

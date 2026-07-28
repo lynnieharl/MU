@@ -265,47 +265,52 @@ async function loadProducts() {
                     document.getElementById('products-container');
   if (!container) return;
 
-  let isFinished = false;
-
-  // ÉP NGẮT SPINNER SAU 2 GIÂY NẾU API TREO KEY
-  const loadingTimeout = setTimeout(() => {
-    if (!isFinished) {
-      console.warn("⚠️ API phản hồi chậm, tự động xóa Spinner!");
-      container.innerHTML = `<div style="text-align: center; color: #888; padding: 40px; grid-column: 1/-1;">
-        <p>🛒 Chưa thể tải dữ liệu tự động hoặc kho hàng đang rỗng.</p>
-        <button onclick="location.reload()" style="background: #da020e; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Tải lại trang</button>
-      </div>`;
-    }
-  }, 2000);
-  
   try {
-    if (!window.supabaseClient) throw new Error("Chưa có supabaseClient");
+    // Chờ kiểm tra nếu supabaseClient chưa sẵn sàng thì đợi 0.3s
+    if (!window.supabaseClient) {
+      console.warn("Đang chờ Supabase Client khởi tạo...");
+      await new Promise(resolve => setTimeout(resolve, 300));
+    }
 
-    const { data, error } = await window.supabaseClient.from('products').select('*');
-    isFinished = true;
-    clearTimeout(loadingTimeout);
+    const client = window.supabaseClient;
+    if (!client) {
+      throw new Error("Không thể kết nối SDK Supabase. Vui lòng kiểm tra lại đường link CDN!");
+    }
+
+    // Query thực tế từ Supabase
+    const { data, error } = await client.from('products').select('*');
     
-    if (error) throw error;
-    if (!data || data.length === 0) {
-      container.innerHTML = `<div style="text-align: center; color: #888; padding: 40px; grid-column: 1/-1;">Kho hàng hiện đang rỗng.</div>`;
+    if (error) {
+      console.error("Lỗi Supabase:", error);
+      container.innerHTML = `<div style="text-align: center; color: #da020e; padding: 40px; grid-column: 1/-1;">Lỗi lấy dữ liệu từ Supabase: ${error.message}</div>`;
       return;
     }
     
-    // Render sản phẩm
+    // Nếu Bảng 'products' trên Supabase chưa có dòng dữ liệu nào
+    if (!data || data.length === 0) {
+      container.innerHTML = `
+        <div style="text-align: center; color: #aaa; padding: 50px; grid-column: 1/-1;">
+          <i class="fas fa-box-open" style="font-size: 40px; margin-bottom: 10px; display: block;"></i>
+          Bảng 'products' trên Supabase hiện đang rỗng (0 sản phẩm).
+        </div>
+      `;
+      return;
+    }
+    
+    // Render sản phẩm thật từ Database
     container.innerHTML = data.map(item => `
       <div class="product-card" style="border: 1px solid #333; padding: 15px; border-radius: 8px; background: #18181c; text-align: center; color: #fff;">
-        <img src="${item.image_url || 'https://via.placeholder.com/200'}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px;">
+        <img src="${item.image_url || item.image || 'https://via.placeholder.com/200'}" alt="${item.name}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px;">
         <h4 style="margin: 10px 0; font-size: 16px;">${item.name || 'Sản phẩm MU'}</h4>
         <p style="color: #da020e; font-weight: bold; font-size: 18px;">$${item.price || 0}</p>
         <button style="background: #da020e; color: #fff; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%;">THÊM VÀO GIỎ</button>
       </div>
     `).join('');
   } catch (err) {
-    isFinished = true;
-    clearTimeout(loadingTimeout);
-    console.error("Lỗi:", err);
-    container.innerHTML = `<div style="text-align: center; color: #da020e; padding: 30px; grid-column: 1/-1;">Không thể tải sản phẩm (${err.message})</div>`;
+    console.error("Crash:", err);
+    container.innerHTML = `<div style="text-align: center; color: #da020e; padding: 30px; grid-column: 1/-1;">Lỗi hệ thống: ${err.message}</div>`;
   }
 }
 
-document.addEventListener('DOMContentLoaded', loadProducts);
+// Bắt buộc đợi toàn bộ trang web và script load xong mới gọi hàm
+window.addEventListener('load', loadProducts);
