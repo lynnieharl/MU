@@ -11,14 +11,25 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  // Khởi tạo ngay lập tức vào window object
-  const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
+<!-- 1. CDN Supabase v2 chuẩn (Load trước tiên) -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   
-  window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-</script>
+  <!-- 2. Khởi tạo Client ngay khi CDN tải xong -->
+  <script>
+    const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
+    
+    // Hàm khởi tạo an toàn
+    function initSupabase() {
+      if (window.supabase && window.supabase.createClient) {
+        window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        console.log("✅ Supabase SDK kết nối thành công!");
+      } else {
+        console.warn("⏳ Đang đợi SDK Supabase nạp...");
+      }
+    }
+    initSupabase();
+  </script>
 </head>
 <body>
 

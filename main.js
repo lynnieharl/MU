@@ -265,39 +265,46 @@ async function loadProducts() {
                     document.getElementById('products-container');
   if (!container) return;
 
+  // Cơ chế Polling: Đợi tối đa 5 giây cho SDK Supabase tải xong nếu mạng chậm
+  let retries = 0;
+  while ((!window.supabaseClient || !window.supabase) && retries < 10) {
+    if (window.supabase && window.supabase.createClient && !window.supabaseClient) {
+      if (typeof initSupabase === 'function') {
+        initSupabase(); // Thử khởi tạo lại
+      } else {
+        window.supabaseClient = window.supabase.createClient('https://suabbqtrggzwgchksenq.supabase.co', 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps');
+      }
+    }
+    await new Promise(resolve => setTimeout(resolve, 500)); // Đợi 0.5s
+    retries++;
+  }
+
+  // Nếu thử 10 lần (5 giây) vẫn không nạp được SDK
+  if (!window.supabaseClient) {
+    container.innerHTML = `<div style="text-align: center; color: #da020e; padding: 40px; grid-column: 1/-1;"> ⚠️ Trình duyệt hoặc bộ chặn quảng cáo (AdBlock) đang chặn kết nối CDN Supabase.<br> Vui lòng tạm tắt AdBlock/Cốc Cốc Shield và bấm <b>Tải lại trang</b>. </div>`;
+    return;
+  }
+
   try {
-    // Chờ kiểm tra nếu supabaseClient chưa sẵn sàng thì đợi 0.3s
-    if (!window.supabaseClient) {
-      console.warn("Đang chờ Supabase Client khởi tạo...");
-      await new Promise(resolve => setTimeout(resolve, 300));
-    }
+    // Query dữ liệu THẬT từ Supabase
+    const { data, error } = await window.supabaseClient.from('products').select('*');
 
-    const client = window.supabaseClient;
-    if (!client) {
-      throw new Error("Không thể kết nối SDK Supabase. Vui lòng kiểm tra lại đường link CDN!");
-    }
-
-    // Query thực tế từ Supabase
-    const { data, error } = await client.from('products').select('*');
-    
     if (error) {
-      console.error("Lỗi Supabase:", error);
-      container.innerHTML = `<div style="text-align: center; color: #da020e; padding: 40px; grid-column: 1/-1;">Lỗi lấy dữ liệu từ Supabase: ${error.message}</div>`;
+      container.innerHTML = `<div style="text-align: center; color: #da020e; padding: 40px; grid-column: 1/-1;">Lỗi truy vấn Database: ${error.message}</div>`;
       return;
     }
     
-    // Nếu Bảng 'products' trên Supabase chưa có dòng dữ liệu nào
     if (!data || data.length === 0) {
       container.innerHTML = `
         <div style="text-align: center; color: #aaa; padding: 50px; grid-column: 1/-1;">
-          <i class="fas fa-box-open" style="font-size: 40px; margin-bottom: 10px; display: block;"></i>
-          Bảng 'products' trên Supabase hiện đang rỗng (0 sản phẩm).
+          <i class="fas fa-box-open" style="font-size: 40px; margin-bottom: 10px; display: block; color: #666;"></i>
+          Kho hàng trên Supabase hiện đang rỗng (0 sản phẩm).
         </div>
       `;
       return;
     }
     
-    // Render sản phẩm thật từ Database
+    // Render danh sách sản phẩm thật
     container.innerHTML = data.map(item => `
       <div class="product-card" style="border: 1px solid #333; padding: 15px; border-radius: 8px; background: #18181c; text-align: center; color: #fff;">
         <img src="${item.image_url || item.image || 'https://via.placeholder.com/200'}" alt="${item.name}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px;">
@@ -307,10 +314,8 @@ async function loadProducts() {
       </div>
     `).join('');
   } catch (err) {
-    console.error("Crash:", err);
     container.innerHTML = `<div style="text-align: center; color: #da020e; padding: 30px; grid-column: 1/-1;">Lỗi hệ thống: ${err.message}</div>`;
   }
 }
 
-// Bắt buộc đợi toàn bộ trang web và script load xong mới gọi hàm
 window.addEventListener('load', loadProducts);
