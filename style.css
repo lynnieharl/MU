@@ -3317,8 +3317,19 @@ details[open] .filter-group-title i {
     user-select: none;
 }
 .hero-slide .hero-image-wrapper {
+    position: relative;
     width: 100%;
     height: 600px;
+}
+.hero-slide .hero-image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    pointer-events: none;
 }
 .hero-slide .hero-img {
     width: 100%;
