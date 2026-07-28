@@ -42,15 +42,18 @@
                     </form>
                 </div>
                 
-                <div class="header-icons">
-                    <a href="wishlist.html" class="header-icon-link">
-                        <i class="fa-regular fa-heart"></i>
-                    </a>
-                    <a href="cart.html" class="header-icon-link cart-icon-wrapper">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        <span class="cart-badge">0</span>
-                    </a>
-                    <div class="header-icon-item account-icon" id="auth-user-icon-container" style="position:relative; margin-left: 15px;"></div>
+                <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
+  <!-- Nút Yêu thích -->
+  <a href="wishlist.html" class="icon-btn"><i class="far fa-heart" style="font-size: 20px; color: #fff;"></i></a>
+  
+  <!-- Nút Giỏ hàng -->
+  <a href="cart.html" class="icon-btn cart-btn"><i class="fas fa-shopping-bag" style="font-size: 20px; color: #fff;"></i><span class="badge" style="background:red; border-radius:50%; padding:2px 5px; font-size:12px; margin-left:3px; color:white;">0</span></a>
+  
+  <!-- NÚT TÀI KHOẢN BẮT BUỘC PHẢI CÓ -->
+  <div id="user-account-btn" onclick="openAuthModal()" style="cursor: pointer; display: flex; align-items: center;">
+    <i class="far fa-user" id="user-icon-img" style="font-size: 20px; color: #fff;"></i>
+  </div>
+</div>
                 </div>
             </div>
         </div>
@@ -556,6 +559,113 @@
     }
 </script>
 
-    <script src="js/auth-modal.js"></script>
+    
+
+<div id="auth-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center;">
+  <div class="modal-content" style="background: #fff; padding: 30px; border-radius: 8px; width: 350px; position: relative; color: #333;">
+    <span onclick="closeAuthModal()" style="position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 20px; font-weight: bold;">&times;</span>
+    <div class="auth-tabs" style="display: flex; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
+      <button id="tab-login-btn" onclick="switchAuthTab('login')" style="flex: 1; padding: 10px; background: none; border: none; font-weight: bold; border-bottom: 2px solid #da020e; cursor: pointer;">ĐĂNG NHẬP</button>
+      <button id="tab-reg-btn" onclick="switchAuthTab('register')" style="flex: 1; padding: 10px; background: none; border: none; font-weight: bold; color: #888; cursor: pointer;">ĐĂNG KÝ</button>
+    </div>
+    
+    <!-- Form Login -->
+    <form id="popup-login-form" onsubmit="handlePopupLogin(event)">
+      <input type="email" id="pop-login-email" placeholder="Email" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+      <input type="password" id="pop-login-pass" placeholder="Mật khẩu" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+      <button type="submit" style="width: 100%; padding: 10px; background: #da020e; color: #fff; border: none; font-weight: bold; border-radius: 4px; cursor: pointer;">ĐĂNG NHẬP</button>
+    </form>
+    
+    <!-- Form Register -->
+    <form id="popup-reg-form" style="display: none;" onsubmit="handlePopupRegister(event)">
+      <input type="email" id="pop-reg-email" placeholder="Email" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+      <input type="password" id="pop-reg-pass" placeholder="Mật khẩu (>=6 ký tự)" minlength="6" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+      <button type="submit" style="width: 100%; padding: 10px; background: #28a745; color: #fff; border: none; font-weight: bold; border-radius: 4px; cursor: pointer;">TẠO TÀI KHOẢN</button>
+    </form>
+  </div>
+</div>
+
+<script>
+function openAuthModal() {
+    document.getElementById('auth-modal').style.display = 'flex';
+}
+function closeAuthModal() {
+    document.getElementById('auth-modal').style.display = 'none';
+}
+function switchAuthTab(tab) {
+    if(tab === 'login') {
+        document.getElementById('popup-login-form').style.display = 'block';
+        document.getElementById('popup-reg-form').style.display = 'none';
+        document.getElementById('tab-login-btn').style.borderBottom = '2px solid #da020e';
+        document.getElementById('tab-login-btn').style.color = '#333';
+        document.getElementById('tab-reg-btn').style.borderBottom = 'none';
+        document.getElementById('tab-reg-btn').style.color = '#888';
+    } else {
+        document.getElementById('popup-login-form').style.display = 'none';
+        document.getElementById('popup-reg-form').style.display = 'block';
+        document.getElementById('tab-login-btn').style.borderBottom = 'none';
+        document.getElementById('tab-login-btn').style.color = '#888';
+        document.getElementById('tab-reg-btn').style.borderBottom = '2px solid #da020e';
+        document.getElementById('tab-reg-btn').style.color = '#333';
+    }
+}
+async function handlePopupLogin(e) {
+    e.preventDefault();
+    if (!window.supabaseClient) return alert('Lỗi kết nối máy chủ!');
+    const email = document.getElementById('pop-login-email').value;
+    const pwd = document.getElementById('pop-login-pass').value;
+    try {
+        const { error } = await window.supabaseClient.auth.signInWithPassword({ email, password: pwd });
+        if (error) throw error;
+        closeAuthModal();
+        window.location.reload();
+    } catch (err) {
+        alert('Đăng nhập thất bại: ' + err.message);
+    }
+}
+async function handlePopupRegister(e) {
+    e.preventDefault();
+    if (!window.supabaseClient) return alert('Lỗi kết nối máy chủ!');
+    const email = document.getElementById('pop-reg-email').value;
+    const pwd = document.getElementById('pop-reg-pass').value;
+    try {
+        const { error } = await window.supabaseClient.auth.signUp({ email, password: pwd });
+        if (error) throw error;
+        await window.supabaseClient.from('users').insert([{ email, role: 'user' }]);
+        alert('Đăng ký thành công!');
+        switchAuthTab('login');
+    } catch (err) {
+        alert('Đăng ký thất bại: ' + err.message);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    setTimeout(async () => {
+        if (!window.supabaseClient) return;
+        const { data: { session } } = await window.supabaseClient.auth.getSession();
+        const btn = document.getElementById('user-account-btn');
+        if (session && btn) {
+            const email = session.user.email;
+            const { data: userData } = await window.supabaseClient.from('users').select('role').eq('email', email).single();
+            let role = userData ? userData.role : 'user';
+            
+            if (role === 'admin') {
+                btn.innerHTML = '<a href="admin-crm.html" title="Admin CRM"><img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" width="25"></a>';
+            } else {
+                btn.innerHTML = `
+                    <div style="position:relative;" class="dropdown-user" onmouseenter="document.getElementById('user-menu-drop').style.display='block'" onmouseleave="document.getElementById('user-menu-drop').style.display='none'">
+                        <img src="https://i.pinimg.com/originals/81/2f/78/812f78a2e1d7cf9d2eb05bcfb1b1c312.png" style="width:25px; border-radius:50%;" title="User Account">
+                        <div id="user-menu-drop" style="display:none; position:absolute; right:0; top:30px; background:#fff; color:#333; width:150px; padding:10px; box-shadow:0 5px 15px rgba(0,0,0,0.2); border-radius:4px; z-index:1000; font-size:14px; text-align:left;">
+                            <a href="manage-products.html" style="display:block; padding:8px; color:#333; text-decoration:none; border-bottom: 1px solid #eee;">Sản Phẩm</a>
+                            <a href="#" onclick="window.supabaseClient.auth.signOut(); window.location.reload();" style="display:block; padding:8px; color:#da020e; text-decoration:none;">Đăng xuất</a>
+                        </div>
+                    </div>
+                `;
+            }
+            btn.onclick = null;
+        }
+    }, 500);
+});
+</script>
 </body>
 </html>
