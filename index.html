@@ -261,13 +261,58 @@
     <!-- ==========================================
          [PHẦN 2] HERO BANNER
          ========================================== -->
-    <section class="hero-banner">
-        <div class="hero-image-wrapper">
-            <img src="images/3_mt-gp-1-hero-banner-desktop.jpg" alt="Old Trafford & Hero" class="hero-img">
-        </div>
-        <div class="hero-content">
-            <h1 class="hero-title">NEW HOME KIT 24/25</h1>
-            <a href="kits-home.html" class="btn-primary">SHOP NOW</a>
+        <!-- ==========================================
+         [PHẦN 2] HERO BANNER CAROUSEL
+         ========================================== -->
+    <section class="hero-carousel-section">
+        <div class="hero-carousel-container" id="hero-carousel">
+            <div class="hero-carousel-track" id="hero-track">
+                
+                <!-- SLIDE 1: HOME KIT -->
+                <div class="hero-slide">
+                    <div class="hero-image-wrapper">
+                        <img src="images/3_mt-gp-1-hero-banner-desktop.jpg" alt="New Home Kit" class="hero-img">
+                    </div>
+                    <div class="hero-content">
+                        <h1 class="hero-title">NEW HOME KIT 24/25</h1>
+                        <a href="kits-home.html" class="btn-primary">SHOP NOW</a>
+                    </div>
+                </div>
+
+                <!-- SLIDE 2: AWAY KIT -->
+                <div class="hero-slide">
+                    <div class="hero-image-wrapper">
+                        <img src="images/19_c09dd81f09a6c8db0ef921ae63aaf881.jpg" alt="New Away Kit" class="hero-img">
+                    </div>
+                    <div class="hero-content">
+                        <h1 class="hero-title" style="color: #111; text-shadow: none;">NEW AWAY KIT 24/25</h1>
+                        <a href="kits-home.html" class="btn-primary">SHOP NOW</a>
+                    </div>
+                </div>
+
+                <!-- SLIDE 3: GOALKEEPER KIT -->
+                <div class="hero-slide">
+                    <div class="hero-image-wrapper">
+                        <img src="images/17_0bb8ce5dfcdaa5f408a0c8cd9c864247.jpg" alt="Goalkeeper Kit" class="hero-img">
+                    </div>
+                    <div class="hero-content">
+                        <h1 class="hero-title" style="color: #fff;">GOALKEEPER KIT 24/25</h1>
+                        <a href="kits-home.html" class="btn-primary">SHOP NOW</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Navigation Arrows -->
+            <button class="hero-nav-btn prev" id="hero-prev"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="hero-nav-btn next" id="hero-next"><i class="fa-solid fa-chevron-right"></i></button>
+
+            <!-- Dots Indicators -->
+            <div class="hero-dots" id="hero-dots">
+                <div class="hero-dot active" data-index="0"></div>
+                <div class="hero-dot" data-index="1"></div>
+                <div class="hero-dot" data-index="2"></div>
+            </div>
         </div>
     </section>
 
