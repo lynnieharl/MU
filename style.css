@@ -3326,9 +3326,9 @@ details[open] .filter-group-title i {
     position: absolute;
     top: 0;
     left: 0;
-    width: 50%;
+    width: 100%;
     height: 100%;
-    background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0) 100%);
     pointer-events: none;
 }
 .hero-slide .hero-img {
@@ -3350,14 +3350,15 @@ details[open] .filter-group-title i {
     font-size: 3.5rem;
     font-weight: 900;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 8px #000, 0 0 20px #000, 0 0 40px rgba(0,0,0,0.8);
     font-family: "Georgia", "Times New Roman", serif;
 }
 .hero-slide .hero-subtitle {
     color: #fff;
     font-size: 1.25rem;
     margin-bottom: 30px;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    font-weight: 500;
+    text-shadow: 1px 1px 4px #000, 0 0 15px #000;
 }
 .hero-cta-btn {
     display: inline-block;
