@@ -3044,12 +3044,12 @@ details[open] .filter-group-title i {
 .store-card-info .card-price {
   font-size: 18px !important;
   font-weight: 800 !important;
-  color: #ffffff !important; /* Update to white for dark theme */
+  color: #000000 !important;
 }
 
 .store-card-info .card-title {
   font-size: 14px !important;
-  color: #aaaaaa !important; /* Update to light grey for dark theme */
+  color: #555555 !important;
   font-weight: 400 !important;
   margin: 0 !important;
 }
