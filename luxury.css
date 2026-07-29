@@ -346,106 +346,126 @@ h1, h2, h3, h4, .lux-title {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
-/* 5. HERITAGE TIMELINE */
-.lux-heritage {
-    background: url('images/9_bebbf6efd4d3e67fa7281f6bdf8429a6.jpg') center center/cover no-repeat fixed;
-    position: relative;
-    padding: 120px 50px;
+/* 5. HONOURS & ACHIEVEMENTS SHOWCASE */
+.lux-honours {
+    background: #0a0a0a;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 100px 50px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.lux-heritage::before {
+.lux-honours::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-}
-
-.lux-heritage-content {
-    position: relative;
-    z-index: 2;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.lux-quote {
-    font-size: 2.5rem;
-    font-family: 'Montserrat', serif;
-    font-style: italic;
-    font-weight: 700;
-    background: linear-gradient(45deg, #c5a059, #f9e596, #c5a059);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 30px;
-    line-height: 1.4;
-}
-
-.lux-quote-author {
-    font-size: 1.2rem;
-    color: var(--lux-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.lux-timeline {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 80px;
-    position: relative;
-}
-
-.lux-timeline::before {
-    content: '';
-    position: absolute;
-    top: 20px;
-    left: 10%;
-    right: 10%;
-    height: 2px;
-    background: rgba(255,255,255,0.2);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(218, 2, 14, 0.05) 0%, transparent 60%);
+    pointer-events: none;
     z-index: 1;
 }
 
-.lux-time-node {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    width: 33.33%;
-}
-
-.lux-time-dot {
-    width: 40px;
-    height: 40px;
-    background: var(--lux-dark);
-    border: 2px solid var(--lux-gold);
-    border-radius: 50%;
-    margin: 0 auto 20px;
+.lux-honours-header {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--lux-gold);
-    font-weight: bold;
-    font-size: 0.9rem;
-    transition: all 0.3s;
+    gap: 30px;
+    margin-bottom: 80px;
+    position: relative;
+    z-index: 2;
 }
 
-.lux-time-node:hover .lux-time-dot {
-    background: var(--lux-gold);
-    color: var(--lux-dark);
-    transform: scale(1.2);
-    box-shadow: 0 0 15px rgba(197, 160, 89, 0.5);
+.lux-divider {
+    height: 1px;
+    width: 100px;
+    background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.5), transparent);
 }
 
-.lux-time-title {
+.lux-honours-title {
+    font-family: 'Montserrat', serif;
+    font-size: 2.5rem;
     font-weight: 700;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    letter-spacing: 4px;
+    background: linear-gradient(45deg, #c5a059, #f9e596, #c5a059);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    margin: 0;
 }
 
-.lux-time-desc {
-    color: var(--lux-text-muted);
-    font-size: 0.9rem;
-    max-width: 200px;
+.lux-honours-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1440px;
     margin: 0 auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.lux-honours-container::-webkit-scrollbar {
+    display: none;
+}
+
+.lux-honours-scroll {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    min-width: min-content;
+    padding-bottom: 20px;
+}
+
+.lux-award-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 220px;
+    padding: 30px 20px;
+    transition: all 0.4s ease;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.lux-award-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.6;
+    filter: grayscale(80%) drop-shadow(0 0 5px rgba(0,0,0,0.5));
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lux-award-count {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    margin-bottom: 10px;
+    transition: color 0.4s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.lux-award-desc {
+    color: var(--lux-text-muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.lux-award-card:hover {
+    background: rgba(255,255,255,0.02);
+    border-color: rgba(212, 175, 55, 0.2);
+    transform: translateY(-5px);
+}
+
+.lux-award-card:hover .lux-award-icon {
+    opacity: 1;
+    filter: drop-shadow(0 0 15px rgba(252, 186, 3, 0.6)) grayscale(0%);
+    transform: scale(1.1);
+}
+
+.lux-award-card:hover .lux-award-count {
+    color: #f9e596;
 }
 
 /* 6. VIP TESTIMONIALS */
