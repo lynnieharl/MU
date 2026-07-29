@@ -80,12 +80,29 @@
                     </button>
                     <div class="header-profile-section">
                         <button class="notification-btn"><i class="far fa-bell"></i><span class="badge">3</span></button>
-                        <div class="avatar-wrapper">
+                                                <div class="avatar-wrapper" id="avatar-btn" style="cursor: pointer;">
                             <div class="avatar-img">A</div>
                             <div class="status-dot"></div>
                             <div class="avatar-info">
                                 <span class="avatar-name">Admin</span>
                                 <span class="avatar-role">Online</span>
+                            </div>
+                            <div class="dropdown-menu" id="profile-dropdown" style="min-width: 200px;">
+                                <div class="dropdown-content">
+                                    <a href="#" class="dropdown-item">
+                                        <i class="fas fa-user" style="width: 20px; color: var(--admin-text-muted);"></i>
+                                        <span style="font-weight: 500; font-size: 0.85rem;">Thông tin (admin@gmail.com)</span>
+                                    </a>
+                                    <a href="login.html" class="dropdown-item">
+                                        <i class="fas fa-exchange-alt" style="width: 20px; color: var(--admin-text-muted);"></i>
+                                        <span style="font-weight: 500; font-size: 0.85rem;">Đổi tài khoản</span>
+                                    </a>
+                                    <div style="border-top: 1px solid var(--admin-border); margin: 4px 0;"></div>
+                                    <a href="#" class="dropdown-item" id="dropdown-logout-btn" onclick="window.executeLogout(event)">
+                                        <i class="fas fa-sign-out-alt" style="width: 20px; color: var(--admin-danger);"></i>
+                                        <span style="font-weight: 600; font-size: 0.85rem; color: var(--admin-danger);">Đăng xuất</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -550,7 +550,7 @@
                     <p style="padding: 10px 15px; color: #888; font-size: 13px; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1);">${email}</p>
                     ${crmLink}
                     <a href="manage-products.html" class="account-menu-link" style="color: #f39c12; font-weight: 600;"><i class="fa-solid fa-boxes-stacked" style="margin-right:6px;"></i> Quản lý Sản phẩm</a>
-                    <a href="#" class="account-menu-link" onclick="handleLogout(event)"><i class="fa-solid fa-right-from-bracket" style="margin-right:6px;"></i> Log Out</a>
+                    <a href="#" class="account-menu-link" onclick="window.executeLogout(event)"><i class="fa-solid fa-right-from-bracket" style="margin-right:6px;"></i> Log Out</a>
                 `;
             }
         } catch (err) {
@@ -870,24 +870,26 @@ async function handlePopupRegister(e) {
 // Hàm Đăng xuất
 
 
-async function handleLogout(e) {
+window.executeLogout = async function(e) {
   if (e && e.preventDefault) e.preventDefault();
   if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
-    localStorage.removeItem('adminToken');
-    localStorage.removeItem('user');
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('role');
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('sb-access-token');
-    localStorage.removeItem('sb-refresh-token');
+    // Clear local and session storage completely
+    localStorage.clear();
     sessionStorage.clear();
+    
+    // Clear cookies
+    document.cookie.split(";").forEach(function(c) { 
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+    });
 
-    if (typeof window.supabaseClient !== 'undefined') {
+    if (window.supabaseClient) {
         await window.supabaseClient.auth.signOut();
     }
-    window.location.href = 'index.html';
+    
+    // Hard redirect
+    window.location.href = 'index.html?logout=' + Date.now();
   }
-}
+};
 
 async function checkAuthState() {
   const accountBtn = document.getElementById('user-account-btn');
@@ -932,7 +934,7 @@ async function checkAuthState() {
     } else if (userRole === 'staff') {
       accountBtn.innerHTML = `<i class="fas fa-id-badge" style="font-size: 22px; color: #ffbe00;" title="Quản Lý Sản Phẩm" onclick="window.location.href='manage-products.html'"></i>`;
     } else {
-      accountBtn.innerHTML = `<i class="fas fa-user-circle" style="font-size: 24px; color: #da020e;" title="${userEmail} - Bấm để Đăng xuất" onclick="handleLogout(event)"></i>`;
+      accountBtn.innerHTML = `<i class="fas fa-user-circle" style="font-size: 24px; color: #da020e;" title="${userEmail} - Bấm để Đăng xuất" onclick="window.executeLogout(event)"></i>`;
     }
   } else {
     // Guest state

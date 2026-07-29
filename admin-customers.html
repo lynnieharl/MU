@@ -83,52 +83,19 @@
                                     <h4>Notifications</h4>
                                     <span class="dropdown-action" id="mark-read-btn">Mark all as read</span>
                                 </div>
-                                <div class="dropdown-content">
-                                    <div class="dropdown-item">
-                                        <div class="dropdown-item-icon"><i class="fas fa-shopping-cart"></i></div>
-                                        <div class="dropdown-item-text">
-                                            <p>Có đơn hàng mới #1024</p>
-                                            <span>2 mins ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <div class="dropdown-item-icon" style="color: #F59E0B; background: rgba(245,158,11,0.1);"><i class="fas fa-exclamation-triangle"></i></div>
-                                        <div class="dropdown-item-text">
-                                            <p>Sản phẩm 'Home Kit 24/25' sắp hết hàng</p>
-                                            <span>1 hour ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <div class="dropdown-item-icon" style="color: #10B981; background: rgba(16,185,129,0.1);"><i class="fas fa-user-plus"></i></div>
-                                        <div class="dropdown-item-text">
-                                            <p>Khách hàng vừa đăng ký</p>
-                                            <span>3 hours ago</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="avatar-wrapper" id="avatar-btn" style="cursor: pointer;">
-                            <div class="avatar-img">A</div>
-                            <div class="status-dot"></div>
-                            <div class="avatar-info">
-                                <span class="avatar-name">Admin</span>
-                                <span class="avatar-role">Online</span>
-                            </div>
-                            <div class="dropdown-menu" id="profile-dropdown" style="min-width: 200px;">
-                                <div class="dropdown-content">
+                                                                <div class="dropdown-content">
                                     <a href="#" class="dropdown-item">
-                                        <i class="fas fa-cog" style="width: 20px; color: var(--admin-text-muted);"></i>
-                                        <span style="font-weight: 500; font-size: 0.85rem;">Profile Settings</span>
+                                        <i class="fas fa-user" style="width: 20px; color: var(--admin-text-muted);"></i>
+                                        <span style="font-weight: 500; font-size: 0.85rem;">Thông tin (admin@gmail.com)</span>
                                     </a>
-                                    <a href="#" class="dropdown-item">
-                                        <i class="fas fa-clipboard-list" style="width: 20px; color: var(--admin-text-muted);"></i>
-                                        <span style="font-weight: 500; font-size: 0.85rem;">System Logs</span>
+                                    <a href="login.html" class="dropdown-item">
+                                        <i class="fas fa-exchange-alt" style="width: 20px; color: var(--admin-text-muted);"></i>
+                                        <span style="font-weight: 500; font-size: 0.85rem;">Đổi tài khoản</span>
                                     </a>
                                     <div style="border-top: 1px solid var(--admin-border); margin: 4px 0;"></div>
-                                    <a href="#" class="dropdown-item" id="dropdown-logout-btn">
+                                    <a href="#" class="dropdown-item" id="dropdown-logout-btn" onclick="window.executeLogout(event)">
                                         <i class="fas fa-sign-out-alt" style="width: 20px; color: var(--admin-danger);"></i>
-                                        <span style="font-weight: 600; font-size: 0.85rem; color: var(--admin-danger);">Logout</span>
+                                        <span style="font-weight: 600; font-size: 0.85rem; color: var(--admin-danger);">Đăng xuất</span>
                                     </a>
                                 </div>
                             </div>

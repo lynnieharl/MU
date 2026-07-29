@@ -18,38 +18,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- LOGOUT LOGIC ---
-    const handleLogout = async (e) => {
-        e.preventDefault();
-        if (!confirm('Bạn có chắc chắn muốn đăng xuất?')) return;
-
-        // Clear local and session storage
-        localStorage.removeItem('adminToken');
-        localStorage.removeItem('user');
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('role');
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('sb-access-token');
-        localStorage.removeItem('sb-refresh-token');
+    window.executeLogout = async function(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        
+        // Clear local and session storage completely
+        localStorage.clear();
         sessionStorage.clear();
+        
+        // Clear cookies
+        document.cookie.split(";").forEach(function(c) { 
+            document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+        });
 
         // Sign out of Supabase if available
         if (window.supabaseClient) {
             await window.supabaseClient.auth.signOut();
         }
 
-        // Redirect to login
-        window.location.href = 'index.html';
+        // Hard redirect
+        window.location.href = 'index.html?logout=' + Date.now();
     };
 
     // Attach to sidebar logout button
     const sidebarLogoutBtns = document.querySelectorAll('.logout-btn-icon');
     sidebarLogoutBtns.forEach(btn => {
-        btn.addEventListener('click', handleLogout);
+        btn.addEventListener('click', (e) => {
+            if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+                window.executeLogout(e);
+            }
+        });
     });
 
     // Attach to dropdown logout button
     const dropdownLogoutBtn = document.getElementById('dropdown-logout-btn');
     if (dropdownLogoutBtn) {
-        dropdownLogoutBtn.addEventListener('click', handleLogout);
+        dropdownLogoutBtn.addEventListener('click', (e) => {
+            if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+                window.executeLogout(e);
+            }
+        });
     }
 });
