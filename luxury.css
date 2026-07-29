@@ -692,6 +692,162 @@ body.luxury-mode .promo-link {
     color: white;
     border-bottom-color: white;
 }
+/* 9. E-COMMERCE COMPACT HEADER */
+body.luxury-mode .top-bar-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background: #000 !important;
+    color: #fff !important;
+    padding: 3px 20px !important;
+    font-size: 0.75rem !important;
+}
+
+body.luxury-mode .top-bar-btn {
+    background: transparent;
+    color: #fff;
+    border: none;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+body.luxury-mode .top-bar-link {
+    color: #fff !important;
+    text-decoration: none;
+    font-size: 0.75rem;
+    text-transform: none;
+}
+
+body.luxury-mode .header-main-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 65px; /* Compact height */
+}
+
+body.luxury-mode .header-logo .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+body.luxury-mode .header-logo .logo-img {
+    height: 40px; /* Small logo */
+}
+
+body.luxury-mode .header-logo .logo-text {
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+}
+
+body.luxury-mode .new-mega-nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+body.luxury-mode .new-mega-nav .nav-list {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+body.luxury-mode .new-mega-nav .nav-link {
+    color: #fff !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
+    transition: color 0.3s;
+    text-transform: uppercase;
+}
+
+body.luxury-mode .new-mega-nav .nav-link:hover {
+    color: var(--lux-red) !important;
+}
+
+body.luxury-mode .header-search-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+body.luxury-mode .search-form {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 20px;
+    padding: 4px 15px;
+    width: 250px;
+}
+
+body.luxury-mode .search-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.8rem;
+    padding: 2px 5px;
+    color: #333 !important;
+    background: transparent;
+}
+
+body.luxury-mode .search-btn {
+    background: transparent;
+    border: none;
+    color: #333;
+    cursor: pointer;
+}
+
+body.luxury-mode .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+body.luxury-mode .icon-btn i, 
+body.luxury-mode #user-account-btn i {
+    font-size: 1.2rem !important;
+}
+
+body.luxury-mode .cart-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+body.luxury-mode .cart-btn .badge {
+    position: absolute !important;
+    top: -5px !important;
+    right: -10px !important;
+    background: #DA020E !important;
+    color: white !important;
+    border-radius: 50% !important;
+    font-size: 10px !important;
+    width: 16px !important;
+    height: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Adjust mega menu position for compact header */
+body.luxury-mode .mega-menu-wrapper {
+    top: 65px !important; 
+}
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {

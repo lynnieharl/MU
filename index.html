@@ -44,49 +44,28 @@
             <div class="top-bar-left">
                 <button class="top-bar-btn"><i class="fa-solid fa-globe"></i> English - US$</button>
             </div>
-            <div class="top-bar-right">
+            <div class="top-bar-center" style="display: flex; gap: 20px;">
                 <a href="track-order.html" class="top-bar-link">Track Order</a>
                 <a href="help.html" class="top-bar-link">Help</a>
             </div>
+            <div class="top-bar-right">
+                <a href="bookmarks.html" class="top-bar-link"><i class="fa-regular fa-bookmark"></i> All Bookmarks</a>
+            </div>
         </div>
 
-        <div class="header-main">
+        <div class="header-main-row">
             <div class="header-logo">
                 <a href="index.html" class="logo-link">
                     <img src="images/0_Manchester_United_FC_crest.svg" alt="Manchester United Logo" class="logo-img devil-aura">
                     <span class="logo-text">UNITED STORE</span>
                 </a>
             </div>
-            
-            <div class="header-search-icons">
-                <div class="header-search">
-                    <form onsubmit="event.preventDefault(); window.location.href='search.html?query='+this.querySelector('input').value;" class="search-form">
-                        <input type="text" name="query" class="search-input" placeholder="Search for products, players, and more...">
-                        <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </form>
-                </div>
-                
-                <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
-  <!-- Nút Yêu thích -->
-  <a href="wishlist.html" class="icon-btn"><i class="far fa-heart" style="font-size: 20px; color: #fff;"></i></a>
-  
-  <!-- Nút Giỏ hàng -->
-  <a href="cart.html" class="icon-btn cart-btn"><i class="fas fa-shopping-bag" style="font-size: 20px; color: #fff;"></i><span class="badge" style="background:red; border-radius:50%; padding:2px 5px; font-size:12px; margin-left:3px; color:white;">0</span></a>
-  
-  <!-- NÚT TÀI KHOẢN BẮT BUỘC PHẢI CÓ -->
-  <div id="user-account-btn" style="cursor: pointer; padding: 5px; display: inline-block;">
-  <i class="far fa-user" id="user-icon-img" style="font-size: 22px; color: #ffffff;"></i>
-</div>
-</div>
-                </div>
-            </div>
-        </div>
 
-        <nav class="new-mega-nav">
-            <ul class="nav-list">
-                <li class="nav-item"><a href="category.html" class="nav-link">New In</a></li>
-                <li class="nav-item has-mega-menu">
-                    <a href="jerseys.html" class="nav-link">Jerseys <span class="badge-new">New</span></a>
+            <nav class="new-mega-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="category.html" class="nav-link">NEW IN</a></li>
+                    <li class="nav-item has-mega-menu">
+                        <a href="jerseys.html" class="nav-link">JERSEYS <span class="badge-new">NEW</span></a>
                     <div class="mega-menu-wrapper">
                         <div class="mega-menu-container">
                             <div class="mega-col">
@@ -134,10 +113,10 @@
                             </div>
                         </div>
                     </div>
-                </li>
-                <li class="nav-item"><a href="category.html?category=Training" class="nav-link">Trainingwear</a></li>
-                <li class="nav-item has-mega-menu">
-                    <a href="category.html?category=Accessories" class="nav-link">Fashion <span class="badge-new">New</span></a>
+                    </li>
+                    <li class="nav-item"><a href="category.html?category=Training" class="nav-link">TRAININGWEAR</a></li>
+                    <li class="nav-item has-mega-menu">
+                        <a href="category.html?category=Accessories" class="nav-link">FASHION <span class="badge-new">NEW</span></a>
                     <div class="mega-menu-wrapper">
                         <div class="mega-menu-container">
                             <div class="mega-col">
@@ -174,9 +153,9 @@
                             </div>
                         </div>
                     </div>
-                </li>
-                <li class="nav-item has-mega-menu">
-                    <a href="category.html?category=Accessories" class="nav-link">Accessories</a>
+                    </li>
+                    <li class="nav-item has-mega-menu">
+                        <a href="category.html?category=Accessories" class="nav-link">ACCESSORIES</a>
                     <div class="mega-menu-wrapper">
                         <div class="mega-menu-container">
                             <div class="mega-col">
@@ -213,9 +192,9 @@
                             </div>
                         </div>
                     </div>
-                </li>
-                <li class="nav-item has-mega-menu">
-                    <a href="gifts.html" class="nav-link">Gifts</a>
+                    </li>
+                    <li class="nav-item has-mega-menu">
+                        <a href="gifts.html" class="nav-link">GIFTS</a>
                     <div class="mega-menu-wrapper">
                         <div class="mega-menu-container">
                             <div class="mega-col">
@@ -244,11 +223,29 @@
                             </div>
                         </div>
                     </div>
-                </li>
-                <li class="nav-item"><a href="auctions.html" class="nav-link">Auctions</a></li>
-                <li class="nav-item"><a href="category.html" class="nav-link" style="color: #ffb3b3;">Outlet</a></li>
-            </ul>
-        </nav>
+                    </li>
+                    <li class="nav-item"><a href="auctions.html" class="nav-link">AUCTIONS</a></li>
+                    <li class="nav-item"><a href="category.html" class="nav-link" style="color: #ffb3b3;">OUTLET</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-search-icons">
+                <div class="header-search">
+                    <form onsubmit="event.preventDefault(); window.location.href='search.html?query='+this.querySelector('input').value;" class="search-form">
+                        <input type="text" name="query" class="search-input" placeholder="Search for products, players...">
+                        <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+                
+                <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="wishlist.html" class="icon-btn"><i class="far fa-heart" style="font-size: 20px; color: #fff;"></i></a>
+                    <a href="cart.html" class="icon-btn cart-btn"><i class="fas fa-shopping-bag" style="font-size: 20px; color: #fff;"></i><span class="badge" style="background:red; border-radius:50%; padding:2px 5px; font-size:12px; margin-left:3px; color:white;">0</span></a>
+                    <div id="user-account-btn" style="cursor: pointer; padding: 5px; display: inline-block;">
+                        <i class="far fa-user" id="user-icon-img" style="font-size: 22px; color: #ffffff;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <!-- ==========================================
