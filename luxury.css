@@ -429,12 +429,16 @@ h1, h2, h3, h4, .lux-title {
     cursor: pointer;
 }
 
-.lux-award-icon {
-    font-size: 4rem;
+.lux-award-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
     margin-bottom: 20px;
     opacity: 0.6;
     filter: grayscale(80%) drop-shadow(0 0 5px rgba(0,0,0,0.5));
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
 .lux-award-count {
@@ -444,12 +448,14 @@ h1, h2, h3, h4, .lux-title {
     margin-bottom: 10px;
     transition: color 0.4s;
     font-family: 'Montserrat', sans-serif;
+    text-align: center;
 }
 
 .lux-award-desc {
     color: var(--lux-text-muted);
     font-size: 0.85rem;
     line-height: 1.5;
+    text-align: center;
 }
 
 .lux-award-card:hover {
@@ -458,10 +464,11 @@ h1, h2, h3, h4, .lux-title {
     transform: translateY(-5px);
 }
 
-.lux-award-card:hover .lux-award-icon {
+.lux-award-card:hover .lux-award-img {
     opacity: 1;
-    filter: drop-shadow(0 0 15px rgba(252, 186, 3, 0.6)) grayscale(0%);
-    transform: scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(252, 186, 3, 0.8)) grayscale(0%);
+    transform: scale(1.15);
+    border: 2px solid rgba(252, 186, 3, 0.5);
 }
 
 .lux-award-card:hover .lux-award-count {
