@@ -223,40 +223,61 @@ h1, h2, h3, h4, .lux-title {
 }
 
 .lux-feature-card {
-    background: #111;
-    border: 1px solid #222;
-    padding: 40px;
+    background: var(--lux-card-bg);
+    border: 1px solid var(--lux-border);
     border-radius: 16px;
     text-align: center;
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-.lux-feature-card:hover {
-    transform: translateY(-10px) rotateY(10deg) rotateX(5deg);
-    box-shadow: -20px 20px 30px rgba(0,0,0,0.5), 0 0 20px rgba(218, 2, 14, 0.2);
-    border-color: #333;
+.lux-feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(218, 2, 14, 0.1), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
 }
 
-.lux-feature-icon {
-    font-size: 3rem;
-    color: var(--lux-red);
-    margin-bottom: 20px;
-    transform: translateZ(50px);
+.lux-feature-card:hover::before {
+    opacity: 1;
 }
 
-.lux-feature-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    transform: translateZ(30px);
+.lux-feature-img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.lux-feature-card p {
-    color: var(--lux-text-muted);
+.lux-feature-content {
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.lux-feature-content h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.lux-feature-content p {
+    color: #d1d5db;
+    font-size: 0.95rem;
     line-height: 1.6;
-    transform: translateZ(20px);
+    margin: 0;
 }
 
 /* 4. BENTO GRID COLLECTION */
