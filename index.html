@@ -30,8 +30,11 @@
     }
     initSupabase();
   </script>
+    <!-- AOS CSS & Luxury Mode -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="luxury.css">
 </head>
-<body>
+<body class="luxury-mode">
 
         <!-- ==========================================
          [PHẦN 1] HEADER & MEGA MENU (MỚI)
@@ -264,251 +267,255 @@
         <!-- ==========================================
          [PHẦN 2] HERO BANNER CAROUSEL
          ========================================== -->
-    <section class="hero-carousel-section">
-        <div class="hero-carousel-container" id="hero-carousel">
-            <div class="hero-carousel-track" id="hero-track">
-                
-                <!-- SLIDE 1: HOME KIT -->
-                <div class="hero-slide">
-                    <div class="hero-image-wrapper">
-                        <img src="images/3_mt-gp-1-hero-banner-desktop.jpg" alt="New Home Kit" class="hero-img">
-                    </div>
-                    <div class="hero-content">
-                        <h1 class="hero-title">An Instant Classic.</h1>
-                        <p class="hero-subtitle">Introducing our new 24/25 Home Kit.</p>
-                        <a href="kits-home.html" class="hero-cta-btn">SHOP NOW</a>
-                    </div>
-                </div>
 
-                <!-- SLIDE 2: AWAY KIT -->
-                <div class="hero-slide">
-                    <div class="hero-image-wrapper">
-                        <img src="https://cdn-media.sforum.vn/storage/app/media/ctvseo_MH/h%C3%ACnh%20n%E1%BB%81n%20Manchester%20United/hinh-nen-manchester-united-thumbnail.jpg" alt="New Away Kit" class="hero-img">
-                    </div>
-                    <div class="hero-content">
-                        <h1 class="hero-title">Stand Out Anywhere.</h1>
-                        <p class="hero-subtitle">Discover the 24/25 Away Kit.</p>
-                        <a href="kits-home.html" class="hero-cta-btn">SHOP NOW</a>
-                    </div>
-                </div>
-
-                <!-- SLIDE 3: GOALKEEPER KIT -->
-                <div class="hero-slide">
-                    <div class="hero-image-wrapper">
-                        <img src="https://i.pinimg.com/originals/7b/a1/fa/7ba1fa98e259a961a426915b5be94255.jpg" alt="Goalkeeper Kit" class="hero-img">
-                    </div>
-                    <div class="hero-content">
-                        <h1 class="hero-title">Defend in Style.</h1>
-                        <p class="hero-subtitle">Introducing our new 24/25 Away Goalkeeper Kit.</p>
-                        <a href="kits-home.html" class="hero-cta-btn">SHOP NOW</a>
-                    </div>
-                </div>
-
+    <!-- ==========================================
+         [LUXURY] 1. CINEMATIC HERO SECTION
+         ========================================== -->
+    <section class="lux-hero" data-aos="fade-in">
+        <img src="images/3_mt-gp-1-hero-banner-desktop.jpg" alt="Home Kit Banner" class="lux-hero-bg">
+        <div class="lux-hero-overlay"></div>
+        <div class="lux-hero-content" data-aos="fade-up" data-aos-delay="200">
+            <h1 class="lux-hero-title">THE RED DEVILS ARMOR<br>— 2024/25 SEASON</h1>
+            <p class="lux-hero-subtitle">Khoác lên mình kiệt tác lịch sử của Nhà hát của những giấc mơ.</p>
+            <div class="lux-hero-actions">
+                <a href="kits-home.html" class="lux-btn-primary"><i class="fas fa-shopping-bag"></i> Khám Phá Bộ Đấu</a>
+                <a href="#" class="lux-btn-secondary" onclick="alert('Tính năng đang phát triển!')"><i class="fas fa-play"></i> Xem Trailer 3D</a>
             </div>
+        </div>
+        
+        <div class="lux-social-proof" data-aos="fade-right" data-aos-delay="500">
+            <i class="fas fa-bolt" style="color: #ffbe00; font-size: 1.2rem;"></i>
+            <span style="font-weight: 500; font-size: 0.95rem;">Hơn 10,000+ CĐV đã sở hữu trong tuần này</span>
+        </div>
+    </section>
 
-            <!-- Navigation Arrows -->
-            <button class="hero-nav-btn prev" id="hero-prev"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="hero-nav-btn next" id="hero-next"><i class="fa-solid fa-chevron-right"></i></button>
-
-            <!-- Dots Indicators -->
-            <div class="hero-dots" id="hero-dots">
-                <div class="hero-dot active" data-index="0"></div>
-                <div class="hero-dot" data-index="1"></div>
-                <div class="hero-dot" data-index="2"></div>
+    <!-- ==========================================
+         [LUXURY] 2. 3D FEATURE HIGHLIGHTS
+         ========================================== -->
+    <section class="lux-section">
+        <div class="lux-section-header" data-aos="fade-up">
+            <h2 class="lux-section-title">BẢN THIẾT KẾ VĨ ĐẠI</h2>
+            <p class="lux-section-subtitle">Sự kết hợp hoàn hảo giữa công nghệ hiện đại và di sản trăm năm.</p>
+        </div>
+        
+        <div class="lux-features-grid">
+            <div class="lux-feature-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-wind lux-feature-icon"></i>
+                <h3>HEAT.RDY Technology</h3>
+                <p>Chất liệu vải dệt kim siêu nhẹ, tối ưu hóa luồng khí, giữ cho các cầu thủ luôn mát mẻ và khô ráo dưới mọi áp lực.</p>
+            </div>
+            <div class="lux-feature-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-shield-alt lux-feature-icon"></i>
+                <h3>Authentic Crest</h3>
+                <p>Logo Manchester United được thêu nổi 3D tinh xảo trên ngực trái, biểu tượng của niềm tự hào bất diệt.</p>
+            </div>
+            <div class="lux-feature-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-leaf lux-feature-icon"></i>
+                <h3>Sustainable Fabric</h3>
+                <p>Được dệt hoàn toàn từ 100% nhựa tái chế đại dương Parley, cam kết bảo vệ môi trường toàn cầu.</p>
             </div>
         </div>
     </section>
 
     <!-- ==========================================
-         [PHẦN 2] TRENDING NOW (Carousel)
+         [LUXURY] 3. BENTO GRID COLLECTION
          ========================================== -->
-    <section class="carousel-section">
-        <div class="carousel-header">
-            <h2 class="section-title">TRENDING NOW</h2>
-            <div class="carousel-controls">
-                <button class="carousel-btn prev-btn" id="trending-prev"><i class="fa-solid fa-chevron-left"></i></button>
-                <button class="carousel-btn next-btn" id="trending-next"><i class="fa-solid fa-chevron-right"></i></button>
-            </div>
+    <section class="lux-section">
+        <div class="lux-section-header" data-aos="fade-up">
+            <h2 class="lux-section-title">THE COLLECTION</h2>
+            <p class="lux-section-subtitle">Lựa chọn bộ trang phục hoàn hảo cho mọi trận đấu của bạn.</p>
         </div>
-        <div class="carousel-container" id="trending-carousel">
-            <div class="carousel-track" id="real-products-track">
-                <div style="width: 100%; text-align: center; padding: 40px; color: #888;">
-                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
-                    <p>Đang tải sản phẩm từ kho hàng...</p>
+        
+        <div class="lux-bento-grid">
+            <!-- Home Kit (Large) -->
+            <div class="lux-bento-item lux-bento-large" data-aos="fade-up">
+                <img src="images/8_4c77739191924bede382dbf20ab1a413.jpg" alt="Home Kit">
+                <div class="lux-bento-content">
+                    <h3>Home Shirt 24/25</h3>
+                    <div class="lux-bento-price">$120.00</div>
+                    <button class="lux-quick-add" onclick="window.location.href='kits-home.html'">Quick Add to Cart</button>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ==========================================
-         [PHẦN 3] SHOP BY CATEGORY
-         ========================================== -->
-    <section class="category-grid-section">
-        <h2 class="section-title text-center">Shop By Category</h2>
-        <div class="kit-grid">
-            <div class="kit-card">
-                <img src="images/8_4c77739191924bede382dbf20ab1a413.jpg" alt="Home Kit" class="kit-bg">
-                <div class="kit-overlay">
-                    <h3>Home Kit</h3>
-                    <a href="kits-home.html" class="btn-primary">Shop Now</a>
+            
+            <!-- Away Kit (Medium) -->
+            <div class="lux-bento-item lux-bento-medium" data-aos="fade-left" data-aos-delay="100">
+                <img src="images/9_bebbf6efd4d3e67fa7281f6bdf8429a6.jpg" alt="Away Kit">
+                <div class="lux-bento-content">
+                    <h3>Away Shirt 24/25</h3>
+                    <div class="lux-bento-price">$110.00</div>
+                    <button class="lux-quick-add" onclick="window.location.href='kits-away.html'">Quick Add</button>
                 </div>
             </div>
-            <div class="kit-card">
-                <img src="images/9_bebbf6efd4d3e67fa7281f6bdf8429a6.jpg" alt="Away Kit" class="kit-bg">
-                <div class="kit-overlay">
-                    <h3>Away Kit</h3>
-                    <a href="kits-away.html" class="btn-primary">Shop Now</a>
-                </div>
-            </div>
-            <div class="kit-card">
-                <img src="images/10_557b882a41d5bc6a7934615bbc14b842.jpg" alt="Third Kit" class="kit-bg">
-                <div class="kit-overlay">
+            
+            <!-- Third Kit (Small) -->
+            <div class="lux-bento-item lux-bento-small" data-aos="fade-up" data-aos-delay="200">
+                <img src="images/10_557b882a41d5bc6a7934615bbc14b842.jpg" alt="Third Kit">
+                <div class="lux-bento-content">
                     <h3>Third Kit</h3>
-                    <a href="kits-third.html" class="btn-primary">Shop Now</a>
+                    <div class="lux-bento-price">$110.00</div>
+                    <button class="lux-quick-add" onclick="window.location.href='kits-third.html'">Quick Add</button>
+                </div>
+            </div>
+            
+            <!-- Training (Small) -->
+            <div class="lux-bento-item lux-bento-small" data-aos="fade-up" data-aos-delay="300">
+                <img src="images/19_c09dd81f09a6c8db0ef921ae63aaf881.jpg" alt="Training">
+                <div class="lux-bento-content">
+                    <h3>Training</h3>
+                    <div class="lux-bento-price">$65.00</div>
+                    <button class="lux-quick-add" onclick="window.location.href='category.html?type=Training'">Explore</button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ==========================================
-         [PHẦN 3] SHOP BY PLAYER
+         [LUXURY] 4. HERITAGE TIMELINE
          ========================================== -->
-    <section class="player-section">
-        <h2 class="section-title text-center">SHOP BY PLAYER</h2>
-        <div class="player-container">
-            <a href="player.html" class="player-card">
-                <img src="images/bruno.jpg" alt="Bruno Fernandes" class="player-avatar" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
-                <div class="player-info-box">
-                    <span class="player-name">B. Fernandes</span>
-                    <span class="player-number">8</span>
+    <section class="lux-heritage">
+        <div class="lux-heritage-content" data-aos="zoom-in">
+            <h2 class="lux-quote">"Tôi không bao giờ chơi để hòa. Sự vĩ đại của Manchester United là luôn tìm cách chiến thắng."</h2>
+            <div class="lux-quote-author">— Sir Alex Ferguson</div>
+            
+            <div class="lux-timeline">
+                <div class="lux-time-node" data-aos="fade-up" data-aos-delay="100">
+                    <div class="lux-time-dot">99</div>
+                    <div class="lux-time-title">Treble Winners</div>
+                    <div class="lux-time-desc">Mùa giải ăn ba lịch sử với thiết kế khóa kéo huyền thoại.</div>
                 </div>
-            </a>
-            <a href="player.html" class="player-card">
-                <img src="images/rashford.jpg" alt="Marcus Rashford" class="player-avatar" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
-                <div class="player-info-box">
-                    <span class="player-name">Rashford</span>
-                    <span class="player-number">10</span>
+                <div class="lux-time-node" data-aos="fade-up" data-aos-delay="200">
+                    <div class="lux-time-dot">08</div>
+                    <div class="lux-time-title">Moscow Kings</div>
+                    <div class="lux-time-desc">Lên đỉnh Châu Âu với sọc trắng ở lưng kinh điển.</div>
                 </div>
-            </a>
-            <a href="player.html" class="player-card">
-                <img src="images/garnacho.jpg" alt="Alejandro Garnacho" class="player-avatar" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
-                <div class="player-info-box">
-                    <span class="player-name">Garnacho</span>
-                    <span class="player-number">17</span>
+                <div class="lux-time-node" data-aos="fade-up" data-aos-delay="300">
+                    <div class="lux-time-dot">24</div>
+                    <div class="lux-time-title">New Era</div>
+                    <div class="lux-time-desc">Sự tái sinh với áo đấu tích hợp công nghệ tương lai.</div>
                 </div>
-            </a>
-            <a href="player.html" class="player-card">
-                <img src="images/mainoo.jpg" alt="Kobbie Mainoo" class="player-avatar" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
-                <div class="player-info-box">
-                    <span class="player-name">Mainoo</span>
-                    <span class="player-number">37</span>
-                </div>
-            </a>
-            <a href="player.html" class="player-card">
-                <img src="images/hojlund.jpg" alt="Rasmus Hojlund" class="player-avatar" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
-                <div class="player-info-box">
-                    <span class="player-name">Hojlund</span>
-                    <span class="player-number">9</span>
-                </div>
-            </a>
+            </div>
         </div>
     </section>
 
     <!-- ==========================================
-         [PHẦN 3] SHOP BY DEPARTMENT
+         [LUXURY] 5. VIP TESTIMONIALS
          ========================================== -->
-    <section class="department-section">
-        <div class="dept-grid">
-            <a href="category.html?type=Men" class="dept-card">
-                <img src="images/16_a4344ea5b8f98e65d41e2666dc881248.jpg" alt="Mens" class="dept-img">
-                <span class="dept-label">Mens</span>
-            </a>
-            <a href="category.html?type=Women" class="dept-card">
-                <img src="images/17_0bb8ce5dfcdaa5f408a0c8cd9c864247.jpg" alt="Womens" class="dept-img">
-                <span class="dept-label">Womens</span>
-            </a>
-            <a href="category.html?type=Accessories" class="dept-card">
-                <img src="images/18_efc356c8f7694d0e6b81af8b55e486dd.jpg" alt="Kids" class="dept-img">
-                <span class="dept-label">Kids</span>
-            </a>
-            <a href="category.html?type=Training" class="dept-card">
-                <img src="images/19_c09dd81f09a6c8db0ef921ae63aaf881.jpg" alt="Training" class="dept-img">
-                <span class="dept-label">Training</span>
-            </a>
+    <section class="lux-section lux-testimonials">
+        <div class="lux-section-header" data-aos="fade-up">
+            <h2 class="lux-section-title">THE RED ARMY</h2>
+            <p class="lux-section-subtitle">Đánh giá từ những cổ động viên nhiệt thành nhất toàn cầu.</p>
+        </div>
+        
+        <div class="lux-testi-grid">
+            <div class="lux-testi-card" data-aos="fade-left" data-aos-delay="100">
+                <div class="lux-testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="lux-testi-text">"Chất vải thực sự ở một đẳng cấp khác. Tôi mặc đi đá banh suốt 2 tiếng mà không hề cảm thấy bí bách. Đáng từng xu!"</p>
+                <div class="lux-testi-user">
+                    <img src="images/bruno.jpg" alt="Fan" class="lux-testi-avatar" onerror="this.src='images/0_Manchester_United_FC_crest.svg'">
+                    <div>
+                        <div class="lux-testi-name">Hoàng Nguyễn</div>
+                        <div class="lux-testi-badge"><i class="fas fa-check-circle"></i> Verified Buyer</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lux-testi-card" data-aos="fade-left" data-aos-delay="200">
+                <div class="lux-testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="lux-testi-text">"Giao hàng cực kỳ nhanh. Logo thêu nổi cực kỳ sắc nét, nhìn sang trọng hơn hẳn các mẫu năm trước. Glory Glory Man United!"</p>
+                <div class="lux-testi-user">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop" alt="Fan" class="lux-testi-avatar" crossorigin="anonymous">
+                    <div>
+                        <div class="lux-testi-name">David Tran</div>
+                        <div class="lux-testi-badge"><i class="fas fa-check-circle"></i> Verified Buyer</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lux-testi-card" data-aos="fade-left" data-aos-delay="300">
+                <div class="lux-testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <p class="lux-testi-text">"Món quà sinh nhật hoàn hảo cho con trai tôi. Form dáng rất chuẩn, mặc lên trông rất khỏe khoắn. Sẽ ủng hộ shop dài dài."</p>
+                <div class="lux-testi-user">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop" alt="Fan" class="lux-testi-avatar" crossorigin="anonymous">
+                    <div>
+                        <div class="lux-testi-name">Thùy Linh</div>
+                        <div class="lux-testi-badge"><i class="fas fa-check-circle"></i> Verified Buyer</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- ==========================================
-         [PHẦN 4] NEWSLETTER & FOOTER
+         [LUXURY] 6. GLOBAL FOOTER
          ========================================== -->
-    <footer class="site-footer">
-        <!-- Newsletter -->
-        <div class="newsletter-section">
-            <div class="newsletter-container">
-                <div class="newsletter-text">
-                    <h3>SIGN UP TO OUR NEWSLETTER</h3>
-                </div>
-                <div class="newsletter-form-container">
-                    <form onsubmit="event.preventDefault(); console.log('Subscribed');" class="newsletter-form">
-                        <input type="email" placeholder="Enter your email address" required class="newsletter-input">
-                        <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
-                    </form>
-                </div>
+    <footer class="lux-footer">
+        <div class="lux-footer-top">
+            <div class="lux-newsletter" data-aos="fade-up">
+                <h3>Tham gia câu lạc bộ VIP</h3>
+                <p>Đăng ký nhận bản tin để cập nhật những mẫu áo giới hạn mới nhất và nhận ngay Voucher giảm giá 10% cho đơn hàng đầu tiên.</p>
+                <form class="lux-news-form" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký!');">
+                    <input type="email" class="lux-news-input" placeholder="Nhập email của bạn..." required>
+                    <button type="submit" class="lux-btn-primary" style="padding: 15px 25px;"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+            
+            <div class="lux-payments" data-aos="fade-up" data-aos-delay="100">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-paypal"></i>
+                <i class="fab fa-cc-apple-pay"></i>
+                <img src="images/22_PayPal.svg" alt="Paypal" style="height: 24px;">
             </div>
         </div>
-
-        <!-- Main Footer Links -->
-        <div class="footer-main">
-            <div class="footer-container">
-                <div class="footer-column">
-                    <h4>Help</h4>
-                    <ul>
-                        <li><a href="faq.html">Help & FAQs</a></li>
-                        <li><a href="track-order.html">Track Order</a></li>
-                        <li><a href="returns.html">Returns</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Shopping With Us</h4>
-                    <ul>
-                        <li><a href="safe-shopping.html">Safe Shopping</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Use</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>About Us</h4>
-                    <ul>
-                        <li><a href="history.html">Club History</a></li>
-                        <li><a href="stadium.html">Old Trafford Stadium</a></li>
-                        <li><a href="foundation.html">MU Foundation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Follow Us</h4>
-                    <ul class="social-links">
-                        <li><a href="https://facebook.com"><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
-                        <li><a href="https://instagram.com"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
-                        <li><a href="https://twitter.com"><i class="fa-brands fa-x-twitter"></i> X (Twitter)</a></li>
-                        <li><a href="https://youtube.com"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
-                    </ul>
-                </div>
+        
+        <div class="lux-footer-main">
+            <div class="lux-footer-brand" data-aos="fade-up">
+                <img src="images/0_Manchester_United_FC_crest.svg" alt="MU Logo" style="width: 60px; margin-bottom: 20px;">
+                <h3 style="color: white; margin-bottom: 10px;">UNITED STORE</h3>
+                <p>Cửa hàng trực tuyến chính thức của Manchester United tại Việt Nam. Nơi lan tỏa niềm đam mê và tự hào của bầy Quỷ Đỏ.</p>
+            </div>
+            
+            <div class="lux-footer-links" data-aos="fade-up" data-aos-delay="100">
+                <h4>Mua Sắm</h4>
+                <ul>
+                    <li><a href="kits-home.html">Áo đấu sân nhà</a></li>
+                    <li><a href="kits-away.html">Áo đấu sân khách</a></li>
+                    <li><a href="category.html?type=Training">Đồ tập luyện</a></li>
+                    <li><a href="gifts.html">Quà lưu niệm</a></li>
+                </ul>
+            </div>
+            
+            <div class="lux-footer-links" data-aos="fade-up" data-aos-delay="200">
+                <h4>Hỗ Trợ</h4>
+                <ul>
+                    <li><a href="track-order.html">Tra cứu đơn hàng</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Hướng dẫn chọn size</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="lux-footer-links" data-aos="fade-up" data-aos-delay="300">
+                <h4>Về Chúng Tôi</h4>
+                <ul>
+                    <li><a href="#">Câu chuyện thương hiệu</a></li>
+                    <li><a href="#">Tuyển dụng</a></li>
+                    <li><a href="#">Phát triển bền vững</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
             </div>
         </div>
-
-        <!-- Bottom Footer -->
-        <div class="footer-bottom">
-            <div class="footer-bottom-container">
-                <div class="copyright-text">
-                    <p>&copy; 2024 Manchester United. All rights reserved.</p>
-                </div>
-                <div class="payment-methods">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Visa_Logo_2012.png" alt="Visa" style="height: 20px; width: auto; margin-right: 10px; vertical-align: middle;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" style="height: 20px; width: auto; margin-right: 10px; vertical-align: middle;">
-                    <img src="images/22_PayPal.svg" alt="PayPal" style="height: 20px; width: auto; margin-right: 10px; vertical-align: middle;">
-                    <img src="images/23_American_Express_logo_%282018%29.svg" alt="American Express" style="height: 20px; width: auto; vertical-align: middle;">
-                </div>
+        
+        <div class="lux-footer-bottom">
+            <div class="copyright">&copy; 2026 Manchester United Store Vietnam. All rights reserved.</div>
+            <div class="lux-socials">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div>
+                <img src="https://luatbaoson.vn/wp-content/uploads/2021/04/104192233_136154144729117_5471923055374465548_n-1-1024x388.png" alt="BCT" style="height: 35px; opacity: 0.8;">
             </div>
         </div>
     </footer>
@@ -981,5 +988,24 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
 });
 </script>
+    <!-- AOS JS for Scroll Animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Sticky Header Effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header-wave-bg');
+            if (window.scrollY > 50) {
+                header.classList.add('lux-scrolled');
+            } else {
+                header.classList.remove('lux-scrolled');
+            }
+        });
+    </script>
 </body>
 </html>
