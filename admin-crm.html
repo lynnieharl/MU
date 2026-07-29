@@ -253,6 +253,7 @@
         }
 
         let allUsersData = [];
+        let allProductsData = [];
 
         document.addEventListener('DOMContentLoaded', async () => {
             if (!supabaseClient) {
@@ -328,7 +329,21 @@
                     .limit(5);
 
                 if (!pErr && products) {
-                    document.getElementById('stat-orders').textContent = products.length; // Temporarily using products for orders
+                    allProductsData = products;
+                    document.getElementById('stat-orders').textContent = products.length;
+                    
+                    // Calculate Total Revenue (Completed only, mocked as p.id % 2 === 0)
+                    const completedOrders = products.filter(p => p.id % 2 === 0);
+                    const totalRevenue = completedOrders.reduce((sum, p) => sum + (p.price || 0), 0);
+                    const revenueFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalRevenue);
+                    const elRevenue = document.getElementById('stat-revenue');
+                    if (elRevenue) elRevenue.textContent = revenueFormatted;
+
+                    // Calculate Pending Orders (mocked as p.id % 2 !== 0)
+                    const pendingOrders = products.filter(p => p.id % 2 !== 0);
+                    const elPending = document.getElementById('stat-pending');
+                    if (elPending) elPending.textContent = pendingOrders.length;
+
                     renderProductsPreview(products);
                 } else if (pErr && pErr.code === 'PGRST205') {
                     document.getElementById('stat-orders').textContent = '0';
