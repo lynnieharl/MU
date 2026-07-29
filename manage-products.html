@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản Lý Sản Phẩm (CRUD) | United Store</title>
+    <!-- Supabase Core & Config -->
+    <script src="js/supabase-config.js"></script>
     <!-- Favicon & Fonts -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔴</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <!-- CSS dùng chung -->
         <link rel="stylesheet" href="admin.css">
 </head>
@@ -20,7 +21,6 @@
         <div class="guard-spinner"></div>
         <p style="color: #9aa0a6; font-size: 14px; font-weight: 500;">Đang xác thực quyền Admin...</p>
     </div>
-
     <div class="admin-container">
         <!-- SIDEBAR -->
         <div class="admin-sidebar">
@@ -28,14 +28,12 @@
                 <img src="images/0_Manchester_United_FC_crest.svg" alt="United Logo" class="admin-logo">
                 <h2>UNITED STORE</h2>
             </div>
-
             <nav class="sidebar-nav">
                 <!-- MAIN / OVERVIEW -->
                 <div class="sidebar-section-title" style="margin-top: 10px;">OVERVIEW</div>
                 <ul>
                     <li><a href="admin-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard Overview</a></li>
                 </ul>
-
                 <!-- STORE MANAGEMENT -->
                 <div class="sidebar-section-title">MANAGEMENT</div>
                 <ul>
@@ -44,14 +42,12 @@
                     <li><a href="admin-customers.html"><i class="fas fa-users"></i> Customers List</a></li>
                     <li><a href="admin-inventory.html"><i class="fas fa-tags"></i> Categories & Inventory</a></li>
                 </ul>
-
                 <!-- MARKETING & ANALYTICS -->
                 <div class="sidebar-section-title">MARKETING</div>
                 <ul>
                     <li><a href="admin-discounts.html"><i class="fas fa-ticket-alt"></i> Discounts & Coupons</a></li>
                     <li><a href="admin-analytics.html"><i class="fas fa-chart-bar"></i> Analytics & Reports</a></li>
                 </ul>
-
                 <!-- SYSTEM -->
                 <div class="sidebar-section-title">SYSTEM</div>
                 <ul>
@@ -69,7 +65,6 @@
                 </div>
             </div>
         </div>
-
         <!-- MAIN CONTENT -->
         <div class="admin-main">
             <div class="main-header">
@@ -95,7 +90,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="dashboard-content">
                 <!-- KPI METRICS -->
                 <div class="metrics-grid">
@@ -132,7 +126,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- PRODUCT TABLE SECTION -->
                 <div class="dashboard-section">
                     <div class="section-header">
@@ -145,7 +138,6 @@
                             <div class="filter-pill">TRAINING</div>
                         </div>
                     </div>
-                    
                     <div class="table-responsive">
                         <table class="admin-table">
                             <thead>
@@ -169,7 +161,6 @@
             </div>
         </div>
     </div>
-
     <!-- MODAL FORM -->
     <div class="modal-overlay" id="product-modal-overlay">
         <div class="modal-content">
@@ -179,12 +170,10 @@
             </div>
             <form id="product-form" class="modal-form">
                 <input type="hidden" id="prd-edit-id">
-                
                 <div class="form-group">
                     <label>Tên Sản Phẩm <span style="color:#d31145">*</span></label>
                     <input type="text" id="prd-name" placeholder="VD: Manchester United 24/25 Home Jersey" required>
                 </div>
-                
                 <div class="form-row">
                     <div class="form-group">
                         <label>Category</label>
@@ -206,7 +195,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="form-row">
                     <div class="form-group">
                         <label>Giá (VND) <span style="color:#d31145">*</span></label>
@@ -217,12 +205,10 @@
                         <input type="text" id="prd-image" placeholder="https://...">
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label>Mô tả sản phẩm</label>
                     <textarea id="prd-desc" rows="3" placeholder="Nhập mô tả ngắn..."></textarea>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn-cancel" onclick="closeProductModal()">Hủy Bỏ</button>
                     <button type="submit" class="btn-save" id="btn-save-prd"><i class="fa-solid fa-floppy-disk"></i> Lưu Sản Phẩm</button>
@@ -230,7 +216,6 @@
             </form>
         </div>
     </div>
-    
     <style>
         /* CSS cho Modal (Tái sử dụng style gọn nhẹ) */
         .modal-overlay {
@@ -266,26 +251,15 @@
         .btn-save { padding: 10px 20px; border-radius: 6px; border: none; background: var(--admin-primary); color: #fff; cursor: pointer; font-weight: 600; }
         .btn-save:hover { background: var(--admin-primary-hover); }
     </style>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
-        let supabaseClient = null;
-        if (window.supabase) {
-            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        }
-
         let allProductsData = [];
         const DEFAULT_IMG = 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
-
         document.addEventListener('DOMContentLoaded', async () => {
             if (!supabaseClient) {
                 alert('Lỗi khởi tạo máy chủ Supabase!');
                 window.location.href = 'index.html#login';
                 return;
             }
-
             try {
                 // 1. KIỂM TRA ĐĂNG NHẬP (BẮT BUỘC ĐÃ LOG IN MỚI ĐƯỢC VÀO TRANG)
                 const { data: { session }, error: sessErr } = await supabaseClient.auth.getSession();
@@ -294,32 +268,26 @@
                     window.location.href = 'index.html#login';
                     return;
                 }
-
                 // -> ĐÃ ĐĂNG NHẬP (ADMIN HOẶC USER ĐỀU ĐƯỢC THAO TÁC)
                 const userEl = document.getElementById('prd-user-email');
                 if (userEl) userEl.textContent = session.user.email;
-                
                 // Ẩn màn hình bảo vệ
                 const overlay = document.getElementById('prd-guard-overlay');
                 if (overlay) {
                     overlay.style.opacity = '0';
                     setTimeout(() => overlay.style.visibility = 'hidden', 400);
                 }
-
                 // 2. TẢI DANH SÁCH SẢN PHẨM (READ)
                 await loadProducts();
-
             } catch (err) {
                 console.error('Lỗi kiểm tra quyền hạn Quản lý Sản phẩm:', err);
                 alert('Có lỗi xảy ra khi kiểm tra phiên đăng nhập: ' + err.message);
                 window.location.href = 'index.html#login';
             }
         });
-
         // ==========================================
         // 1. READ: TẢI DANH SÁCH SẢN PHẨM
         // ==========================================
-        
         const FALLBACK_PRODUCTS = [
             { id: 1, name: 'Manchester United Home Shirt 2024-25', price: 2500000, category: 'Jerseys', subcategory: 'Home', image_url: 'https://i.pinimg.com/736x/89/3e/32/893e32ca12e3f5d5b77ff0a59b6c00d8.jpg', description: 'Official Home Kit 24/25' },
             { id: 2, name: 'Manchester United Away Shirt 2024-25', price: 2500000, category: 'Jerseys', subcategory: 'Away', image_url: 'https://i.pinimg.com/736x/67/da/75/67da75762c647b5ad3246ebc6046eef2.jpg', description: 'Official Away Kit 24/25' },
@@ -327,24 +295,20 @@
             { id: 4, name: 'Manchester United Training Top 2024', price: 1500000, category: 'Training', subcategory: 'Tops', image_url: 'https://i.pinimg.com/736x/e4/f0/a4/e4f0a4dbdcf7d6112d31da7e31d3f9ec.jpg', description: 'Training Gear' },
             { id: 5, name: 'Manchester United Scarf', price: 450000, category: 'Accessories', subcategory: 'Scarves', image_url: 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac', description: 'Red & White Scarf' }
         ];
-
         function updateKPIs(products) {
             const total = products.length;
             const jerseys = products.filter(p => p.category === 'Jerseys').length;
             const training = products.filter(p => p.category === 'Training').length;
             const other = total - jerseys - training;
-            
             const elTotal = document.getElementById('stat-total');
             const elJerseys = document.getElementById('stat-jerseys');
             const elTraining = document.getElementById('stat-training');
             const elOther = document.getElementById('stat-other');
-            
             if(elTotal) elTotal.textContent = total;
             if(elJerseys) elJerseys.textContent = jerseys;
             if(elTraining) elTraining.textContent = training;
             if(elOther) elOther.textContent = other;
         }
-
         async function loadProducts() {
             try {
                 const { data: products, error } = await supabaseClient
@@ -352,41 +316,40 @@
                     .select('*')
                     .order('id', { ascending: false });
 
-                const tbody = document.getElementById('prd-table-body');
-                if (!tbody) return;
-
                 if (error) {
-                    if (error.code === 'PGRST205') {
-                        // Fallback to mock data if table doesn't exist
-                        allProductsData = FALLBACK_PRODUCTS;
-                        updateKPIs(allProductsData);
-                        renderProductsTable(allProductsData);
-                        return;
-                    }
-                    throw error;
+                    console.error('Lỗi khi lấy dữ liệu sản phẩm:', error);
+                    document.getElementById('prd-table-body').innerHTML = createEmptyState("Không thể kết nối đến cơ sở dữ liệu.");
+                    return;
                 }
 
-                allProductsData = products || [];
-                if (allProductsData.length === 0) {
-                    // Fallback to mock data if empty
-                    allProductsData = FALLBACK_PRODUCTS;
+                if (!products || products.length === 0) {
+                    document.getElementById('prd-table-body').innerHTML = createEmptyState("Chưa có sản phẩm nào trong cửa hàng.");
+                    
+                    // Reset stats
+                    document.getElementById('stat-total').textContent = '0';
+                    document.getElementById('stat-jerseys').textContent = '0';
+                    document.getElementById('stat-training').textContent = '0';
+                    document.getElementById('stat-other').textContent = '0';
+                    return;
                 }
-                
-                updateKPIs(allProductsData);
-                renderProductsTable(allProductsData);
 
-            } catch (ex) {
-                console.error('Lỗi truy vấn sản phẩm:', ex);
-                allProductsData = FALLBACK_PRODUCTS;
-                updateKPIs(allProductsData);
-                renderProductsTable(allProductsData);
+                allProducts = products;
+                renderProducts(products);
+
+                // Update Stats dynamically
+                document.getElementById('stat-total').textContent = products.length;
+                document.getElementById('stat-jerseys').textContent = products.filter(p => p.category === 'Jerseys' || p.category === 'Áo đấu').length;
+                document.getElementById('stat-training').textContent = products.filter(p => p.category === 'Training' || p.category === 'Tập luyện').length;
+                document.getElementById('stat-other').textContent = products.filter(p => p.category !== 'Jerseys' && p.category !== 'Áo đấu' && p.category !== 'Training' && p.category !== 'Tập luyện').length;
+
+            } catch (err) {
+                console.error('Lỗi ngoại lệ khi load products:', err);
+                document.getElementById('prd-table-body').innerHTML = createEmptyState("Đã xảy ra lỗi khi tải dữ liệu.");
             }
         }
-
         function renderProductsTable(list) {
             const tbody = document.getElementById('prd-table-body');
             if (!tbody) return;
-
             if (!list || list.length === 0) {
                 tbody.innerHTML = `
                     <tr>
@@ -398,7 +361,6 @@
                 `;
                 return;
             }
-
             tbody.innerHTML = list.map(p => {
                 const imgUrl = p.image_url && p.image_url.trim() !== '' ? p.image_url : DEFAULT_IMG;
                 const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price || 0);
@@ -425,7 +387,6 @@
                 `;
             }).join('');
         }
-
         // ==========================================
         // 2. TÌM KIẾM SẢN PHẨM
         // ==========================================
@@ -442,7 +403,6 @@
             );
             renderProductsTable(filtered);
         }
-
         // ==========================================
         // 3. CREATE / UPDATE MODAL
         // ==========================================
@@ -450,18 +410,15 @@
             document.getElementById('modal-form-title').textContent = 'Thêm Sản Phẩm Mới';
             document.getElementById('prd-edit-id').value = '';
             document.getElementById('product-form').reset();
-            
             const overlay = document.getElementById('product-modal-overlay');
             overlay.classList.add('active');
         }
-
         function openEditModal(id) {
             const prd = allProductsData.find(p => p.id === id);
             if (!prd) {
                 alert('Không tìm thấy thông tin sản phẩm!');
                 return;
             }
-
             document.getElementById('modal-form-title').textContent = 'Chỉnh Sửa Sản Phẩm #' + id;
             document.getElementById('prd-edit-id').value = prd.id;
             document.getElementById('prd-name').value = prd.name || '';
@@ -470,19 +427,15 @@
             document.getElementById('prd-price').value = prd.price || 0;
             document.getElementById('prd-image').value = prd.image_url || '';
             document.getElementById('prd-desc').value = prd.description || '';
-            
             const overlay = document.getElementById('product-modal-overlay');
             overlay.classList.add('active');
         }
-
         function closeProductModal() {
             const overlay = document.getElementById('product-modal-overlay');
             overlay.classList.remove('active');
         }
-
         async function handleSaveProduct(e) {
             e.preventDefault();
-            
             const editId = document.getElementById('prd-edit-id').value;
             const name = document.getElementById('prd-name').value.trim();
             const category = document.getElementById('prd-category').value;
@@ -490,24 +443,20 @@
             const price = parseFloat(document.getElementById('prd-price').value) || 0;
             const image_url = document.getElementById('prd-image').value.trim();
             const description = document.getElementById('prd-desc').value.trim();
-
             if (!name) {
                 alert('Vui lòng nhập tên sản phẩm!');
                 return;
             }
-
             const btnSave = document.getElementById('btn-save-prd');
             const originalText = btnSave.innerHTML;
             btnSave.disabled = true;
             btnSave.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang Xử Lý...';
-
             try {
                 if (!editId) {
                     // CREATE: Thêm mới
                     const { error } = await supabaseClient
                         .from('products')
                         .insert([{ name, category, subcategory, price, image_url, description }]);
-
                     if (error) throw error;
                     alert('Đã thêm sản phẩm mới vào kho thành công!');
                 } else {
@@ -516,14 +465,11 @@
                         .from('products')
                         .update({ name, category, subcategory, price, image_url, description })
                         .eq('id', parseInt(editId));
-
                     if (error) throw error;
                     alert(`Đã cập nhật thông tin sản phẩm #${editId} thành công!`);
                 }
-
                 closeProductModal();
                 await loadProducts();
-
             } catch (err) {
                 console.error('Lỗi lưu sản phẩm:', err);
                 alert('Lỗi thao tác Supabase: ' + err.message);
@@ -532,7 +478,6 @@
                 btnSave.innerHTML = originalText;
             }
         }
-
         // ==========================================
         // 4. DELETE: XÓA SẢN PHẨM
         // ==========================================
@@ -540,23 +485,19 @@
             if (!confirm(`Bạn có chắc muốn xóa sản phẩm "${name || '#' + id}" khỏi hệ thống không?\nHành động này không thể hoàn tác!`)) {
                 return;
             }
-
             try {
                 const { error } = await supabaseClient
                     .from('products')
                     .delete()
                     .eq('id', id);
-
                 if (error) throw error;
                 alert('Đã xóa sản phẩm thành công!');
                 await loadProducts();
-
             } catch (err) {
                 console.error('Lỗi xóa sản phẩm:', err);
                 alert('Lỗi xóa sản phẩm: ' + err.message);
             }
         }
-
         async function handlePrdLogout(e) {
             e.preventDefault();
             if (supabaseClient) {
@@ -566,7 +507,6 @@
         }
     </script>
     <script src="js/auth-modal.js"></script>
-
         // INTERACTIVITY FOR DROPDOWNS
         document.addEventListener('DOMContentLoaded', () => {
             const notifBtn = document.getElementById('notif-btn');
@@ -576,7 +516,6 @@
             const markReadBtn = document.getElementById('mark-read-btn');
             const notifBadge = document.getElementById('notif-badge');
             const dropdownLogoutBtn = document.getElementById('dropdown-logout-btn');
-
             if (notifBtn && notifDropdown) {
                 notifBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -584,7 +523,6 @@
                     if(profileDropdown) profileDropdown.classList.remove('active');
                 });
             }
-
             if (avatarBtn && profileDropdown) {
                 avatarBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -592,7 +530,6 @@
                     if(notifDropdown) notifDropdown.classList.remove('active');
                 });
             }
-
             if (markReadBtn && notifBadge) {
                 markReadBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -600,7 +537,6 @@
                     // Optional: could empty the content or change styling to read
                 });
             }
-
             if (dropdownLogoutBtn) {
                 dropdownLogoutBtn.addEventListener('click', async (e) => {
                     e.preventDefault();
@@ -610,8 +546,6 @@
                     window.location.href = 'index.html#login';
                 });
             }
-
-            
             const devFeatures = document.querySelectorAll('.dev-feature');
             devFeatures.forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -619,7 +553,6 @@
                     alert('Tính năng đang phát triển!');
                 });
             });
-    
             // Close on outside click
             document.addEventListener('click', (e) => {
                 if (notifDropdown && !notifDropdown.contains(e.target) && !notifBtn.contains(e.target)) {
@@ -630,7 +563,6 @@
                 }
             });
         });
-
     <script src="js/sidebar-router.js"></script>
     <script src="js/admin-auth.js"></script>
 </body>

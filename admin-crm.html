@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRM Quản Trị Hệ Thống | United Store</title>
+    <!-- Supabase Core & Config -->
+    <script src="js/supabase-config.js"></script>
     <!-- Favicon & Fonts -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔴</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <!-- CSS dùng chung -->
         <link rel="stylesheet" href="admin.css">
 </head>
@@ -20,7 +21,6 @@
         <div class="guard-spinner"></div>
         <p style="color: #9aa0a6; font-size: 14px; font-weight: 500;">Đang xác thực quyền Admin...</p>
     </div>
-
     <div class="admin-container">
         <!-- SIDEBAR -->
         <div class="admin-sidebar">
@@ -28,14 +28,12 @@
                 <img src="images/0_Manchester_United_FC_crest.svg" alt="United Logo" class="admin-logo">
                 <h2>UNITED STORE</h2>
             </div>
-
             <nav class="sidebar-nav">
                 <!-- MAIN / OVERVIEW -->
                 <div class="sidebar-section-title" style="margin-top: 10px;">OVERVIEW</div>
                 <ul>
                     <li><a href="admin-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard Overview</a></li>
                 </ul>
-
                 <!-- STORE MANAGEMENT -->
                 <div class="sidebar-section-title">MANAGEMENT</div>
                 <ul>
@@ -44,14 +42,12 @@
                     <li><a href="admin-customers.html"><i class="fas fa-users"></i> Customers List</a></li>
                     <li><a href="admin-inventory.html"><i class="fas fa-tags"></i> Categories & Inventory</a></li>
                 </ul>
-
                 <!-- MARKETING & ANALYTICS -->
                 <div class="sidebar-section-title">MARKETING</div>
                 <ul>
                     <li><a href="admin-discounts.html"><i class="fas fa-ticket-alt"></i> Discounts & Coupons</a></li>
                     <li><a href="admin-analytics.html"><i class="fas fa-chart-bar"></i> Analytics & Reports</a></li>
                 </ul>
-
                 <!-- SYSTEM -->
                 <div class="sidebar-section-title">SYSTEM</div>
                 <ul>
@@ -69,7 +65,6 @@
                 </div>
             </div>
         </div>
-
         <!-- MAIN CONTENT -->
         <div class="admin-main">
             <div class="main-header">
@@ -112,7 +107,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="avatar-wrapper" id="avatar-btn" style="cursor: pointer;">
                             <div class="avatar-img">A</div>
                             <div class="status-dot"></div>
@@ -141,7 +135,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="dashboard-content">
                 <!-- KPI METRICS -->
                 <div class="metrics-grid">
@@ -178,7 +171,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- ORDERS SECTION -->
                 <div class="dashboard-section">
                     <div class="section-header">
@@ -191,7 +183,6 @@
                             <div class="filter-pill">Completed</div>
                         </div>
                     </div>
-                    
                     <div class="table-responsive">
                         <table class="admin-table">
                             <thead>
@@ -210,7 +201,6 @@
                         </table>
                     </div>
                 </div>
-
                 <!-- CUSTOMERS SECTION -->
                 <div class="dashboard-section">
                     <div class="section-header">
@@ -218,7 +208,6 @@
                             <i class="fas fa-address-book"></i> Customer Directory
                         </div>
                     </div>
-                    
                     <div class="table-responsive">
                         <table class="admin-table">
                             <thead>
@@ -237,30 +226,18 @@
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
-        let supabaseClient = null;
-        if (window.supabase) {
-            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        }
-
         let allUsersData = [];
         let allProductsData = [];
-
         document.addEventListener('DOMContentLoaded', async () => {
             if (!supabaseClient) {
                 alert('Lỗi khởi tạo máy chủ Supabase!');
                 window.location.href = 'index.html';
                 return;
             }
-
             try {
                 // 1. KIỂM TRA SESSION VÀ PHÂN QUYỀN ADMIN ĐỘC QUYỀN
                 const { data: { session }, error: sessErr } = await supabaseClient.auth.getSession();
@@ -269,7 +246,6 @@
                     window.location.href = 'index.html';
                     return;
                 }
-
                 // 2. TRUY VẤN BẢNG USERS ĐỂ LẤY ROLE
                 const email = session.user.email;
                 const { data: userData, error: dbErr } = await supabaseClient
@@ -277,93 +253,74 @@
                     .select('role')
                     .eq('email', email)
                     .single();
-
                 if (dbErr || !userData || userData.role !== 'admin') {
                     alert('Cảnh báo: Bạn không có quyền Admin! Trang này chỉ dành cho Admin!');
                     window.location.href = 'index.html';
                     return;
                 }
-
                 // -> ĐÃ XÁC THỰC ADMIN THÀNH CÔNG!
                 const userEl = document.getElementById('crm-user-email');
                 if (userEl) userEl.textContent = email;
-                
                 // Ẩn màn hình bảo vệ
                 const overlay = document.getElementById('crm-guard-overlay');
                 if (overlay) {
                     overlay.style.opacity = '0';
                     setTimeout(() => overlay.style.visibility = 'hidden', 400);
                 }
-
                 // 3. TẢI DỮ LIỆU DASHBOARD
                 await loadCrmDashboardData();
-
             } catch (err) {
                 console.error('Lỗi kiểm tra quyền hạn CRM:', err);
                 alert('Có lỗi xảy ra khi xác thực quyền truy cập: ' + err.message);
                 window.location.href = 'index.html';
             }
         });
-
         async function loadCrmDashboardData() {
             try {
-                // Lấy danh sách users
+                // Fetch Users
                 const { data: users, error: uErr } = await supabaseClient
                     .from('users')
                     .select('*')
                     .order('id', { ascending: true });
-
-                if (!uErr && users) {
+                    
+                if (!uErr && users && users.length > 0) {
                     allUsersData = users;
                     document.getElementById('stat-customers').textContent = users.length;
                     renderUsersTable(users);
                 } else {
-                    document.getElementById('crm-users-body').innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--admin-danger);">Không thể tải danh sách người dùng.</td></tr>`;
+                    document.getElementById('stat-customers').textContent = '0';
+                    document.getElementById('crm-users-body').innerHTML = createEmptyState("Chưa có khách hàng nào.");
                 }
 
-                // Lấy danh sách products
-                const { data: products, error: pErr } = await supabaseClient
-                    .from('products')
-                    .select('*')
-                    .limit(5);
+                // Fetch Orders
+                const { data: orders, error: oErr } = await supabaseClient
+                    .from('orders')
+                    .select('*, users(email)');
 
-                if (!pErr && products) {
-                    allProductsData = products;
-                    document.getElementById('stat-orders').textContent = products.length;
+                if (!oErr && orders && orders.length > 0) {
+                    allProductsData = orders; // Temporarily keeping the variable name for compatibility
+                    document.getElementById('stat-orders').textContent = orders.length;
                     
-                    // Calculate Total Revenue (Completed only, mocked as p.id % 2 === 0)
-                    const completedOrders = products.filter(p => p.id % 2 === 0);
-                    const totalRevenue = completedOrders.reduce((sum, p) => sum + (p.price || 0), 0);
-                    const revenueFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalRevenue);
+                    const completedOrders = orders.filter(o => o.status === 'Completed' || o.status === 'Đã giao');
+                    const totalRevenue = completedOrders.reduce((sum, o) => sum + (o.total_value || o.price || 0), 0);
                     const elRevenue = document.getElementById('stat-revenue');
-                    if (elRevenue) elRevenue.textContent = revenueFormatted;
+                    if (elRevenue) elRevenue.textContent = formatCurrency(totalRevenue);
 
-                    // Calculate Pending Orders (mocked as p.id % 2 !== 0)
-                    const pendingOrders = products.filter(p => p.id % 2 !== 0);
+                    const pendingOrders = orders.filter(o => o.status === 'Pending' || o.status === 'Chờ xử lý');
                     const elPending = document.getElementById('stat-pending');
                     if (elPending) elPending.textContent = pendingOrders.length;
-
-                    renderProductsPreview(products);
-                } else if (pErr && pErr.code === 'PGRST205') {
-                    document.getElementById('stat-orders').textContent = '0';
-                    document.getElementById('crm-orders-body').innerHTML = `
-                        <tr>
-                            <td colspan="6" style="text-align: center; padding: 25px; color: var(--admin-warning);">
-                                <i class="fa-solid fa-triangle-exclamation" style="margin-right: 8px;"></i>
-                                Bảng <b>products</b> chưa được tạo trên Supabase.
-                            </td>
-                        </tr>
-                    `;
+                    
+                    renderProductsPreview(orders);
                 } else {
                     document.getElementById('stat-orders').textContent = '0';
-                    document.getElementById('crm-orders-body').innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--admin-text-muted);">Chưa có sản phẩm nào.</td></tr>`;
+                    document.getElementById('stat-revenue').textContent = '0 ₫';
+                    document.getElementById('stat-pending').textContent = '0';
+                    document.getElementById('crm-orders-body').innerHTML = createEmptyState("Chưa có đơn hàng nào trong hệ thống.");
                 }
-
             } catch (ex) {
                 console.error('Lỗi tải dữ liệu CRM:', ex);
             }
         }
-
         function renderUsersTable(list) {
             const tbody = document.getElementById('crm-users-body');
             if (!tbody) return;
@@ -371,7 +328,6 @@
                 tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--admin-text-muted);">Chưa có người dùng nào trong hệ thống.</td></tr>`;
                 return;
             }
-
             tbody.innerHTML = list.map(u => {
                 const dateStr = u.created_at ? new Date(u.created_at).toLocaleDateString('vi-VN') : 'N/A';
                 const isAdm = u.role === 'admin';
@@ -398,34 +354,34 @@
                 `;
             }).join('');
         }
-
         function renderProductsPreview(list) {
             const tbody = document.getElementById('crm-orders-body');
             if (!tbody) return;
             if (!list || list.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--admin-text-muted);">Chưa có sản phẩm nào.</td></tr>`;
+                tbody.innerHTML = createEmptyState("Chưa có đơn hàng nào.");
                 return;
             }
-
-            tbody.innerHTML = list.map(p => {
-                const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price || 0);
+            tbody.innerHTML = list.map(o => {
+                const total = o.total_value || o.price || 0;
+                const status = o.status || 'Pending';
+                const statusClass = (status === 'Completed' || status === 'Đã giao') ? 'success' : 'warning';
+                const dateStr = o.created_at ? new Date(o.created_at).toLocaleDateString('vi-VN') : new Date().toLocaleDateString('vi-VN');
+                const customer = o.users?.email || o.customer_email || 'Khách vãng lai';
+                
                 return `
                     <tr>
-                        <td style="font-weight: 600; color: var(--admin-text-muted);">#ORD-${p.id || '-'}</td>
-                        <td style="font-weight: 600; color: var(--admin-text-main);">${p.name || 'Sản phẩm không tên'}</td>
-                        <td style="color: var(--admin-text-main); font-weight: 700;">${priceFormatted}</td>
-                        <td><span class="status-badge ${p.id % 2 === 0 ? 'success' : 'warning'}">${p.id % 2 === 0 ? 'Completed' : 'Pending'}</span></td>
-                        <td style="color: var(--admin-text-muted); font-size: 13px;">${new Date().toLocaleDateString('vi-VN')}</td>
+                        <td style="font-weight: 600; color: var(--admin-text-muted);">#ORD-${o.id || '-'}</td>
+                        <td style="font-weight: 600; color: var(--admin-text-main);">${customer}</td>
+                        <td style="color: var(--admin-text-main); font-weight: 700;">${formatCurrency(total)}</td>
+                        <td><span class="status-badge ${statusClass}">${status}</span></td>
+                        <td style="color: var(--admin-text-muted); font-size: 13px;">${dateStr}</td>
                         <td style="text-align: right;">
-                            <a href="manage-products.html" class="btn-action-icon" title="View details">
-                                <i class="fa-solid fa-eye"></i>
-                            </a>
+                            <button class="btn-action-icon" title="View details"><i class="fa-solid fa-eye"></i></button>
                         </td>
                     </tr>
                 `;
             }).join('');
         }
-
         function handleUserSearch(e) {
             e.preventDefault();
             const keyword = document.getElementById('user-search-input').value.trim().toLowerCase();
@@ -436,7 +392,6 @@
             const filtered = allUsersData.filter(u => (u.email && u.email.toLowerCase().includes(keyword)) || (u.role && u.role.toLowerCase().includes(keyword)));
             renderUsersTable(filtered);
         }
-
         async function promoteToAdmin(userId, userEmail) {
             if (!confirm(`Bạn có chắc muốn nâng tài khoản [${userEmail}] lên làm Admin (Quản trị viên)?`)) return;
             try {
@@ -444,7 +399,6 @@
                     .from('users')
                     .update({ role: 'admin' })
                     .eq('id', userId);
-
                 if (error) throw error;
                 alert(`Đã nâng quyền Admin thành công cho ${userEmail}!`);
                 await loadCrmDashboardData();
@@ -452,7 +406,6 @@
                 alert('Lỗi cập nhật quyền: ' + err.message);
             }
         }
-
         async function handleCrmLogout(e) {
             e.preventDefault();
             if (supabaseClient) {
@@ -460,9 +413,7 @@
             }
             window.location.href = 'index.html#login';
         }
-    
         let currentOrderFilter = 'All Orders';
-        
         document.addEventListener('DOMContentLoaded', () => {
             const pills = document.querySelectorAll('.filter-pill');
             pills.forEach(pill => {
@@ -471,25 +422,22 @@
                     pills.forEach(p => p.classList.remove('active'));
                     // Add active to clicked
                     pill.classList.add('active');
-                    
                     currentOrderFilter = pill.textContent.trim();
                     // In CRM, orders are mocked with products, so we re-render the products preview
                     if (allProductsData && allProductsData.length > 0) {
                         let filtered = allProductsData;
                         if (currentOrderFilter === 'Completed') {
-                            filtered = allProductsData.filter(p => p.id % 2 === 0); // Mock logic for demo
+                            filtered = allProductsData.filter(o => o.status === 'Completed' || o.status === 'Đã giao');
                         } else if (currentOrderFilter === 'Pending') {
-                            filtered = allProductsData.filter(p => p.id % 2 !== 0); // Mock logic for demo
+                            filtered = allProductsData.filter(o => o.status === 'Pending' || o.status === 'Chờ xử lý');
                         }
                         renderProductsPreview(filtered);
                     }
                 });
             });
         });
-
 </script>
     <script src="js/auth-modal.js"></script>
-
         // INTERACTIVITY FOR DROPDOWNS
         document.addEventListener('DOMContentLoaded', () => {
             const notifBtn = document.getElementById('notif-btn');
@@ -499,7 +447,6 @@
             const markReadBtn = document.getElementById('mark-read-btn');
             const notifBadge = document.getElementById('notif-badge');
             const dropdownLogoutBtn = document.getElementById('dropdown-logout-btn');
-
             if (notifBtn && notifDropdown) {
                 notifBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -507,7 +454,6 @@
                     if(profileDropdown) profileDropdown.classList.remove('active');
                 });
             }
-
             if (avatarBtn && profileDropdown) {
                 avatarBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -515,7 +461,6 @@
                     if(notifDropdown) notifDropdown.classList.remove('active');
                 });
             }
-
             if (markReadBtn && notifBadge) {
                 markReadBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -523,7 +468,6 @@
                     // Optional: could empty the content or change styling to read
                 });
             }
-
             if (dropdownLogoutBtn) {
                 dropdownLogoutBtn.addEventListener('click', async (e) => {
                     e.preventDefault();
@@ -533,8 +477,6 @@
                     window.location.href = 'index.html#login';
                 });
             }
-
-            
             const devFeatures = document.querySelectorAll('.dev-feature');
             devFeatures.forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -542,7 +484,6 @@
                     alert('Tính năng đang phát triển!');
                 });
             });
-    
             // Close on outside click
             document.addEventListener('click', (e) => {
                 if (notifDropdown && !notifDropdown.contains(e.target) && !notifBtn.contains(e.target)) {
@@ -553,7 +494,6 @@
                 }
             });
         });
-
     <script src="js/sidebar-router.js"></script>
     <script src="js/admin-auth.js"></script>
 </body>

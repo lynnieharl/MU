@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory & Categories | United Store</title>
+    <!-- Supabase Core & Config -->
+    <script src="js/supabase-config.js"></script>
     <!-- Favicon & Fonts -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔴</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <!-- CSS dùng chung -->
         <link rel="stylesheet" href="admin.css">
 </head>
@@ -20,7 +21,6 @@
         <div class="guard-spinner"></div>
         <p style="color: #9aa0a6; font-size: 14px; font-weight: 500;">Đang xác thực quyền Admin...</p>
     </div>
-
     <div class="admin-container">
         <!-- SIDEBAR -->
         <div class="admin-sidebar">
@@ -28,14 +28,12 @@
                 <img src="images/0_Manchester_United_FC_crest.svg" alt="United Logo" class="admin-logo">
                 <h2>UNITED STORE</h2>
             </div>
-
             <nav class="sidebar-nav">
                 <!-- MAIN / OVERVIEW -->
                 <div class="sidebar-section-title" style="margin-top: 10px;">OVERVIEW</div>
                 <ul>
                     <li><a href="admin-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard Overview</a></li>
                 </ul>
-
                 <!-- STORE MANAGEMENT -->
                 <div class="sidebar-section-title">MANAGEMENT</div>
                 <ul>
@@ -44,14 +42,12 @@
                     <li><a href="admin-customers.html"><i class="fas fa-users"></i> Customers List</a></li>
                     <li><a href="admin-inventory.html"><i class="fas fa-tags"></i> Categories & Inventory</a></li>
                 </ul>
-
                 <!-- MARKETING & ANALYTICS -->
                 <div class="sidebar-section-title">MARKETING</div>
                 <ul>
                     <li><a href="admin-discounts.html"><i class="fas fa-ticket-alt"></i> Discounts & Coupons</a></li>
                     <li><a href="admin-analytics.html"><i class="fas fa-chart-bar"></i> Analytics & Reports</a></li>
                 </ul>
-
                 <!-- SYSTEM -->
                 <div class="sidebar-section-title">SYSTEM</div>
                 <ul>
@@ -69,7 +65,6 @@
                 </div>
             </div>
         </div>
-
         <!-- MAIN CONTENT -->
         <div class="admin-main">
             <div class="main-header">
@@ -112,7 +107,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="avatar-wrapper" id="avatar-btn" style="cursor: pointer;">
                             <div class="avatar-img">A</div>
                             <div class="status-dot"></div>
@@ -141,7 +135,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="dashboard-content">
 <div class="dashboard-section">
     <div class="section-header">
@@ -160,24 +153,9 @@
                     <th style="width: 100px; text-align: right;">Update</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td style="color: #888; font-weight: 500;">SKU-JER-001</td>
-                    <td style="font-weight: 600;">Home Shirt 24/25 - Size M</td>
-                    <td>Jerseys</td>
-                    <td style="text-align: center; font-weight: 700;">145</td>
-                    <td><span class="status-badge success">In Stock</span></td>
-                    <td style="text-align: right;"><button class="btn-action-icon"><i class="fas fa-edit"></i></button></td>
-                </tr>
-                <tr>
-                    <td style="color: #888; font-weight: 500;">SKU-JER-002</td>
-                    <td style="font-weight: 600;">Home Shirt 24/25 - Size L</td>
-                    <td>Jerseys</td>
-                    <td style="text-align: center; font-weight: 700; color: #dc2626;">4</td>
-                    <td><span class="status-badge danger" style="background: rgba(220,38,38,0.1); color: #dc2626;">Low Stock</span></td>
-                    <td style="text-align: right;"><button class="btn-action-icon"><i class="fas fa-edit"></i></button></td>
-                </tr>
-            </tbody>
+            <tbody id="inventory-table-body">
+    <tr><td colspan="6" style="text-align: center; padding: 30px;">Đang tải dữ liệu...</td></tr>
+</tbody>
         </table>
     </div>
 </div></div>
