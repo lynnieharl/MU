@@ -25,7 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Clear local and session storage
         localStorage.removeItem('adminToken');
         localStorage.removeItem('user');
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('role');
+        localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('sb-access-token');
+        localStorage.removeItem('sb-refresh-token');
         sessionStorage.clear();
 
         // Sign out of Supabase if available

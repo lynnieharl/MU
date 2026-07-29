@@ -612,18 +612,7 @@
         }
     }
 
-    async function handleLogout(e) {
-  if (e && e.preventDefault) e.preventDefault();
-  if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
-    if (typeof window.supabaseClient !== 'undefined') {
-        await window.supabaseClient.auth.signOut();
-    } else if (typeof window.supabaseClient !== 'undefined') {
-        await window.supabaseClient.auth.signOut();
-    }
-    localStorage.clear();
-    window.location.href = 'index.html';
-  }
-}
+    
         window.location.reload();
     }
 </script>
@@ -879,40 +868,75 @@ async function handlePopupRegister(e) {
 }
 
 // Hàm Đăng xuất
+
+
 async function handleLogout(e) {
   if (e && e.preventDefault) e.preventDefault();
   if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('user');
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('role');
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('sb-access-token');
+    localStorage.removeItem('sb-refresh-token');
+    sessionStorage.clear();
+
     if (typeof window.supabaseClient !== 'undefined') {
         await window.supabaseClient.auth.signOut();
     }
-    localStorage.clear();
     window.location.href = 'index.html';
   }
 }
 
 async function checkAuthState() {
-  if (!window.supabaseClient) return;
-  try {
-    const { data: { session } } = await window.supabaseClient.auth.getSession();
-    const accountBtn = document.getElementById('user-account-btn');
-    
-    if (session) {
-      const email = session.user.email;
-      const { data: userData } = await window.supabaseClient.from('users').select('role').eq('email', email).single();
-      const role = userData ? userData.role : 'user';
-      
-      if (role === 'admin') {
-        accountBtn.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" style="width: 28px; height: 28px; cursor: pointer;" title="Trang Admin CRM" onclick="window.location.href='admin-crm.html'">`;
-      } else if (role === 'staff') {
-        accountBtn.innerHTML = `<i class="fas fa-id-badge" style="font-size: 22px; color: #ffbe00;" title="Quản Lý Sản Phẩm" onclick="window.location.href='manage-products.html'"></i>`;
-      } else {
-        accountBtn.innerHTML = `<i class="fas fa-user-circle" style="font-size: 24px; color: #da020e;" title="${email} - Bấm để Đăng xuất" onclick="handleLogout(event)"></i>`;
+  const accountBtn = document.getElementById('user-account-btn');
+  if (!accountBtn) return;
+
+  let isAuthenticated = false;
+  let userEmail = null;
+  let userRole = 'user';
+
+  // 1. Check LocalStorage first
+  const currentUser = localStorage.getItem('currentUser') || localStorage.getItem('user');
+  const savedRole = localStorage.getItem('role');
+
+  if (currentUser) {
+      isAuthenticated = true;
+      userEmail = currentUser;
+      userRole = savedRole || 'user';
+  }
+
+  // 2. Fallback to Supabase if available
+  if (window.supabaseClient) {
+    try {
+      const { data: { session } } = await window.supabaseClient.auth.getSession();
+      if (session) {
+        isAuthenticated = true;
+        userEmail = session.user.email;
+        // Fetch role if not already in local storage
+        if (!savedRole) {
+            const { data: userData } = await window.supabaseClient.from('users').select('role').eq('email', userEmail).single();
+            if (userData) userRole = userData.role;
+        }
       }
-    } else {
-      accountBtn.innerHTML = `<i class="far fa-user" id="user-icon-img" style="font-size: 22px; color: #ffffff;"></i>`;
+    } catch (err) {
+      console.warn("Lỗi xác thực Supabase:", err.message);
     }
-  } catch (err) {
-    console.error("Lỗi xác thực:", err.message);
+  }
+
+  // 3. Render Header based on state
+  if (isAuthenticated) {
+    if (userRole === 'admin') {
+      accountBtn.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" style="width: 28px; height: 28px; cursor: pointer;" title="Trang Admin Dashboard" onclick="window.location.href='admin-dashboard.html'">`;
+    } else if (userRole === 'staff') {
+      accountBtn.innerHTML = `<i class="fas fa-id-badge" style="font-size: 22px; color: #ffbe00;" title="Quản Lý Sản Phẩm" onclick="window.location.href='manage-products.html'"></i>`;
+    } else {
+      accountBtn.innerHTML = `<i class="fas fa-user-circle" style="font-size: 24px; color: #da020e;" title="${userEmail} - Bấm để Đăng xuất" onclick="handleLogout(event)"></i>`;
+    }
+  } else {
+    // Guest state
+    accountBtn.innerHTML = `<i class="far fa-user" id="user-icon-img" style="font-size: 22px; color: #ffffff;" title="Đăng nhập / Đăng ký"></i>`;
   }
 }
 
