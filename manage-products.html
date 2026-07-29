@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản Lý Sản Phẩm (CRUD) | United Store</title>
     <!-- Supabase Core & Config -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-config.js"></script>
     <!-- Favicon & Fonts -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔴</text></svg>">
@@ -252,16 +253,12 @@
         .btn-save:hover { background: var(--admin-primary-hover); }
     </style>
     <script>
-        let allProductsData = [];
+        let allProducts = [];
+        let editingProductId = null;
         const DEFAULT_IMG = 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
         document.addEventListener('DOMContentLoaded', async () => {
-            if (!supabaseClient) {
-                alert('Lỗi khởi tạo máy chủ Supabase!');
-                window.location.href = 'index.html#login';
-                return;
-            }
             try {
-                // 1. KIỂM TRA ĐĂNG NHẬP (BẮT BUỘC ĐÃ LOG IN MỚI ĐƯỢC VÀO TRANG)
+                // 1. KIỂM TRA SESSION
                 const { data: { session }, error: sessErr } = await supabaseClient.auth.getSession();
                 if (sessErr || !session || !session.user) {
                     alert('Vui lòng đăng nhập để truy cập trang Quản Lý Sản Phẩm!');

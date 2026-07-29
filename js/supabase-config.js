@@ -2,10 +2,14 @@ const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
 let supabaseClient = null;
 
-if (window.supabase) {
-    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-} else {
-    console.error("Supabase SDK not loaded!");
+try {
+    if (window.supabase && typeof window.supabase.createClient === 'function') {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    } else {
+        console.warn('Supabase SDK chưa load xong hoặc chưa được tích hợp.');
+    }
+} catch (err) {
+    console.error('Lỗi khi khởi tạo Supabase:', err);
 }
 
 // Utility function to format currency

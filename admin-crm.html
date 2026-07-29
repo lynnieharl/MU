@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRM Quản Trị Hệ Thống | United Store</title>
     <!-- Supabase Core & Config -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-config.js"></script>
     <!-- Favicon & Fonts -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔴</text></svg>">
@@ -233,11 +234,6 @@
         let allUsersData = [];
         let allProductsData = [];
         document.addEventListener('DOMContentLoaded', async () => {
-            if (!supabaseClient) {
-                alert('Lỗi khởi tạo máy chủ Supabase!');
-                window.location.href = 'index.html';
-                return;
-            }
             try {
                 // 1. KIỂM TRA SESSION VÀ PHÂN QUYỀN ADMIN ĐỘC QUYỀN
                 const { data: { session }, error: sessErr } = await supabaseClient.auth.getSession();
