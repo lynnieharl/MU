@@ -164,11 +164,52 @@ h1, h2, h3, h4, .lux-title {
     font-size: 3rem;
     font-weight: 800;
     margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Typography 1: BẢN THIẾT KẾ VĨ ĐẠI */
+.lux-section-title.title-design {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 8px;
+    color: #ffffff;
+}
+
+/* Typography 2: THE COLLECTION */
+.lux-section-title.title-collection {
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #ffffff;
+}
+.title-collection + .lux-section-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 1rem; /* 1/3 của 3rem */
+    color: #e5e7eb;
+}
+
+/* Typography 3: THE RED ARMY */
+.lux-section-title.title-red-army {
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffffff;
+}
+.title-red-army + .lux-section-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: #9ca3af;
 }
 
 .lux-section-subtitle {
     color: var(--lux-text-muted);
     font-size: 1.1rem;
+    text-align: center;
 }
 
 .lux-features-grid {
