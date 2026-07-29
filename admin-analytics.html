@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Analytics | United Store</title>
+    <!-- Favicon & Fonts -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔴</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS dùng chung -->
+        <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Overlay Bảo Vệ -->
+    <div id="crm-guard-overlay">
+        <div class="guard-spinner"></div>
+        <p style="color: #9aa0a6; font-size: 14px; font-weight: 500;">Đang xác thực quyền Admin...</p>
+    </div>
+
+    <div class="admin-container">
+        <!-- SIDEBAR -->
+        <div class="admin-sidebar">
+            <div class="sidebar-header">
+                <img src="images/0_Manchester_United_FC_crest.svg" alt="United Logo" class="admin-logo">
+                <h2>UNITED STORE</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- MAIN / OVERVIEW -->
+                <div class="sidebar-section-title" style="margin-top: 10px;">OVERVIEW</div>
+                <ul>
+                    <li><a href="admin-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard Overview</a></li>
+                </ul>
+
+                <!-- STORE MANAGEMENT -->
+                <div class="sidebar-section-title">MANAGEMENT</div>
+                <ul>
+                    <li><a href="admin-crm.html"><i class="fas fa-chart-line"></i> CRM & Orders</a></li>
+                    <li><a href="manage-products.html"><i class="fas fa-box"></i> Products Management</a></li>
+                    <li><a href="admin-customers.html"><i class="fas fa-users"></i> Customers List</a></li>
+                    <li><a href="admin-inventory.html"><i class="fas fa-tags"></i> Categories & Inventory</a></li>
+                </ul>
+
+                <!-- MARKETING & ANALYTICS -->
+                <div class="sidebar-section-title">MARKETING</div>
+                <ul>
+                    <li><a href="admin-discounts.html"><i class="fas fa-ticket-alt"></i> Discounts & Coupons</a></li>
+                    <li><a href="admin-analytics.html"><i class="fas fa-chart-bar"></i> Analytics & Reports</a></li>
+                </ul>
+
+                <!-- SYSTEM -->
+                <div class="sidebar-section-title">SYSTEM</div>
+                <ul>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Store Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="admin-profile-card">
+                    <div class="profile-avatar"><i class="fas fa-user-shield"></i></div>
+                    <div class="profile-info">
+                        <h3 id="crm-user-email">Admin User</h3>
+                        <span class="role-badge">SUPER ADMIN</span>
+                    </div>
+                    <button class="logout-btn-icon" id="crm-btn-logout" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="admin-main">
+            <div class="main-header">
+                <h1>Store Analytics</h1>
+                <div class="header-actions">
+                    <form class="search-bar" id="crm-search-form">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="crm-search-input" placeholder="Search orders or users...">
+                    </form>
+                    <div class="header-profile-section">
+                        <div style="position: relative;">
+                            <button class="notification-btn" id="notif-btn"><i class="far fa-bell"></i><span class="badge" id="notif-badge">5</span></button>
+                            <div class="dropdown-menu" id="notif-dropdown">
+                                <div class="dropdown-header">
+                                    <h4>Notifications</h4>
+                                    <span class="dropdown-action" id="mark-read-btn">Mark all as read</span>
+                                </div>
+                                <div class="dropdown-content">
+                                    <div class="dropdown-item">
+                                        <div class="dropdown-item-icon"><i class="fas fa-shopping-cart"></i></div>
+                                        <div class="dropdown-item-text">
+                                            <p>Có đơn hàng mới #1024</p>
+                                            <span>2 mins ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <div class="dropdown-item-icon" style="color: #F59E0B; background: rgba(245,158,11,0.1);"><i class="fas fa-exclamation-triangle"></i></div>
+                                        <div class="dropdown-item-text">
+                                            <p>Sản phẩm 'Home Kit 24/25' sắp hết hàng</p>
+                                            <span>1 hour ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <div class="dropdown-item-icon" style="color: #10B981; background: rgba(16,185,129,0.1);"><i class="fas fa-user-plus"></i></div>
+                                        <div class="dropdown-item-text">
+                                            <p>Khách hàng vừa đăng ký</p>
+                                            <span>3 hours ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="avatar-wrapper" id="avatar-btn" style="cursor: pointer;">
+                            <div class="avatar-img">A</div>
+                            <div class="status-dot"></div>
+                            <div class="avatar-info">
+                                <span class="avatar-name">Admin</span>
+                                <span class="avatar-role">Online</span>
+                            </div>
+                            <div class="dropdown-menu" id="profile-dropdown" style="min-width: 200px;">
+                                <div class="dropdown-content">
+                                    <a href="#" class="dropdown-item">
+                                        <i class="fas fa-cog" style="width: 20px; color: var(--admin-text-muted);"></i>
+                                        <span style="font-weight: 500; font-size: 0.85rem;">Profile Settings</span>
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                        <i class="fas fa-clipboard-list" style="width: 20px; color: var(--admin-text-muted);"></i>
+                                        <span style="font-weight: 500; font-size: 0.85rem;">System Logs</span>
+                                    </a>
+                                    <div style="border-top: 1px solid var(--admin-border); margin: 4px 0;"></div>
+                                    <a href="#" class="dropdown-item" id="dropdown-logout-btn">
+                                        <i class="fas fa-sign-out-alt" style="width: 20px; color: var(--admin-danger);"></i>
+                                        <span style="font-weight: 600; font-size: 0.85rem; color: var(--admin-danger);">Logout</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+<div class="dashboard-section">\n    <div class="section-header">\n        <div class="section-title"><i class="fas fa-chart-bar"></i> Analytics & Reports</div>\n    </div>\n    <div style="height: 400px; background: #fafafa; border: 1px dashed #ccc; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 8px; color: #888;">\n        <i class="fas fa-tools" style="font-size: 3rem; margin-bottom: 15px; color: #cbd5e1;"></i>\n        <h3 style="color: #475569;">Advanced Analytics Engine</h3>\n        <p style="margin-top: 8px; font-size: 0.9rem;">Tích hợp Google Analytics và Chart.js đang được phát triển.</p>\n    </div>\n</div></div>
+</div></div><script src="js/sidebar-router.js"></script></body></html>

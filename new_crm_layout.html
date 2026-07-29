@@ -1,0 +1,142 @@
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Overlay Bảo Vệ -->
+    <div id="crm-guard-overlay">
+        <div class="guard-spinner"></div>
+        <p style="color: #9aa0a6; font-size: 14px; font-weight: 500;">Đang xác thực quyền Admin...</p>
+    </div>
+
+    <div class="admin-container">
+        <!-- SIDEBAR -->
+        <div class="admin-sidebar">
+            <div class="sidebar-header">
+                <img src="images/0_Manchester_United_FC_crest.svg" alt="United Logo" class="admin-logo">
+                <h2>UNITED STORE</h2>
+            </div>
+            <div class="admin-profile">
+                <div class="avatar-circle"><i class="fas fa-user-shield"></i></div>
+                <div class="profile-info">
+                    <h3 id="crm-user-email">Admin User</h3>
+                    <span class="role-badge">SUPER ADMIN</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="admin-crm.html"><i class="fas fa-chart-line"></i> CRM & Orders</a></li>
+                    <li><a href="manage-products.html"><i class="fas fa-box"></i> Products</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="crm-btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="admin-main">
+            <div class="main-header">
+                <h1>CRM & Order Management</h1>
+                <div class="header-actions">
+                    <form class="search-bar" id="crm-search-form">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="crm-search-input" placeholder="Search orders or users...">
+                    </form>
+                    <button class="notification-btn"><i class="far fa-bell"></i><span class="badge">5</span></button>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <!-- KPI METRICS -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon user-icon"><i class="fas fa-users"></i></div>
+                        <div class="metric-data">
+                            <h4>Total Customers</h4>
+                            <div class="metric-value" id="stat-customers">0</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon product-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="metric-data">
+                            <h4>Total Orders</h4>
+                            <div class="metric-value" id="stat-orders">0</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon revenue-icon"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="metric-data">
+                            <h4>Total Revenue</h4>
+                            <div class="metric-value" id="stat-revenue">0 ₫</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon" style="background: rgba(111, 66, 193, 0.1); color: #6f42c1;"><i class="fas fa-box-open"></i></div>
+                        <div class="metric-data">
+                            <h4>Pending Orders</h4>
+                            <div class="metric-value" id="stat-pending">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ORDERS SECTION -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-receipt"></i> Recent Orders
+                        </div>
+                        <div class="filter-pills">
+                            <div class="filter-pill active">All Orders</div>
+                            <div class="filter-pill">Pending</div>
+                            <div class="filter-pill">Completed</div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 80px;">Order ID</th>
+                                    <th>Customer (Email)</th>
+                                    <th style="width: 150px;">Total Value</th>
+                                    <th style="width: 120px;">Status</th>
+                                    <th style="width: 150px;">Date</th>
+                                    <th style="width: 150px; text-align: right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="crm-orders-body">
+                                <tr><td colspan="6" style="text-align:center; padding:30px;">Loading data...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CUSTOMERS SECTION -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-address-book"></i> Customer Directory
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 80px;">User ID</th>
+                                    <th>Email Address</th>
+                                    <th style="width: 150px;">Total Orders</th>
+                                    <th style="width: 180px;">Total Spent</th>
+                                    <th style="width: 150px;">Last Active</th>
+                                    <th style="width: 100px; text-align: right;">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody id="crm-users-body">
+                                <tr><td colspan="6" style="text-align:center; padding:30px;">Loading data...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
