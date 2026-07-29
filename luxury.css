@@ -239,7 +239,7 @@ h1, h2, h3, h4, .lux-title {
 }
 
 .lux-bento-item:hover img {
-    transform: scale(1.08);
+    transform: scale(1.05);
     opacity: 0.5;
 }
 
@@ -267,11 +267,34 @@ h1, h2, h3, h4, .lux-title {
     flex-direction: column;
     justify-content: flex-end;
     background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    transition: transform 0.5s ease;
+}
+
+.lux-bento-item:hover .lux-bento-content {
+    transform: translateY(-10px);
+}
+
+.lux-vip-badge {
+    align-self: flex-start;
+    background: linear-gradient(45deg, #c5a059, #f9e596, #c5a059);
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
 }
 
 .lux-bento-content h3 {
     font-size: 2rem;
     margin-bottom: 5px;
+}
+
+.lux-bento-subtitle {
+    color: var(--lux-text-muted);
+    font-size: 1rem;
+    margin-bottom: 15px;
 }
 
 .lux-bento-small .lux-bento-content h3 {
@@ -286,11 +309,12 @@ h1, h2, h3, h4, .lux-title {
 }
 
 .lux-quick-add {
-    background: white;
-    color: black;
-    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
     padding: 10px 20px;
-    font-weight: 700;
+    font-weight: 600;
     border-radius: 4px;
     cursor: pointer;
     opacity: 0;
@@ -305,8 +329,9 @@ h1, h2, h3, h4, .lux-title {
 }
 
 .lux-quick-add:hover {
-    background: var(--lux-red);
-    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
 /* 5. HERITAGE TIMELINE */
@@ -598,9 +623,18 @@ h1, h2, h3, h4, .lux-title {
 }
 
 /* 8. STICKY HEADER LUXURY STATE */
+body.luxury-mode .header-wave-bg {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .header-wave-bg.lux-scrolled {
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(12px);
+    background: rgba(17, 17, 17, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 .header-wave-bg.lux-scrolled .top-bar-container,
