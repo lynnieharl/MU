@@ -467,20 +467,29 @@ h1, h2, h3, h4, .lux-title {
     z-index: 2;
     max-width: 1440px;
     margin: 0 auto;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-.lux-honours-container::-webkit-scrollbar {
-    display: none;
+    overflow: hidden;
 }
 
-.lux-honours-scroll {
+.lux-honours-track {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
     gap: 30px;
-    min-width: min-content;
+    width: max-content;
+    animation: scroll 20s linear infinite;
     padding-bottom: 20px;
+}
+
+.lux-honours-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-50% - 15px));
+    }
 }
 
 .lux-award-card {
