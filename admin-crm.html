@@ -30,9 +30,32 @@
             </div>
 
             <nav class="sidebar-nav">
+                <!-- MAIN / OVERVIEW -->
+                <div class="sidebar-section-title" style="margin-top: 10px;">OVERVIEW</div>
                 <ul>
-                    <li class="active"><a href="admin-crm.html"><i class="fas fa-chart-line"></i> CRM & Orders</a></li>
-                    <li><a href="manage-products.html"><i class="fas fa-box"></i> Products</a></li>
+                    <li><a href="#" class="dev-feature"><i class="fas fa-chart-pie"></i> Dashboard Overview</a></li>
+                </ul>
+
+                <!-- STORE MANAGEMENT -->
+                <div class="sidebar-section-title">MANAGEMENT</div>
+                <ul>
+                    <li class="${activePage === 'crm' ? 'active' : ''}"><a href="admin-crm.html"><i class="fas fa-chart-line"></i> CRM & Orders</a></li>
+                    <li class="${activePage === 'products' ? 'active' : ''}"><a href="manage-products.html"><i class="fas fa-box"></i> Products Management</a></li>
+                    <li><a href="#" class="dev-feature"><i class="fas fa-users"></i> Customers List</a></li>
+                    <li><a href="#" class="dev-feature"><i class="fas fa-tags"></i> Categories & Inventory</a></li>
+                </ul>
+
+                <!-- MARKETING & ANALYTICS -->
+                <div class="sidebar-section-title">MARKETING</div>
+                <ul>
+                    <li><a href="#" class="dev-feature"><i class="fas fa-ticket-alt"></i> Discounts & Coupons</a></li>
+                    <li><a href="#" class="dev-feature"><i class="fas fa-chart-bar"></i> Analytics & Reports</a></li>
+                </ul>
+
+                <!-- SYSTEM -->
+                <div class="sidebar-section-title">SYSTEM</div>
+                <ul>
+                    <li><a href="#" class="dev-feature"><i class="fas fa-cog"></i> Store Settings</a></li>
                 </ul>
             </nav>
             <div class="sidebar-footer">
@@ -497,6 +520,15 @@
                 });
             }
 
+            
+            const devFeatures = document.querySelectorAll('.dev-feature');
+            devFeatures.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert('Tính năng đang phát triển!');
+                });
+            });
+    
             // Close on outside click
             document.addEventListener('click', (e) => {
                 if (notifDropdown && !notifDropdown.contains(e.target) && !notifBtn.contains(e.target)) {
