@@ -446,7 +446,7 @@
             const profileDropdown = document.getElementById('profile-dropdown');
             const markReadBtn = document.getElementById('mark-read-btn');
             const notifBadge = document.getElementById('notif-badge');
-            const dropdownLogoutBtn = document.getElementById('dropdown-logout-btn');
+            
             if (notifBtn && notifDropdown) {
                 notifBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -466,15 +466,6 @@
                     e.stopPropagation();
                     notifBadge.style.display = 'none';
                     // Optional: could empty the content or change styling to read
-                });
-            }
-            if (dropdownLogoutBtn) {
-                dropdownLogoutBtn.addEventListener('click', async (e) => {
-                    e.preventDefault();
-                    if (supabaseClient) {
-                        await supabaseClient.auth.signOut();
-                    }
-                    window.location.href = 'index.html#login';
                 });
             }
             const devFeatures = document.querySelectorAll('.dev-feature');
