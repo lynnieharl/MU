@@ -213,6 +213,8 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    margin-bottom: 24px;
 }
 
 .main-header h1 {
@@ -225,7 +227,7 @@ h1, h2, h3, h4, h5, h6 {
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 20px;
 }
 
 .search-bar {
@@ -332,8 +334,9 @@ h1, h2, h3, h4, h5, h6 {
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin-bottom: 40px;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 28px;
 }
 
 .metric-card {
@@ -449,6 +452,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* CLEAN MODERN TABLES */
 .table-responsive {
+    width: 100%;
     overflow-x: auto;
 }
 
