@@ -169,7 +169,8 @@ h1, h2, h3, h4, .lux-title {
 
 /* Typography 1: BẢN THIẾT KẾ VĨ ĐẠI */
 .lux-section-title.title-design {
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
     text-transform: uppercase;
     font-weight: 400;
     letter-spacing: 8px;
