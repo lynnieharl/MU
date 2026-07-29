@@ -143,5 +143,50 @@
             </div>
 
             <div class="dashboard-content">
-<div style="display: flex; gap: 24px;">\n    <div class="dashboard-section" style="flex: 2;">\n        <div class="section-header">\n            <div class="section-title"><i class="fas fa-ticket-alt"></i> Active Coupons</div>\n        </div>\n        <div class="table-responsive">\n            <table class="admin-table">\n                <thead>\n                    <tr>\n                        <th>Code</th>\n                        <th style="width: 100px;">Discount</th>\n                        <th style="width: 150px;">Expiry Date</th>\n                        <th style="width: 100px;">Status</th>\n                        <th style="width: 80px; text-align: right;">Action</th>\n                    </tr>\n                </thead>\n                <tbody>\n                    <tr>\n                        <td><span style="font-family: monospace; font-size: 1rem; font-weight: 700; background: #f3f4f6; padding: 4px 8px; border-radius: 4px;">WELCOME10</span></td>\n                        <td style="font-weight: 700; color: var(--admin-primary);">-10%</td>\n                        <td style="color: #666;">31/12/2026</td>\n                        <td><span class="status-badge success">Active</span></td>\n                        <td style="text-align: right;"><button class="btn-action-icon danger"><i class="fas fa-trash"></i></button></td>\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n    </div>\n    <div class="dashboard-section" style="flex: 1;">\n        <div class="section-header">\n            <div class="section-title"><i class="fas fa-plus"></i> Generate Coupon</div>\n        </div>\n        <form style="display: flex; flex-direction: column; gap: 16px;">\n            <div>\n                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: #555;">Coupon Code</label>\n                <input type="text" placeholder="e.g. SUMMER24" style="width: 100%; padding: 10px 15px; border: 1px solid #ddd; border-radius: 8px;">\n            </div>\n            <div>\n                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: #555;">Discount (%)</label>\n                <input type="number" placeholder="10" min="1" max="100" style="width: 100%; padding: 10px 15px; border: 1px solid #ddd; border-radius: 8px;">\n            </div>\n            <button type="button" class="btn-create" style="margin-top: 10px; width: 100%; justify-content: center;">Create Coupon</button>\n        </form>\n    </div>\n</div></div>
-</div></div><script src="js/sidebar-router.js"></script></body></html>
+<div style="display: flex; gap: 24px;">
+    <div class="dashboard-section" style="flex: 2;">
+        <div class="section-header">
+            <div class="section-title"><i class="fas fa-ticket-alt"></i> Active Coupons</div>
+        </div>
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th style="width: 100px;">Discount</th>
+                        <th style="width: 150px;">Expiry Date</th>
+                        <th style="width: 100px;">Status</th>
+                        <th style="width: 80px; text-align: right;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span style="font-family: monospace; font-size: 1rem; font-weight: 700; background: #f3f4f6; padding: 4px 8px; border-radius: 4px;">WELCOME10</span></td>
+                        <td style="font-weight: 700; color: var(--admin-primary);">-10%</td>
+                        <td style="color: #666;">31/12/2026</td>
+                        <td><span class="status-badge success">Active</span></td>
+                        <td style="text-align: right;"><button class="btn-action-icon danger"><i class="fas fa-trash"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="dashboard-section" style="flex: 1;">
+        <div class="section-header">
+            <div class="section-title"><i class="fas fa-plus"></i> Generate Coupon</div>
+        </div>
+        <form style="display: flex; flex-direction: column; gap: 16px;">
+            <div>
+                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: #555;">Coupon Code</label>
+                <input type="text" placeholder="e.g. SUMMER24" style="width: 100%; padding: 10px 15px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+            <div>
+                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: #555;">Discount (%)</label>
+                <input type="number" placeholder="10" min="1" max="100" style="width: 100%; padding: 10px 15px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+            <button type="button" class="btn-create" style="margin-top: 10px; width: 100%; justify-content: center;">Create Coupon</button>
+        </form>
+    </div>
+</div></div>
+</div></div><script src="js/sidebar-router.js"></script>    <script src="js/admin-auth.js"></script>
+</body></html>

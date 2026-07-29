@@ -143,6 +143,81 @@
             </div>
 
             <div class="dashboard-content">
-<div class="metrics-grid">\n    <div class="metric-card">\n        <div class="metric-icon revenue-icon"><i class="fas fa-money-bill-wave"></i></div>\n        <div class="metric-data">\n            <h4>Today&#39;s Revenue</h4>\n            <div class="metric-value">12.5M ₫</div>\n            <div class="metric-growth"><span class="growth-up"><i class="fas fa-arrow-up"></i> 8.4%</span> <span class="growth-text">vs yesterday</span></div>\n        </div>\n    </div>\n    <div class="metric-card">\n        <div class="metric-icon product-icon"><i class="fas fa-shopping-cart"></i></div>\n        <div class="metric-data">\n            <h4>New Orders</h4>\n            <div class="metric-value">42</div>\n            <div class="metric-growth"><span class="growth-up"><i class="fas fa-arrow-up"></i> 12.1%</span> <span class="growth-text">vs yesterday</span></div>\n        </div>\n    </div>\n    <div class="metric-card">\n        <div class="metric-icon user-icon"><i class="fas fa-users"></i></div>\n        <div class="metric-data">\n            <h4>Active Users</h4>\n            <div class="metric-value">1,204</div>\n            <div class="metric-growth"><span class="growth-up"><i class="fas fa-arrow-up"></i> 2.5%</span> <span class="growth-text">vs yesterday</span></div>\n        </div>\n    </div>\n    <div class="metric-card">\n        <div class="metric-icon" style="background: rgba(220, 38, 38, 0.1); color: #DC2626;"><i class="fas fa-exclamation-triangle"></i></div>\n        <div class="metric-data">\n            <h4>Low Stock Items</h4>\n            <div class="metric-value">8</div>\n            <div class="metric-growth"><span class="growth-down"><i class="fas fa-arrow-down"></i> Needs attention</span></div>\n        </div>\n    </div>\n</div>\n<div style="display: flex; gap: 24px;">\n    <div class="dashboard-section" style="flex: 2;">\n        <div class="section-header">\n            <div class="section-title"><i class="fas fa-chart-area"></i> Revenue Overview</div>\n        </div>\n        <div style="height: 300px; background: #fafafa; border: 1px dashed #ccc; display: flex; justify-content: center; align-items: center; border-radius: 8px; color: #888;">\n            <canvas id="revenueChart"></canvas>\n        </div>\n    </div>\n    <div class="dashboard-section" style="flex: 1;">\n        <div class="section-header">\n            <div class="section-title"><i class="fas fa-fire"></i> Top Selling Products</div>\n        </div>\n        <ul style="list-style: none; padding: 0; margin: 0;">\n            <li style="display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #eee;">\n                <img src="https://i.pinimg.com/736x/89/3e/32/893e32ca12e3f5d5b77ff0a59b6c00d8.jpg" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px;">\n                <div style="flex: 1;">\n                    <h4 style="font-size: 0.85rem; margin-bottom: 4px; color: #333;">Home Shirt 24/25</h4>\n                    <span style="font-size: 0.75rem; color: #888;">142 sales</span>\n                </div>\n                <div style="font-weight: 700; font-size: 0.9rem; color: #DA020E;">2.5M ₫</div>\n            </li>\n            <li style="display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #eee;">\n                <img src="https://i.pinimg.com/736x/67/da/75/67da75762c647b5ad3246ebc6046eef2.jpg" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px;">\n                <div style="flex: 1;">\n                    <h4 style="font-size: 0.85rem; margin-bottom: 4px; color: #333;">Away Shirt 24/25</h4>\n                    <span style="font-size: 0.75rem; color: #888;">98 sales</span>\n                </div>\n                <div style="font-weight: 700; font-size: 0.9rem; color: #DA020E;">2.5M ₫</div>\n            </li>\n            <li style="display: flex; align-items: center; gap: 15px; padding: 12px 0;">\n                <img src="https://i.pinimg.com/736x/e4/f0/a4/e4f0a4dbdcf7d6112d31da7e31d3f9ec.jpg" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px;">\n                <div style="flex: 1;">\n                    <h4 style="font-size: 0.85rem; margin-bottom: 4px; color: #333;">Training Top</h4>\n                    <span style="font-size: 0.75rem; color: #888;">65 sales</span>\n                </div>\n                <div style="font-weight: 700; font-size: 0.9rem; color: #DA020E;">1.5M ₫</div>\n            </li>\n        </ul>\n    </div>\n</div></div>
-</div></div><script src="js/sidebar-router.js"></script></body></html>
+<div class="metrics-grid">
+    <div class="metric-card">
+        <div class="metric-icon revenue-icon"><i class="fas fa-money-bill-wave"></i></div>
+        <div class="metric-data">
+            <h4>Today&#39;s Revenue</h4>
+            <div class="metric-value">12.5M ₫</div>
+            <div class="metric-growth"><span class="growth-up"><i class="fas fa-arrow-up"></i> 8.4%</span> <span class="growth-text">vs yesterday</span></div>
+        </div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-icon product-icon"><i class="fas fa-shopping-cart"></i></div>
+        <div class="metric-data">
+            <h4>New Orders</h4>
+            <div class="metric-value">42</div>
+            <div class="metric-growth"><span class="growth-up"><i class="fas fa-arrow-up"></i> 12.1%</span> <span class="growth-text">vs yesterday</span></div>
+        </div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-icon user-icon"><i class="fas fa-users"></i></div>
+        <div class="metric-data">
+            <h4>Active Users</h4>
+            <div class="metric-value">1,204</div>
+            <div class="metric-growth"><span class="growth-up"><i class="fas fa-arrow-up"></i> 2.5%</span> <span class="growth-text">vs yesterday</span></div>
+        </div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-icon" style="background: rgba(220, 38, 38, 0.1); color: #DC2626;"><i class="fas fa-exclamation-triangle"></i></div>
+        <div class="metric-data">
+            <h4>Low Stock Items</h4>
+            <div class="metric-value">8</div>
+            <div class="metric-growth"><span class="growth-down"><i class="fas fa-arrow-down"></i> Needs attention</span></div>
+        </div>
+    </div>
+</div>
+<div style="display: flex; gap: 24px;">
+    <div class="dashboard-section" style="flex: 2;">
+        <div class="section-header">
+            <div class="section-title"><i class="fas fa-chart-area"></i> Revenue Overview</div>
+        </div>
+        <div style="height: 300px; background: #fafafa; border: 1px dashed #ccc; display: flex; justify-content: center; align-items: center; border-radius: 8px; color: #888;">
+            <canvas id="revenueChart"></canvas>
+        </div>
+    </div>
+    <div class="dashboard-section" style="flex: 1;">
+        <div class="section-header">
+            <div class="section-title"><i class="fas fa-fire"></i> Top Selling Products</div>
+        </div>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #eee;">
+                <img src="https://i.pinimg.com/736x/89/3e/32/893e32ca12e3f5d5b77ff0a59b6c00d8.jpg" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px;">
+                <div style="flex: 1;">
+                    <h4 style="font-size: 0.85rem; margin-bottom: 4px; color: #333;">Home Shirt 24/25</h4>
+                    <span style="font-size: 0.75rem; color: #888;">142 sales</span>
+                </div>
+                <div style="font-weight: 700; font-size: 0.9rem; color: #DA020E;">2.5M ₫</div>
+            </li>
+            <li style="display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #eee;">
+                <img src="https://i.pinimg.com/736x/67/da/75/67da75762c647b5ad3246ebc6046eef2.jpg" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px;">
+                <div style="flex: 1;">
+                    <h4 style="font-size: 0.85rem; margin-bottom: 4px; color: #333;">Away Shirt 24/25</h4>
+                    <span style="font-size: 0.75rem; color: #888;">98 sales</span>
+                </div>
+                <div style="font-weight: 700; font-size: 0.9rem; color: #DA020E;">2.5M ₫</div>
+            </li>
+            <li style="display: flex; align-items: center; gap: 15px; padding: 12px 0;">
+                <img src="https://i.pinimg.com/736x/e4/f0/a4/e4f0a4dbdcf7d6112d31da7e31d3f9ec.jpg" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px;">
+                <div style="flex: 1;">
+                    <h4 style="font-size: 0.85rem; margin-bottom: 4px; color: #333;">Training Top</h4>
+                    <span style="font-size: 0.75rem; color: #888;">65 sales</span>
+                </div>
+                <div style="font-weight: 700; font-size: 0.9rem; color: #DA020E;">1.5M ₫</div>
+            </li>
+        </ul>
+    </div>
+</div></div>
+</div></div><script src="js/sidebar-router.js"></script>    <script src="js/admin-auth.js"></script>
+</body></html>
 <script>document.addEventListener('DOMContentLoaded', () => { const canvas = document.getElementById('revenueChart'); if (canvas) { const ctx = canvas.getContext('2d'); ctx.fillStyle = '#DA020E'; ctx.font = '16px Inter'; ctx.fillText('Biểu đồ doanh thu đang được cập nhật...', 50, 150); } });</script>
