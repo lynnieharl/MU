@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
 /* ==========================================================================
    LUXURY LANDING PAGE OVERHAUL (AOS, GLASSMORPHISM, BENTO GRID)
    ========================================================================== */
@@ -169,11 +171,12 @@ h1, h2, h3, h4, .lux-title {
 
 /* Typography 1: BẢN THIẾT KẾ VĨ ĐẠI */
 .lux-section-title.title-design {
-    font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
-    font-style: italic;
-    text-transform: uppercase;
+    font-family: 'Great Vibes', cursive;
+    font-style: normal;
+    text-transform: capitalize;
     font-weight: 400;
-    letter-spacing: 8px;
+    letter-spacing: 2px;
+    font-size: 4.5rem;
     color: #ffffff;
 }
 
