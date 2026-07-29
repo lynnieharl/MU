@@ -623,18 +623,21 @@ h1, h2, h3, h4, .lux-title {
     color: #666;
 }
 
-/* 8. TRANSPARENT OVERLAY HEADER */
+/* 8. STICKY HEADER LUXURY STATE */
 body.luxury-mode .header-wave-bg {
-    position: absolute;
+    position: sticky;
     top: 0;
-    left: 0;
     width: 100%;
     z-index: 1000;
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-    border: none !important;
-    box-shadow: none !important;
+}
+
+.header-wave-bg.lux-scrolled {
+    /* Loại bỏ đổi màu nền đen, giữ nguyên wave bg gốc */
+    background: transparent; 
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 .header-wave-bg.lux-scrolled .top-bar-container,
 .header-wave-bg.lux-scrolled .top-bar {
