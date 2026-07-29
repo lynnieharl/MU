@@ -467,7 +467,18 @@ h1, h2, h3, h4, .lux-title {
     z-index: 2;
     max-width: 1440px;
     margin: 0 auto;
-    overflow: hidden;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    cursor: grab;
+}
+
+.lux-honours-container::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.lux-honours-container:active {
+    cursor: grabbing;
 }
 
 .lux-honours-track {
@@ -475,21 +486,7 @@ h1, h2, h3, h4, .lux-title {
     align-items: flex-start;
     gap: 30px;
     width: max-content;
-    animation: scroll 20s linear infinite;
     padding-bottom: 20px;
-}
-
-.lux-honours-track:hover {
-    animation-play-state: paused;
-}
-
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-50% - 15px));
-    }
 }
 
 .lux-award-card {
