@@ -697,25 +697,26 @@ body.luxury-mode .top-bar-container {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    background: #000 !important;
-    color: #fff !important;
+    background: transparent !important; /* Removed black background to blend with wave pattern */
     padding: 3px 20px !important;
     font-size: 0.75rem !important;
 }
 
 body.luxury-mode .top-bar-btn {
     background: transparent;
-    color: #fff;
+    color: #c5a059 !important; /* Polished gold */
     border: none;
     font-size: 0.75rem;
     cursor: pointer;
+    font-weight: 600;
 }
 
 body.luxury-mode .top-bar-link {
-    color: #fff !important;
+    color: #c5a059 !important; /* Polished gold */
     text-decoration: none;
     font-size: 0.75rem;
     text-transform: none;
+    font-weight: 600;
 }
 
 body.luxury-mode .header-main-row {
