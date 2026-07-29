@@ -226,15 +226,16 @@ h1, h2, h3, h4, .lux-title {
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    background: #111;
+    background: transparent;
     group: bento;
 }
 
 .lux-bento-item img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.7s ease;
+    transition: transform 0.4s ease;
     opacity: 0.8;
 }
 
@@ -624,18 +625,19 @@ h1, h2, h3, h4, .lux-title {
 
 /* 8. STICKY HEADER LUXURY STATE */
 body.luxury-mode .header-wave-bg {
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
     z-index: 1000;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-wave-bg.lux-scrolled {
-    background: rgba(17, 17, 17, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    /* Loại bỏ đổi màu nền đen, giữ nguyên wave bg gốc */
+    background: transparent; 
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 .header-wave-bg.lux-scrolled .top-bar-container,
 .header-wave-bg.lux-scrolled .top-bar {
