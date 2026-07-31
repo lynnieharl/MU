@@ -3430,3 +3430,50 @@ details[open] .filter-group-title i {
     .hero-slide .hero-title { font-size: 2rem; }
     .hero-nav-btn { width: 40px; height: 40px; font-size: 16px; }
 }
+
+
+/* =========================================
+   [GLOBAL SCALE DOWN] CHUẨN GIAO DIỆN DESKTOP
+   ========================================= */
+
+/* 1. Thu nhỏ tỉ lệ Font & Zoom toàn cục */
+html {
+  font-size: 14px !important; /* Giảm từ 16px mặc định xuống 14px */
+  zoom: 95%; /* Thu nhỏ nhẹ giao diện vừa tầm mắt trên Desktop */
+}
+body {
+  font-family: 'Outfit', 'Montserrat', -apple-system, sans-serif !important;
+  font-size: 13px !important;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* 2. Siết lại độ rộng Khung chứa (Container Max-Width) */
+.container, 
+.site-header .main-header-container, 
+.top-bar-container, 
+.product-grid, 
+.hero-overlay,
+footer .footer-container {
+  max-width: 1200px !important; /* Khóa độ rộng tối đa chuẩn */
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 3. Thu gọn Padding & Font chữ cho các thành phần chính */
+.main-header-container {
+  padding: 8px 16px !important;
+}
+
+.main-nav a, .nav-item a {
+  font-size: 12px !important;
+}
+
+.product-card img, .lux-product-image, .store-card-img-wrap img {
+  height: 220px !important;
+  object-fit: contain !important;
+}
+
+.hero-banner h1, .hero-content h1, .hero-title, .lux-hero h1 {
+  font-size: 30px !important;
+}
