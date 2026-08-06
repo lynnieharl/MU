@@ -89,7 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Success
                 window.cartManager.clearCart();
-                window.location.href = 'success.html';
+                
+                // Show Success Popup
+                showSuccessPopup();
 
             } catch (err) {
                 console.error('Lỗi khi đặt hàng:', err);
@@ -97,6 +99,63 @@ document.addEventListener('DOMContentLoaded', () => {
                 payBtn.disabled = false;
                 payBtn.textContent = 'Pay Now';
             }
+        });
+    }
+
+    function showSuccessPopup() {
+        const overlay = document.createElement('div');
+        Object.assign(overlay.style, {
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            width: '100vw',
+            height: '100vh',
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            zIndex: '99999',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backdropFilter: 'blur(5px)'
+        });
+        
+        const orderNumber = '#MU-' + Math.floor(Math.random() * 1000000);
+
+        const popup = document.createElement('div');
+        Object.assign(popup.style, {
+            backgroundColor: '#fff',
+            padding: '40px',
+            borderRadius: '16px',
+            textAlign: 'center',
+            maxWidth: '400px',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+            transform: 'scale(0.8)',
+            opacity: '0',
+            transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+        });
+
+        popup.innerHTML = `
+            <div style="width: 80px; height: 80px; background-color: #22c55e; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 40px; margin: 0 auto 20px;">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h2 style="margin: 0 0 10px; color: #1f2937; font-size: 28px; font-weight: 800; text-transform: uppercase;">THANK YOU!</h2>
+            <p style="color: #6b7280; font-size: 15px; margin-bottom: 25px; line-height: 1.5;">Your order has been placed successfully.<br>Order Number: <strong style="color: #1f2937;">${orderNumber}</strong></p>
+            <button id="success-continue-btn" style="background-color: #da291c; color: white; border: none; padding: 14px 28px; font-weight: 700; border-radius: 4px; cursor: pointer; transition: background-color 0.2s; width: 100%; text-transform: uppercase; letter-spacing: 1px;">CONTINUE SHOPPING</button>
+        `;
+
+        overlay.appendChild(popup);
+        document.body.appendChild(overlay);
+
+        // Animate in
+        setTimeout(() => {
+            popup.style.transform = 'scale(1)';
+            popup.style.opacity = '1';
+        }, 10);
+
+        const btn = document.getElementById('success-continue-btn');
+        btn.addEventListener('mouseover', () => btn.style.backgroundColor = '#b91c14');
+        btn.addEventListener('mouseout', () => btn.style.backgroundColor = '#da291c');
+        btn.addEventListener('click', () => {
+            window.location.href = 'index.html';
         });
     }
 });
