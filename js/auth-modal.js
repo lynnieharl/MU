@@ -228,7 +228,7 @@ document.head.appendChild(styleElement);
 // ==========================================
 // 3. INJECT HTML FOR MODAL
 // ==========================================
-const modalHtml = \`
+const modalHtml = `
 <div class="auth-modal-overlay" id="authModal">
     <div class="auth-modal-box">
         <button class="auth-modal-close" onclick="closeAuthModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -267,7 +267,7 @@ const modalHtml = \`
         </form>
     </div>
 </div>
-\`;
+`;
 document.body.insertAdjacentHTML('beforeend', modalHtml);
 
 // ==========================================
@@ -427,14 +427,14 @@ window.updateHeaderAvatar = async function() {
 
         if (role === 'admin') {
             // ADMIN LOGO (MU Crest)
-            container.innerHTML = \`
+            container.innerHTML = `
                 <a href="admin-crm.html" class="header-dynamic-avatar" title="Quản Trị Hệ Thống">
                     <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Admin">
                 </a>
-            \`;
+            `;
         } else {
             // USER LOGO (Red Devil)
-            container.innerHTML = \`
+            container.innerHTML = `
                 <div class="header-dynamic-avatar" title="Tài Khoản">
                     <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png" style="filter: grayscale(100%) contrast(150%) brightness(50%) sepia(100%) hue-rotate(-50deg) saturate(1000%) contrast(2);" alt="User">
                     <div class="avatar-dropdown">
@@ -442,7 +442,7 @@ window.updateHeaderAvatar = async function() {
                         <a href="#" onclick="handleGlobalLogout(event)" class="avatar-dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> Đăng Xuất</a>
                     </div>
                 </div>
-            \`;
+            `;
         }
 
     } catch (err) {
@@ -452,11 +452,11 @@ window.updateHeaderAvatar = async function() {
 }
 
 function renderGuestAvatar(container) {
-    container.innerHTML = \`
+    container.innerHTML = `
         <a href="#" onclick="openAuthModal(); return false;" class="header-dynamic-avatar" title="Đăng Nhập / Đăng Ký">
             <i class="fa-regular fa-user"></i>
         </a>
-    \`;
+    `;
 }
 
 // Chạy cập nhật Avatar ngay khi tải xong file
