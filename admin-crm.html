@@ -158,13 +158,14 @@
                                     <th style="width: 80px;">Order ID</th>
                                     <th>Customer (Email)</th>
                                     <th style="width: 150px;">Total Value</th>
+                                    <th>Items</th>
                                     <th style="width: 120px;">Status</th>
                                     <th style="width: 150px;">Date</th>
                                     <th style="width: 150px; text-align: right;">Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="crm-orders-body">
-                                <tr><td colspan="6" style="text-align:center; padding:30px;">Loading data...</td></tr>
+                                <tr><td colspan="7" style="text-align:center; padding:30px;">Loading data...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -260,14 +261,14 @@
                 // Fetch Orders
                 const { data: orders, error: oErr } = await supabaseClient
                     .from('orders')
-                    .select('*, users(email)');
+                    .select('*');
 
                 if (!oErr && orders && orders.length > 0) {
                     allProductsData = orders; // Temporarily keeping the variable name for compatibility
                     document.getElementById('stat-orders').textContent = orders.length;
                     
                     const completedOrders = orders.filter(o => o.status === 'Completed' || o.status === 'Đã giao');
-                    const totalRevenue = completedOrders.reduce((sum, o) => sum + (o.total_value || o.price || 0), 0);
+                    const totalRevenue = completedOrders.reduce((sum, o) => sum + (o.total_amount || 0), 0);
                     const elRevenue = document.getElementById('stat-revenue');
                     if (elRevenue) elRevenue.textContent = formatCurrency(totalRevenue);
 
@@ -327,17 +328,26 @@
                 return;
             }
             tbody.innerHTML = list.map(o => {
-                const total = o.total_value || o.price || 0;
+                const total = o.total_amount || 0;
                 const status = o.status || 'Pending';
                 const statusClass = (status === 'Completed' || status === 'Đã giao') ? 'success' : 'warning';
                 const dateStr = o.created_at ? new Date(o.created_at).toLocaleDateString('vi-VN') : new Date().toLocaleDateString('vi-VN');
-                const customer = o.users?.email || o.customer_email || 'Khách vãng lai';
+                const customer = o.user_email || 'Khách vãng lai';
+                
+                let itemsSummary = "N/A";
+                try {
+                    const parsedItems = JSON.parse(o.items);
+                    if (Array.isArray(parsedItems) && parsedItems.length > 0) {
+                        itemsSummary = parsedItems.map(i => `${i.quantity}x ${i.name}`).join('<br>');
+                    }
+                } catch(e) {}
                 
                 return `
                     <tr>
                         <td style="font-weight: 600; color: var(--admin-text-muted);">#ORD-${o.id || '-'}</td>
                         <td style="font-weight: 600; color: var(--admin-text-main);">${customer}</td>
                         <td style="color: var(--admin-text-main); font-weight: 700;">${formatCurrency(total)}</td>
+                        <td style="color: var(--admin-text-muted); font-size: 13px;">${itemsSummary}</td>
                         <td><span class="status-badge ${statusClass}">${status}</span></td>
                         <td style="color: var(--admin-text-muted); font-size: 13px;">${dateStr}</td>
                         <td style="text-align: right;">
