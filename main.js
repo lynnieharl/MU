@@ -315,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         const imgUrl = pd.image_url || 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
                         let priceVal = parseFloat(pd.price) || 0;
-                        const priceFormatted = '$' + priceVal.toFixed(2);
+                        const priceFormatted = '₫' + new Intl.NumberFormat('en-US').format(priceVal);
 
                         // Cập nhật tên và giá
                         document.querySelector('.product-title-large').innerText = pd.name;
@@ -506,7 +506,7 @@ async function loadProducts() {
       if (!container || !products) return;
       container.innerHTML = products.map(item => {
         let rawPrice = parseFloat(item.price) || 0;
-        let formattedPrice = '$' + rawPrice.toFixed(2);
+        let formattedPrice = '₫' + new Intl.NumberFormat('en-US').format(rawPrice);
           
         return `<div class="store-card-item" onclick="location.href='product.html?id=${item.id}'"> 
           <div class="store-card-img-wrap"> 
@@ -518,9 +518,9 @@ async function loadProducts() {
               <span class="official-badge-new">New</span>
             </div>
           </div> 
-          <div class="store-card-info"> 
-            <h3 class="card-title">${item.name || 'Manchester United Jersey'}</h3> 
-            <p class="card-price">${formattedPrice}</p>
+          <div class="store-card-info" style="padding-top: 12px; gap: 6px;"> 
+            <p class="card-price" style="font-weight: 700 !important; color: #000 !important; margin: 0 !important; font-size: 14px !important;">${formattedPrice}</p>
+            <h3 class="card-title" style="color: #767677 !important; font-size: 13px !important; font-weight: 400 !important; margin: 0 !important; line-height: 1.4 !important;">${item.name || 'Manchester United Jersey'}</h3> 
           </div> 
         </div>`;
       }).join('');

@@ -407,7 +407,7 @@
                 */
 // grid.innerHTML = products.map(p => {
                     const imgUrl = p.image_url || 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
-                    const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price || 0);
+                    const priceFormatted = '₫' + new Intl.NumberFormat('en-US').format(p.price || 0);
                     const catTag = p.category ? `<span style="position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.7); color:#fff; padding:4px 10px; font-size:11px; font-weight:bold; border-radius:4px; border:1px solid #333; z-index:10;">${p.category}</span>` : '';
                     
                     return `
@@ -416,9 +416,9 @@
                         <div class="product-image-container">
                             <img src="${imgUrl}" class="product-img" alt="${p.name || ''}" onerror="this.src='https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80'">
                         </div>
-                        <div class="product-info">
-                            <a href="product.html?id=${p.id}" class="product-title" style="display: block; font-weight: 600; margin-bottom: 8px; color: #fff; text-decoration: none; font-size: 14px;">${p.name || 'Sản phẩm mới'}</a>
-                            <p class="product-price" style="color: #d31145; font-weight: 800; font-size: 16px;">${priceFormatted}</p>
+                        <div class="product-info" style="padding-top: 12px; display: flex; flex-direction: column; gap: 6px;">
+                            <p class="product-price" style="color: #000; font-weight: 700; font-size: 14px; margin: 0;">${priceFormatted}</p>
+                            <a href="product.html?id=${p.id}" class="product-title" style="display: block; font-weight: 400; margin: 0; color: #767677; text-decoration: none; font-size: 13px; line-height: 1.4;">${p.name || 'Sản phẩm mới'}</a>
                         </div>
                     </div>
                     `;
@@ -585,16 +585,16 @@
             // Render dữ liệu
             track.innerHTML = products.map(p => {
                 const imgUrl = p.image_url || 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
-                const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price || 0);
+                const priceFormatted = '₫' + new Intl.NumberFormat('en-US').format(p.price || 0);
                 
                 return `
                 <div class="product-card">
                     <div class="product-image-container">
                         <img src="${imgUrl}" class="product-img" alt="${p.name || ''}" onerror="this.src='https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80'">
                     </div>
-                    <div class="product-info">
-                        <a href="product.html?id=${p.id}" class="product-title">${p.name || 'Sản phẩm mới'}</a>
-                        <p class="product-price" style="color: #d31145; font-weight: bold;">${priceFormatted}</p>
+                    <div class="product-info" style="padding-top: 12px; display: flex; flex-direction: column; gap: 6px;">
+                        <p class="product-price" style="color: #000; font-weight: 700; font-size: 14px; margin: 0;">${priceFormatted}</p>
+                        <a href="product.html?id=${p.id}" class="product-title" style="display: block; font-weight: 400; margin: 0; color: #767677; text-decoration: none; font-size: 13px; line-height: 1.4;">${p.name || 'Sản phẩm mới'}</a>
                     </div>
                 </div>
                 `;

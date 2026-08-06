@@ -126,9 +126,9 @@
                                 <img src="${p.img2}" class="product-img hover-img">
                                 <button class="quick-add-btn">QUICK ADD</button>
                             </div>
-                            <div class="product-info">
-                                <a href="product.html" class="product-title">${p.name}</a>
-                                <p class="product-price">$${p.price.toFixed(2)}</p>
+                            <div class="product-info" style="padding-top: 12px; display: flex; flex-direction: column; gap: 6px;">
+                                <p class="product-price" style="color: #000; font-weight: 700; font-size: 14px; margin: 0;">₫${new Intl.NumberFormat('en-US').format(p.price || 0)}</p>
+                                <a href="product.html" class="product-title" style="display: block; font-weight: 400; margin: 0; color: #767677; text-decoration: none; font-size: 13px; line-height: 1.4;">${p.name}</a>
                             </div>
                         </div>
                     `;
