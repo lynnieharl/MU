@@ -3477,3 +3477,69 @@ footer .footer-container {
 .hero-banner h1, .hero-content h1, .hero-title, .lux-hero h1 {
   font-size: 30px !important;
 }
+
+
+/* =========================================
+   [HOTFIX] CATEGORY LAYOUT CENTERING & SORT
+   ========================================= */
+.category-layout {
+  display: block !important;
+  width: 100% !important;
+  max-width: 1240px !important;
+  margin: 30px auto 60px auto !important;
+  padding: 0 20px !important;
+  box-sizing: border-box !important;
+}
+
+.category-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin-bottom: 25px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding-bottom: 15px !important;
+}
+
+.breadcrumbs.container {
+  max-width: 1240px !important;
+  margin: 20px auto 0 auto !important;
+  padding: 0 20px !important;
+  box-sizing: border-box !important;
+}
+
+.sort-box select, #sort-select, #sort-by {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+  border: 1px solid #333333 !important;
+  padding: 8px 14px !important;
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+  outline: none !important;
+}
+
+.sort-box select:hover, #sort-select:hover, #sort-by:hover {
+  border-color: #da020e !important;
+}
+
+.product-grid, #cat-product-grid, .products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 24px !important;
+  width: 100% !important;
+  max-width: 1240px !important;
+  margin: 0 auto !important;
+  justify-content: center !important;
+}
+
+@media (max-width: 1024px) {
+  .product-grid, #cat-product-grid, .products-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 600px) {
+  .product-grid, #cat-product-grid, .products-grid {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+}

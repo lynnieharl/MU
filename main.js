@@ -499,28 +499,65 @@ async function loadProducts() {
     }
     
     // 3. RENDER LAYOUT SCOPED CSS AN TOÀN
-    container.innerHTML = data.map(item => {
-      const formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
-        .format(item.price || 0)
-        .replace(/₫|VND/g, '')
-        .trim();
-        
-      return `<div class="store-card-item" onclick="location.href='product-detail.html?id=${item.id}'"> 
-        <div class="store-card-img-wrap"> 
-          <img src="${item.image_url || item.image || 'https://via.placeholder.com/300x375'}" alt="${item.name}"> 
-          <button class="store-card-wishlist" onclick="event.stopPropagation();"> 
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"> 
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path> 
-            </svg> 
-          </button> 
-          <span class="store-card-badge-new">New</span> 
-        </div> 
-        <div class="store-card-info"> 
-          <div class="card-price">${formattedPrice} ₫</div> 
-          <h3 class="card-title">${item.name || 'Manchester United Jersey'}</h3> 
-        </div> 
-      </div>`;
-    }).join('');
+    window.rawCategoryProducts = data;
+    
+    window.renderSortedProducts = function(products) {
+      if (!container || !products) return;
+      container.innerHTML = products.map(item => {
+        const formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+          .format(item.price || 0)
+          .replace(/₫|VND/g, '')
+          .trim();
+          
+        return `<div class="store-card-item" onclick="location.href='product.html?id=${item.id}'"> 
+          <div class="store-card-img-wrap"> 
+            <img src="${item.image_url || item.image || 'https://via.placeholder.com/300x375'}" alt="${item.name}"> 
+            <button class="store-card-wishlist" onclick="event.stopPropagation();"> 
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"> 
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path> 
+              </svg> 
+            </button> 
+            <span class="store-card-badge-new">New</span> 
+          </div> 
+          <div class="store-card-info"> 
+            <div class="card-price">${formattedPrice} ₫</div> 
+            <h3 class="card-title">${item.name || 'Manchester United Jersey'}</h3> 
+          </div> 
+        </div>`;
+      }).join('');
+    };
+
+    window.sortAndRenderCategoryProducts = function(sortValue) {
+      if (!window.rawCategoryProducts) return;
+      let list = [...window.rawCategoryProducts];
+
+      if (sortValue === 'price-asc') {
+        list.sort((a, b) => (parseFloat(a.price) || 0) - (parseFloat(b.price) || 0));
+      } else if (sortValue === 'price-desc') {
+        list.sort((a, b) => (parseFloat(b.price) || 0) - (parseFloat(a.price) || 0));
+      } else if (sortValue === 'name-asc' || sortValue === 'a-z') {
+        list.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+      } else if (sortValue === 'name-desc' || sortValue === 'z-a') {
+        list.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
+      } else {
+        // Newest / Recommended
+        list.sort((a, b) => (b.id || 0) - (a.id || 0));
+      }
+
+      window.renderSortedProducts(list);
+    };
+
+    // Initial Render
+    window.renderSortedProducts(data);
+
+    // Bind change event to sort dropdown
+    const sortSelect = document.getElementById('sort-select') || document.getElementById('sort-by');
+    if (sortSelect && !sortSelect.hasAttribute('data-sort-bound')) {
+      sortSelect.setAttribute('data-sort-bound', 'true');
+      sortSelect.addEventListener('change', function(e) {
+        window.sortAndRenderCategoryProducts(e.target.value);
+      });
+    }
 
     // Update totals on Jerseys page
     const countText = document.getElementById('jerseys-count-text');
