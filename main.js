@@ -314,7 +314,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
 
                         const imgUrl = pd.image_url || 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
-                        const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(pd.price || 0);
+                        let priceVal = parseFloat(pd.price) || 0;
+                        if (priceVal > 100000) priceVal = priceVal / 25000;
+                        const priceFormatted = '$' + priceVal.toFixed(2);
 
                         // Cập nhật tên và giá
                         document.querySelector('.product-title-large').innerText = pd.name;
@@ -527,7 +529,6 @@ async function loadProducts() {
             </div>
           </div> 
           <div class="store-card-info"> 
-            <div class="card-price">${formattedPrice}</div> 
             <h3 class="card-title">${item.name || 'Manchester United Jersey'}</h3> 
           </div> 
         </div>`;
@@ -585,6 +586,8 @@ function setupGlobalUserDropdown() {
                      document.querySelector('.user-account-btn') ||
                      document.getElementById('account-link');
   if (!accountBtn) return;
+  if (accountBtn.dataset.dropdownBound) return;
+  accountBtn.dataset.dropdownBound = 'true';
 
   accountBtn.style.position = 'relative';
 
