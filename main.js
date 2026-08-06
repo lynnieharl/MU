@@ -520,6 +520,7 @@ async function loadProducts() {
           </div> 
           <div class="store-card-info"> 
             <h3 class="card-title">${item.name || 'Manchester United Jersey'}</h3> 
+            <p class="card-price">${formattedPrice}</p>
           </div> 
         </div>`;
       }).join('');
