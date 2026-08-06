@@ -315,7 +315,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         const imgUrl = pd.image_url || 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80';
                         let priceVal = parseFloat(pd.price) || 0;
-                        if (priceVal > 100000) priceVal = priceVal / 25000;
                         const priceFormatted = '$' + priceVal.toFixed(2);
 
                         // Cập nhật tên và giá
@@ -507,16 +506,7 @@ async function loadProducts() {
       if (!container || !products) return;
       container.innerHTML = products.map(item => {
         let rawPrice = parseFloat(item.price) || 0;
-        let formattedPrice = '';
-        if (rawPrice > 100000) {
-          let usd = (rawPrice / 25000).toFixed(2);
-          if (parseFloat(usd) > 300) usd = '110.00';
-          formattedPrice = '$' + usd;
-        } else if (rawPrice > 0) {
-          formattedPrice = '$' + rawPrice.toFixed(2);
-        } else {
-          formattedPrice = '$110.00';
-        }
+        let formattedPrice = '$' + rawPrice.toFixed(2);
           
         return `<div class="store-card-item" onclick="location.href='product.html?id=${item.id}'"> 
           <div class="store-card-img-wrap"> 
