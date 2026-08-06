@@ -122,13 +122,49 @@ document.addEventListener('DOMContentLoaded', () => {
             return "Bạn có thể liên hệ trực tiếp với chúng tôi qua số điện thoại 1900-1234 hoặc email support@unitedstore.vn";
         }
 
+        // MU Players
+        if (msg.includes('cầu thủ') || msg.includes('đội hình') || msg.includes('ai đá')) {
+            return "Đội hình chính hiện tại của Manchester United gồm các ngôi sao nổi bật như Bruno Fernandes (Đội trưởng), Marcus Rashford, Alejandro Garnacho, Kobbie Mainoo, Rasmus Hojlund, Leny Yoro, và Andre Onana.";
+        }
+        if (msg.includes('bruno') || msg.includes('fernandes')) {
+            return "Bruno Fernandes (số 8) là Đội trưởng hiện tại của Manchester United, được biết đến với nhãn quan chiến thuật tuyệt vời và khả năng kiến tạo đỉnh cao.";
+        }
+        if (msg.includes('rashford')) {
+            return "Marcus Rashford (số 10) là tiền đạo xuất thân từ học viện Carrington, niềm tự hào của Manchester United với tốc độ và khả năng săn bàn ấn tượng.";
+        }
+        if (msg.includes('garnacho') || msg.includes('mainoo')) {
+            return "Alejandro Garnacho (số 17) và Kobbie Mainoo (số 37) là những tài năng trẻ sáng giá bậc nhất của Manchester United hiện tại, tương lai của Quỷ Đỏ!";
+        }
+
+        // MU History
+        if (msg.includes('lịch sử') || msg.includes('thành lập') || msg.includes('ra đời')) {
+            return "Manchester United được thành lập vào năm 1878 với tên gọi ban đầu là Newton Heath LYR Football Club, sau đó đổi tên thành Manchester United vào năm 1902.";
+        }
+        if (msg.includes('sir alex') || msg.includes('ferguson')) {
+            return "Sir Alex Ferguson là vị huấn luyện viên vĩ đại nhất lịch sử CLB, dẫn dắt đội bóng từ 1986 đến 2013, mang về 38 danh hiệu lớn nhỏ bao gồm 13 chức vô địch Premier League.";
+        }
+        if (msg.includes('cúp') || msg.includes('vô địch') || msg.includes('danh hiệu')) {
+            return "Manchester United là câu lạc bộ giàu truyền thống nhất nước Anh với 20 lần vô địch Ngoại Hạng Anh, 13 FA Cup, 6 League Cup, và 3 lần vô địch UEFA Champions League.";
+        }
+        if (msg.includes('treble') || msg.includes('cú ăn 3') || msg.includes('1999')) {
+            return "Năm 1999, Manchester United làm nên lịch sử khi trở thành đội bóng Anh đầu tiên giành Cú ăn ba vĩ đại (Treble): Premier League, FA Cup và UEFA Champions League.";
+        }
+
+        // MU Fixtures
+        if (msg.includes('lịch thi đấu') || msg.includes('trận tới') || msg.includes('khi nào đá') || msg.includes('đối thủ')) {
+            return "Bạn có thể theo dõi lịch thi đấu chính thức, bảng xếp hạng và các tin tức mới nhất về đội bóng ngay trên trang chủ hoặc ứng dụng chính thức của Manchester United nhé!";
+        }
+        if (msg.includes('hôm nay') && (msg.includes('đá') || msg.includes('trận'))) {
+            return "Để cập nhật chính xác trận đấu hôm nay, bạn vui lòng xem trực tiếp trên các kênh truyền hình thể thao hoặc app chính thức của CLB. GGMU!";
+        }
+
         // Greeting
         if (msg.includes('chào') || msg.includes('hi ') || msg.includes('hello')) {
             return "Xin chào! GGMU! Mình có thể giúp gì cho bạn hôm nay?";
         }
 
         // Default Fallback
-        return "Xin lỗi, mình chưa hiểu ý bạn lắm. Bạn có thể hỏi về: giá áo, size, phí ship, đổi trả hoặc cách thức mua hàng nhé. GGMU! 🔴";
+        return "Xin lỗi, mình chưa hiểu ý bạn lắm. Bạn có thể hỏi về thông tin sản phẩm (giá áo, size), hoặc hỏi về đội bóng Manchester United (lịch sử, cầu thủ, lịch thi đấu) nhé. GGMU! 🔴";
     }
 
     function handleSend() {
