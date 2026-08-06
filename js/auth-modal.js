@@ -428,9 +428,14 @@ window.updateHeaderAvatar = async function() {
         if (role === 'admin') {
             // ADMIN LOGO (MU Crest)
             container.innerHTML = `
-                <a href="admin-crm.html" class="header-dynamic-avatar" title="Quản Trị Hệ Thống">
+                <div class="header-dynamic-avatar" title="Quản Trị Hệ Thống">
                     <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Admin">
-                </a>
+                    <div class="avatar-dropdown">
+                        <a href="admin-crm.html" class="avatar-dropdown-item"><i class="fa-solid fa-chart-line"></i> Quản Trị CRM</a>
+                        <a href="manage-products.html" class="avatar-dropdown-item"><i class="fa-solid fa-box"></i> Quản Lý Sản Phẩm</a>
+                        <a href="#" onclick="handleGlobalLogout(event)" class="avatar-dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> Đăng Xuất</a>
+                    </div>
+                </div>
             `;
         } else {
             // USER LOGO (Red Devil)
