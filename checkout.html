@@ -480,6 +480,16 @@
         </div>
     </footer>
 
+    <!-- Nhúng Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://suabbqtrggzwgchksenq.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_E711W3fBxwZeRVYH3TOBAA_ZNoe_wps';
+        if (window.supabase) {
+            window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        }
+    </script>
+
     <!-- Script JS -->
     <script src="main.js"></script>
     <script src="js/auth-modal.js"></script>
