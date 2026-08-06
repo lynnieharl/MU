@@ -225,20 +225,20 @@
     </header>
     <!-- BREADCRUMBS -->
     <div class="breadcrumbs container" style="margin-top: 20px;">
-        <a href="index.html">Trang Chủ</a> &gt; <span id="cat-breadcrumb" style="font-weight: bold; color: #d31145;">Danh Mục</span>
+        <a href="index.html">Home</a> &gt; <span id="cat-breadcrumb" style="font-weight: bold; color: #da020e;">All Products</span>
     </div>
 
     <!-- MAIN CONTENT AREA -->
     <main class="container category-layout" style="margin-top: 30px; margin-bottom: 60px;">
         
         <div class="category-header flex justify-between items-center" style="margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
-            <h2 style="font-size: 28px; font-weight: 800; color: #fff;" id="cat-page-title">SẢN PHẨM</h2>
+            <h2 style="font-size: 28px; font-weight: 800; color: #fff;" id="cat-page-title">ALL PRODUCTS</h2>
             <div class="sort-box">
-                <label for="sort-select" style="color: #aaa; margin-right: 10px;">Sắp xếp:</label>
+                <label for="sort-select" style="color: #aaa; margin-right: 10px;">Sort By:</label>
                 <select id="sort-select" style="background: #111; color: #fff; border: 1px solid #333; padding: 5px 10px; border-radius: 4px;">
-                    <option value="newest">Mới nhất</option>
-                    <option value="price-asc">Giá: Thấp đến Cao</option>
-                    <option value="price-desc">Giá: Cao đến Thấp</option>
+                    <option value="newest">Newest</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
                 </select>
             </div>
         </div>
@@ -247,7 +247,7 @@
         <div class="product-grid" id="cat-product-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px;">
             <div style="width: 100%; text-align: center; padding: 40px; color: #888; grid-column: 1 / -1;">
                 <i class="fa-solid fa-spinner fa-spin" style="font-size: 32px; margin-bottom: 10px;"></i>
-                <p>Đang tải dữ liệu sản phẩm từ hệ thống...</p>
+                <p>Loading products...</p>
             </div>
         </div>
         

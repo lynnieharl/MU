@@ -473,7 +473,7 @@ async function loadProducts() {
     const breadcrumb = document.getElementById('cat-breadcrumb');
     const pageTitle = document.getElementById('cat-page-title');
     if (breadcrumb || pageTitle) {
-      let displayTitle = 'Tất cả sản phẩm';
+      let displayTitle = 'All Products';
       if (catParam && subParam) {
         displayTitle = `${catParam} - ${subParam}`;
       } else if (catParam || subParam) {
@@ -481,7 +481,7 @@ async function loadProducts() {
       }
       
       if (breadcrumb) breadcrumb.innerText = displayTitle;
-      if (pageTitle) pageTitle.innerText = (!catParam && !subParam) ? 'TẤT CẢ SẢN PHẨM' : 'DANH MỤC: ' + displayTitle.toUpperCase();
+      if (pageTitle) pageTitle.innerText = (!catParam && !subParam) ? 'ALL PRODUCTS' : 'CATEGORY: ' + displayTitle.toUpperCase();
       document.title = displayTitle + ' - United Store';
     }
 
@@ -494,7 +494,7 @@ async function loadProducts() {
     }
     
     if (!data || data.length === 0) {
-      container.innerHTML = `<p style="text-align: center; width: 100%; color: #888; padding: 40px;">Chưa có sản phẩm nào thuộc phân loại này.</p>`;
+      container.innerHTML = `<p style="text-align: center; width: 100%; color: #888; padding: 40px;">No products found in this category.</p>`;
       return;
     }
     
@@ -504,10 +504,12 @@ async function loadProducts() {
     window.renderSortedProducts = function(products) {
       if (!container || !products) return;
       container.innerHTML = products.map(item => {
-        const formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
-          .format(item.price || 0)
-          .replace(/₫|VND/g, '')
-          .trim();
+        let rawPrice = parseFloat(item.price) || 0;
+        let formattedPrice = '';
+        if (rawPrice > 100000) {
+          let usd = (rawPrice / 25000).toFixed(2);
+          if (parseFloat(usd) > 300) usd = '110.00';
+          formattedPrice = '
           
         return `<div class="store-card-item" onclick="location.href='product.html?id=${item.id}'"> 
           <div class="store-card-img-wrap"> 
@@ -520,7 +522,140 @@ async function loadProducts() {
             <span class="store-card-badge-new">New</span> 
           </div> 
           <div class="store-card-info"> 
-            <div class="card-price">${formattedPrice} ₫</div> 
+            <div class="card-price">${formattedPrice}</div> 
+            <h3 class="card-title">${item.name || 'Manchester United Jersey'}</h3> 
+          </div> 
+        </div>`;
+      }).join('');
+    };
+
+    window.sortAndRenderCategoryProducts = function(sortValue) {
+      if (!window.rawCategoryProducts) return;
+      let list = [...window.rawCategoryProducts];
+
+      if (sortValue === 'price-asc') {
+        list.sort((a, b) => (parseFloat(a.price) || 0) - (parseFloat(b.price) || 0));
+      } else if (sortValue === 'price-desc') {
+        list.sort((a, b) => (parseFloat(b.price) || 0) - (parseFloat(a.price) || 0));
+      } else if (sortValue === 'name-asc' || sortValue === 'a-z') {
+        list.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+      } else if (sortValue === 'name-desc' || sortValue === 'z-a') {
+        list.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
+      } else {
+        // Newest / Recommended
+        list.sort((a, b) => (b.id || 0) - (a.id || 0));
+      }
+
+      window.renderSortedProducts(list);
+    };
+
+    // Initial Render
+    window.renderSortedProducts(data);
+
+    // Bind change event to sort dropdown
+    const sortSelect = document.getElementById('sort-select') || document.getElementById('sort-by');
+    if (sortSelect && !sortSelect.hasAttribute('data-sort-bound')) {
+      sortSelect.setAttribute('data-sort-bound', 'true');
+      sortSelect.addEventListener('change', function(e) {
+        window.sortAndRenderCategoryProducts(e.target.value);
+      });
+    }
+
+    // Update totals on Jerseys page
+    const countText = document.getElementById('jerseys-count-text');
+    const pillCount = document.getElementById('total-count-pill');
+    if (countText) countText.innerText = data.length + ' products';
+    if (pillCount && !catParam && !subParam) pillCount.innerText = data.length; // Only update ALL pill if no filter
+  } catch (err) {
+    console.error("Crash JS:", err);
+    container.innerHTML = `<p style="text-align: center; width: 100%; color: #888;">Đã xảy ra lỗi khi tải dữ liệu (${err.message}).</p>`;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadProducts);
+window.addEventListener('load', loadProducts); + usd;
+        } else if (rawPrice > 0) {
+          formattedPrice = '
+          
+        return `<div class="store-card-item" onclick="location.href='product.html?id=${item.id}'"> 
+          <div class="store-card-img-wrap"> 
+            <img src="${item.image_url || item.image || 'https://via.placeholder.com/300x375'}" alt="${item.name}"> 
+            <button class="store-card-wishlist" onclick="event.stopPropagation();"> 
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"> 
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path> 
+              </svg> 
+            </button> 
+            <span class="store-card-badge-new">New</span> 
+          </div> 
+          <div class="store-card-info"> 
+            <div class="card-price">${formattedPrice}</div> 
+            <h3 class="card-title">${item.name || 'Manchester United Jersey'}</h3> 
+          </div> 
+        </div>`;
+      }).join('');
+    };
+
+    window.sortAndRenderCategoryProducts = function(sortValue) {
+      if (!window.rawCategoryProducts) return;
+      let list = [...window.rawCategoryProducts];
+
+      if (sortValue === 'price-asc') {
+        list.sort((a, b) => (parseFloat(a.price) || 0) - (parseFloat(b.price) || 0));
+      } else if (sortValue === 'price-desc') {
+        list.sort((a, b) => (parseFloat(b.price) || 0) - (parseFloat(a.price) || 0));
+      } else if (sortValue === 'name-asc' || sortValue === 'a-z') {
+        list.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+      } else if (sortValue === 'name-desc' || sortValue === 'z-a') {
+        list.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
+      } else {
+        // Newest / Recommended
+        list.sort((a, b) => (b.id || 0) - (a.id || 0));
+      }
+
+      window.renderSortedProducts(list);
+    };
+
+    // Initial Render
+    window.renderSortedProducts(data);
+
+    // Bind change event to sort dropdown
+    const sortSelect = document.getElementById('sort-select') || document.getElementById('sort-by');
+    if (sortSelect && !sortSelect.hasAttribute('data-sort-bound')) {
+      sortSelect.setAttribute('data-sort-bound', 'true');
+      sortSelect.addEventListener('change', function(e) {
+        window.sortAndRenderCategoryProducts(e.target.value);
+      });
+    }
+
+    // Update totals on Jerseys page
+    const countText = document.getElementById('jerseys-count-text');
+    const pillCount = document.getElementById('total-count-pill');
+    if (countText) countText.innerText = data.length + ' products';
+    if (pillCount && !catParam && !subParam) pillCount.innerText = data.length; // Only update ALL pill if no filter
+  } catch (err) {
+    console.error("Crash JS:", err);
+    container.innerHTML = `<p style="text-align: center; width: 100%; color: #888;">Đã xảy ra lỗi khi tải dữ liệu (${err.message}).</p>`;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadProducts);
+window.addEventListener('load', loadProducts); + rawPrice.toFixed(2);
+        } else {
+          formattedPrice = '$110.00';
+        }
+          
+        return `<div class="store-card-item" onclick="location.href='product.html?id=${item.id}'"> 
+          <div class="store-card-img-wrap"> 
+            <img src="${item.image_url || item.image || 'https://via.placeholder.com/300x375'}" alt="${item.name}"> 
+            <button class="store-card-wishlist" onclick="event.stopPropagation();"> 
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"> 
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path> 
+              </svg> 
+            </button> 
+            <span class="store-card-badge-new">New</span> 
+          </div> 
+          <div class="store-card-info"> 
+            <div class="card-price">${formattedPrice}</div> 
             <h3 class="card-title">${item.name || 'Manchester United Jersey'}</h3> 
           </div> 
         </div>`;
