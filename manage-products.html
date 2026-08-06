@@ -84,14 +84,14 @@
                             <div class="avatar-img">A</div>
                             <div class="status-dot"></div>
                             <div class="avatar-info">
-                                <span class="avatar-name">Admin</span>
+                                <span class="avatar-name" id="prd-header-name">User</span>
                                 <span class="avatar-role">Online</span>
                             </div>
                             <div class="dropdown-menu" id="profile-dropdown" style="min-width: 200px;">
                                 <div class="dropdown-content">
                                     <a href="#" class="dropdown-item">
                                         <i class="fas fa-user" style="width: 20px; color: var(--admin-text-muted);"></i>
-                                        <span style="font-weight: 500; font-size: 0.85rem;">Thông tin (admin@gmail.com)</span>
+                                        <span style="font-weight: 500; font-size: 0.85rem;" id="prd-header-email">Thông tin</span>
                                     </a>
                                     <a href="login.html" class="dropdown-item">
                                         <i class="fas fa-exchange-alt" style="width: 20px; color: var(--admin-text-muted);"></i>
@@ -285,6 +285,10 @@
                 // -> ĐÃ ĐĂNG NHẬP (ADMIN HOẶC USER ĐỀU ĐƯỢC THAO TÁC)
                 const userEl = document.getElementById('prd-user-email');
                 if (userEl) userEl.textContent = session.user.email;
+                const headerName = document.getElementById('prd-header-name');
+                const headerEmail = document.getElementById('prd-header-email');
+                if (headerName) headerName.textContent = session.user.email.split('@')[0];
+                if (headerEmail) headerEmail.textContent = 'Thông tin (' + session.user.email + ')';
                 // Ẩn màn hình bảo vệ
                 const overlay = document.getElementById('prd-guard-overlay');
                 if (overlay) {

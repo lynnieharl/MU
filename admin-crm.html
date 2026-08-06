@@ -86,7 +86,7 @@
                                                                 <div class="dropdown-content">
                                     <a href="#" class="dropdown-item">
                                         <i class="fas fa-user" style="width: 20px; color: var(--admin-text-muted);"></i>
-                                        <span style="font-weight: 500; font-size: 0.85rem;">Thông tin (admin@gmail.com)</span>
+                                        <span style="font-weight: 500; font-size: 0.85rem;" id="crm-header-email">Thông tin</span>
                                     </a>
                                     <a href="login.html" class="dropdown-item">
                                         <i class="fas fa-exchange-alt" style="width: 20px; color: var(--admin-text-muted);"></i>
@@ -223,7 +223,9 @@
                 }
                 // -> ĐÃ XÁC THỰC ADMIN THÀNH CÔNG!
                 const userEl = document.getElementById('crm-user-email');
-                if (userEl) userEl.textContent = email;
+                if (userEl) userEl.textContent = session.user.email;
+                const headerEmail = document.getElementById('crm-header-email');
+                if (headerEmail) headerEmail.textContent = 'Thông tin (' + session.user.email + ')';
                 // Ẩn màn hình bảo vệ
                 const overlay = document.getElementById('crm-guard-overlay');
                 if (overlay) {

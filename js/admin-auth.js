@@ -17,6 +17,31 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(showContent, 1000);
     }
 
+    // Global patch to fix hardcoded admin@gmail.com text across all admin pages
+    setTimeout(async () => {
+        if (window.supabaseClient) {
+            try {
+                const { data: { session } } = await window.supabaseClient.auth.getSession();
+                if (session && session.user) {
+                    const email = session.user.email;
+                    const name = email.split('@')[0];
+                    
+                    document.querySelectorAll('span').forEach(span => {
+                        if (span.textContent.includes('admin@gmail.com')) {
+                            span.textContent = `Thông tin (${email})`;
+                        }
+                    });
+                    
+                    document.querySelectorAll('.avatar-name').forEach(span => {
+                        if (span.textContent === 'Admin') {
+                            span.textContent = name;
+                        }
+                    });
+                }
+            } catch(e) {}
+        }
+    }, 300);
+
     // --- LOGOUT LOGIC ---
     window.executeLogout = async function(e) {
         if (e && e.preventDefault) e.preventDefault();
