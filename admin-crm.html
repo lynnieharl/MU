@@ -351,6 +351,7 @@
                         <td><span class="status-badge ${statusClass}">${status}</span></td>
                         <td style="color: var(--admin-text-muted); font-size: 13px;">${dateStr}</td>
                         <td style="text-align: right;">
+                            ${status !== 'Completed' ? `<button class="btn-action-icon" style="color: #22c55e; margin-right: 5px;" title="Duyệt đơn hàng" onclick="window.approveOrder(${o.id})"><i class="fa-solid fa-check"></i></button>` : ''}
                             <button class="btn-action-icon" title="View details"><i class="fa-solid fa-eye"></i></button>
                         </td>
                     </tr>
@@ -375,12 +376,29 @@
                     .update({ role: 'admin' })
                     .eq('id', userId);
                 if (error) throw error;
-                alert(`Đã nâng quyền Admin thành công cho ${userEmail}!`);
-                await loadCrmDashboardData();
+                alert('Nâng quyền thành công!');
+                loadCrmDashboardData();
             } catch (err) {
-                alert('Lỗi cập nhật quyền: ' + err.message);
+                console.error(err);
+                alert('Lỗi khi cập nhật quyền: ' + err.message);
             }
         }
+
+        window.approveOrder = async function(orderId) {
+            if (!confirm(`Bạn có chắc chắn muốn duyệt đơn hàng #ORD-${orderId} không?`)) return;
+            try {
+                const { error } = await supabaseClient
+                    .from('orders')
+                    .update({ status: 'Completed' })
+                    .eq('id', orderId);
+                if (error) throw error;
+                alert('Đã duyệt đơn hàng thành công!');
+                loadCrmDashboardData(); // Tải lại bảng
+            } catch (err) {
+                console.error(err);
+                alert('Lỗi khi duyệt đơn hàng: ' + err.message);
+            }
+        };
         async function handleCrmLogout(e) {
             e.preventDefault();
             if (supabaseClient) {
