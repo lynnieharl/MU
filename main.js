@@ -707,3 +707,97 @@ window.addEventListener('load', loadProducts); + rawPrice.toFixed(2);
 
 document.addEventListener('DOMContentLoaded', loadProducts);
 window.addEventListener('load', loadProducts);
+
+/* =========================================
+   USER PROFILE DROPDOWN MENU INITIALIZER
+   ========================================= */
+function setupGlobalUserDropdown() {
+  const accountBtn = document.getElementById('user-account-btn') || document.querySelector('.user-account-btn');
+  if (!accountBtn) return;
+
+  accountBtn.style.position = 'relative';
+
+  let dropdown = document.getElementById('user-profile-dropdown');
+  if (!dropdown) {
+    dropdown = document.createElement('div');
+    dropdown.id = 'user-profile-dropdown';
+    dropdown.className = 'user-dropdown-menu';
+    dropdown.innerHTML = `
+      <div class="user-dropdown-header">
+        <div class="dropdown-user-avatar">
+          <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="User Avatar">
+        </div>
+        <div class="dropdown-user-info">
+          <span class="user-name">Admin Account</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+      <div class="user-dropdown-divider"></div>
+      <ul class="user-dropdown-links">
+        <li>
+          <a href="admin-crm.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Admin CRM Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="manage-products.html">
+            <i class="fas fa-boxes-stacked"></i>
+            <span>Manage Products</span>
+          </a>
+        </li>
+        <li>
+          <a href="orders.html">
+            <i class="fas fa-shopping-bag"></i>
+            <span>My Orders</span>
+          </a>
+        </li>
+        <li>
+          <a href="account.html">
+            <i class="fas fa-user-gear"></i>
+            <span>Account Settings</span>
+          </a>
+        </li>
+        <li class="dropdown-logout-item">
+          <a href="#" id="dropdown-logout-btn">
+            <i class="fas fa-arrow-right-from-bracket"></i>
+            <span>Log Out</span>
+          </a>
+        </li>
+      </ul>
+    `;
+    accountBtn.appendChild(dropdown);
+  }
+
+  // Handle click on user profile icon
+  accountBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    dropdown.classList.toggle('active');
+  });
+
+  // Handle logout
+  const logoutBtn = document.getElementById('dropdown-logout-btn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = 'index.html';
+    });
+  }
+
+  // Close dropdown on click outside
+  document.addEventListener('click', function(e) {
+    if (!accountBtn.contains(e.target)) {
+      dropdown.classList.remove('active');
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', setupGlobalUserDropdown);
+} else {
+  setupGlobalUserDropdown();
+}
