@@ -16,14 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Inject HTML
     const chatboxHTML = `
         <div class="chatbox-fab" id="chatbox-fab" title="Chat với chúng tôi">
-            <i class="fa-solid fa-message"></i>
+            <img src="images/0_Manchester_United_FC_crest.svg" alt="MU Logo" style="width: 32px; height: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); transition: transform 0.3s;" class="fab-icon-main">
             <i class="fa-solid fa-xmark"></i>
         </div>
 
         <div class="chatbox-window" id="chatbox-window">
             <div class="chatbox-header">
-                <div class="chatbox-header-avatar">
-                    <i class="fa-solid fa-robot"></i>
+                <div class="chatbox-header-avatar" style="background: transparent;">
+                    <img src="images/0_Manchester_United_FC_crest.svg" alt="MU Logo" style="width: 100%; height: 100%; object-fit: contain;">
                 </div>
                 <div class="chatbox-header-info">
                     <h4>MU Store Assistant</h4>
