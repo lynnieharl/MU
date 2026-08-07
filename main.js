@@ -489,15 +489,13 @@ async function loadProducts() {
     
     let productsList = data;
     if (!productsList || productsList.length === 0) {
-      // Fallback mock data if DB returns 0 rows
-      productsList = [
-        { id: 101, name: 'Manchester United 24/25 Home Shirt - Men', price: 110, category: 'Home', image_url: 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80' },
-        { id: 102, name: 'Manchester United 24/25 Away Shirt - Men', price: 110, category: 'Away', image_url: 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80' },
-        { id: 103, name: 'Manchester United 24/25 Third Shirt - Men', price: 110, category: 'Third', image_url: 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80' },
-        { id: 104, name: 'Manchester United Training Jersey 24/25', price: 75, category: 'Training', image_url: 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80' },
-        { id: 105, name: 'Manchester United Essential Hoodie', price: 90, category: 'Fashion', image_url: 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80' },
-        { id: 106, name: 'Manchester United Official Crest Cap', price: 30, category: 'Accessories', image_url: 'https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80' }
-      ];
+      container.innerHTML = `
+        <div style="width: 100%; text-align: center; padding: 50px; color: #888; grid-column: 1 / -1; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px dashed rgba(255,255,255,0.1);">
+            <i class="fa-solid fa-box-open" style="font-size: 48px; margin-bottom: 15px; color: #444;"></i>
+            <h3 style="color: #444; font-size: 20px; margin-bottom: 8px;">Hiện chưa có sản phẩm nào thuộc mục này.</h3>
+        </div>
+      `;
+      return;
     }
     
     window.rawCategoryProducts = productsList;
