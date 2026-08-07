@@ -138,4 +138,54 @@
 
     <!-- Cart Logic -->
     <script src="js/cart-logic.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            let retries = 0;
+            while (!window.supabaseClient && retries < 10) {
+                await new Promise(r => setTimeout(r, 500));
+                retries++;
+            }
+            if (!window.supabaseClient) {
+                document.getElementById('customers-table-body').innerHTML = '<tr><td colspan="7" style="text-align:center;">Lỗi: Không kết nối được Supabase</td></tr>';
+                return;
+            }
+            
+            const tbody = document.getElementById('customers-table-body');
+            const { data: users, error } = await window.supabaseClient.from('users').select('*').order('id', { ascending: true });
+            
+            if (error) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Lỗi khi tải danh sách khách hàng.</td></tr>';
+                return;
+            }
+            
+            if (!users || users.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Chưa có khách hàng nào.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = users.map(u => {
+                const initial = u.email ? u.email.substring(0, 2).toUpperCase() : 'US';
+                const roleStr = u.role === 'admin' ? '<span class="status-badge" style="background:#6366f1;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;">Admin</span>' : '<span class="status-badge success" style="background:#10b981;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;">Active</span>';
+                const name = u.email ? u.email.split('@')[0] : 'Unknown';
+
+                return `
+                    <tr>
+                        <td><div class="avatar-img" style="width: 32px; height: 32px; font-size: 0.8rem; background: #DA020E; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold;">${initial}</div></td>
+                        <td style="font-weight: 600;">${name}</td>
+                        <td style="color: #666;">${u.email}</td>
+                        <td style="text-align: center; font-weight: 600;">0</td>
+                        <td style="font-weight: 700; color: var(--admin-primary);">₫0</td>
+                        <td>${roleStr}</td>
+                        <td style="text-align: right;"><button class="btn-action-icon" style="border:none; background:transparent; cursor:pointer; color:#666;"><i class="fas fa-eye"></i></button></td>
+                    </tr>
+                `;
+            }).join('');
+
+        } catch (e) {
+            console.error(e);
+        }
+    });
+    </script>
 </body></html>
