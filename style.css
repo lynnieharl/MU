@@ -3938,3 +3938,204 @@ footer .footer-container {
 .mega-product-card img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; background: #f5f5f5; }
 .mega-product-card h4 { font-size: 13px; font-weight: 500; margin: 0; color: #333; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4; }
 .mega-product-card p { font-size: 14px; font-weight: bold; margin: 0; color: #da291c; }
+
+
+/* GLOBAL COMPACT HEADER FIX (Migrated from luxury.css) */
+/* 9. E-COMMERCE COMPACT HEADER */
+.top-bar-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background: transparent !important; /* Removed black background to blend with wave pattern */
+    padding: 3px 20px !important;
+    font-size: 0.75rem !important;
+}
+
+.top-bar-btn {
+    background: transparent;
+    color: #c5a059 !important; /* Polished gold */
+    border: none;
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.top-bar-link {
+    color: #c5a059 !important; /* Polished gold */
+    text-decoration: none;
+    font-size: 0.75rem;
+    text-transform: none;
+    font-weight: 600;
+}
+
+.header-main-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 65px; /* Compact height */
+}
+
+.header-logo .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.header-logo .logo-img {
+    height: 40px; /* Small logo */
+}
+
+.header-logo .logo-text {
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+}
+
+.new-mega-nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.new-mega-nav .nav-list {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.new-mega-nav .nav-link {
+    color: #fff !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
+    transition: color 0.3s;
+    text-transform: uppercase;
+}
+
+.new-mega-nav .nav-link:hover {
+    color: var(--lux-red) !important;
+}
+
+.header-search-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 20px;
+    padding: 4px 15px;
+    width: 250px;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.8rem;
+    padding: 2px 5px;
+    color: #333 !important;
+    background: transparent;
+}
+
+.search-btn {
+    background: transparent;
+    border: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon-btn i, 
+#user-account-btn i {
+    font-size: 1.2rem !important;
+}
+
+.cart-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cart-btn .badge {
+    position: absolute !important;
+    top: -5px !important;
+    right: -10px !important;
+    background: #DA020E !important;
+    color: white !important;
+    border-radius: 50% !important;
+    font-size: 10px !important;
+    width: 16px !important;
+    height: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Adjust mega menu position for compact header */
+.mega-menu-wrapper {
+    top: 65px !important; 
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .lux-hero-title { font-size: 4rem; }
+    .lux-bento-grid { grid-template-columns: repeat(2, 1fr); }
+    .lux-bento-large { grid-column: span 2; }
+    .lux-bento-medium { grid-column: span 2; }
+}
+
+@media (max-width: 992px) {
+    .top-bar-container { display: none !important; }
+    .header-main-row {
+        height: auto !important;
+        flex-direction: column !important;
+        padding: 15px 20px 5px 20px !important;
+        gap: 10px !important;
+    }
+    .new-mega-nav {
+        width: 100%;
+        order: 3;
+    }
+    .header-search-icons {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        order: 2;
+    }
+    .search-form {
+        flex: 1;
+        margin-right: 15px;
+    }
+    .new-mega-nav .nav-list {
+        justify-content: flex-start !important;
+        overflow-x: auto !important;
+        flex-wrap: nowrap !important;
+        padding-bottom: 5px;
+    }
+    .new-mega-nav .nav-link {
+        padding: 5px 0 !important;
+    }
