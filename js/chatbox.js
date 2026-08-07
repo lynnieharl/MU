@@ -150,6 +150,40 @@ document.addEventListener('DOMContentLoaded', () => {
             return "Năm 1999, Manchester United làm nên lịch sử khi trở thành đội bóng Anh đầu tiên giành Cú ăn ba vĩ đại (Treble): Premier League, FA Cup và UEFA Champions League.";
         }
 
+        // General Football / Legends
+        if (msg.includes('ronaldo') || msg.includes('cr7')) {
+            return "Cristiano Ronaldo (CR7) là một trong những cầu thủ vĩ đại nhất lịch sử. Anh từng thi đấu bùng nổ trong màu áo Manchester United, giành Quả bóng vàng đầu tiên tại đây trước khi tạo nên di sản vĩ đại.";
+        }
+        if (msg.includes('messi') || msg.includes('m10') || msg.includes('lionel')) {
+            return "Lionel Messi là huyền thoại bóng đá thế giới với kỷ lục 8 Quả bóng vàng. Dù chưa từng thi đấu cho Manchester United, tài năng của anh là điều cả thế giới phải công nhận.";
+        }
+        if (msg.includes('rooney') || msg.includes('gã shrek')) {
+            return "Wayne Rooney là cầu thủ ghi bàn vĩ đại nhất lịch sử Manchester United với 253 bàn thắng. Một huyền thoại mang dòng máu Quỷ đỏ thực sự tại Old Trafford!";
+        }
+        if (msg.includes('pele') || msg.includes('maradona')) {
+            return "Pele và Maradona là hai biểu tượng vĩnh cửu của bóng đá thế giới, những người đã đưa môn thể thao vua lên tầm nghệ thuật trong thế kỷ 20.";
+        }
+        if (msg.includes('beckham')) {
+            return "David Beckham (số 7) không chỉ là một huyền thoại với những cú sút phạt thần sầu mà còn là biểu tượng thời trang vĩ đại xuất thân từ Thế hệ 92 của Manchester United.";
+        }
+        
+        // Tournaments / Rules / Awards
+        if (msg.includes('world cup')) {
+            return "World Cup là giải vô địch bóng đá thế giới được tổ chức 4 năm một lần bởi FIFA. Đây là giấc mơ vinh quang lớn nhất của mọi cầu thủ quốc gia.";
+        }
+        if (msg.includes('champions league') || msg.includes('cúp c1') || msg.includes('c1')) {
+            return "UEFA Champions League (Cúp C1) là giải đấu danh giá nhất cấp câu lạc bộ tại Châu Âu. Manchester United từng 3 lần đăng quang tại đấu trường này (1968, 1999, 2008).";
+        }
+        if (msg.includes('ngoại hạng anh') || msg.includes('premier league') || msg.includes('epl')) {
+            return "Premier League là giải đấu quốc nội hấp dẫn nhất hành tinh. Manchester United hiện đang là câu lạc bộ giữ kỷ lục vô địch nhiều nhất với 20 lần lên ngôi vương.";
+        }
+        if (msg.includes('việt vị') || msg.includes('offside')) {
+            return "Luật Việt vị (Offside): Cầu thủ bị coi là việt vị nếu họ đứng gần đường biên ngang sân đối phương hơn cả bóng và cầu thủ phòng ngự đối phương cuối cùng (không tính thủ môn) ở thời điểm đồng đội chuyền bóng.";
+        }
+        if (msg.includes('quả bóng vàng') || msg.includes('ballon d\'or') || msg.includes('qbv')) {
+            return "Quả bóng vàng (Ballon d'Or) là giải thưởng cá nhân danh giá nhất bóng đá. Kỷ lục hiện tại thuộc về Lionel Messi (8 lần) và Cristiano Ronaldo (5 lần). Bốn cầu thủ MU từng giành giải này là Denis Law, Bobby Charlton, George Best và Cristiano Ronaldo.";
+        }
+
         // MU Fixtures
         if (msg.includes('lịch thi đấu') || msg.includes('trận tới') || msg.includes('khi nào đá') || msg.includes('đối thủ')) {
             return "Bạn có thể theo dõi lịch thi đấu chính thức, bảng xếp hạng và các tin tức mới nhất về đội bóng ngay trên trang chủ hoặc ứng dụng chính thức của Manchester United nhé!";
