@@ -143,17 +143,20 @@
     document.addEventListener('DOMContentLoaded', async () => {
         try {
             let retries = 0;
-            while (!window.supabaseClient && retries < 10) {
+            // Use the global variable supabaseClient defined in supabase-config.js
+            let client = typeof supabaseClient !== 'undefined' ? supabaseClient : null;
+            while (!client && retries < 10) {
                 await new Promise(r => setTimeout(r, 500));
+                client = typeof supabaseClient !== 'undefined' ? supabaseClient : null;
                 retries++;
             }
-            if (!window.supabaseClient) {
+            if (!client) {
                 document.getElementById('customers-table-body').innerHTML = '<tr><td colspan="7" style="text-align:center;">Lỗi: Không kết nối được Supabase</td></tr>';
                 return;
             }
             
             const tbody = document.getElementById('customers-table-body');
-            const { data: users, error } = await window.supabaseClient.from('users').select('*').order('id', { ascending: true });
+            const { data: users, error } = await client.from('users').select('*').order('id', { ascending: true });
             
             if (error) {
                 tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Lỗi khi tải danh sách khách hàng.</td></tr>';
