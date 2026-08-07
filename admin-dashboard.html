@@ -259,6 +259,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (labels.length === 0) {
                 labels = ['Chưa có dữ liệu'];
                 data = [0];
+            } else if (labels.length === 1) {
+                // If there's only 1 data point, prepend a 0 so the line chart looks like a line
+                labels.unshift('Tháng trước');
+                data.unshift(0);
             }
 
             const ctx = canvas.getContext('2d');
@@ -271,7 +275,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                         data: data,
                         borderColor: '#DA020E',
                         backgroundColor: 'rgba(218, 2, 14, 0.1)',
-                        borderWidth: 2,
+                        borderWidth: 3,
+                        pointBackgroundColor: '#ffffff',
+                        pointBorderColor: '#DA020E',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
                         fill: true,
                         tension: 0.4
                     }]
@@ -282,6 +290,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                     plugins: {
                         legend: {
                             display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(context.parsed.y);
+                                }
+                            }
                         }
                     },
                     scales: {
@@ -289,7 +304,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                             beginAtZero: true,
                             ticks: {
                                 callback: function(value) {
-                                    return (value / 1000000) + 'M'; // format as millions
+                                    if (value >= 1000000) {
+                                        return (value / 1000000).toFixed(value % 1000000 === 0 ? 0 : 1) + 'M';
+                                    } else if (value >= 1000) {
+                                        return (value / 1000).toFixed(value % 1000 === 0 ? 0 : 1) + 'K';
+                                    }
+                                    return value + ' ₫';
                                 }
                             }
                         }
