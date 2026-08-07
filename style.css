@@ -3929,3 +3929,12 @@ footer .footer-container {
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
 }
+
+/* Mega Menu Layout Updates */
+.mega-menu-links { display: flex; flex: 2; gap: 40px; }
+.mega-products-grid { flex: 3; display: flex; gap: 20px; }
+.mega-product-card { flex: 1; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: inherit; transition: transform 0.2s; background: #fff; }
+.mega-product-card:hover { transform: translateY(-5px); }
+.mega-product-card img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; background: #f5f5f5; }
+.mega-product-card h4 { font-size: 13px; font-weight: 500; margin: 0; color: #333; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4; }
+.mega-product-card p { font-size: 14px; font-weight: bold; margin: 0; color: #da291c; }
