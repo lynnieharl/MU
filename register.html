@@ -24,175 +24,168 @@
             <div class="top-bar-left">
                 <button class="top-bar-btn"><i class="fa-solid fa-globe"></i> English - US$</button>
             </div>
-            <div class="top-bar-right">
+            <div class="top-bar-center" style="display: flex; gap: 20px;">
                 <a href="track-order.html" class="top-bar-link">Track Order</a>
                 <a href="help.html" class="top-bar-link">Help</a>
             </div>
+            <div class="top-bar-right">
+                <a href="bookmarks.html" class="top-bar-link"><i class="fa-regular fa-bookmark"></i> All Bookmarks</a>
+            </div>
         </div>
 
-        <div class="header-main">
+        <div class="header-main-row">
             <div class="header-logo">
                 <a href="index.html" class="logo-link">
                     <img src="images/0_Manchester_United_FC_crest.svg" alt="Manchester United Logo" class="logo-img devil-aura">
                     <span class="logo-text">UNITED STORE</span>
                 </a>
             </div>
-            
-            <div class="header-search-icons">
-                <div class="header-search">
-                    <form onsubmit="event.preventDefault(); window.location.href='search.html?query='+this.querySelector('input').value;" class="search-form">
-                        <input type="text" name="query" class="search-input" placeholder="Search for products, players, and more...">
-                        <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </form>
-                </div>
-                
-                <div class="header-icons">
-                    <a href="wishlist.html" class="header-icon-link">
-                        <i class="fa-regular fa-heart"></i>
-                    </a>
-                    <a href="cart.html" class="header-icon-link cart-icon-wrapper">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        <span class="cart-badge">0</span>
-                    </a>
-                    <div class="header-icon-item account-icon" id="auth-user-icon-container" style="position:relative; margin-left: 15px;"></div>
-                </div>
-            </div>
-        </div>
 
-        <nav class="new-mega-nav">
-            <ul class="nav-list">
-                <li class="nav-item"><a href="category.html" class="nav-link">New In</a></li>
-                <li class="nav-item has-mega-menu">
-                    <a href="jerseys.html" class="nav-link">Jerseys <span class="badge-new">New</span></a>
+            <nav class="new-mega-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="category.html" class="nav-link">NEW IN</a></li>
+                    <li class="nav-item has-mega-menu">
+                        <a href="jerseys.html" class="nav-link">JERSEYS <span class="badge-new">NEW</span></a>
                     <div class="mega-menu-wrapper">
                         <div class="mega-menu-container">
-                            <div class="mega-col">
-                                <h3>Home</h3>
-                                <ul>
-                                    <li><a href="category.html?category=Home&subcategory=Men">Men</a></li>
-                                    <li><a href="category.html?category=Home&subcategory=Women">Women</a></li>
-                                    <li><a href="category.html?category=Home&subcategory=Kids">Kids</a></li>
-                                    <li><a href="category.html?category=Home&subcategory=Baby %26 Infant">Baby & Infant</a></li>
-                                </ul>
+                            <div class="mega-menu-links">
+                                <div class="mega-col">
+                                    <h3>Home</h3>
+                                    <ul>
+                                        <li><a href="category.html?category=Home&subcategory=Men">Men</a></li>
+                                        <li><a href="category.html?category=Home&subcategory=Women">Women</a></li>
+                                        <li><a href="category.html?category=Home&subcategory=Kids">Kids</a></li>
+                                        <li><a href="category.html?category=Home&subcategory=Baby %26 Infant">Baby & Infant</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-col">
+                                    <h3>Away <span class="badge-new">New</span></h3>
+                                    <ul>
+                                        <li><a href="category.html?category=Away&subcategory=Men">Men</a></li>
+                                        <li><a href="category.html?category=Away&subcategory=Women">Women</a></li>
+                                        <li><a href="category.html?category=Away&subcategory=Kids">Kids</a></li>
+                                        <li><a href="category.html?category=Away&subcategory=Baby %26 Infant">Baby & Infant</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-col">
+                                    <h3>Third</h3>
+                                    <ul>
+                                        <li><a href="category.html?category=Third&subcategory=Men">Men</a></li>
+                                        <li><a href="category.html?category=Third&subcategory=Women">Women</a></li>
+                                        <li><a href="category.html?category=Third&subcategory=Kids">Kids</a></li>
+                                        <li><a href="category.html?category=Third&subcategory=Baby %26 Infant">Baby & Infant</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-col">
+                                    <h3>Goalkeeper</h3>
+                                    <ul>
+                                        <li><a href="category.html?category=Goalkeeper&subcategory=Men">Men</a></li>
+                                        <li><a href="category.html?category=Goalkeeper&subcategory=Women">Women</a></li>
+                                        <li><a href="category.html?category=Goalkeeper&subcategory=Kids">Kids</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-col">
+                                    <h3>Shop By Player</h3>
+                                    <ul>
+                                        <li><a href="player.html">Men's team</a></li>
+                                        <li><a href="player.html">Women's Team</a></li>
+                                        <li><a href="player.html">Player Printed Jerseys</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="mega-col">
-                                <h3>Away <span class="badge-new">New</span></h3>
-                                <ul>
-                                    <li><a href="category.html?category=Away&subcategory=Men">Men</a></li>
-                                    <li><a href="category.html?category=Away&subcategory=Women">Women</a></li>
-                                    <li><a href="category.html?category=Away&subcategory=Kids">Kids</a></li>
-                                    <li><a href="category.html?category=Away&subcategory=Baby %26 Infant">Baby & Infant</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Third</h3>
-                                <ul>
-                                    <li><a href="category.html?category=Third&subcategory=Men">Men</a></li>
-                                    <li><a href="category.html?category=Third&subcategory=Women">Women</a></li>
-                                    <li><a href="category.html?category=Third&subcategory=Kids">Kids</a></li>
-                                    <li><a href="category.html?category=Third&subcategory=Baby %26 Infant">Baby & Infant</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Goalkeeper</h3>
-                                <ul>
-                                    <li><a href="category.html?category=Goalkeeper&subcategory=Men">Men</a></li>
-                                    <li><a href="category.html?category=Goalkeeper&subcategory=Women">Women</a></li>
-                                    <li><a href="category.html?category=Goalkeeper&subcategory=Kids">Kids</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Shop By Player</h3>
-                                <ul>
-                                    <li><a href="player.html">Men's team</a></li>
-                                    <li><a href="player.html">Women's Team</a></li>
-                                    <li><a href="player.html">Player Printed Jerseys</a></li>
-                                </ul>
-                            </div>
+                            <div class="mega-products-grid" id="mega-products-jerseys"></div>
                         </div>
                     </div>
-                </li>
-                <li class="nav-item"><a href="category.html?category=Training" class="nav-link">Trainingwear</a></li>
-                <li class="nav-item has-mega-menu">
-                    <a href="category.html?category=Accessories" class="nav-link">Fashion <span class="badge-new">New</span></a>
+                    </li>
+                    <li class="nav-item has-mega-menu">
+                        <a href="category.html?category=Training" class="nav-link">TRAININGWEAR</a>
+                        <div class="mega-menu-wrapper">
+                            <div class="mega-menu-container">
+                                <div class="mega-menu-links">
+                                    <div class="mega-col">
+                                        <h3>Collections</h3>
+                                        <ul>
+                                            <li><a href="category.html?category=Training">Training Tops</a></li>
+                                            <li><a href="category.html?category=Training">Pre Match</a></li>
+                                            <li><a href="category.html?category=Training">Anthem Jackets</a></li>
+                                            <li><a href="category.html?category=Training">Training Bottoms</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mega-products-grid" id="mega-products-training"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item has-mega-menu">
+                        <a href="category.html?category=Fashion" class="nav-link">FASHION <span class="badge-new">NEW</span></a>
                     <div class="mega-menu-wrapper">
                         <div class="mega-menu-container">
-                            <div class="mega-col">
-                                <h3>Men</h3>
-                                <ul>
-                                    <li><a href="category.html?category=Accessories&subcategory=Men">Tops</a></li>
-                                    <li><a href="category.html?category=Accessories&subcategory=Men">Jackets & coats</a></li>
-                                    <li><a href="category.html?category=Accessories&subcategory=Men">Trousers & shorts</a></li>
-                                </ul>
+                            <div class="mega-menu-links">
+                                <div class="mega-col">
+                                    <h3>Men</h3>
+                                    <ul>
+                                        <li><a href="category.html?category=Fashion&subcategory=Men">Tops</a></li>
+                                        <li><a href="category.html?category=Fashion&subcategory=Men">Jackets & coats</a></li>
+                                        <li><a href="category.html?category=Fashion&subcategory=Men">Trousers & shorts</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-col">
+                                    <h3>Women</h3>
+                                    <ul>
+                                        <li><a href="category.html?category=Fashion&subcategory=Women">Tops</a></li>
+                                        <li><a href="category.html?category=Fashion&subcategory=Women">Jackets & coats</a></li>
+                                        <li><a href="category.html?category=Fashion&subcategory=Women">Trousers & shorts</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-col">
+                                    <h3>Kids</h3>
+                                    <ul>
+                                        <li><a href="category.html?category=Fashion&subcategory=Kids">Tops</a></li>
+                                        <li><a href="category.html?category=Fashion&subcategory=Kids">Jacket & Coat</a></li>
+                                        <li><a href="category.html?category=Fashion&subcategory=Kids">Trousers & Shorts</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="mega-col">
-                                <h3>Women</h3>
-                                <ul>
-                                    <li><a href="category.html?category=Accessories&subcategory=Women">Tops</a></li>
-                                    <li><a href="category.html?category=Accessories&subcategory=Women">Jackets & coats</a></li>
-                                    <li><a href="category.html?category=Accessories&subcategory=Women">Trousers & shorts</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Kids</h3>
-                                <ul>
-                                    <li><a href="category.html?category=Accessories&subcategory=Kids">Tops</a></li>
-                                    <li><a href="category.html?category=Accessories&subcategory=Kids">Jacket & Coat</a></li>
-                                    <li><a href="category.html?category=Accessories&subcategory=Kids">Trousers & Shorts</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Collections</h3>
-                                <ul>
-                                    <li><a href="category.html?category=Training">Trainingwear</a></li>
-                                    <li><a href="category.html?category=Training">Pre Match</a></li>
-                                    <li><a href="category.html?category=Training">Anthem Jackets</a></li>
-                                </ul>
-                            </div>
+                            <div class="mega-products-grid" id="mega-products-fashion"></div>
                         </div>
                     </div>
-                </li>
-                <li class="nav-item has-mega-menu">
-                    <a href="category.html?category=Accessories" class="nav-link">Accessories</a>
+                    </li>
+                    <li class="nav-item has-mega-menu">
+                        <a href="category.html?category=Accessories" class="nav-link">ACCESSORIES</a>
                     <div class="mega-menu-wrapper">
                         <div class="mega-menu-container">
-                            <div class="mega-col">
-                                <h3>Accessories</h3>
-                                <ul>
-                                    <li><a href="category.html?category=Accessories">Headwear</a></li>
-                                    <li><a href="category.html?category=Accessories">Watches</a></li>
-                                    <li><a href="category.html?category=Accessories">Keyrings</a></li>
-                                </ul>
+                            <div class="mega-menu-links">
+                                <div class="mega-col">
+                                    <h3>Accessories</h3>
+                                    <ul>
+                                        <li><a href="category.html?category=Accessories">Headwear</a></li>
+                                        <li><a href="category.html?category=Accessories">Watches</a></li>
+                                        <li><a href="category.html?category=Accessories">Keyrings</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-col">
+                                    <h3>Souvenirs</h3>
+                                    <ul>
+                                        <li><a href="category.html?category=Accessories">Flags & Pennants</a></li>
+                                        <li><a href="category.html?category=Accessories">Badges & Pins</a></li>
+                                        <li><a href="category.html?category=Accessories">Mugs & Glasses</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-col">
+                                    <h3>Homeware</h3>
+                                    <ul>
+                                        <li><a href="category.html?category=Accessories">Bedroom</a></li>
+                                        <li><a href="category.html?category=Accessories">Bathroom</a></li>
+                                        <li><a href="category.html?category=Accessories">Kitchen</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="mega-col">
-                                <h3>Souvenirs</h3>
-                                <ul>
-                                    <li><a href="category.html?category=Accessories">Flags & Pennants</a></li>
-                                    <li><a href="category.html?category=Accessories">Badges & Pins</a></li>
-                                    <li><a href="category.html?category=Accessories">Mugs & Glasses</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Homeware</h3>
-                                <ul>
-                                    <li><a href="category.html?category=Accessories">Bedroom</a></li>
-                                    <li><a href="category.html?category=Accessories">Bathroom</a></li>
-                                    <li><a href="category.html?category=Accessories">Kitchen</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Kids</h3>
-                                <ul>
-                                    <li><a href="category.html?category=Accessories&subcategory=Kids">Toys & Games</a></li>
-                                    <li><a href="category.html?category=Accessories&subcategory=Kids">School Supplies</a></li>
-                                    <li><a href="category.html?category=Accessories&subcategory=Kids">Soft Toys</a></li>
-                                </ul>
-                            </div>
+                            <div class="mega-products-grid" id="mega-products-accessories"></div>
                         </div>
                     </div>
-                </li>
-                <li class="nav-item has-mega-menu">
-                    <a href="gifts.html" class="nav-link">Gifts</a>
+                    </li>
+                    <li class="nav-item has-mega-menu">
+                        <a href="gifts.html" class="nav-link">GIFTS</a>
                     <div class="mega-menu-wrapper">
                         <div class="mega-menu-container">
                             <div class="mega-col">
@@ -221,11 +214,27 @@
                             </div>
                         </div>
                     </div>
-                </li>
-                <li class="nav-item"><a href="auctions.html" class="nav-link">Auctions</a></li>
-                <li class="nav-item"><a href="category.html" class="nav-link" style="color: #ffb3b3;">Outlet</a></li>
-            </ul>
-        </nav>
+                    </li>
+                    <li class="nav-item"><a href="auctions.html" class="nav-link">AUCTIONS</a></li>
+                    <li class="nav-item"><a href="category.html" class="nav-link" style="color: #ffb3b3;">OUTLET</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-search-icons">
+                <div class="header-search">
+                    <form onsubmit="event.preventDefault(); window.location.href='search.html?query='+this.querySelector('input').value;" class="search-form">
+                        <input type="text" name="query" class="search-input" placeholder="Search for products, players...">
+                        <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+                
+                <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="wishlist.html" class="icon-btn"><i class="far fa-heart" style="font-size: 20px; color: #fff;"></i></a>
+                    <a href="cart.html" class="icon-btn cart-btn"><i class="fas fa-shopping-bag" style="font-size: 20px; color: #fff;"></i><span class="badge" style="background:red; border-radius:50%; padding:2px 5px; font-size:12px; margin-left:3px; color:white;">0</span></a>
+                    <div class="header-icon-item account-icon" id="auth-user-icon-container" style="position:relative; margin-left: 5px;"></div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <!-- ==========================================
@@ -533,6 +542,9 @@
 
     <!-- Smart Chatbox -->
     <script src="js/chatbox.js"></script>
+
+    <!-- Mega Menu -->
+    <script src="js/mega-menu.js"></script>
 
     <!-- Cart Logic -->
     <script src="js/cart-logic.js"></script>

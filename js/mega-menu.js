@@ -9,9 +9,10 @@ async function initMegaMenus() {
     }
 
     const megaMenuMappings = [
-        { containerId: 'mega-products-training', category: 'Training' },
-        { containerId: 'mega-products-fashion', category: 'Accessories' }, // Using Accessories for Fashion as fallback
-        { containerId: 'mega-products-accessories', category: 'Accessories' }
+        { containerId: 'mega-products-jerseys', categoryMatch: ['Home', 'Away', 'Third', 'Goalkeeper'] },
+        { containerId: 'mega-products-training', categoryMatch: ['Training'] },
+        { containerId: 'mega-products-fashion', categoryMatch: ['Fashion'] },
+        { containerId: 'mega-products-accessories', categoryMatch: ['Accessories'] }
     ];
 
     for (const mapping of megaMenuMappings) {
@@ -22,7 +23,7 @@ async function initMegaMenus() {
             let query = window.supabaseClient
                 .from('products')
                 .select('id, name, price, image_url')
-                .eq('category', mapping.category)
+                .in('category', mapping.categoryMatch)
                 .order('id', { ascending: false })
                 .limit(3);
                 
@@ -33,15 +34,16 @@ async function initMegaMenus() {
             if (products && products.length > 0) {
                 renderMegaProducts(container, products);
             } else {
-                const { data: fallback } = await window.supabaseClient
-                    .from('products')
-                    .select('id, name, price, image_url')
-                    .order('id', { ascending: false })
-                    .limit(3);
-                if (fallback) renderMegaProducts(container, fallback);
+                // No products found for this specific category
+                container.innerHTML = `
+                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color:#888; font-family:Arial,sans-serif; text-align:center;">
+                        <i class="fa-solid fa-box-open" style="font-size:24px; margin-bottom:10px; color:#ccc;"></i>
+                        <span style="font-size:14px;">More coming soon</span>
+                    </div>
+                `;
             }
         } catch (err) {
-            console.error(`Failed to fetch products for ${mapping.category}:`, err);
+            console.error(`Failed to fetch products for ${mapping.categoryMatch.join(',')}:`, err);
         }
     }
 }
