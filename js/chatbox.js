@@ -91,14 +91,29 @@ document.addEventListener('DOMContentLoaded', () => {
     function getBotResponse(message) {
         const msg = message.toLowerCase();
         
+        // Greetings
+        if (msg.includes('alo') || msg === 'hi' || msg.includes('hello') || msg.includes('chào') || msg === 'hey') {
+            return "Chào bạn! Mình là trợ lý ảo của United Store. Bạn cần hỗ trợ mua sắm hay muốn tìm hiểu thông tin gì về Manchester United nào?";
+        }
+        
+        // Courtesy
+        if (msg.includes('cảm ơn') || msg.includes('thank') || msg.includes('tks') || msg.includes('ok')) {
+            return "Rất vui được hỗ trợ bạn! Nếu cần gì thêm, cứ nhắn tin cho mình nhé. GGMU! 🔴";
+        }
+        
+        // Identity
+        if (msg.includes('bạn là ai') || msg.includes('ai đây') || msg.includes('tên gì')) {
+            return "Mình là Chatbot tự động của Manchester United Store, được lập trình để giúp bạn mua sắm và trả lời mọi thắc mắc về Quỷ Đỏ!";
+        }
+
         // Product Info
-        if (msg.includes('giá') || msg.includes('bao nhiêu')) {
+        if (msg.includes('giá') || msg.includes('bao nhiêu') || msg.includes('tiền')) {
             return "Giá áo đấu chính hãng hiện tại dao động từ 2.000.000đ đến 3.500.000đ tùy phiên bản (Fan hay Player). Bạn có thể vào mục Áo Đấu để xem chi tiết nhé!";
         }
-        if (msg.includes('size') || msg.includes('kích cỡ')) {
+        if (msg.includes('size') || msg.includes('kích cỡ') || msg.includes('mặc vừa')) {
             return "Cửa hàng có đủ size từ S đến 2XL theo tiêu chuẩn Châu Âu. Form áo hơi to nên nếu bạn thích mặc ôm, hãy cân nhắc giảm 1 size nhé.";
         }
-        if (msg.includes('chính hãng') || msg.includes('fake') || msg.includes('thật')) {
+        if (msg.includes('chính hãng') || msg.includes('fake') || msg.includes('thật') || msg.includes('auth')) {
             return "Cam kết 100% hàng chính hãng, nhập khẩu trực tiếp từ cửa hàng Megastore tại Old Trafford. Đền bù gấp 10 lần nếu phát hiện hàng giả!";
         }
 
