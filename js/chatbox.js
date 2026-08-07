@@ -149,6 +149,51 @@ document.addEventListener('DOMContentLoaded', () => {
         if (msg.includes('treble') || msg.includes('cú ăn 3') || msg.includes('1999')) {
             return "Năm 1999, Manchester United làm nên lịch sử khi trở thành đội bóng Anh đầu tiên giành Cú ăn ba vĩ đại (Treble): Premier League, FA Cup và UEFA Champions League.";
         }
+        // Complex Questions & Debates
+        if ((msg.includes('cr7') || msg.includes('ronaldo')) && (msg.includes('messi') || msg.includes('m10')) && (msg.includes('goat') || msg.includes('giỏi hơn') || msg.includes('xuất sắc hơn') || msg.includes('so sánh'))) {
+            return "Cuộc tranh luận 'Ai là GOAT' giữa Cristiano Ronaldo và Lionel Messi là bất tận. Mỗi người có một phong cách và di sản vĩ đại riêng. Dù sao đi nữa, là fan Quỷ Đỏ, chúng ta luôn tự hào về những năm tháng đỉnh cao CR7 đã cống hiến tại Nhà hát của những giấc mơ!";
+        }
+        
+        // Rivals & Other Clubs
+        if (msg.includes('man city') || msg.includes('manchester city') || msg.includes('mcfc')) {
+            return "Manchester City là đối thủ cùng thành phố và là kình địch lớn của chúng ta trong những năm gần đây. Tuy nhiên, về bề dày lịch sử và truyền thống, Manchester United vẫn luôn là biểu tượng số 1 nước Anh!";
+        }
+        if (msg.includes('liverpool') || msg.includes('the kop')) {
+            return "Liverpool là đại kình địch không đội trời chung của Manchester United. Trận Derby nước Anh giữa MU và Liverpool luôn là trận đấu rực lửa và giàu cảm xúc nhất!";
+        }
+        if (msg.includes('arsenal')) {
+            return "Arsenal từng là đối thủ cạnh tranh khốc liệt nhất của Manchester United trong kỷ nguyên đầu của Premier League, tạo nên những cuộc đối đầu kinh điển giữa Sir Alex và Arsene Wenger.";
+        }
+        if (msg.includes('real madrid') || msg.includes('barcelona')) {
+            return "Real Madrid và Barcelona là hai gã khổng lồ của bóng đá Tây Ban Nha. Rất nhiều huyền thoại từng thi đấu cho cả MU và hai CLB này (như Beckham, Ronaldo, Pique...).";
+        }
+        
+        // Managers
+        if (msg.includes('ten hag')) {
+            return "Erik ten Hag là HLV hiện tại của Manchester United, mang đến triết lý bóng đá kỷ luật và đề cao việc kiểm soát trận đấu.";
+        }
+        if (msg.includes('pep') || msg.includes('guardiola')) {
+            return "Pep Guardiola là huấn luyện viên xuất sắc bậc nhất thế giới, người đã tạo nên lối chơi tiki-taka trứ danh và hiện đang dẫn dắt kình địch Man City.";
+        }
+        if (msg.includes('mourinho')) {
+            return "Jose Mourinho ('Người đặc biệt') từng dẫn dắt Manchester United, giúp CLB giành chức vô địch Europa League, League Cup và Siêu cúp Anh.";
+        }
+        
+        // Modern Superstars
+        if (msg.includes('mbappe')) {
+            return "Kylian Mbappé là siêu sao hàng đầu thế giới hiện nay với tốc độ khủng khiếp và kỹ năng săn bàn đỉnh cao. Cậu ấy hiện đang khoác áo Real Madrid.";
+        }
+        if (msg.includes('haaland')) {
+            return "Erling Haaland là một cỗ máy ghi bàn đáng sợ của Man City. Một đối thủ vô cùng đáng gờm tại Ngoại Hạng Anh.";
+        }
+        
+        // General Tactics & Rules
+        if (msg.includes('var')) {
+            return "VAR (Video Assistant Referee) là công nghệ video hỗ trợ trọng tài, được áp dụng để giảm thiểu sai sót trong các quyết định quan trọng (bàn thắng, thẻ đỏ, penalty).";
+        }
+        if (msg.includes('penalty') || msg.includes('phạt đền')) {
+            return "Penalty (phạt đền) là cú đá phạt trực tiếp từ chấm 11 mét khi có lỗi nghiêm trọng xảy ra trong vòng cấm địa. Ở MU, Bruno Fernandes hiện là chuyên gia sút penalty uy tín nhất.";
+        }
 
         // General Football / Legends
         if (msg.includes('ronaldo') || msg.includes('cr7')) {
