@@ -89,6 +89,28 @@ const translations = {
         'all-products': 'ALL PRODUCTS'
     },
     'vi': {
+        'review-3': 'Món quà sinh nhật hoàn hảo cho con trai tôi. Form dáng rất chuẩn, mặc lên trông rất khỏe khoắn. Sẽ ủng hộ shop dài dài.',
+        'review-2': 'Giao hàng cực kỳ nhanh. Logo thêu nổi cực kỳ sắc nét, nhìn sang trọng hơn hẳn các mẫu năm trước. Glory Glory Man United!',
+        'review-1': 'Chất vải thực sự ở một đẳng cấp khác. Tôi mặc đi đá banh suốt 2 tiếng mà không hề cảm thấy bí bách. Đáng từng xu!',
+        'reviews-desc': 'Đánh giá từ những cổ động viên nhiệt thành nhất toàn cầu.',
+        'store-desc': 'Cửa hàng trực tuyến chính thức của Manchester United tại Việt Nam. Nơi lan tỏa niềm đam mê và tự hào của bầy Quỷ Đỏ.',
+        'contact': 'Liên hệ',
+        'sustainability': 'Phát triển bền vững',
+        'careers': 'Tuyển dụng',
+        'brand-story': 'Câu chuyện thương hiệu',
+        'about-footer': 'VỀ CHÚNG TÔI',
+        'faq': 'FAQ',
+        'size-guide': 'Hướng dẫn chọn size',
+        'return-policy': 'Chính sách đổi trả',
+        'track-order-footer': 'Tra cứu đơn hàng',
+        'support-footer': 'HỖ TRỢ',
+        'souvenirs-footer': 'Quà lưu niệm',
+        'training-footer': 'Đồ tập luyện',
+        'away-kits-footer': 'Áo đấu sân khách',
+        'home-kits-footer': 'Áo đấu sân nhà',
+        'shop-footer': 'MUA SẮM',
+        'email-placeholder': 'Nhập email của bạn...',
+        'join-vip': 'THAM GIA CÂU LẠC BỘ VIP',
         'lang-btn': 'Tiếng Việt - VNĐ',
         'new-in': 'HÀNG MỚI',
         'jerseys': 'ÁO ĐẤU',
@@ -220,9 +242,9 @@ window.addEventListener('DOMContentLoaded', () => {
         const langMenu = document.getElementById('lang-menu');
         
         if (langDropdown) {
-            langMenu.classList.toggle('active');
-        } else if (langMenu && langMenu.classList.contains('active')) {
-            langMenu.classList.remove('active');
+            langMenu.style.display = langMenu.style.display === 'none' || langMenu.style.display === '' ? 'block' : 'none';
+        } else if (langMenu && langMenu.style.display === 'block') {
+            langMenu.style.display = 'none';
         }
     });
 
@@ -233,7 +255,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const lang = e.target.getAttribute('data-lang');
             setLanguage(lang);
             const langMenu = document.getElementById('lang-menu');
-            if (langMenu) langMenu.classList.remove('active');
+            if (langMenu) langMenu.style.display = 'none';
         }
     });
 });
