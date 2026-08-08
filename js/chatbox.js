@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             right: 24px !important;
             z-index: 2147483647 !important;
             background-color: #d31145 !important;
-            box-shadow: 0 4px 15px rgba(211, 17, 69, 0.5) !important;
+            box-shadow: 0 0 15px rgba(211, 17, 69, 0.8), 0 0 30px rgba(255, 0, 0, 0.5) !important; /* Aura effect */
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -55,12 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
         /* Inject MU Logo */
         #dify-chatbot-bubble-button::before {
             content: '';
-            display: block;
-            width: 32px;
-            height: 32px;
-            background: url('https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg') no-repeat center center;
-            background-size: contain;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: 32px !important;
+            height: 32px !important;
+            background: url('https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg') no-repeat center center !important;
+            background-size: contain !important;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 15px rgba(255, 0, 0, 0.6)) !important; /* Logo Aura */
         }
     `;
     document.head.appendChild(style);
