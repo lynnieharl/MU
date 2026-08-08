@@ -142,9 +142,9 @@
         </div>
     </div>
 
-    <script src="main.js"></script>
-    <script src="cart.js"></script>
-    <script src="auth.js"></script>
+    <script defer src="main.js"></script>
+    <script defer src="cart.js"></script>
+    <script defer src="auth.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const user = JSON.parse(localStorage.getItem('vanilla_store_user'));
@@ -167,15 +167,15 @@
             el.classList.add('active');
         }
     </script>
-    <script src="js/auth-modal.js"></script>
+    <script defer src="js/auth-modal.js"></script>
 
     <!-- Smart Chatbox -->
-    <script src="js/chatbox.js"></script>
+    <script defer src="js/chatbox.js"></script>
 
     <!-- Mega Menu -->
-    <script src="js/mega-menu.js"></script>
+    <script defer src="js/mega-menu.js"></script>
 
     <!-- Cart Logic -->
-    <script src="js/cart-logic.js"></script>
+    <script defer src="js/cart-logic.js"></script>
 </body>
 </html>
