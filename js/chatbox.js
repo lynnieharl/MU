@@ -71,6 +71,15 @@ document.addEventListener('DOMContentLoaded', () => {
             height: calc(100% + 40px) !important;
             margin-bottom: -40px !important;
         }
+
+        /* User custom CSS for Dify internals */
+        [class*="workflow-process"],
+        [class*="node-process"],
+        [class*="thinking"],
+        .workflow-process-item,
+        div:has(> [class*="Phân loại câu hỏi"]) {
+            display: none !important;
+        }
     `;
     document.head.appendChild(style);
 });
