@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     style.innerHTML = `
         /* Main Bubble Button Style */
         #dify-chatbot-bubble-button {
+            position: fixed !important;
+            bottom: 24px !important;
+            right: 24px !important;
+            z-index: 2147483647 !important;
             background-color: #d31145 !important;
             box-shadow: 0 4px 15px rgba(211, 17, 69, 0.5) !important;
             display: flex !important;
@@ -32,6 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         /* Chat Window Size */
         #dify-chatbot-bubble-window {
+            position: fixed !important;
+            bottom: 84px !important;
+            right: 24px !important;
+            z-index: 2147483647 !important;
             width: 26rem !important; /* Slightly wider for better reading */
             height: 42rem !important; /* Taller */
             border-radius: 12px !important;
@@ -50,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             display: block;
             width: 32px;
             height: 32px;
-            background: url('images/0_Manchester_United_FC_crest.svg') no-repeat center center;
+            background: url('https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg') no-repeat center center;
             background-size: contain;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
