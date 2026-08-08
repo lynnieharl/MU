@@ -333,6 +333,8 @@
 
         function setJerseysFilter(category, clickedElement) {
             const url = new URL(window.location);
+            url.searchParams.delete('cat');
+            url.searchParams.delete('sub');
             if (category === 'ALL') {
                 url.searchParams.delete('category');
             } else {
@@ -356,7 +358,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const initialCat = urlParams.get('category') || 'ALL';
+            const initialCat = urlParams.get('category') || urlParams.get('cat') || urlParams.get('sub') || 'ALL';
             const initialPill = document.querySelector('.filter-pill[data-category="' + initialCat + '"]');
             if (initialPill) {
                 document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
