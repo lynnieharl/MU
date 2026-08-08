@@ -385,7 +385,7 @@ async function loadProducts() {
       container.innerHTML = `
         <div style="width: 100%; text-align: center; padding: 50px; color: #888; grid-column: 1 / -1; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px dashed rgba(255,255,255,0.1);">
             <i class="fa-solid fa-box-open" style="font-size: 48px; margin-bottom: 15px; color: #444;"></i>
-            <h3 style="color: #444; font-size: 20px; margin-bottom: 8px;">Hiện chưa có sản phẩm nào thuộc mục này.</h3>
+            <h3 style="color: #444; font-size: 20px; margin-bottom: 8px;" data-i18n="no-products">No products in this category.</h3>
         </div>
       `;
       return;
@@ -438,6 +438,7 @@ async function loadProducts() {
 
     // Initial Render
     window.renderSortedProducts(productsList);
+    if (typeof translatePage === 'function') translatePage(localStorage.getItem('preferredLang') || 'en');
 
     const sortSelect = document.getElementById('sort-select') || document.getElementById('sort-by');
     if (sortSelect && !sortSelect.hasAttribute('data-sort-bound')) {
@@ -453,7 +454,7 @@ async function loadProducts() {
     if (pillCount && !catParam && !subParam) pillCount.innerText = productsList.length;
   } catch (err) {
     console.error("Crash JS:", err);
-    container.innerHTML = `<p style="text-align: center; width: 100%; color: #888;">Unable to load products (${err.message}).</p>`;
+    container.innerHTML = `<p style="text-align: center; width: 100%; color: #888;" data-i18n="load-error">Unable to load products.</p>`;
   }
 }
 

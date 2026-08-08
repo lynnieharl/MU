@@ -18,7 +18,15 @@
     <header class="header-wave-bg">
         <div class="top-bar-container">
             <div class="top-bar-left">
-                <button class="top-bar-btn"><i class="fa-solid fa-globe"></i> English - US$</button>
+                
+            <div class="lang-dropdown" style="position: relative; display: inline-block;">
+                <button class="top-bar-btn" id="lang-toggle" style="background: none; border: none; color: inherit; font: inherit; cursor: pointer; display: flex; align-items: center; gap: 5px;"><i class="fa-solid fa-globe"></i> <span id="current-lang" data-i18n="lang-btn">English - US$</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.8em;"></i></button>
+                <div class="lang-menu" id="lang-menu" style="display: none; position: absolute; top: 100%; left: 0; background: #fff; color: #000; min-width: 150px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border-radius: 4px; z-index: 1000; overflow: hidden; margin-top: 5px;">
+                    <a href="#" data-lang="en" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; font-weight: 500; font-size: 13px; border-bottom: 1px solid #eee;">English</a>
+                    <a href="#" data-lang="vi" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; font-weight: 500; font-size: 13px;">Tiếng Việt</a>
+                </div>
+            </div>
+
             </div>
             <div class="top-bar-center" style="display: flex; gap: 20px;">
                 <a href="track-order.html" class="top-bar-link">Track Order</a>
@@ -510,5 +518,6 @@
 
     <!-- Checkout Logic -->
     <script defer src="js/checkout.js"></script>
+    <script defer src="js/i18n.js"></script>
 </body>
 </html>

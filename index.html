@@ -42,7 +42,15 @@
     <header class="header-wave-bg">
         <div class="top-bar-container">
             <div class="top-bar-left">
-                <button class="top-bar-btn"><i class="fa-solid fa-globe"></i> English - US$</button>
+                
+            <div class="lang-dropdown" style="position: relative; display: inline-block;">
+                <button class="top-bar-btn" id="lang-toggle" style="background: none; border: none; color: inherit; font: inherit; cursor: pointer; display: flex; align-items: center; gap: 5px;"><i class="fa-solid fa-globe"></i> <span id="current-lang" data-i18n="lang-btn">English - US$</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.8em;"></i></button>
+                <div class="lang-menu" id="lang-menu" style="display: none; position: absolute; top: 100%; left: 0; background: #fff; color: #000; min-width: 150px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border-radius: 4px; z-index: 1000; overflow: hidden; margin-top: 5px;">
+                    <a href="#" data-lang="en" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; font-weight: 500; font-size: 13px; border-bottom: 1px solid #eee;">English</a>
+                    <a href="#" data-lang="vi" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; font-weight: 500; font-size: 13px;">Tiếng Việt</a>
+                </div>
+            </div>
+
             </div>
             <div class="top-bar-center" style="display: flex; gap: 20px;">
                 <a href="track-order.html" class="top-bar-link">Track Order</a>
@@ -277,17 +285,17 @@
         <video src="videos/cr7video.mp4" class="lux-hero-bg" autoplay muted loop playsinline></video>
         <div class="lux-hero-overlay"></div>
         <div class="lux-hero-content" data-aos="fade-up" data-aos-delay="200">
-            <h1 class="lux-hero-title">THE RED DEVILS ARMOR<br>— 2024/25 SEASON</h1>
-            <p class="lux-hero-subtitle">Khoác lên mình kiệt tác lịch sử của Nhà hát của những giấc mơ.</p>
+            <h1 class="lux-hero-title" data-i18n="hero-title">THE RED DEVILS ARMOR<br>— 2024/25 SEASON</h1>
+            <p class="lux-hero-subtitle" data-i18n="hero-subtitle">Don the historic masterpiece of the Theatre of Dreams.</p>
             <div class="lux-hero-actions">
-                <a href="kits-home.html" class="lux-btn-primary"><i class="fas fa-shopping-bag"></i> Khám Phá Bộ Đấu</a>
-                <a href="#" class="lux-btn-secondary" onclick="alert('Tính năng đang phát triển!')"><i class="fas fa-play"></i> Xem Trailer 3D</a>
+                <a href="kits-home.html" class="lux-btn-primary"><i class="fas fa-shopping-bag"></i> <span data-i18n="explore-kits">Explore Kits</span></a>
+                <a href="#" class="lux-btn-secondary" onclick="alert('Coming soon!')"><i class="fas fa-play"></i> <span data-i18n="watch-trailer">Watch 3D Trailer</span></a>
             </div>
         </div>
         
         <div class="lux-social-proof" data-aos="fade-right" data-aos-delay="500">
             <i class="fas fa-bolt" style="color: #ffbe00; font-size: 1.2rem;"></i>
-            <span style="font-weight: 500; font-size: 0.95rem;">Hơn 10,000+ CĐV đã sở hữu trong tuần này</span>
+            <span style="font-weight: 500; font-size: 0.95rem;" data-i18n="social-proof">Over 10,000+ fans got theirs this week</span>
         </div>
     </section>
 
@@ -403,8 +411,8 @@
          ========================================== -->
     <section class="lux-section">
         <div class="lux-section-header" data-aos="fade-up">
-            <h2 class="lux-section-title title-design">BẢN THIẾT KẾ VĨ ĐẠI</h2>
-            <p class="lux-section-subtitle">Sự kết hợp hoàn hảo giữa công nghệ hiện đại và di sản trăm năm.</p>
+            <h2 class="lux-section-title title-design" data-i18n="design-title">THE GREAT BLUEPRINT</h2>
+            <p class="lux-section-subtitle" data-i18n="design-subtitle">A perfect blend of modern technology and a century of heritage.</p>
         </div>
         
         <div class="lux-features-grid">
@@ -437,8 +445,8 @@
          ========================================== -->
     <section class="lux-section">
         <div class="lux-section-header" data-aos="fade-up">
-            <h2 class="lux-section-title title-collection">THE COLLECTION</h2>
-            <p class="lux-section-subtitle">Lựa chọn bộ trang phục hoàn hảo cho mọi trận đấu của bạn.</p>
+            <h2 class="lux-section-title title-collection" data-i18n="collection-title">THE COLLECTION</h2>
+            <p class="lux-section-subtitle" data-i18n="collection-subtitle">Choose the perfect kit for every match.</p>
         </div>
         
         <div class="lux-bento-grid">
@@ -446,10 +454,10 @@
             <div class="lux-bento-item lux-bento-large" data-aos="fade-up" onclick="window.location.href='jerseys.html?cat=Home'" style="cursor: pointer;">
                 <img src="images/2_24295ea4b3319ca1ab4a7b45bc5272e4.jpg" alt="Home Kit">
                 <div class="lux-bento-content">
-                    <div class="lux-vip-badge">AUTHENTIC EDITION 24/25</div>
+                    <div class="lux-vip-badge" data-i18n="authentic-edition">AUTHENTIC EDITION 24/25</div>
                     <h3>Home Shirt 24/25</h3>
-                    <p class="lux-bento-subtitle">Thêu tên/số áo tùy chọn theo yêu cầu</p>
-                    <button class="lux-quick-add" onclick="event.stopPropagation(); window.location.href='jerseys.html?cat=Home'">Khám Phá Chi Tiết</button>
+                    <p class="lux-bento-subtitle" data-i18n="home-desc">Custom name/number embroidery on request</p>
+                    <button class="lux-quick-add" onclick="event.stopPropagation(); window.location.href='jerseys.html?cat=Home'" data-i18n="explore-details">Explore Details</button>
                 </div>
             </div>
             
@@ -458,7 +466,7 @@
                 <img src="images/9_bebbf6efd4d3e67fa7281f6bdf8429a6.jpg" alt="Away Kit">
                 <div class="lux-bento-content">
                     <h3>Away Shirt 24/25</h3>
-                    <button class="lux-quick-add" onclick="event.stopPropagation(); window.location.href='jerseys.html?cat=Away'">Đặt May Áo Đấu</button>
+                    <button class="lux-quick-add" onclick="event.stopPropagation(); window.location.href='jerseys.html?cat=Away'" data-i18n="order-kit">Order Kit</button>
                 </div>
             </div>
             
@@ -467,7 +475,7 @@
                 <img src="images/10_557b882a41d5bc6a7934615bbc14b842.jpg" alt="Third Kit">
                 <div class="lux-bento-content">
                     <h3>Third Kit</h3>
-                    <button class="lux-quick-add" onclick="event.stopPropagation(); window.location.href='jerseys.html?cat=Third'">Khám Phá</button>
+                    <button class="lux-quick-add" onclick="event.stopPropagation(); window.location.href='jerseys.html?cat=Third'" data-i18n="explore">Explore</button>
                 </div>
             </div>
             
@@ -476,7 +484,7 @@
                 <img src="images/19_c09dd81f09a6c8db0ef921ae63aaf881.jpg" alt="Training">
                 <div class="lux-bento-content">
                     <h3>Training</h3>
-                    <button class="lux-quick-add" onclick="event.stopPropagation(); window.location.href='jerseys.html'">Khám Phá</button>
+                    <button class="lux-quick-add" onclick="event.stopPropagation(); window.location.href='jerseys.html'" data-i18n="explore">Explore</button>
                 </div>
             </div>
         </div>
@@ -503,20 +511,18 @@
 
             <!-- Right Side: Content -->
             <div class="lux-about-content" data-aos="fade-left" data-aos-delay="100">
-                <div class="about-subtitle">BUILT ON PASSION. DRIVEN BY UNITY.</div>
-                <h2 class="about-title">BUILT ON. DRIVEN BY<br>UNITY. <span class="highlight-outline">PASSION.</span><br>GLORY.</h2>
-                <p class="about-desc">
-                    FOUNDED WITH THE SPIRIT OF TEAMWORK AND DEDICATION, OUR FOOTBALL CLUB HAS GROWN INTO A SYMBOL OF PRIDE, UNITY, AND EXCELLENCE. WE'RE COMMITTED TO DEVELOPING TALENT, INSPIRING FANS, AND CONQUERING EVERY CHALLENGE.
-                </p>
+                <div class="about-subtitle" data-i18n="about-subtitle">BUILT ON PASSION. DRIVEN BY UNITY.</div>
+                <h2 class="about-title" data-i18n="about-title">BUILT ON. DRIVEN BY<br>UNITY. <span class="highlight-outline">PASSION.</span><br>GLORY.</h2>
+                <p class="about-desc" data-i18n="about-desc">FOUNDED WITH THE SPIRIT OF TEAMWORK AND DEDICATION, OUR FOOTBALL CLUB HAS GROWN INTO A SYMBOL OF PRIDE, UNITY, AND EXCELLENCE. WE'RE COMMITTED TO DEVELOPING TALENT, INSPIRING FANS, AND CONQUERING EVERY CHALLENGE.</p>
                 
                 <div class="about-features">
-                    <div class="feature-item"><i class="fas fa-check-circle"></i> YOUTH DEVELOPMENT PROGRAMS</div>
-                    <div class="feature-item"><i class="fas fa-check-circle"></i> AWARD-WINNING COACHING STAFF</div>
-                    <div class="feature-item"><i class="fas fa-check-circle"></i> GLOBAL FANBASE CONNECTION</div>
-                    <div class="feature-item"><i class="fas fa-check-circle"></i> STATE-OF-THE-ART TRAINING</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i><span data-i18n="about-youth">YOUTH DEVELOPMENT PROGRAMS</span></div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i><span data-i18n="about-coaching">AWARD-WINNING COACHING STAFF</span></div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i><span data-i18n="about-fanbase">GLOBAL FANBASE CONNECTION</span></div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i><span data-i18n="about-training">STATE-OF-THE-ART TRAINING</span></div>
                 </div>
 
-                <a href="#" class="lux-btn-primary about-btn">MORE ABOUT US <i class="fas fa-arrow-right"></i></a>
+                <a href="#" class="lux-btn-primary about-btn"><span data-i18n="more-about-us">MORE ABOUT US</span> <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
@@ -527,7 +533,7 @@
     <section class="lux-honours">
         <div class="lux-honours-header" data-aos="fade-up">
             <div class="lux-divider"></div>
-            <h2 class="lux-honours-title">HONOURS & ACHIEVEMENTS</h2>
+            <h2 class="lux-honours-title" data-i18n="honours-title">HONOURS & ACHIEVEMENTS</h2>
             <div class="lux-divider"></div>
         </div>
         
@@ -537,63 +543,63 @@
                 <div class="lux-award-card">
                     <img src="images/premier_league_trophy.jpg" alt="Premier League Trophy" class="lux-award-img">
                     <div class="lux-award-count">20x PREMIER LEAGUE TITLES</div>
-                    <div class="lux-award-desc">Kỷ lục vô địch giải đấu cao nhất nước Anh</div>
+                    <div class="lux-award-desc" data-i18n="pl-desc">Record top-flight English titles</div>
                 </div>
                 <div class="lux-award-card">
                     <img src="images/champions_league_trophy.jpg" alt="Champions League Trophy" class="lux-award-img">
                     <div class="lux-award-count">3x UEFA CHAMPIONS LEAGUE</div>
-                    <div class="lux-award-desc">Đỉnh cao châu Âu (1968, 1999, 2008)</div>
+                    <div class="lux-award-desc" data-i18n="ucl-desc">European Pinnacle (1968, 1999, 2008)</div>
                 </div>
                 <div class="lux-award-card">
                     <img src="images/fa_cup_trophy.jpg" alt="FA Cup Trophy" class="lux-award-img">
                     <div class="lux-award-count">13x FA CUP TROPHIES</div>
-                    <div class="lux-award-desc">Di sản lâu đời bậc nhất xứ sở sương mù</div>
+                    <div class="lux-award-desc" data-i18n="fa-desc">Oldest heritage in England</div>
                 </div>
                 <div class="lux-award-card">
                     <img src="images/fifa_club_world_cup.jpg" alt="FIFA Club World Cup" class="lux-award-img">
                     <div class="lux-award-count">1x FIFA CLUB WORLD CUP</div>
-                    <div class="lux-award-desc">Nhà vô địch thế giới cấp câu lạc bộ</div>
+                    <div class="lux-award-desc" data-i18n="cwc-desc">Club World Champions</div>
                 </div>
                 <div class="lux-award-card">
                     <img src="images/historic_treble.jpg" alt="Historic Treble Trophies" class="lux-award-img">
                     <div class="lux-award-count">1x HISTORIC TREBLE (1999)</div>
-                    <div class="lux-award-desc">Cú ăn ba huyền thoại vĩ đại</div>
+                    <div class="lux-award-desc" data-i18n="treble-desc">The legendary great treble</div>
                 </div>
                 <div class="lux-award-card">
                     <img src="images/users_choice_award.jpg" alt="Users Choice Award" class="lux-award-img">
                     <div class="lux-award-count">USERS' CHOICE AWARD 2024</div>
-                    <div class="lux-award-desc">Giải thưởng do người hâm mộ bình chọn</div>
+                    <div class="lux-award-desc" data-i18n="fans-desc">Fans voted award</div>
                 </div>
                 <!-- SET 2 (Clone for infinite scroll) -->
                 <div class="lux-award-card">
                     <img src="images/premier_league_trophy.jpg" alt="Premier League Trophy" class="lux-award-img">
                     <div class="lux-award-count">20x PREMIER LEAGUE TITLES</div>
-                    <div class="lux-award-desc">Kỷ lục vô địch giải đấu cao nhất nước Anh</div>
+                    <div class="lux-award-desc" data-i18n="pl-desc">Record top-flight English titles</div>
                 </div>
                 <div class="lux-award-card">
                     <img src="images/champions_league_trophy.jpg" alt="Champions League Trophy" class="lux-award-img">
                     <div class="lux-award-count">3x UEFA CHAMPIONS LEAGUE</div>
-                    <div class="lux-award-desc">Đỉnh cao châu Âu (1968, 1999, 2008)</div>
+                    <div class="lux-award-desc" data-i18n="ucl-desc">European Pinnacle (1968, 1999, 2008)</div>
                 </div>
                 <div class="lux-award-card">
                     <img src="images/fa_cup_trophy.jpg" alt="FA Cup Trophy" class="lux-award-img">
                     <div class="lux-award-count">13x FA CUP TROPHIES</div>
-                    <div class="lux-award-desc">Di sản lâu đời bậc nhất xứ sở sương mù</div>
+                    <div class="lux-award-desc" data-i18n="fa-desc">Oldest heritage in England</div>
                 </div>
                 <div class="lux-award-card">
                     <img src="images/fifa_club_world_cup.jpg" alt="FIFA Club World Cup" class="lux-award-img">
                     <div class="lux-award-count">1x FIFA CLUB WORLD CUP</div>
-                    <div class="lux-award-desc">Nhà vô địch thế giới cấp câu lạc bộ</div>
+                    <div class="lux-award-desc" data-i18n="cwc-desc">Club World Champions</div>
                 </div>
                 <div class="lux-award-card">
                     <img src="images/historic_treble.jpg" alt="Historic Treble Trophies" class="lux-award-img">
                     <div class="lux-award-count">1x HISTORIC TREBLE (1999)</div>
-                    <div class="lux-award-desc">Cú ăn ba huyền thoại vĩ đại</div>
+                    <div class="lux-award-desc" data-i18n="treble-desc">The legendary great treble</div>
                 </div>
                 <div class="lux-award-card">
                     <img src="images/users_choice_award.jpg" alt="Users Choice Award" class="lux-award-img">
                     <div class="lux-award-count">USERS' CHOICE AWARD 2024</div>
-                    <div class="lux-award-desc">Giải thưởng do người hâm mộ bình chọn</div>
+                    <div class="lux-award-desc" data-i18n="fans-desc">Fans voted award</div>
                 </div>
             </div>
         </div>
@@ -743,5 +749,6 @@
 
     <!-- Cart Logic -->
     <script defer src="js/cart-logic.js"></script>
+    <script defer src="js/i18n.js"></script>
 </body>
 </html>
