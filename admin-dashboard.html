@@ -20,6 +20,12 @@
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- CSS dùng chung -->
         <link rel="stylesheet" href="admin.css">
+
+    <!-- Performance Preconnects -->
+    <link rel="preconnect" href="https://qtxikxszhllugqnhdypo.supabase.co" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+
 </head>
 <body>
     <!-- Overlay Bảo Vệ -->
@@ -218,7 +224,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const top3 = products.slice(0, 3);
                 topProductsList.innerHTML = top3.map(p => `
                     <li style="display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #eee;">
-                        <img src="${p.image_url || 'images/placeholder.jpg'}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px;">
+                        <img loading="lazy" decoding="async" src="${p.image_url || 'images/placeholder.jpg'}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px;">
                         <div style="flex: 1;">
                             <h4 style="font-size: 0.85rem; margin-bottom: 4px; color: #333;">${p.name}</h4>
                             <span style="font-size: 0.75rem; color: #888;">${p.stock} in stock</span>

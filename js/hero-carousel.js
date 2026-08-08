@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (activeIndex !== currentHeroIndex) {
                 updateHeroDots(activeIndex);
             }
-        });
+        }, { passive: true });
 
         // Mouse Drag to Scroll for Hero
         let isHeroDown = false;

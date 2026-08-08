@@ -20,6 +20,12 @@
         .order-header { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;}
         @media (max-width: 768px) { .account-layout { flex-direction: column; } .account-sidebar { width: 100%; } }
     </style>
+
+    <!-- Performance Preconnects -->
+    <link rel="preconnect" href="https://qtxikxszhllugqnhdypo.supabase.co" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+
 </head>
 <body>
     <!-- TOPBAR -->
@@ -35,7 +41,7 @@
         <div class="container navbar">
             <button class="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button>
             <a href="index.html" class="nav-brand">
-                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd Logo">
+                <img loading="lazy" decoding="async" src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd Logo">
             </a>
             <nav class="nav-menu">
                 <div class="nav-item"><a href="category.html" class="nav-link">Kits</a></div>
@@ -93,8 +99,8 @@
                         </div>
                     </div>
                     <div style="display:flex; gap:10px;">
-                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=80&q=80" style="width:60px; height:60px; object-fit:cover;">
-                        <img src="https://images.unsplash.com/photo-1520903928273-0f44b0a2fe08?auto=format&fit=crop&w=80&q=80" style="width:60px; height:60px; object-fit:cover;">
+                        <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=80&q=80" style="width:60px; height:60px; object-fit:cover;">
+                        <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1520903928273-0f44b0a2fe08?auto=format&fit=crop&w=80&q=80" style="width:60px; height:60px; object-fit:cover;">
                     </div>
                 </div>
 
@@ -110,7 +116,7 @@
                         </div>
                     </div>
                     <div style="display:flex; gap:10px;">
-                        <img src="https://images.unsplash.com/photo-1616124619460-ff4ed8f4683c?auto=format&fit=crop&w=80&q=80" style="width:60px; height:60px; object-fit:cover;">
+                        <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1616124619460-ff4ed8f4683c?auto=format&fit=crop&w=80&q=80" style="width:60px; height:60px; object-fit:cover;">
                     </div>
                 </div>
             </div>

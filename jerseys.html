@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Phải gọi đúng file style.css -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Performance Preconnects -->
+    <link rel="preconnect" href="https://qtxikxszhllugqnhdypo.supabase.co" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+
 </head>
 <body>
 
@@ -40,7 +46,7 @@
         <div class="header-main-row">
             <div class="header-logo">
                 <a href="index.html" class="logo-link">
-                    <img src="images/0_Manchester_United_FC_crest.svg" alt="Manchester United Logo" class="logo-img devil-aura">
+                    <img loading="lazy" decoding="async" src="images/0_Manchester_United_FC_crest.svg" alt="Manchester United Logo" class="logo-img devil-aura">
                     <span class="logo-text">UNITED STORE</span>
                 </a>
             </div>
@@ -246,21 +252,21 @@
     <div class="container" style="margin-top: 20px;">
         <div class="featured-banners">
             <div class="banner-card" onclick="setJerseysFilter('Home', this)" data-category="Home">
-                <img src="https://store.manutd.com/content/ebs/store/manutd/en/jcr:content/root/container/carousel_copy/carousel_item/image.coreimg.jpeg" 
+                <img loading="lazy" decoding="async" src="https://store.manutd.com/content/ebs/store/manutd/en/jcr:content/root/container/carousel_copy/carousel_item/image.coreimg.jpeg" 
                      onerror="this.onerror=null;this.src='https://a.storyblok.com/f/274736/481x140/000badaa19/plp-top-bar-imagery_v3.jpg/m/1536x0/filters:quality(70)';" 
                      referrerpolicy="no-referrer" 
                      alt="Home Kit" class="banner-img" style="aspect-ratio: 481/140;">
                 <div class="banner-overlay">Home Kit</div>
             </div>
             <div class="banner-card" onclick="setJerseysFilter('Away', this)" data-category="Away">
-                <img src="https://store.manutd.com/content/ebs/store/manutd/en/jcr:content/root/container/carousel_copy/carousel_item_1648074900/image.coreimg.jpeg" 
+                <img loading="lazy" decoding="async" src="https://store.manutd.com/content/ebs/store/manutd/en/jcr:content/root/container/carousel_copy/carousel_item_1648074900/image.coreimg.jpeg" 
                      onerror="this.onerror=null;this.src='https://a.storyblok.com/f/274736/481x140/73d61c19e3/product414-plp-top-bar-imagery.jpg/m/1536x0/filters:quality(70)';" 
                      referrerpolicy="no-referrer" 
                      alt="Away Kit" class="banner-img" style="aspect-ratio: 481/140;">
                 <div class="banner-overlay">Away Kit</div>
             </div>
             <div class="banner-card" onclick="setJerseysFilter('Goalkeeper', this)" data-category="Goalkeeper">
-                <img src="https://store.manutd.com/content/ebs/store/manutd/en/jcr:content/root/container/carousel_copy/carousel_item_1648074901/image.coreimg.jpeg" 
+                <img loading="lazy" decoding="async" src="https://store.manutd.com/content/ebs/store/manutd/en/jcr:content/root/container/carousel_copy/carousel_item_1648074901/image.coreimg.jpeg" 
                      onerror="this.onerror=null;this.src='https://a.storyblok.com/f/274736/481x140/553078de7f/phallon073-plp-top-bar-imagery.jpg/m/1536x0/filters:quality(70)';" 
                      referrerpolicy="no-referrer" 
                      alt="Goalkeeper Kit" class="banner-img" style="aspect-ratio: 481/140;">
@@ -429,7 +435,7 @@
                     <div class="product-card grid-item" style="position: relative;">
                         ${catTag}
                         <div class="product-image-container">
-                            <img src="${imgUrl}" class="product-img" alt="${p.name || ''}" onerror="this.src='https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80'">
+                            <img loading="lazy" decoding="async" src="${imgUrl}" class="product-img" alt="${p.name || ''}" onerror="this.src='https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80'">
                         </div>
                         <div class="product-info" style="padding-top: 12px; display: flex; flex-direction: column; gap: 6px;">
                             <p class="product-price" style="color: #000; font-weight: 700; font-size: 14px; margin: 0;">${priceFormatted}</p>
@@ -509,10 +515,10 @@
                     <p>&copy; 2024 Manchester United. All rights reserved.</p>
                 </div>
                 <div class="payment-methods">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Visa_Logo_2012.png" alt="Visa" style="height: 20px; width: auto; margin-right: 10px; vertical-align: middle;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" style="height: 20px; width: auto; margin-right: 10px; vertical-align: middle;">
-                    <img src="images/22_PayPal.svg" alt="PayPal" style="height: 20px; width: auto; margin-right: 10px; vertical-align: middle;">
-                    <img src="images/23_American_Express_logo_%282018%29.svg" alt="American Express" style="height: 20px; width: auto; vertical-align: middle;">
+                    <img loading="lazy" decoding="async" src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Visa_Logo_2012.png" alt="Visa" style="height: 20px; width: auto; margin-right: 10px; vertical-align: middle;">
+                    <img loading="lazy" decoding="async" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" style="height: 20px; width: auto; margin-right: 10px; vertical-align: middle;">
+                    <img loading="lazy" decoding="async" src="images/22_PayPal.svg" alt="PayPal" style="height: 20px; width: auto; margin-right: 10px; vertical-align: middle;">
+                    <img loading="lazy" decoding="async" src="images/23_American_Express_logo_%282018%29.svg" alt="American Express" style="height: 20px; width: auto; vertical-align: middle;">
                 </div>
             </div>
         </div>
@@ -606,7 +612,7 @@
                 return `
                 <div class="product-card">
                     <div class="product-image-container">
-                        <img src="${imgUrl}" class="product-img" alt="${p.name || ''}" onerror="this.src='https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80'">
+                        <img loading="lazy" decoding="async" src="${imgUrl}" class="product-img" alt="${p.name || ''}" onerror="this.src='https://images.unsplash.com/photo-1577003833758-c0b93e8784ac?auto=format&fit=crop&w=400&q=80'">
                     </div>
                     <div class="product-info" style="padding-top: 12px; display: flex; flex-direction: column; gap: 6px;">
                         <p class="product-price" style="color: #000; font-weight: 700; font-size: 14px; margin: 0;">${priceFormatted}</p>

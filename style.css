@@ -293,7 +293,7 @@ button {
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     z-index: 1000;
 }
 
@@ -446,7 +446,7 @@ button {
     background-color: var(--color-primary);
     color: var(--color-white);
     border: 2px solid var(--color-primary);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-primary:hover {
@@ -491,7 +491,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .carousel-btn:hover {
@@ -1044,7 +1044,7 @@ button {
     background-color: var(--color-white);
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: transform 0.2s, opacity 0.2s, background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .size-btn:hover, .size-btn.active {
@@ -1597,7 +1597,7 @@ button {
     font-weight: bold;
     text-align: center;
     border-radius: 4px;
-    transition: all 0.2s;
+    transition: transform 0.2s, opacity 0.2s, background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .account-menu-link:hover {
@@ -1809,7 +1809,7 @@ button {
     font-size: 0.95rem;
     color: #ffffff;
     outline: none;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sso-input::placeholder {
@@ -1857,7 +1857,7 @@ button {
     justify-content: center;
     gap: 12px;
     box-shadow: 0 12px 25px rgba(218, 41, 28, 0.35);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
 }
@@ -1968,7 +1968,7 @@ button {
     display: flex;
     align-items: center;
     gap: 6px;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .perk-pill i {
@@ -2811,7 +2811,7 @@ details[open] .filter-group-title i {
     padding: 12px 20px;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     width: 85%;
     text-align: center;
     z-index: 15;
@@ -2927,7 +2927,7 @@ details[open] .filter-group-title i {
     height: auto;
     filter: drop-shadow(0 0 4px rgba(230, 0, 0, 0.5));
     animation: devilAuraGlow 2s infinite ease-in-out;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes devilAuraGlow {
@@ -3189,7 +3189,7 @@ details[open] .filter-group-title i {
     display: -webkit-box;
     -webkit-line-clamp: 2; /* Limit to 2 lines initially */
     -webkit-box-orient: vertical;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .jerseys-desc.expanded {
     display: block;
@@ -3222,7 +3222,7 @@ details[open] .filter-group-title i {
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -3419,7 +3419,7 @@ details[open] .filter-group-title i {
     background: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: transform 0.3s, opacity 0.3s, background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 .hero-dot.active {
     background: #fff;
