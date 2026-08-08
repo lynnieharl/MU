@@ -65,6 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
             background-size: contain !important;
             filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 15px rgba(255, 0, 0, 0.6)) !important; /* Logo Aura */
         }
+
+        /* Hide Dify Watermark Hack */
+        #dify-chatbot-bubble-window iframe {
+            height: calc(100% + 40px) !important;
+            margin-bottom: -40px !important;
+        }
     `;
     document.head.appendChild(style);
 });
